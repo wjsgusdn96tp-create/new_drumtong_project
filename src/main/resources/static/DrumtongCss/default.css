@@ -122,20 +122,21 @@ ul>li>a{
 
 /* tab css */
 .tab{
-	display: flex;
 	width: 100%;
+	display: hidden;
 }
 .tab>ul{
 	margin-top: 30px;
-    display: flex;
     font-size: 20px;
+    display: flex;
+
 }
 .tab>ul>li{
+	width: 180px;
     color: var(--main5);
-    justify-content: center;
-    border: 1px solid var(--line4);
+    border: 1px solid var(--main3);
+	text-align: center;
 }
-
 .tab>.first-tab{
 	float: left;
 }
@@ -143,6 +144,12 @@ ul>li>a{
 	float: right;
 }
 
+.first-button {
+	width: 150px;
+	height: 30px;
+	border: none;
+	background-color: var(--main3);
+}
 
 
 
