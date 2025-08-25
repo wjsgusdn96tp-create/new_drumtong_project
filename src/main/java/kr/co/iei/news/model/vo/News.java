@@ -1,4 +1,4 @@
-package kr.co.iei.promotion.model.news.vo;
+package kr.co.iei.news.model.vo;
 
 import org.apache.ibatis.type.Alias;
 

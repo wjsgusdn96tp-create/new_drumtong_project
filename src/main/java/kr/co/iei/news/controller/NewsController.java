@@ -1,11 +1,11 @@
-package kr.co.iei.promotion.controller;
+package kr.co.iei.news.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/news")
-public class PromotionController {
+public class NewsController {
 	
 	
 	
