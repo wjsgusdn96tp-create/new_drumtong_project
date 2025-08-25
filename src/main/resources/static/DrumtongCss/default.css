@@ -115,7 +115,7 @@ ul>li>a{
 
 /* content css */
 .content-wrap{
-	width: 1200px;
+	width: 800px;
 	margin: 0 auto;
 }
 
@@ -123,6 +123,7 @@ ul>li>a{
 /* tab css */
 .tab{
 	display: flex;
+	width: 100%;
 }
 .tab>ul{
 	margin-top: 30px;
@@ -136,12 +137,11 @@ ul>li>a{
 }
 
 .tab>.first-tab{
-	justify-content: right;
+	float: left;
 }
 .tab>.second-tab{
-	justify-content: left;
+	float: right;
 }
-
 
 
 
