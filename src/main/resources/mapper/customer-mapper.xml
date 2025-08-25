@@ -16,6 +16,6 @@
 	</select>
 	
 	<select id="selectCustomerTotalCount" resultType="int">
-		select count(*) from notice
+		select count(*) from customer_service_tbl
 	</select>
 </mapper>
