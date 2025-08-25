@@ -56,12 +56,12 @@
                         <th style="width: 20%;">작성일</th>
                         <th style="width: 10%;">삭제</th>
                     </tr>
-                    <tr class="tab-content">
-                        <th style="width: 15%;"></th>
-                        <th style="width: 15%;"></th>
-                        <th style="width: 40%;"></th>
-                        <th style="width: 20%;"></th>
-                        <th style="width: 10%;"></th>
+                    <tr class="tab-content"  th:each="customer : ${list}">
+                        <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
+                        <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
+                        <td style="width: 40%;" th:text="${customer.customerTitle}"></td>
+                        <td style="width: 20%;" th:text="${customer.customerDate"></td>
+                        <td style="width: 10%;"></td>
                     </tr>
                 </table>
             </div>
