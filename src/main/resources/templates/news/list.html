@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.promotion>img{
+	margin-top: 30px;
+	}
+	.news-item{
+	width: 200px;
+	}
+	.news-item>img{
+	width: 100%;
+	}
+	
+	.first-button{
+	float: right;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<div class="content-wrap">
+	
+		<div class="promotion">
+			<img src="/img/news/promotion.jpg" style="width:100%">
+		</div>
+		
+		<div class="tab">
+			<ul class="first-tab">
+				<li>전체보기</li>
+				<li>이벤트</li>
+				<li>프로모션</li>
+			</ul>
+			<ul  class="second-tab">
+				<li>공지사항</li>
+			</ul>
+		</div>
+		
+		<div class="first-button-div">
+			<button class="first-button">글쓰기</button>		
+		</div>
+		
+		<div class="news-list"> 
+			<div class="news-item"> 
+				<img src="/img/프로모션1.jpg">
+				<div>제목</div>
+				<div>
+					<span>기간</span>
+					<span>하트</span>
+				</div>
+			</div>
+			
+			<button>더보기</button>
+		</div>
+	</div>
+</body>
+</html>

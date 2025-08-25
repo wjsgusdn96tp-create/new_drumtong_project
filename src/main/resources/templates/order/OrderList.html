@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>헤더</title>
-    <link rel="stylesheet" href="/DrumtongCss/default.css">
-    <script src="/DrumtongJs/jquery-3.6.0.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>주문내역</title>
+    <link rel="stylesheet" href="DrumtongCss/default.css">
+    <link rel="stylesheet" href="DrumtongCss/list.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
     <div class="header">
         <div class="logo-box">
-            <div class="logo-img">
-                <img src="/img/로고 (1) 1.svg">
-            </div>
-            <div class="logo-name">
-                <div class="drum">DRUM</div>
-                <div class="tong">TONG</div>
-            </div>
+                <div class="logo-img">
+                    <img src="/img/로고 (1) 1.svg">
+                </div>
+                <div class="logo-name">
+                    <div class="drum">DRUM</div>
+                    <div class="tong">TONG</div>
+                </div>
         </div>
         <div class="nav-box">
             <div class="navbox1">
@@ -25,8 +26,7 @@
                     <li><a href="#">Sales Page</a></li>
                     <li><a href="#">Admin MemberList</a></li>
                     <li>
-                        <a href="#"
-                        ><span class="material-icons">perm_identity</span></a>
+                        <a href="#"><span class="material-icons">perm_identity</span></a>
                     </li>
                     <li><a href="#"><span class="material-icons">list_alt</span></a></li>
                     <li><a href="#"><span class="material-icons">shopping_cart</span></a></li>
@@ -38,10 +38,12 @@
                     <li><a href="#">ORDER</a></li>
                     <li><a href="/news/list">NEWS</a></li> 
                     <li><a href="/customer/list">CUSTMER SERVICE</a></li>                   
-
                 </ul>
             </div>
         </div>
-    </div>   
+    </div>  
+    <div class="order-mainbox">
+        <div class="order-namebox">주문내역</div>
+    </div>
 </body>
 </html>
