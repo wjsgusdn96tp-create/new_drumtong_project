@@ -59,10 +59,10 @@
 				
 			<!-- 이미지  -->
 			<form action="#" method="get" id="">
-				<div class="product_list">
+				<div class="product_list_wrap">
 					<!-- [js]for문 -->
 					<ul>
-						<li class="product_one">
+						<li class="product_one_wrap">
 							<div class="product_one_box">
 								<div class="product_manager_btn">
 									<input type="submit" name="product_update_btn" id="product_update_btn">
@@ -77,18 +77,22 @@
 								<!-- 클릭 시, 장바구니로 이동 -->
 								<input type="submit" name="product" id="product">	
 								<label for="product">
+									
+									
 									<div class="product_img_box">
 										<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
+										<!-- DB에서 들고올거 -->
+										<div class="product_content_box">
+											<h3>product_name</h3>
+											<p>칼로리 : ${.product_content_kcal} kcal</p>
+											<p>카페인 : ${.product_content_shot} 샷</p>
+											<p>당 : ${.product_content_sugar} g</p>
+											<p>나트륨 : ${.product_content_natrium} g</p>
+											<p>지방 :${.product_content_carbs} g</p>
+										</div>
 									</div>
-									<!-- DB에서 들고올거 -->
-									<div class="product_content_box">
-										<h3>product_name</h3>
-										<p>칼로리 : ${.product_content_kcal} kcal</p>
-										<p>카페인 : ${.product_content_shot} 샷</p>
-										<p>당 : ${.product_content_sugar} g</p>
-										<p>나트륨 : ${.product_content_natrium} g</p>
-										<p>지방 :${.product_content_carbs} g </p>
-									</div>
+									
+									
 								</label>
 							    <!-- e[관리자,회원,비회원] -->
 								<div class="product_icon">
