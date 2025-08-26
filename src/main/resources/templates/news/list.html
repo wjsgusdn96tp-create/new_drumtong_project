@@ -3,28 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	.promotion>img{
-	margin-top: 30px;
-	}
-	.news-item{
-	width: 200px;
-	}
-	.news-item>img{
-	width: 100%;
-	}
-	
-	.first-button{
-	float: right;
-	}
-</style>
+<script src="/DrumtongJs/news.js"></script>
+<link rel="stylesheet" href="/DrumtongCss/news.css">
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
 	
-		<div class="promotion">
-			<img src="/img/news/promotion.jpg" style="width:100%">
+		<div id="main-news">
+			<img src="/img/news/main_promotion1.jpg" class="main-news1 close">
+			<img src="/img/news/main_promotion2.jpg" class="main-news2 close">
+			<img src="/img/news/main_promotion3.jpg" class="main-news3 active">
 		</div>
 		
 		<div class="tab">
@@ -33,26 +22,172 @@
 				<li>이벤트</li>
 				<li>프로모션</li>
 			</ul>
+			<span></span>
 			<ul  class="second-tab">
 				<li>공지사항</li>
 			</ul>
 		</div>
 		
-		<div class="first-button-div">
-			<button class="first-button">글쓰기</button>		
+		<div class="btn-div">
+			<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 쓰기</a>	
+			<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>	
+				
 		</div>
 		
-		<div class="news-list"> 
-			<div class="news-item"> 
-				<img src="/img/프로모션1.jpg">
-				<div>제목</div>
-				<div>
-					<span>기간</span>
-					<span>하트</span>
-				</div>
+		<div class="list close">
+			<ul class="news-list"> 
+				<li class="news-item"> 
+					<div class="item-img-div">
+						<img src="/img/프로모션1.jpg">
+					</div>
+					<div class="text-warp">
+						<div class="news-title">
+							<span>[프로모션]</span> 
+							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
+						</div>
+						<div class="list-small">
+							<span class=date>
+								<span>2025-08-26</span>
+								<span>~</span>
+								<span>2025-09-01</span>
+							</span>
+							<span class=like>
+								<span class="material-icons">favorite_border</span>
+							</span>
+						</div>
+					</div>
+					
+					<li class="news-item"> 
+					<div class="item-img-div">
+						<img src="/img/프로모션1.jpg">
+					</div>
+					<div class="text-warp">
+						<div class="news-title">
+							<span>[프로모션]</span> 
+							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
+						</div>
+						<div class="list-small">
+							<span class=date>
+								<span>2025-08-26</span>
+								<span>~</span>
+								<span>2025-09-01</span>
+							</span>
+							<span class=like>
+								<span class="material-icons">favorite_border</span>
+							</span>
+						</div>
+					</div>
+					
+					<li class="news-item"> 
+					<div class="item-img-div">
+						<img src="/img/프로모션1.jpg">
+					</div>
+					<div class="text-warp">
+						<div class="news-title">
+							<span>[프로모션]</span> 
+							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
+						</div>
+						<div class="list-small">
+							<span class=date>
+								<span>2025-08-26</span>
+								<span>~</span>
+								<span>2025-09-01</span>
+							</span>
+							<span class=like>
+								<span class="material-icons">favorite_border</span>
+							</span>
+						</div>
+					</div>
+					
+					<li class="news-item"> 
+					<div class="item-img-div">
+						<img src="/img/프로모션1.jpg">
+					</div>
+					<div class="text-warp">
+						<div class="news-title">
+							<span>[프로모션]</span> 
+							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
+						</div>
+						<div class="list-small">
+							<span class=date>
+								<span>2025-08-26</span>
+								<span>~</span>
+								<span>2025-09-01</span>
+							</span>
+							<span class=like>
+								<span class="material-icons">favorite_border</span>
+							</span>
+						</div>
+					</div>
+					
+					<li class="news-item"> 
+					<div class="item-img-div">
+						<img src="/img/프로모션1.jpg">
+					</div>
+					<div class="text-warp">
+						<div class="news-title">
+							<span>[프로모션]</span> 
+							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
+						</div>
+						<div class="list-small">
+							<span class=date>
+								<span>2025-08-26</span>
+								<span>~</span>
+								<span>2025-09-01</span>
+							</span>
+							<span class=like>
+								<span class="material-icons">favorite_border</span>
+							</span>
+						</div>
+					</div>
+					
+					<li class="news-item"> 
+					<div class="item-img-div">
+						<img src="/img/프로모션1.jpg">
+					</div>
+					<div class="text-warp">
+						<div class="news-title">
+							<span>[PROMOTION]</span> 
+							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
+						</div>
+						<div class="list-small">
+							<span class=date>
+								<span>2025-08-26</span>
+								<span>~</span>
+								<span>2025-09-01</span>
+							</span>
+							<span class=like>
+								<span class="material-icons">favorite_border</span>
+							</span>
+						</div>
+					</div>
+				
+			</ul>
+			<div id="add-search"> 		
+				<button class="btn">더보기</button>
 			</div>
-			
-			<button>더보기</button>
+		</div>
+		
+		
+		
+		
+		
+		
+		<div class="notice-list">
+			<table border=1>
+				<tr>
+					<th>번호</th>
+					<th>글 제목</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>글 제목</td>
+					<td>2025-01-05</td>
+					<td>조회수</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>
