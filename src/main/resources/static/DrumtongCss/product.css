@@ -11,12 +11,12 @@
 		width: 1200px;
 		margin: 50px auto;
 		line-height: 50px;
-		
 	}
+
+/*카테로리*/
 .product_wrap>.product_title_wrap{
 	width:1000px;
 	margin-left: 0;
-	
 }
 .product_wrap>.product_title_wrap>.product_title>li:first-child{
 	border-left: 1px solid var(--main3);
@@ -82,31 +82,26 @@
 .product_title_list{
 	display: none;
 }
+/*----------------------------------*/
 
-
-
+/*버튼(출력 순)*/
 .wrap>.product_wrap>.product_list_btn{
 	text-align: right;
 }
-
 .product_btn{
 	margin-top: 22px;
 }
-.btn{
-	width: 95px;
-	height: 30px;
-	color:  var(--gray4);
-	background-color: var(--main2);
-	border-radius: 4px;
-	border: none;
-	outline: none;
-	border: 1px solid var(--main3);
-	font-weight: 500;
-	text-align: center;
-	cursor: pointer;
+/*----------------------------------*/
+
+/*버튼(관리자용_메뉴 추가)*/
+.product_insert_btn>button{
+	width: 120px;
+	height: 35px;
 }
-.btn:hover{
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
-	color: var(--gray2);
-	font-weight: 550;
+.product_insert_btn>button>a{
+	font-size:15px;
+	text-decoration: none;
+	font-weight: 600;
+	color: var(--main4);
 }
+
