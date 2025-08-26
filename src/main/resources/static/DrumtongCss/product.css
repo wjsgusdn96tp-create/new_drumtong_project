@@ -10,36 +10,40 @@
 .product_wrap{
 		width: 1200px;
 		margin: 50px auto;
-		line-height: 50px;
+		line-height: 45px;
 	}
 
 /*카테로리*/
 .product_wrap>.product_title_wrap{
 	width:1000px;
 	margin-left: 0;
+	
+	
 }
-.product_wrap>.product_title_wrap>.product_title>li:first-child{
-	border-left: 1px solid var(--main3);
-}
+
 .product_wrap>.product_title_wrap>.product_title>.product_title_main{
-	border: 1px solid var(--main3);
+	border-top: 1px solid var(--main3);
+	border-bottom: 1px solid var(--main3);
 	width: 210px;
-	height: 50px;
+	height: 45px;
 	float: left;
 	text-align: center;
 	float: left;
-	
 	border-left: none;
+}
+.product_wrap>.product_title_wrap>.product_title{
+	
 }
 .product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
 	background-color:var(--main2);
+	border-top: 2px solid var(--main3);
 	
 }
 .product_wrap>.product_title_wrap>.product_title>.product_drink:hover{
 	border-bottom: none;
 }
 .product_wrap>.product_title_wrap>.product_title>.product_drink>div{
-	border: 1px solid var(--main3);
+	
 	border-top: 1px solid var(--main1);
 	text-align: left;
 	padding-left: 10px;
@@ -98,18 +102,22 @@
 .product_title_list{
 	display: none;
 }
-/*----------------------------------*/
+
 
 /*버튼(출력 순)*/
 .wrap>.product_wrap>.product_list_btn{
 	text-align: right;
 }
 .product_btn{
-	margin-top: 22px;
+	margin-top: 19px;
 }
-/*----------------------------------*/
+
 
 /*버튼(관리자용_메뉴 추가)*/
+.product_insert_btn{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 .product_insert_btn>button{
 	width: 120px;
 	height: 35px;
