@@ -15,8 +15,9 @@
 
 /*카테로리*/
 .product_wrap>.product_title_wrap{
-	width:1000px;
-	margin-left: 0;
+	width:1200px;
+	height: 50px;
+	
 	
 	
 }
@@ -31,9 +32,7 @@
 	float: left;
 	border-left: none;
 }
-.product_wrap>.product_title_wrap>.product_title{
-	
-}
+
 .product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
 	background-color:var(--main2);
 	border-top: 2px solid var(--main3);
@@ -104,28 +103,76 @@
 }
 
 
-/*버튼(출력 순)*/
-.wrap>.product_wrap>.product_list_btn{
+.product_new_wrap{
+	margin-top: 20px;
+	margin-bottom: 70px;
+}
+
+
+
+/*카테고리 바로 밑 버튼*/
+.product_new_wrap{
+	padding-top20px;
+	overflow: hidden;
+}
+.product_new_wrap>div{
+	width: 500px;
+	
+}
+
+/*카테고리 바로 밑 버튼 > 버튼(출력 순)*/
+.wrap>.product_wrap>.product_new_wrap>.product_list_btn{
 	text-align: right;
 }
 .product_btn{
-	margin-top: 19px;
+
+}
+.product_new_wrap>.product_list_btn{
+	float: right;
 }
 
+/*카테고리 바로 밑 버튼 > 버튼(관리자용_메뉴 추가)*/
 
-/*버튼(관리자용_메뉴 추가)*/
-.product_insert_btn{
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-.product_insert_btn>button{
+.product_new_wrap>.product_insert_btn>button{
 	width: 120px;
 	height: 35px;
+	float: left;
+	
 }
-.product_insert_btn>button>a{
+.product_new_wrap>.product_insert_btn>button>a{
 	font-size:15px;
 	text-decoration: none;
 	font-weight: 600;
 	color: var(--main4);
 }
 
+
+/*상품 리스트 one*/
+form>.product_list>ul>.product_one{
+	width: 350px;
+}
+form>.product_list>ul>.product_one>.product_one_box>input{
+	display:none;
+}
+form>.product_list>ul>.product_one>.product_one_box>label>.product_img_box>img{
+	width: 350px;
+}
+
+/*상품 리스트 one> 버튼(관리자용_수정 삭제)*/
+.product_manager_btn{
+	overflow: hidden;
+}
+.product_manager_btn>input{
+	display:none;	
+}
+.product_manager_btn>label>button{
+	height: 25px;	
+	width: 50px;
+	float: right;
+	margin-left: 5px;
+}
+.product_manager_btn>label>button>a{
+	text-decoration: none;
+	color: var(--main4);
+	font-weight: 600;
+}

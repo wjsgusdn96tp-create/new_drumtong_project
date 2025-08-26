@@ -16,7 +16,7 @@
 		<div class="product_wrap">
 			<div class="product_title_wrap">
 				<ul class="product_title">
-					<li class="product_title_main"><a href="">전체상품</a></li>
+					<li class="product_title_main"><a href="#">전체상품</a></li>
 					<li class="product_title_main product_drink">음료
 						<div class="product_title_list">
 							<ul class="product_title_ice">
@@ -42,20 +42,21 @@
 					<li class="product_title_main"><a href="#">굿즈</a></li>
 				</ul>
 			</div>
+			
+			<div class="product_new_wrap">
+				<!--출력순 버튼-->
+				<div class="product_list_btn">
+					<button class="btn product_btn">가격순</button>
+					<button class="btn product_btn">최신순</button>
+					<button class="btn product_btn">좋아요순</button>
+				</div>
+			
+				<!--e(관리자버튼)메뉴 추가 -->
+				<div class="product_insert_btn">
+					<button class="btn"><a href="#">메뉴 추가</a></button>
+				</div>
+			</div>	
 				
-			<!--출력순 버튼-->
-			<div class="product_list_btn">
-				<button class="btn product_btn">가격순</button>
-				<button class="btn product_btn">최신순</button>
-				<button class="btn product_btn">좋아요순</button>
-			</div>
-			
-			<!--e(관리자버튼)메뉴 추가 -->
-			<div class="product_insert_btn">
-				<button class="btn"><a href="#">메뉴 추가</a></button>
-			</div>
-			
-			
 			<!-- 이미지  -->
 			<form action="#" method="get" id="">
 				<div class="product_list">
@@ -63,6 +64,16 @@
 					<ul>
 						<li class="product_one">
 							<div class="product_one_box">
+								<div class="product_manager_btn">
+									<input type="submit" name="product_update_btn" id="product_update_btn">
+									<label for="product_update_btn">
+										<button class="btn"><a href="#">수정</a></button>
+									</label>
+									<input type="submit" name="product_delete_btn" id="product_delete_btn">
+									<label for="product_delete_btn">
+										<button class="btn"><a href="#">삭제</a></button>
+									</label>
+								</div>
 								<!-- 클릭 시, 장바구니로 이동 -->
 								<input type="submit" name="product" id="product">	
 								<label for="product">
