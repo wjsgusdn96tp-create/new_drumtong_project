@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" href="/DrumtongCss/product.css">
+    <link rel="stylesheet" href="/DrumtongCss/default.css">
+
+</head>
+<body>
+	<th:block th:include="/common/header"></th:block>
+		<!--카테고리-->
+	<div class="wrap">
+		<div class="product_wrap">
+			<div class="product_title_wrap">
+				<ul class="product_title">
+					<li class="product_title_main"><a href="">전체상품</a></li>
+					<li class="product_title_main product_drink">음료
+						<div class="product_title_list">
+							<ul class="product_title_ice">
+								<li>ICE
+									<ul>
+										<li><a href="#">커피</a></li>
+										<li><a href="#">차</a></li>
+										<li><a href="#">그 외 제조음료</a></li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="product_title_hot">
+								<li>HOT
+									<ul>
+										<li><a href="#">커피</a></li>
+										<li><a href="#">차</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="product_title_main"><a href="#">디저트</a></li>
+					<li class="product_title_main"><a href="#">굿즈</a></li>
+				</ul>
+			</div>
+				
+			<!--출력순 버튼-->
+			<div class="product_list_btn">
+				<button class="product_btn_p">가격순</button>
+				<button class="product_btn_d">최신순</button>
+				<button class="product_btn_l">좋아요순</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
