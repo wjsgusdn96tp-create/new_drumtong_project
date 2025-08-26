@@ -4,47 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OrderMap</title>
-    <link rel="stylesheet" href="DrumtongCss/default.css">
-    <link rel="stylesheet" href="DrumtongCss/ordermap.css">
+    <link rel="stylesheet" href="/DrumtongCss/default.css">
+    <link rel="stylesheet" href="/DrumtongCss/ordermap.css">
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=r6oehvpmcw"></script>
 </head>
 <body>
-    <div class="header">
-        <div class="logo-box">
-            <div class="logo-img">
-                <img src="img/로고 (1) 1.svg">
-            </div>
-            <div class="logo-name">
-                <div class="drum">DRUM</div>
-                <div class="tong">TONG</div>
-            </div>
-        </div>
-        <div class="nav-box">
-            <div class="navbox1">
-                <ul class="navi-small-box">
-                    <li><a href="#">Sales Page</a></li>
-                    <li><a href="#">Admin MemberList</a></li>
-                    <li>
-                        <a href="#"><img src="img/mdi_user-outline.svg"></a>
-                    </li>
-                    <li><a href="#"><img src="img/lsicon_list-outline.svg"></a></li>
-                    <li><a href="#"><img src="img/mdi_cart.svg"></a></li>
-                    <li><a href="#"><img src="img/material-symbols_logout.svg"></a></li>
-                </ul>
-            </div>
-            <div class="navbox2">
-                <ul class="menu-box">
-                    <li><a href="#">ORDER</a></li>
-                    <li><a href="news/list">NEWS</a></li> 
-                    <li><a href="customer/list">CUSTMER SERVICE</a></li>                   
-                </ul>
-            </div>
-        </div>
-    </div>
+    <th:block th:include="/common/header"></th:block>
     <div class="ordermap-mainbox">
         <div class="ordermap-name">주문할 지점을 선택하세요</div>
         <div id="map"></div>
     </div>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=ptbhb8aree&submodules=geocoder"></script>
+    
+    <script>
+    const mapDiv = document.getElementById("map");
+	
+	const map = new naver.maps.Map(mapDiv,{
+		center : new naver.maps.LatLng(37.5338151,126.8969784),
+		zoom : 17,
+		zoomControl : true,
+		zoomControlOptions:{
+			position : naver.maps.Position.TOP_RIGHT,
+			style : naver.maps.ZoomControlStyle.SMALL
+		}
+	});
+	
+	const marker = new naver.maps.Marker({
+		position : new naver.maps.LatLng(37.5781205,126.9126326),
+		map : map
+	});
+	
+	let contentString = [
+		"<div class='iw-inner'>",
+		" <p>dd</p>",
+		"</div>"
+	].join("");
+	
+	let infoWindow = new naver.maps.InfoWindow();
+	naver.maps.Event.addListener(marker,"click",function(e){
+		infoWindow = new naver.maps.InfoWindow({
+			content : contentString
+		});
+		infoWindow.open(map,marker);
+	});
+	
+    </script>
     
 </body>
 </html>
