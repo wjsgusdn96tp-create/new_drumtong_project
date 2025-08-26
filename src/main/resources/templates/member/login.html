@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/DrumtongCss/login.css">
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -37,7 +38,7 @@
                 </div>
                 <!-- 로그인 box footer 이미지 -->
                 <div class="login-footer">
-                    <img src="img/로고.png">
+                    <img src="/img/로고.png">
                     <p>DRUM TONG company</p>
                 </div>
             </form>
@@ -67,6 +68,7 @@
     const loginEvent = document.getElementById("login-event");
     loginEvent.addEventListener("click", function(){
         loginEvent.style.backgroundColor = "#000000";
+        window.location.href ="/member/login";
     });
     // 회원가입 box 클릭 이벤트
     const joinEvent = document.getElementById("join-event");
