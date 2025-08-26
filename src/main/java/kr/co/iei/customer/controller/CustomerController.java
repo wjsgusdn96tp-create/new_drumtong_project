@@ -47,7 +47,7 @@ public class CustomerController {
 		CustomerListData cld = customerService.selectOpinionList(reqPage);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getList());
-		return "customer/list";
+		return "customer/listOpinion";
 
 	}
 	
