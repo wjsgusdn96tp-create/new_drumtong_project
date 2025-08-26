@@ -17,10 +17,10 @@
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=ptbhb8aree&submodules=geocoder"></script>
     
     <script>
+    
     const mapDiv = document.getElementById("map");
-	
 	const map = new naver.maps.Map(mapDiv,{
-		center : new naver.maps.LatLng(37.5338151,126.8969784),
+		center : new naver.maps.LatLng(37.5359296,126.8985397),
 		zoom : 17,
 		zoomControl : true,
 		zoomControlOptions:{
@@ -28,25 +28,12 @@
 			style : naver.maps.ZoomControlStyle.SMALL
 		}
 	});
-	
 	const marker = new naver.maps.Marker({
-		position : new naver.maps.LatLng(37.5781205,126.9126326),
+		position : new naver.maps.LatLng(37.5359296,126.8985397),
 		map : map
 	});
 	
-	let contentString = [
-		"<div class='iw-inner'>",
-		" <p>dd</p>",
-		"</div>"
-	].join("");
 	
-	let infoWindow = new naver.maps.InfoWindow();
-	naver.maps.Event.addListener(marker,"click",function(e){
-		infoWindow = new naver.maps.InfoWindow({
-			content : contentString
-		});
-		infoWindow.open(map,marker);
-	});
 	
     </script>
     
