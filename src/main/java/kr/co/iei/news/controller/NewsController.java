@@ -16,8 +16,12 @@ public class NewsController {
 	private NewsService newsService;
 	
 	@GetMapping(value="/list")
-	public String boardList() {
+	public String newsList() {
 		return "news/list";
 	}
 	
+	@GetMapping(value="/writeFrm")
+	public String writeFrm() {
+		return "news/writeFrm";
+	}
 }
