@@ -13,14 +13,20 @@
 	.news-item>img{
 	width: 100%;
 	}
+	
+	.first-button{
+	float: right;
+	}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
+	
 		<div class="promotion">
 			<img src="/img/news/promotion.jpg" style="width:100%">
 		</div>
+		
 		<div class="tab">
 			<ul class="first-tab">
 				<li>전체보기</li>
@@ -31,6 +37,11 @@
 				<li>공지사항</li>
 			</ul>
 		</div>
+		
+		<div class="first-button-div">
+			<button class="first-button">글쓰기</button>		
+		</div>
+		
 		<div class="news-list"> 
 			<div class="news-item"> 
 				<img src="/img/프로모션1.jpg">
@@ -40,6 +51,8 @@
 					<span>하트</span>
 				</div>
 			</div>
+			
+			<button>더보기</button>
 		</div>
 	</div>
 </body>

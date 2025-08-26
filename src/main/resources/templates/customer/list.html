@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <link rel='stylesheet' href="/DrumtongCss/customer.css">
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -55,14 +56,32 @@
                         <th style="width: 20%;">작성일</th>
                         <th style="width: 10%;">삭제</th>
                     </tr>
-                    <tr class="tab-content">
-                        <th style="width: 15%;"></th>
-                        <th style="width: 15%;"></th>
-                        <th style="width: 40%;"></th>
-                        <th style="width: 20%;"></th>
-                        <th style="width: 10%;"></th>
+                    <tr class="tab-content"  th:each="customer : ${list}">
+                        <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
+                        <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
+                        <td style="width: 40%;" th:text="${customer.customerTitle}"></td>
+                        <td style="width: 20%;" th:text="${customer.customerDate}"></td>
+                        <td style="width: 10%;"></td>
                     </tr>
                 </table>
+            </div>
+            <div>
+            	<ul>
+            		<li th:if="${navi.prev}">
+            			<a th:href="@{/customer/list(reqPage=${navi.startNo - 1})}">
+					    	<span class="material-icons">chevron_left</span>
+				        </a>
+            		</li>
+            		<li th:each="pageNo : ${#numbers.sequence(navi.startNo, navi.endNo)}">
+            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page'" class="page-item" th:href="@{/customer/list(reqPage=${pageNo})}" th:text="${pageNo}">
+					    </a>
+					</li>
+				    <li th:if="${navi.next}">
+				    	<a class="page-item" th:href="@{/customer/list(reqPage=${navi.endNo + 1})}">
+				        	<span class="material-icons">chevron_right</span>
+				    	</a>
+   					</li>
+            	</ul>
             </div>
         </div>
     </div>
