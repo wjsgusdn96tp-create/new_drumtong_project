@@ -28,11 +28,11 @@
 	float: left;
 	text-align: center;
 	float: left;
-	background-color:var(--main2);
+	
 	border-left: none;
 }
 .product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+	background-color:var(--main2);
 }
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main>div{
