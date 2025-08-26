@@ -1,8 +1,27 @@
 :root{
-    --color1 : #FBF8F1;
-    --color2 : #F7ECDE;
-    --color3 : #E9DAC1;
-    --color4 : #54BAB9;
+	/*main color */
+	--main1: #FBF8F1;
+	--main2: #F7ECDE;
+	--main3: #E9DAC1;
+	--main4: #54BAB9;
+	--main5: #6D2932;
+	
+	  /*gray*/
+  --gray1: #222222;
+  --gray2: #555555;
+  --gray3: #717171;
+  --gray4: #8f8f8f;
+  --gray5: #b7b7b7;
+  --gray6: #d6d6d6;
+  --gray7: #efefef;
+  --gray8: #ffffff;
+
+  /*line-color*/
+  --line1: #222222;
+  --line2: #d6d6d6;
+  --line3: #eaeced;
+  --line4: #f6f6f6;
+  --line5: #f8f9fa;
 }
 body{
     background-color: #FBF8F1;
@@ -82,17 +101,58 @@ body{
     background-color: #F7ECDE;
     height: 500px;
     padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 .title-table{
     width: 100%;
     border-spacing: 0;
+    background-color: var(--main1);
 }
 
 .title-table>tbody>tr>th{
-    border: 1px, solid, black;
+    border: 1px, solid, var(--main3);
     border-right: 0;
+    
+    height: 40px;
 }
+
 .title-table>tbody>tr>:last-child{
-    border-right: 1px solid black;
+    border-right: 1px solid var(--main3);
+}
+.tab-content>td{
+    border: 1px, solid, var(--main3);
+    border-right: 0;
+    border-top: 0;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+}
+.delete-btn{
+    border: 0;
+    width: 45px;
+    height: 20px;
+    background-color: var(--main3);
+    font-size: 10px;
+    
+}
+.navi{
+    display: flex;
+    justify-content: center;
+}
+.navi-ul{
+    overflow: hidden;
+}
+.navi-li{
+    float: left;
+    list-style: none;
+    width: 24px;
+    text-align: center;
+}
+.navi-li>a{
+    color: #222222;
+}
+.navi-li>a>span{
+    color: #222222;
 }
 
