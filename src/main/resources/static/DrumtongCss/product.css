@@ -8,28 +8,36 @@
 	margin: auto;
 }
 .product_wrap{
-		width: 800px;
-		background-color:#E9DAC1 ;
+		width: 1200px;
 		margin: 50px auto;
-		line-height: 37px;
-		
+		line-height: 50px;
 	}
+
+/*카테로리*/
 .product_wrap>.product_title_wrap{
-	width:700px;
+	width:1000px;
 	margin-left: 0;
-	
+}
+.product_wrap>.product_title_wrap>.product_title>li:first-child{
+	border-left: 1px solid var(--main3);
 }
 .product_wrap>.product_title_wrap>.product_title>.product_title_main{
-	border: 1px solid var(--main5);
-	width: 140px;
-	height: 35px;
+	border: 1px solid var(--main3);
+	width: 210px;
+	height: 50px;
 	float: left;
 	text-align: center;
 	float: left;
+	
+	border-left: none;
+}
+.product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
+	background-color:var(--main2);
 }
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main>div{
-	border: 1px solid var(--main5);
+	border: 1px solid var(--main3);
+	border-top:none;
 	text-align: left;
 	padding-left: 10px;
 }
@@ -51,12 +59,15 @@
 }
 .product_wrap>.product_title_wrap>ul>li>div>ul>li{
 	list-style: none;
-	font-weight: 500;
+	font-weight: 600;
 	color: var(--main5);
 }
 .product_wrap>.product_title_wrap>ul>li>div>ul>li>ul>li>a{
 	text-decoration: none;
 	color: var(--main5);
+}
+.product_wrap>.product_title_wrap>ul>li>div>ul>li>ul>li>a:hover{
+	font-weight: 500;
 }
 .product_wrap>.product_title_wrap>ul>li>div>ul>li>ul>li{
 	list-style: none;
@@ -65,22 +76,32 @@
 	color: var(--main5);
 }
 .product_drink:hover>.product_title_list{
+	margin-top:3px;
 	display: block;
 }
 .product_title_list{
 	display: none;
 }
+/*----------------------------------*/
 
-
-
+/*버튼(출력 순)*/
 .wrap>.product_wrap>.product_list_btn{
 	text-align: right;
 }
-.product_list_btn>button{
-	width: 65px;
-	height: 27px;
-	margin-top: 10px;
-	font-weight: 500;
-	background-color: var(--main3);
-	color:  var(--main5);
+.product_btn{
+	margin-top: 22px;
 }
+/*----------------------------------*/
+
+/*버튼(관리자용_메뉴 추가)*/
+.product_insert_btn>button{
+	width: 120px;
+	height: 35px;
+}
+.product_insert_btn>button>a{
+	font-size:15px;
+	text-decoration: none;
+	font-weight: 600;
+	color: var(--main4);
+}
+
