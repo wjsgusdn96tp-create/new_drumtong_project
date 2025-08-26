@@ -62,7 +62,9 @@
                     <tr class="tab-content"  th:each="customer : ${list}">
                         <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
                         <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
-                        <td style="width: 45%;" th:text="${customer.customerTitle}"></td>
+                        <td class="title-td" style="width: 45%;">
+                        	<a href="#" th:text="${customer.customerTitle}"></a>
+                        </td>
                         <td style="width: 15%;" th:text="${customer.customerDate}"></td>
                         <td style="width: 10%;">
                             <button class="delete-btn">삭제</button>
@@ -78,16 +80,16 @@
             <div class="navi">
             	<ul class="navi-ul">
             		<li class="navi-li" th:if="${navi.prev}">
-            			<a th:href="@{/customer/list(reqPage=${navi.startNo - 1})}">
+            			<a th:href="@{/customer/goodjob(reqPage=${navi.startNo - 1})}">
 					    	<span class="material-icons">chevron_left</span>
 				        </a>
             		</li>
             		<li class="navi-li" th:each="pageNo : ${#numbers.sequence(navi.startNo, navi.endNo)}">
-            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page'" class="page-item" th:href="@{/customer/list(reqPage=${pageNo})}" th:text="${pageNo}">
+            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page' : ''" class="page-item" th:href="@{/customer/goodjob(reqPage=${pageNo})}" th:text="${pageNo}">
 					    </a>
 					</li>
 				    <li class="navi-li" th:if="${navi.next}">
-				    	<a class="page-item" th:href="@{/customer/list(reqPage=${navi.endNo + 1})}">
+				    	<a class="page-item" th:href="@{/customer/goodjob(reqPage=${navi.endNo + 1})}">
 				        	<span class="material-icons">chevron_right</span>
 				    	</a>
    					</li>
