@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrderMap</title>
+    <link rel="stylesheet" href="/DrumtongCss/default.css">
+    <link rel="stylesheet" href="/DrumtongCss/ordermap.css">
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=r6oehvpmcw"></script>
+</head>
+<body>
+    <th:block th:include="/common/header"></th:block>
+    <div class="ordermap-mainbox">
+        <div class="ordermap-name">주문할 지점을 선택하세요</div>
+        <div id="map"></div>
+    </div>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=ptbhb8aree&submodules=geocoder"></script>
+    
+    <script>
+    
+    const mapDiv = document.getElementById("map");
+	const map = new naver.maps.Map(mapDiv,{
+		center : new naver.maps.LatLng(37.5359296,126.8985397),
+		zoom : 17,
+		zoomControl : true,
+		zoomControlOptions:{
+			position : naver.maps.Position.TOP_RIGHT,
+			style : naver.maps.ZoomControlStyle.SMALL
+		}
+	});
+	const marker = new naver.maps.Marker({
+		position : new naver.maps.LatLng(37.5359296,126.8985397),
+		map : map
+	});
+	
+	
+	
+    </script>
+    
+</body>
+</html>

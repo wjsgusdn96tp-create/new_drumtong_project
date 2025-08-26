@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="kr.co.iei.customer.controller.CustomerController">
+<mapper namespace="kr.co.iei.customer.dao.CustomerDao">
 	
+	<select id="selectCustomerList" resultType="customer">
+		SELECT *
+			FROM (
+			    SELECT rownum AS rnum, c.*
+			    FROM (
+			        SELECT customer_category, customer_nickname, customer_title, customer_date
+			        FROM customer_service_tbl
+			        ORDER BY customer_no DESC
+			    ) c
+			)
+			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
+	</select>
+	
+	<select id="selectCustomerTotalCount" resultType="int">
+		select count(*) from customer_service_tbl
+	</select>
+	
+	<select id="selectGjList" resultType="customer">
+		SELECT *
+			FROM (
+			    SELECT rownum AS rnum, c.*
+			    FROM (
+			       SELECT customer_category, customer_nickname, customer_title, customer_date
+			        FROM customer_service_tbl
+			        WHERE customer_category = '칭찬'
+			        ORDER BY customer_no DESC
+			    ) c
+			)
+			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
+	</select>
+	
+	<select id="selectGjTotalCount" resultType="int">
+		select count(*) from customer_service_tbl where customer_category = '칭찬'
+	</select>
+	
+	<select id="selectComplainList" resultType="customer">
+		SELECT *
+			FROM (
+			    SELECT rownum AS rnum, c.*
+			    FROM (
+			       SELECT customer_category, customer_nickname, customer_title, customer_date
+			        FROM customer_service_tbl
+			        WHERE customer_category = '불만'
+			        ORDER BY customer_no DESC
+			    ) c
+			)
+			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
+	</select>
+	
+	<select id="selectComplainTotalCount" resultType="int">
+		select count(*) from customer_service_tbl where customer_category = '불만'
+	</select>
+	
+	<select id="selectOpinionList" resultType="customer">
+		select * 
+			from (
+				select rownum as rnum, c.* 
+				from (
+					select customer_category, customer_nickname, customer_title, customer_date
+					from customer_service_tbl
+					where customer_category = '의견'
+					order by customer_no desc
+					) c
+			)
+			where #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
+	</select>
+	
+	<select id="selectOpinionTotalCount" resultType="int">
+		select count(*) from customer_service_tbl where customer_category = '의견'
+	</select>
 </mapper>

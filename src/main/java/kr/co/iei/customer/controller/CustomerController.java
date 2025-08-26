@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.iei.customer.service.CustomerService;
+import kr.co.iei.customer.vo.CustomerListData;
 
 @Controller
 @RequestMapping(value="/customer")
@@ -18,8 +19,38 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	@GetMapping(value="/list")
-	public String customerList(Model model) {
-//		List list = CustomerService.selectAll();
+	public String customerList(int reqPage, Model model) {
+		CustomerListData cld = customerService.selectCustomerList(reqPage);
+		model.addAttribute("list", cld.getList());
+		model.addAttribute("navi", cld.getCustomerNavi());
 		return "customer/list";
 	}
+	
+	@GetMapping(value="/goodjob")
+	public String goodjobList(int reqPage, Model model) {
+		CustomerListData cld = customerService.selectGjList(reqPage);
+		model.addAttribute("list", cld.getList());
+		model.addAttribute("navi", cld.getCustomerNavi());
+		return "customer/listGj";
+	}
+	
+	@GetMapping(value="/complain")
+	public String complainList(int reqPage, Model model) {
+		CustomerListData cld = customerService.selectComplainList(reqPage);
+		model.addAttribute("list", cld.getList());
+		model.addAttribute("navi", cld.getCustomerNavi());
+		return "customer/listComplain";
+	}
+	
+	@GetMapping(value="/opinion")
+	public String opinionList(int reqPage, Model model) {
+		CustomerListData cld = customerService.selectOpinionList(reqPage);
+		model.addAttribute("list", cld.getList());
+		model.addAttribute("navi", cld.getList());
+		return "customer/list";
+
+	}
+	
+	
+	
 }
