@@ -3,19 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/DrumtongJs/news.js"></script>
 <style>
-	.promotion>img{
-	margin-top: 30px;
-	}
-	.news-item{
-	width: 200px;
-	}
-	.news-item>img{
-	width: 100%;
+	#main-news>img{
+		margin-top: 30px;
+		width: 100%;
 	}
 	
 	.first-button{
 	float: right;
+	margin: 10px 0;
+
+	}
+	.first-button-div{
+	width: 100%;
+	overflow: hidden;
+	}
+	.date>span {
+		font-size: 12px;
+	}
+	.like{
+		float: right;
+	}
+	.like>span {
+		font-size: 14px;
+	}
+	
+	.news-item{
+	width: 200px;
+	}
+	
+	.news-title{
+		width: 100%;
+		height: 30px;
+		line-height: 15px;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+    	overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.item-img-div>img{
+		width: 90%;
+		margin: auto;
+		display: block;
+	}
+	.item-img-div {
+		width: 200px;
+		height: 200px;
+	}
+	.news-item:hover  img{
+		transition-duration: 0.5s;
+		width: 95%;
 	}
 </style>
 </head>
@@ -23,8 +63,10 @@
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
 	
-		<div class="promotion">
-			<img src="/img/news/promotion.jpg" style="width:100%">
+		<div id="main-news">
+			<img src="/img/news/main_promotion1.jpg" class="main-news1 close">
+			<img src="/img/news/main_promotion2.jpg" class="main-news2 close">
+			<img src="/img/news/main_promotion3.jpg" class="main-news3 active">
 		</div>
 		
 		<div class="tab">
@@ -33,26 +75,57 @@
 				<li>이벤트</li>
 				<li>프로모션</li>
 			</ul>
+			<span></span>
 			<ul  class="second-tab">
 				<li>공지사항</li>
 			</ul>
 		</div>
 		
 		<div class="first-button-div">
-			<button class="first-button">글쓰기</button>		
+			<a href=# class="first-button">글쓰기</a>		
 		</div>
 		
-		<div class="news-list"> 
-			<div class="news-item"> 
-				<img src="/img/프로모션1.jpg">
-				<div>제목</div>
-				<div>
-					<span>기간</span>
-					<span>하트</span>
+		<ul class="news-list"> 
+			<li class="news-item"> 
+				<div class="item-img-div">
+					<img src="/img/프로모션1.jpg">
 				</div>
-			</div>
-			
-			<button>더보기</button>
+				<div class="news-title">
+					<span>[프로모션]</span> 
+					<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다.</span> 
+				</div>
+				<div class="list-small">
+					<span class=date>
+						<span>2025-08-26</span>
+						<span>~</span>
+						<span>2025-09-01</span>
+					</span>
+					<span class=like>
+						<span class="material-icons">favorite_border</span>
+					</span>
+				</div>
+			</li>
+			<li class="news-item"> 
+				<div class="item-img-div">
+					<img src="/img/프로모션1.jpg">
+				</div>
+				<div class="news-title">
+					<span>[프로모션]</span> 
+					<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다.</span> 
+				</div>
+				<div class="list-small">
+					<span class=date>
+						<span>2025-08-26</span>
+						<span>~</span>
+						<span>2025-09-01</span>
+					</span>
+					<span class=like>
+						<span class="material-icons">favorite_border</span>
+					</span>
+				</div>
+			</li>
+		</ul>
+		<button>더보기</button>
 		</div>
 	</div>
 </body>

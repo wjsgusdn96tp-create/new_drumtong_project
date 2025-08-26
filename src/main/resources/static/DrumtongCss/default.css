@@ -100,7 +100,7 @@ ul>li>a{
 }
 .menu-box>li>a{
     color: var(--main5);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 20px;
 }
 .navi-small-box>li>a:hover {
@@ -127,7 +127,7 @@ ul>li>a{
 }
 .tab>ul{
 	margin-top: 30px;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
 
 }
@@ -136,6 +136,8 @@ ul>li>a{
     color: var(--main5);
     border: 1px solid var(--main3);
 	text-align: center;
+	font-weight: 600;
+	padding: 3px 0;
 }
 .tab>.first-tab{
 	float: left;
@@ -145,12 +147,24 @@ ul>li>a{
 }
 
 .first-button {
-	width: 150px;
+	width: 100px;
 	height: 30px;
 	border: none;
 	background-color: var(--main3);
+	font-weight: 600;
+	color: var(--main5);
+	font-size: 15px;
+	
+}
+.tab>ul>li:hover {
+	background-color: var(--main3);
 }
 
-
+.close {
+	display: none;
+}
+.active {
+	display: block;
+}
 
 
