@@ -62,7 +62,9 @@
                     <tr class="tab-content"  th:each="customer : ${list}">
                         <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
                         <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
-                        <td style="width: 45%;" th:text="${customer.customerTitle}"></td>
+                        <td style="width: 45%;">
+                        	<a href="#" th:text="${customer.customerTitle}"></a>
+                        </td>
                         <td style="width: 15%;" th:text="${customer.customerDate}"></td>
                         <td style="width: 10%;">
                             <button class="delete-btn">삭제</button>
