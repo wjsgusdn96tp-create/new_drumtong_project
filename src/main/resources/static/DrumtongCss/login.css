@@ -117,6 +117,8 @@ ul>li>a{
 h1{
     text-align: center;
     color: #31363F;
+    padding-bottom: 15px;
+    padding-top: 5px;
 }
 .login-box{
     width: 500px;
@@ -127,6 +129,7 @@ h1{
     background-color: #F7ECDE;
 }
 .login-box>h3{
+	padding-top: 20px;
     padding-bottom: 50px;
     font-size: 18px;
 }

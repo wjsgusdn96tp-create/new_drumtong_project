@@ -8,10 +8,7 @@
 	
 	<!-- selectOneMember -->
 	<select id="selectOneMember" resultType="member">
-		select * from member_tbl
-		where member_email = #{memberEmail}
-		<if test="memberPw != null">
-			and member_pw = #{memberPw}
-		</if>
+		select * from member_tbl where member_email = #{memberEmail}
+	
 	</select>
 </mapper>
