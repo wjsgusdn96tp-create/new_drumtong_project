@@ -33,6 +33,33 @@
 		map : map
 	});
 	
+	let infoWindow = new naver.maps.InfoWindow();
+	naver.maps.Event.addListener(marker,"click",function(e){
+		infoWindow = new naver.maps.InfoWindow({
+			content : contentString
+		});
+		infoWindow.open(map,marker);
+	});
+	naver.maps.Event.addListener(map,"click",function(e){
+		console.log(e);
+		map.setCenter(e.coord);
+		marker.setPosition(e.coord);
+		if(infoWindow.getMap()){
+			infoWindow.close(); 
+		}
+		
+		naver.maps.Service.reverseGeocode({
+			location : e.coord
+		},function(status, response){
+			
+			const address = response.result.items[0].address;
+			contentString = [
+				"<div class = 'iw-inner'>",
+				"<a>"+address+"</a>",
+				"</div>"
+			].join("");
+		});
+	});
 	
 	
     </script>

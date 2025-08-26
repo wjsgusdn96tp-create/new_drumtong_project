@@ -55,6 +55,9 @@ body{
     font-size: 15px;
     padding-right: 20px;
 }
+.drumtong{
+    color: var(--main4);
+}
 .tab{
     height: 30px;
     display: flex;
@@ -75,17 +78,31 @@ body{
     float: left;
     list-style: none;
     width: 60px;
-    border: 1px solid black;
+
     text-align: center;
     border-right: none;
+
+	background-color: var(--main1);
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+}
+.tab>div>:first-child>li:hover{
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
+	color: var(--gray2);
+	font-weight: 550;
+	background-color: var(--main2);
 }
 .tab>div>:first-child>:last-child{
-    border-right: 1px solid black;
+    border-right: 1px solid var(--main3);
 }
 .tab>div>:first-child>li>a{
     text-decoration: none;
-    color: black;
     width: 60px;
+    color: var(--gray4);
 }
 .tab>div>:nth-child(2)>li{
     float: left;
@@ -129,12 +146,51 @@ body{
     font-size: 12px;
 }
 .delete-btn{
-    border: 0;
+    font-size: 10px;
     width: 45px;
     height: 20px;
-    background-color: var(--main3);
-    font-size: 10px;
+	color:  var(--gray4);
+	background-color: var(--main1);
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
     
+}
+.delete-btn:hover{
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
+	color: var(--gray2);
+	font-weight: 550;
+	background-color: var(--main2);
+}
+.button-tr{
+    height: 30px;
+}
+.button-td{
+    text-align: right;
+    padding-right: 15px;
+}
+.write-btn{
+    width: 85px;
+	height: 25px;
+	color:  var(--main4);
+	background-color: var(--main1);
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+}
+.write-btn:hover{
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
+	color: var(--gray2);
+	font-weight: 550;
+	background-color: var(--main2);
 }
 .navi{
     display: flex;
