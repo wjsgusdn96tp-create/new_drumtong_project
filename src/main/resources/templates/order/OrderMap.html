@@ -50,7 +50,7 @@
 	
 	let infoWindow = new naver.maps.InfoWindow();
 	
-	naver.maps.Event.addListener(marker1,"onclick",function(e){
+	naver.maps.Event.addListener(marker1,"click",function(e){
 		infoWindow = new naver.maps.InfoWindow({
 			content : contentString
 		});
@@ -64,7 +64,7 @@
 		naver.maps.Service.reverseGeocode({
 			location : e.coord
 		},function(status, response){
-			
+			console.log(response);
 			const address = response.result.items[0].address;
 			contentString = [
 				"<div class = 'iw-inner'>",
