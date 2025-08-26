@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,34 +19,47 @@
     <script>
     
     const mapDiv = document.getElementById("map");
-	const map = new naver.maps.Map(mapDiv,{
-		center : new naver.maps.LatLng(37.5359296,126.8985397),
+    
+    const map = new naver.maps.Map(mapDiv,{
+		center : new naver.maps.LatLng(37.5338151,126.8969784),
 		zoom : 17,
-		zoomControl : true,
 		zoomControlOptions:{
 			position : naver.maps.Position.TOP_RIGHT,
 			style : naver.maps.ZoomControlStyle.SMALL
 		}
 	});
-	const marker = new naver.maps.Marker({
-		position : new naver.maps.LatLng(37.5359296,126.8985397),
+	
+    
+	const marker1 = new naver.maps.Marker({
+		position : new naver.maps.LatLng(37.5340956,126.8969507),
+		map : map
+	});
+	const marker2 = new naver.maps.Marker({
+		position : new naver.maps.LatLng(37.5350961,126.8999555),
+		map : map
+	});
+	const marker3 = new naver.maps.Marker({
+		position : new naver.maps.LatLng(37.5338262,126.9009868),
+		map : map
+	});
+	const marker4 = new naver.maps.Marker({
+		position : new naver.maps.LatLng(37.5352083,126.8967269),
 		map : map
 	});
 	
+	
 	let infoWindow = new naver.maps.InfoWindow();
-	naver.maps.Event.addListener(marker,"click",function(e){
+	
+	naver.maps.Event.addListener(marker1,"onclick",function(e){
 		infoWindow = new naver.maps.InfoWindow({
 			content : contentString
 		});
-		infoWindow.open(map,marker);
+		infoWindow.open(map,marker1);
 	});
 	naver.maps.Event.addListener(map,"click",function(e){
 		console.log(e);
 		map.setCenter(e.coord);
 		marker.setPosition(e.coord);
-		if(infoWindow.getMap()){
-			infoWindow.close(); 
-		}
 		
 		naver.maps.Service.reverseGeocode({
 			location : e.coord
@@ -55,7 +68,10 @@
 			const address = response.result.items[0].address;
 			contentString = [
 				"<div class = 'iw-inner'>",
-				"<a>"+address+"</a>",
+				"<a href=/product/productList>"+address+"</a>",
+				"</div>",
+				"<div class = 'iw-inner'>",
+				"<a href=/product/productList>"+address+"</a>",
 				"</div>"
 			].join("");
 		});
