@@ -55,31 +55,9 @@ body{
     font-size: 15px;
     padding-right: 20px;
 }
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 14px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+.drumtong{
+    color: var(--main4);
 }
-
 .tab{
     height: 30px;
     display: flex;
@@ -100,17 +78,30 @@ body{
     float: left;
     list-style: none;
     width: 60px;
-    border: 1px solid black;
+
     text-align: center;
     border-right: none;
+
+	background-color: var(--main1);
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 600;
+	text-align: center;
+
+}
+.tab>div>:first-child>li:hover{
+    /* text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	 */
+
+	background-color: var(--main3);
 }
 .tab>div>:first-child>:last-child{
-    border-right: 1px solid black;
+    border-right: 1px solid var(--main3);
 }
 .tab>div>:first-child>li>a{
     text-decoration: none;
-    color: black;
     width: 60px;
+    color: var(--main5);
 }
 .tab>div>:nth-child(2)>li{
     float: left;
@@ -153,13 +144,59 @@ body{
     text-align: center;
     font-size: 12px;
 }
+.title-td>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: var(--gray1);
+}
 .delete-btn{
-    border: 0;
+    font-size: 10px;
     width: 45px;
     height: 20px;
-    background-color: var(--main3);
-    font-size: 10px;
+	color:  var(--gray4);
+	background-color: var(--main1);
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
     
+}
+.delete-btn:hover{
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
+	color: var(--gray2);
+	font-weight: 550;
+	background-color: var(--main2);
+}
+.button-tr{
+    height: 30px;
+}
+.button-td{
+    text-align: right;
+    padding-right: 15px;
+}
+.write-btn{
+    width: 85px;
+	height: 25px;
+	color:  var(--main4);
+	background-color: var(--main1);
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+}
+.write-btn:hover{
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
+	color: var(--gray2);
+	font-weight: 550;
+	background-color: var(--main2);
 }
 .navi{
     display: flex;
@@ -171,7 +208,7 @@ body{
 .navi-li{
     float: left;
     list-style: none;
-    width: 24px;
+    width: 26px;
     text-align: center;
 }
 .navi-li>a{
@@ -179,5 +216,16 @@ body{
 }
 .navi-li>a>span{
     color: #222222;
+}
+.page-item{
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+}
+.active-page{
+    background-color: var(--main4);
+    font-weight: 600;
+    border-radius: 45%;
 }
 

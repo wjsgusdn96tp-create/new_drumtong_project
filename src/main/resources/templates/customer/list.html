@@ -10,7 +10,10 @@
 	<div class="allfirst-wrap">
         <div class="all-wrap">
             <div>
-                <div>드럼Tong은 언제나 고객의 소리에 귀 기울이겠습니다.</div>
+                <div>
+                	<span class="drumtong">DrumTong</span>
+                	은 언제나 고객의 소리에 귀 기울이겠습니다.
+                </div>
             </div>
             <div>
                 <div class="customer-center">고객센터: <span class="material-icons">phone</span> 1577-0000</div>
@@ -52,18 +55,25 @@
                     <tr>
                         <th style="width: 15%;">유형</th>
                         <th style="width: 15%;">작성자</th>
-                        <th style="width: 40%;">제목</th>
-                        <th style="width: 20%;">작성일</th>
+                        <th style="width: 45%;">제목</th>
+                        <th style="width: 15%;">작성일</th>
                         <th style="width: 10%;">삭제</th>
                     </tr>
                     <tr class="tab-content"  th:each="customer : ${list}">
                         <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
                         <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
-                        <td style="width: 40%;" th:text="${customer.customerTitle}"></td>
-                        <td style="width: 20%;" th:text="${customer.customerDate}"></td>
+                        <td class="title-td" style="width: 45%;">
+                        	<a href="#" th:text="${customer.customerTitle}"></a>
+                        </td>
+                        <td style="width: 15%;" th:text="${customer.customerDate}"></td>
                         <td style="width: 10%;">
                             <button class="delete-btn">삭제</button>
                         </td>
+                    </tr>
+                    <tr class="button-tr">
+                    	<td class="button-td" colspan="5">
+	                        <button class="write-btn">글쓰기</button>
+                    	</td>
                     </tr>
                 </table>
             </div>
@@ -75,7 +85,7 @@
 				        </a>
             		</li>
             		<li class="navi-li" th:each="pageNo : ${#numbers.sequence(navi.startNo, navi.endNo)}">
-            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page'" class="page-item" th:href="@{/customer/list(reqPage=${pageNo})}" th:text="${pageNo}">
+            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page' : ''" class="page-item" th:href="@{/customer/list(reqPage=${pageNo})}" th:text="${pageNo}">
 					    </a>
 					</li>
 				    <li class="navi-li" th:if="${navi.next}">

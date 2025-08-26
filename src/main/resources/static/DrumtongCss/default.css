@@ -1,4 +1,4 @@
-:root{
+ :root{
 	/*main color */
 	--main1: #FBF8F1;
 	--main2: #F7ECDE;
@@ -69,6 +69,7 @@ ul>li>a{
     height: 100px;
     background-color: var(--main3);
     display: flex;
+    min-width: 1200px;
 }
 .nav-box{
     width: 1200px;
@@ -100,7 +101,7 @@ ul>li>a{
 }
 .menu-box>li>a{
     color: var(--main5);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 20px;
 }
 .navi-small-box>li>a:hover {
@@ -127,7 +128,7 @@ ul>li>a{
 }
 .tab>ul{
 	margin-top: 30px;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
 
 }
@@ -136,6 +137,8 @@ ul>li>a{
     color: var(--main5);
     border: 1px solid var(--main3);
 	text-align: center;
+	font-weight: 600;
+	padding: 3px 0;
 }
 .tab>.first-tab{
 	float: left;
@@ -144,11 +147,15 @@ ul>li>a{
 	float: right;
 }
 
-.first-button {
-	width: 150px;
-	height: 30px;
-	border: none;
+.tab>ul>li:hover {
 	background-color: var(--main3);
+}
+
+.close {
+	display: none;
+}
+.active {
+	display: block;
 }
 
 /*button css*/
