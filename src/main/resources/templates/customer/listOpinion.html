@@ -75,7 +75,7 @@
 				        </a>
             		</li>
             		<li class="navi-li" th:each="pageNo : ${#numbers.sequence(navi.startNo, navi.endNo)}">
-            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page'" class="page-item" th:href="@{/customer/list(reqPage=${pageNo})}" th:text="${pageNo}">
+            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page'" class="page-item" th:href="@{/customer/listOpinion(reqPage=${pageNo})}" th:text="${pageNo}">
 					    </a>
 					</li>
 				    <li class="navi-li" th:if="${navi.next}">

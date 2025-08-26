@@ -25,4 +25,32 @@ public class CustomerController {
 		model.addAttribute("navi", cld.getCustomerNavi());
 		return "customer/list";
 	}
+	
+	@GetMapping(value="/goodjob")
+	public String goodjobList(int reqPage, Model model) {
+		CustomerListData cld = customerService.selectGjList(reqPage);
+		model.addAttribute("list", cld.getList());
+		model.addAttribute("navi", cld.getCustomerNavi());
+		return "customer/listGj";
+	}
+	
+	@GetMapping(value="/complain")
+	public String complainList(int reqPage, Model model) {
+		CustomerListData cld = customerService.selectComplainList(reqPage);
+		model.addAttribute("list", cld.getList());
+		model.addAttribute("navi", cld.getCustomerNavi());
+		return "customer/listComplain";
+	}
+	
+	@GetMapping(value="/opinion")
+	public String opinionList(int reqPage, Model model) {
+		CustomerListData cld = customerService.selectOpinionList(reqPage);
+		model.addAttribute("list", cld.getList());
+		model.addAttribute("navi", cld.getList());
+		return "customer/list";
+
+	}
+	
+	
+	
 }
