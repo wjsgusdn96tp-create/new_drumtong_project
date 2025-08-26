@@ -69,6 +69,7 @@ ul>li>a{
     height: 100px;
     background-color: var(--main3);
     display: flex;
+    min-width: 1200px;
 }
 .nav-box{
     width: 1200px;
@@ -146,16 +147,6 @@ ul>li>a{
 	float: right;
 }
 
-.first-button {
-	width: 100px;
-	height: 30px;
-	border: none;
-	background-color: var(--main3);
-	font-weight: 600;
-	color: var(--main5);
-	font-size: 15px;
-	
-}
 .tab>ul>li:hover {
 	background-color: var(--main3);
 }
