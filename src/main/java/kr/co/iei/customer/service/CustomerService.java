@@ -17,13 +17,16 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 	
-	public CustomerListData selectCustomerList(int reqPage) {
+	public CustomerListData selectCustomerList(int reqPage, String sort) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
+					
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("start",start);
 		param.put("end", end);
+		param.put("sort", sort);
+		System.out.println(param);
 		List list = customerDao.selectCustomerList(param);
 		
 		int totalCount = customerDao.selectCustomerTotalCount();
@@ -50,13 +53,14 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectGjList(int reqPage) {
+	public CustomerListData selectGjList(int reqPage, String sort) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("start",start);
 		param.put("end", end);
+		param.put("sort", sort);
 		List list = customerDao.selectGjList(param);
 		
 		int totalCount = customerDao.selectGjTotalCount();
@@ -83,13 +87,14 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectComplainList(int reqPage) {
+	public CustomerListData selectComplainList(int reqPage, String sort) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("start",start);
 		param.put("end", end);
+		param.put("sort", sort);
 		List list = customerDao.selectComplainList(param);
 		
 		int totalCount = customerDao.selectComplainTotalCount();
@@ -116,13 +121,14 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectOpinionList(int reqPage) {
+	public CustomerListData selectOpinionList(int reqPage, String sort) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("start",start);
 		param.put("end", end);
+		param.put("sort", sort);
 		List list = customerDao.selectOpinionList(param);
 		
 		int totalCount = customerDao.selectOpinionTotalCount();

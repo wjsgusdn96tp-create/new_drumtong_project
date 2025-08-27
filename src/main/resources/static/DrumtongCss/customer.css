@@ -29,6 +29,7 @@ body{
 .allfirst-wrap{
     padding-top: 100px;
     width: 1200px;
+    height: 800px;
     margin: 0 auto;
     
 }
@@ -88,6 +89,7 @@ body{
 	border: 1px solid var(--main3);
 	font-weight: 600;
 	text-align: center;
+    
 
 }
 .tab>div>:first-child>li:hover{
@@ -107,11 +109,16 @@ body{
     float: left;
     list-style: none;
 }
-.tab>div>:nth-child(2)>li>p{
+.tab>div>:nth-child(2)>li:hover{
+    font-weight: 600;
+}
+.tab>div>:nth-child(2)>li>a{
     padding: 0;
     margin: 0;
     width: 80px;
     text-align: right;
+    color: var(--gray1);
+    padding-left: 10px;
 }
 .customer-content-wrap{
     background-color: #F7ECDE;
@@ -227,5 +234,8 @@ body{
     background-color: var(--main4);
     font-weight: 600;
     border-radius: 45%;
+}
+.icons{
+	font-size: 10;
 }
 

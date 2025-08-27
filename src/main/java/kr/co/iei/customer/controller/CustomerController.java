@@ -19,34 +19,39 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	@GetMapping(value="/list")
-	public String customerList(int reqPage, Model model) {
-		CustomerListData cld = customerService.selectCustomerList(reqPage);
+	public String customerList(int reqPage, String sort, Model model) {
+		CustomerListData cld = customerService.selectCustomerList(reqPage, sort);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
+		model.addAttribute("sort", sort);
 		return "customer/list";
 	}
 	
 	@GetMapping(value="/goodjob")
-	public String goodjobList(int reqPage, Model model) {
-		CustomerListData cld = customerService.selectGjList(reqPage);
+	public String goodjobList(int reqPage, String sort, String category, Model model) {
+		CustomerListData cld = customerService.selectGjList(reqPage, sort);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
+		model.addAttribute("sort", sort);
+		model.addAttribute("category", category);
 		return "customer/listGj";
 	}
 	
 	@GetMapping(value="/complain")
-	public String complainList(int reqPage, Model model) {
-		CustomerListData cld = customerService.selectComplainList(reqPage);
+	public String complainList(int reqPage, String sort, Model model) {
+		CustomerListData cld = customerService.selectComplainList(reqPage, sort);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
+		model.addAttribute("sort", sort);
 		return "customer/listComplain";
 	}
 	
 	@GetMapping(value="/opinion")
-	public String opinionList(int reqPage, Model model) {
-		CustomerListData cld = customerService.selectOpinionList(reqPage);
+	public String opinionList(int reqPage, String sort, Model model) {
+		CustomerListData cld = customerService.selectOpinionList(reqPage, sort);
 		model.addAttribute("list", cld.getList());
-		model.addAttribute("navi", cld.getList());
+		model.addAttribute("navi", cld.getCustomerNavi());
+		model.addAttribute("sort", sort);
 		return "customer/listOpinion";
 
 	}

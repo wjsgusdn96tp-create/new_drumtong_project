@@ -240,4 +240,40 @@ table>tbody>tr>td{
 }
 
 
+/*footer*/
+.footer{
+    background-color: var(--gray2);
+    color: var(--main4);
+    padding-top: 50px;
+    padding-bottom: 15px;
+    min-width: 1200px;
+}
+.footer-all-wrap{
+/*     display: flex; */
+	overflow: hidden;
+    justify-content: space-around;
+}
+.div-1{
+	float: left;
+    font-size: 12px;
+    padding-left: 50px;
+/*     padding-top: 1%; */
+}
+.div-2{
+	float: right;
+    padding-top: 70px;
+    font-size: 12px;
+}
+.div-3{
+	float: right;
+    text-align: right;
+    width: 100px;
+/*     padding-top: 5%; */
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 50px
+}
+
 

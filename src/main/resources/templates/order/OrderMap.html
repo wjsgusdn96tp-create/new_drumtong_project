@@ -6,23 +6,25 @@
     <title>OrderMap</title>
     <link rel="stylesheet" href="/DrumtongCss/default.css">
     <link rel="stylesheet" href="/DrumtongCss/ordermap.css">
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=r6oehvpmcw"></script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=r6oehvpmcw&submodules=geocoder"></script>
 </head>
 <body>
     <th:block th:include="/common/header"></th:block>
+   
     <div class="ordermap-mainbox">
         <div class="ordermap-name">주문할 지점을 선택하세요</div>
         <div id="map"></div>
     </div>
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=ptbhb8aree&submodules=geocoder"></script>
     
-    <script>
+    <script th:inline="javascript">
+    const list = [[${list}]];
     
     const mapDiv = document.getElementById("map");
     
     const map = new naver.maps.Map(mapDiv,{
 		center : new naver.maps.LatLng(37.5338151,126.8969784),
 		zoom : 17,
+		zoomControl : true,
 		zoomControlOptions:{
 			position : naver.maps.Position.TOP_RIGHT,
 			style : naver.maps.ZoomControlStyle.SMALL
@@ -47,35 +49,59 @@
 		map : map
 	});
 	
+	let contentString1=[
+		"<div class='iw-inner'>",
+		"<a href='/product/productList'>"+list[0].shopName+"</a>",
+    	"</div>"
+    ].join("");
+	let contentString2=[
+		"<div class='iw-inner'>",
+		"<a href='/product/productList'>"+list[1].shopName+"</a>",
+    	"</div>"
+    ].join("");
+	let contentString3=[
+		"<div class='iw-inner'>",
+		"<a href='/product/productList'>"+list[2].shopName+"</a>",
+    	"</div>"
+    ].join("");
+	let contentString4=[
+		"<div class='iw-inner'>",
+		"<a href='/product/productList'>"+list[3].shopName+"</a>",
+    	"</div>"
+    ].join("");
+	
 	
 	let infoWindow = new naver.maps.InfoWindow();
 	
-	naver.maps.Event.addListener(marker1,"onclick",function(e){
-		infoWindow = new naver.maps.InfoWindow({
-			content : contentString
-		});
-		infoWindow.open(map,marker1);
-	});
-	naver.maps.Event.addListener(map,"click",function(e){
-		console.log(e);
-		map.setCenter(e.coord);
-		marker.setPosition(e.coord);
-		
-		naver.maps.Service.reverseGeocode({
-			location : e.coord
-		},function(status, response){
-			
-			const address = response.result.items[0].address;
-			contentString = [
-				"<div class = 'iw-inner'>",
-				"<a href=/product/productList>"+address+"</a>",
-				"</div>",
-				"<div class = 'iw-inner'>",
-				"<a href=/product/productList>"+address+"</a>",
-				"</div>"
-			].join("");
-		});
-	});
+	//marker에 클릭이벤트 적용
+    naver.maps.Event.addListener(marker1,"click",function(e){
+    	infoWindow = new naver.maps.InfoWindow({
+    		content : contentString1
+    	});
+    	infoWindow.open(map,marker1);
+    });
+    naver.maps.Event.addListener(marker2,"click",function(e){
+    	infoWindow = new naver.maps.InfoWindow({
+    		content : contentString2
+    	});
+    	infoWindow.open(map,marker2);
+    });
+
+    naver.maps.Event.addListener(marker3,"click",function(e){
+    	infoWindow = new naver.maps.InfoWindow({
+    		content : contentString3
+    	});
+    	infoWindow.open(map,marker3);
+    });
+    naver.maps.Event.addListener(marker4,"click",function(e){
+    	infoWindow = new naver.maps.InfoWindow({
+    		content : contentString4
+    	});
+    	infoWindow.open(map,marker4);
+    });
+
+
+	
 	
 	
     </script>
