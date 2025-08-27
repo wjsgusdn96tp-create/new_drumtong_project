@@ -21,3 +21,22 @@
     border: 1px solid black;
     margin: 0 auto;
 }
+
+.map-shopname {
+	background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  max-width: 200px;
+}
+
+.map-shopname>a {
+	font-weight:bold;
+	color: #54BAB9;
+	text-decoration: none;
+}
+
+.map-addr {
+	text-align: center;
+}
