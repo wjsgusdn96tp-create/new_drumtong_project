@@ -4,11 +4,11 @@
 }
 
 .wrap{
-	width: 1200px;
+	width: 1275px;
 	margin: auto;
 }
 .product_wrap{
-		width: 1200px;
+		width: 1275px;
 		margin: 50px auto;
 		line-height: 45px;
 	}
@@ -17,27 +17,27 @@
 .product_wrap>.product_title_wrap{
 	width:1200px;
 	height: 50px;
-	
+	margin-left: 37px;
 	
 	
 }
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main{
-	border-top: 1px solid var(--main3);
-	border-bottom: 1px solid var(--main3);
+	border-top: 2px solid var(--main3);
+	border-bottom: 2px solid var(--main3);
 	width: 210px;
 	height: 50px;
 	float: left;
 	text-align: center;
 	float: left;
 	border-left: none;
-	background-color: var(--main2)
+	
 }
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
 	background-color:var(--main2);
-	border-top: 2px solid var(--main3);
-	background-color: var(--main3);
+	border-top: 3px solid var(--main3);
+	background-color: var(--main2)
 	
 }
 .product_wrap>.product_title_wrap>.product_title>.product_drink:hover{
@@ -113,7 +113,8 @@
 
 /*카테고리 바로 밑 버튼*/
 .product_new_wrap{
-	
+	margin-left:37px;
+	width:1200px;
 	overflow: hidden;
 	margin-bottom: 120px;
 }
@@ -128,8 +129,6 @@
 .product_new_wrap>.product_list_btn{
 	float: right;
 }
-
-
 
 /*카테고리 바로 밑 버튼 > 버튼(관리자용_메뉴 추가)*/
 .product_new_wrap>.product_insert_btn>button{
@@ -150,26 +149,38 @@
 }
 
 
-/*상품 리스트 one*/
-form>.product_list_wrap{
+/*상품 리스트*/
+.product_list_wrap{
+	width:1275px;
 	padding-top: 20px;
 }
-form>.product_list_wrap>ul>.product_one_wrap{
-	width: 350px;
+.product_list_wrap>ul{
+	overflow: hidden;
+	flex-wrap: wrap;
 }
-form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>div{
+/*상품 리스트 one*/
+.product_list_wrap>ul>.product_one_wrap{
+	width: 350px;
+	margin-left:37px;
+	margin-right:37px;
+	float: left;
+	
+}
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div{
 	border : 1px solid var(--main3); 
-	width: 352px;
-	height: 372px;
+	width: 351px;
+	height: 371px;
 	background-color: var(--main2);	
 }
-form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>div>img{
+
+/*상품 리스트 one > 이미지,상세정보box*/
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div>img{
 	width: 350px;
 	height: 370px;
 	position: absolute;
 	z-index:2;
 }
-form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>div>.product_content_box{
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div>.product_content_box{
 	
 	width: 352px;
 	height: 372px;
@@ -179,18 +190,17 @@ form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>div>.product
 	background-color: var(--main2);
 	opacity: 0.8;
 }
-form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>div:hover>div{
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div:hover>div{
 	z-index: 3;
 	
 }
-form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>input{
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>input{
 	display: none;
 }
-form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>.product_img_box>img{
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>.product_img_box>img{
 	width: 350px;
 	height: 370px;
 }
-
 
 /*상품 리스트 one> 버튼(관리자용_수정 삭제)*/
 .product_manager_btn{
@@ -198,10 +208,12 @@ form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>.product_img
 	margin-bottom: 5px;
 	
 }
-.product_manager_btn>input{
+
+.product_manager_btn>form>input{
 	display:none;	
 }
-.product_manager_btn>label>button{
+
+.product_manager_btn>form>label>button{
 	height: 30px;	
 	width: 70px;
 	float: right;
@@ -210,11 +222,12 @@ form>.product_list_wrap>ul>.product_one_wrap>.product_one_box>label>.product_img
 	background-color: var(--main2);
 	border: 1px solid var(--main3); 
 }
-.product_manager_btn>label>button:hover{
+.product_manager_btn>form>label>button:hover{
 	border: 2px solid var(--main3); 
 }
-.product_manager_btn>label>button>a{
+.product_manager_btn>form>label>button{
 	text-decoration: none;
 	color: var(--main4);
 	font-weight: 600;
 }
+

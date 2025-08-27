@@ -58,50 +58,53 @@
 			</div>	
 				
 			<!-- 이미지  -->
-			<form action="#" method="get" id="">
 				<div class="product_list_wrap">
-					<!-- [js]for문 -->
 					<ul>
+						<!-- [js]for문-대표 상품 리스트 -->
 						<li class="product_one_wrap">
 							<div class="product_one_box">
 								<div class="product_manager_btn">
-									<input type="submit" name="product_update_btn" id="product_update_btn">
-									<label for="product_update_btn">
-										<button class="btn"><a href="#">수정</a></button>
-									</label>
-									<input type="submit" name="product_delete_btn" id="product_delete_btn">
-									<label for="product_delete_btn">
-										<button class="btn"><a href="#">삭제</a></button>
-									</label>
+									<form action="#"><!-- 수정 페이지로 이동 -->
+										<input type="submit" class="product_update_btn" name="product_no" id="product_no" >
+										<label for="product_no">
+											<button class="btn">수정</button>
+										</label>
+									</form>
+									<form action="#"><!-- 삭제 후 해당 페이지로(우선 controller 페이지로 이동)-->
+										<input type="submit" class="product_delete_btn" name="product_no" id="product_no">
+										<label for="product_no">
+											<button class="btn">삭제</button>
+										</label>
+									</form>
 								</div>
 								<!-- 클릭 시, 장바구니로 이동 -->
-								<input type="submit" name="product" id="product">	
-								<label for="product">
-									
-									
-									<div class="product_img_box">
-										<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
-										<!-- DB에서 들고올거 -->
-										<div class="product_content_box">
-											<h3>product_name</h3>
-											<p>칼로리 : ${.product_content_kcal} kcal</p>
-											<p>카페인 : ${.product_content_shot} 샷</p>
-											<p>당 : ${.product_content_sugar} g</p>
-											<p>나트륨 : ${.product_content_natrium} g</p>
-											<p>지방 :${.product_content_carbs} g</p>
-										</div>
-									</div>
-									
-									
-								</label>
-							    <!-- e[관리자,회원,비회원] -->
-								<div class="product_icon">
-									<div class="product_cart">
-										<input type="submit" name="product_cart" id="product_cart">	
-										<label for="product_cart">
-											<span class="material-icons">add_shopping_cart</span>
-										</label>
-									</div>
+								<form action="#" method="get" id="">
+									<input type="submit" class="product" name="product_no" id="product_no">	
+									<label for="product_no">
+										<div class="product_img_box">
+											<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
+											<!-- DB에서 들고올거 -->
+											<div class="product_content_box">
+												<h3>product_name</h3>
+												<p>칼로리 : ${.product_content_kcal} kcal</p>
+												<p>카페인 : ${.product_content_shot} 샷</p>
+												<p>당 : ${.product_content_sugar} g</p>
+												<p>나트륨 : ${.product_content_natrium} g</p>
+												<p>지방 :${.product_content_carbs} g</p>
+											</div>
+										</div>	
+									</label>
+								</form>
+							   	 <!-- e[관리자,회원,비회원] -->
+									<div class="product_icon">
+										<form action="#" method="get" id=""><!-- 장바구니 페이지로 이동 -->
+											<div class="product_cart">
+												<input type="submit" name="product_cart" id="product_cart">	
+												<label for="product_cart">
+													<span class="material-icons">add_shopping_cart</span>
+												</label>
+											</div>
+										</form>
 									<!-- e[회원-좋아요 기능] -->
 									<div class="product_like">
 										<span class="material-icons">favorite_border</span>
@@ -111,9 +114,61 @@
 							</div>
 						
 						</li>
+						
+						<!-- [js]for문-상품 리스트 -->
+						<!-- [js]for문-대표 상품 리스트 -->
+						<li class="product_one_wrap">
+							<div class="product_one_box">
+								<div class="product_manager_btn">
+									<input type="submit" class="product_update_btn" name="product_no" id="product_no" >
+									<label for="product_no">
+										<button class="btn"><a href="#">수정</a></button>
+									</label>
+									<input type="submit" class="product_delete_btn" name="product_no" id="product_no">
+									<label for="product_no">
+										<button class="btn"><a href="#">삭제</a></button>
+									</label>
+								</div>
+								<!-- 클릭 시, 장바구니로 이동 -->
+								<form action="#" method="get" id="">
+									<input type="submit" class="product" name="product_no" id="product_no">	
+									<label for="product_no">
+										<div class="product_img_box">
+											<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
+											<!-- DB에서 들고올거 -->
+											<div class="product_content_box">
+												<h3>product_name</h3>
+												<p>칼로리 : ${.product_content_kcal} kcal</p>
+												<p>카페인 : ${.product_content_shot} 샷</p>
+												<p>당 : ${.product_content_sugar} g</p>
+												<p>나트륨 : ${.product_content_natrium} g</p>
+												<p>지방 :${.product_content_carbs} g</p>
+											</div>
+										</div>	
+									</label>
+							   	 <!-- e[관리자,회원,비회원] -->
+									<div class="product_icon">
+										<div class="product_cart">
+											<input type="submit" name="product_cart" id="product_cart">	
+											<label for="product_cart">
+												<span class="material-icons">add_shopping_cart</span>
+											</label>
+										</div>
+									</form>
+									<!-- e[회원-좋아요 기능] -->
+									<div class="product_like">
+										<span class="material-icons">favorite_border</span>
+										<span class="material-icons">favorite</span>
+									</div>
+								</div>							
+							</div>
+						
+						</li>
+						
+						<!-- 화면 css 구현 끝나면 삭제 예정 -->
 					</ul>
 				</div>
-			</form>
+			
 			
 		</div>
 	</div>
