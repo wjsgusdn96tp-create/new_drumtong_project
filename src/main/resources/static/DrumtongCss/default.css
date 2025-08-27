@@ -179,4 +179,29 @@ ul>li>a{
 	background-color: var(--main2);
 }
 
+/*table css*/
+table{
+    width: 100%;
+    border-spacing: 0;
+    background-color: var(--main1);
+}
+
+table>tbody>tr>th{
+    border: 1px, solid, var(--main3);
+    border-right: 0;
+    height: 40px;
+}
+
+table>tbody>tr>:last-child{
+    border-right: 1px solid var(--main3);
+}
+
+table>tbody>tr>td{
+    border: 1px, solid, var(--main3);
+    border-right: 0;
+    border-top: 0;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+}
 
