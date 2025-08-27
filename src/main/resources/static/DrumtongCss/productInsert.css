@@ -3,15 +3,63 @@
     margin: 0;
 }
 .productInsert_wrap{
-    width: 1200px;
+    width: 800px;
     text-align: center;
-    background-color: antiquewhite;
+    margin: 0 auto;
+    
 }
 .productInsert_wrap>.productInsert_title_wrap{
-    width: 1200px;
+    width: 800px;
     text-align: center;
     line-height: 100px;
+    font-size: 24px;
+    font-weight:bold;
+    color: var(--gray1);
+    margin-top: 50px;
 }
 
 /*--------카테고리 타이틀 버튼-------*/
-.
+.btn:hover{
+	border: 2px solid var(--main3);
+}
+.productInsert_title_btn{
+	overflow: hidden;
+	height: 40px;
+}
+.productInsert_title_btn>button{
+	float: left;
+	margin-right: 3px;
+}
+
+/*---------상품 등록 contentbox--------*/
+.title_font{
+	font-weight: 600;
+	font-size: 17px;
+	color: var(--gray1);
+}
+.productInsert_content_wrap{
+	background: var(--main2)
+}
+/*상품명*/
+.content_name{
+	border: 1px solid var(--main3);
+	line-height: 60px;
+	overflow: hidden;
+	
+}
+.content_name>.name_title{
+	border: 1px solid var(--main3);
+	height: 60px;
+	width: 150px;	
+	float: left;
+}
+.content_name>.name_content_wrap{
+	width: 645px;
+	float: left;
+
+}
+.content_name>.name_content_wrap>.name_content{
+	background-color: var(--main1);
+	height: 50px;
+	width: 600px;
+}
