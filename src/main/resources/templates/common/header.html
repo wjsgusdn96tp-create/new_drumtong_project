@@ -33,7 +33,12 @@
                     </li>
                     <li><a href="#"><span class="material-icons">list_alt</span></a></li>
                     <li><a href="#"><span class="material-icons">shopping_cart</span></a></li>
-                    <li><a href="/member/loginFrm"><span class="material-icons">login/logout</span></a></li>
+                    <th:block th:if="${session.member == null}">
+						<li><a href="/member/loginFrm"><span class="material-icons">login</span></a></li>
+					</th:block>
+					<th:block th:if="${session.member != null}">
+						<li><a href="/member/loginFrm"><span class="material-icons">logout</span></a></li>
+					</th:block>
                 </ul>
             </div>
             <div class="navbox2">
