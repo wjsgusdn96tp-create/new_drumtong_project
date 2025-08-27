@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<!-- join page -->
+	<h1>회원가입</h1>
+	<main class="content">
+		<section class="section join-wrap">
+		
+			<!-- 이메일 중복체크 -->
+			<form action="/member/checkEmail" name="checkEmailFrm" method="get">
+				<input type="hidden" name="checkEmail">
+			</form>
+			<form action="/member/join" method="post" autocomplete="off">
+				<!-- 이메일 입력 -->
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberEmail">이메일<span style="color: red;">*</span></label>
+					</div>
+					<div class="input-item">
+						<input type="email" name="memberEmail" id="memberEmail">
+					</div>
+					<p class="input-msg email-check-msg"></p>
+				</div>
+				
+				<!-- 이메일 인증번호 -->
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="verificationCode">인증번호 입력</label>
+					</div>
+					<div class="verificationCode-button-box">
+						<button type="submit" class="btn-vc">인증하기</button>
+					</div>
+				</div>
+				
+				<!-- 비밀번호 입력 -->
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberPw">비밀번호<span style="color: red;">*</span></label>
+					</div>
+					<div class="input-item">
+						<input type="password" name="memberPw" id="memberPw">
+					</div>
+				</div>
+				
+				<!-- 비밀번호 확인 -->
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberPwRe">비밀번호 확인</label>
+					</div>
+					<div class="input-item">
+						<input type="password" name="memberPwRe" id="memberPwRe">
+					</div>
+					<p class="input-msg pw-check-msg"></p>
+				</div>
+				
+				<!-- 닉네임 입력 -->
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberNicname">닉네임<span style="color: red;">*</span></label>
+					</div>
+					<div class="input-item">
+						<input type="text" name="memberNicname" id="memberNicname">
+					</div>
+				</div>
+				
+				<!-- 이용약관 동의서 -->
+				 <div class="agree-content">
+				 	<div class="agree">
+				 		<div class="agree-check">
+				 			<label for="check1">이용 약관에 동의합니다.</label>
+				 			<input type="checkbox" name="check1" id="check1">
+				 		</div>
+				 		<div class="agree-explain">
+				 			제1조(목적)이 약관은 블루보틀커피코리아 유한회사(이하”회사”)가 운영하는 사이버 몰(이하 “몰”이라 한다)에서 제공하는 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+				 			제2조(정의)① “몰”이란 회사가 재화 또는 용역(이하 “재화 등”이라 함)을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.② “이용자”란 “몰”에 접속하여 이 약관에 따라 “몰”이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.③ ‘회원’이라 함은 “몰”에 회원등록을 한 자로서, 계속적으로 “몰”이 제공하는 서비스를 이용할 수 있는 자를 말합니다.④ ‘비회원’이라 함은 회원에 가입하지 않고 “몰”이 제공하는 서비스를 이용하는 자를 말합니다.
+				 			제3조 (약관 등의 명시와 설명 및 개정)① “몰”은 이 약관의 내용과 상호 및 대표자 성명, 영업소 소재지 주소(소비자의 불만을 처리할 수 있는 곳의 주소를 포함), 전화번호, 모사전송번호, 전자우편주소, 사업자등록번호, 통신판매업신고번호, 개인정보관리책임자 등을 이용자가 쉽게 알 수 있도록 몰의 초기 서비스화면(전면)에 게시합니다. 다만, 약관의 내용은 이용자가 연결화면을 통하여 볼 수 있도록 할 수 있습니다.② “몰은 이용자가 약관에 동의하기에 앞서 약관에 정하여져 있는 내용 중 청약철회, 배송 책임, 환불 조건 등과 같은 중요한 내용을 이용자가 이해할 수 있도록 별도의 연결 화면 또는 팝업 화면 등을 제공하여 이용자의 확인을 구할 수 있습니다.③ “몰”은 「전자상거래 등에서의 소비자보호에 관한 법률」, 「약관의 규제에 관한 법률」, 「전자문서 및 전자거래기본법」, 「전자금융거래법」, 「전자서명법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」, 「방문판매 등에 관한 법률」, 「소비자기본법」 등 관련 법을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다.④ “몰”이 약관을 개정할 경우에는 적용일자 및 개정사유를 명시하여 현행 약관과 함께 몰의 초기화면에 그 적용일자 7일 이전부터 적용일자 전일까지 공지합니다. 다만, 이용자에게 불리하게 약관 내용을 변경하는 경우에는 최소한 30일 이상의 사전 유예기간을 두고 공지합니다. 이 경우 "몰“은 개정 전 내용과 개정 후 내용을 명확하게 비교하여 이용자가 알기 쉽도록 표시합니다.⑤ “몰”이 약관을 개정할 경우에는 그 개정약관은 그 적용일자 이후에 체결되는 계약에만 적용되고 그 이전에 이미 체결된 계약에 대해서는 개정 전의 약관조항이 그대로 적용됩니다. 다만 이미 계약을 체결한 이용자가 개정약관 조항의 적용을 받기를 원하는 뜻을 제3항에 의한 개정약관의 공지기간 내에 “몰”에 송신하여 “몰”의 동의를 받은 경우에는 개정약관 조항이 적용됩니다.⑥ 이 약관에서 정하지 아니한 사항과 이 약관의 해석에 관하여는 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제 등에 관한 법률, 공정거래위원회가 정하는 전자상거래 등에서의 소비자 보호지침 및 관계법령 또는 상관례에 따릅니다
+				 			제4조(서비스의 제공 및 변경)① “몰”은 다음과 같은 업무를 수행합니다.1) 재화 또는 용역에 대한 정보 제공 및 구매계약의 체결2) 구매계약이 체결된 재화 또는 용역의 배송3) 기타 “몰”이 정하는 업무② “몰”은 재화 또는 용역의 품절 또는 기술적 사양의 변경 등의 경우에는 장차 체결되는 계약에 의해 제공할 재화 또는 용역의 내용을 변경할 수 있습니다. 이 경우에는 변경된 재화 또는 용역의 내용 및 제공일자를 명시하여 현재의 재화 또는 용역의 내용을 게시한 곳에 즉시 공지합니다.③ “몰”이 제공하기로 이용자와 계약을 체결한 서비스의 내용을 재화 등의 품절 또는 기술적 사양의 변경 등의 사유로 변경할 경우에는 그 사유를 이용자에게 통지 가능한 주소로 즉시 통지합니다.
+				 			제5조(서비스의 중단)① “몰”은 컴퓨터 등 정보통신설비의 보수점검·교체 및 고장, 통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다.② “몰”은 제1항의 사유로 서비스의 제공이 일시적으로 중단됨으로 인하여 이용자 또는 제3자가 입은 손해에 대하여 배상합니다. 단, “몰”이 고의 또는 과실이 없음을 입증하는 경우에는 그러하지 아니합니다.
+				 		</div>
+				 	</div>
+				 	
+				 	<!-- 개인정보 수집 동의서 -->
+				 	<div class="agree">
+				 		<div class="agree-check">
+				 			<label for="check2">개인정보 수집 및 이용에 동의합니다.</label>
+				 			<input type="checkbox" name="check2" id="check2">
+				 		</div>
+				 		<div class="agree-explain">
+				 			1.수집하는 개인정보 항목 및 수집방법
+				 			드럼통은 이용자들의 회원가입, 상담, 그리고 각종 서비스의 제공을 위해 아래와 같은 개인정보를 수집하고 있습니다.성명, 전자우편 주소, 전화번호 (휴대전화 번호), 우편주소(배송지/청구지),또한 서비스 이용과정이나 사업 처리 과정에서 사용자 이름 및 패스워드, 웹 브라우저, 및 OS 유형, 접속 로그, IP 주소, 광고 ID, 쿠키, 방문 날짜, 서비스 이용 기록, 사업자가 마케팅 등에 이용할 목적으로 가공한 회원정보 등이 생성되어 수집될 수 있습니다.
+				 			2.개인정보의 수집 및 이용목적
+				 			대부분의 브랜드 홈페이지 서비스는 별도의 이용자 등록이 없이 사용할 수 있습니다. 그러나 브랜드 회원서비스, 상품구매, 각종 이벤트 참여(1주년 기념 혜택, 무료 커피샘플 증정, 할인 바우처 제공, 커피 클래스 초청, 신제품 및 한정판 제품 소식 안내 등), 소비자 조사 등을 통하여 이용자들에게 맞춤 서비스를 비롯한 보다 더 향상된 양질의 서비스를 제공하기 위하여 필요한 이용자 개인 정보를 수집하고 있으며, 수집한 개인정보는 다음의 목적으로 활용됩니다.
+				 			3.수집한 개인정보의 보유 및 이용기간
+				 			이용자가 드럼통의 브랜드 홈페이지 회원으로서 드럼통에서 제공하는 브랜드 홈페이지의 회원서비스를 이용하는 동안 드럼통은 이용자들의 개인정보를 보유하며 규정에 따라 개인정보를 활용합니다. 회원이 가입 해지를 요청하거나 개인정보 수집 및 이용 목적이 달성된 후에는 해당 개인 정보를 영업일 5일 이내 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.
+				 			4.개인정보의 파기절차
+				 			1) 드럼통은 회원이 가입 해지를 요청하거나, 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 해당 개인 정보를 영업일 5일 이내 파기합니다.
+				 			2) 이용자로부터 동의 받은 개인정보 보유기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다. 별도 보존되는 개인정보는 법률에 의한 경우가 아니고서는 보존목적 이외의 다른 목적으로 이용되지 않습니다.
+				 			5.개인정보 수집 거부 권리
+				 			귀하는 드럼통의 서비스 이용에 필요한 최소한의 개인정보 수집·이용에 동의하지 않을 권리가 있으며, 동의 거부 시 거부한 내용에 대해 서비스가 제한될 수 있습니다.
+				 		</div>
+				 	</div>
+				 	
+				 	<!-- 전체 동의서 체크박스 -->
+				 	<label>
+      					<input type="checkbox" id="agreeAll"> 모두 동의합니다 (전체 동의)
+    				</label>
+				 </div>
+				 
+				 <!-- 가입하기 버튼 -->
+				 <div class="join-button-box">
+				 	<button type="submit" class="btn-primary lg">가입하기</button>
+				 </div>
+			</form>
+		</section>
+	</main>
+	
+	<script>
+		// 비밀번호 확인 여부 jQ
+		$("#memberPwRe").on("keyup", function(){
+			$(".pw-check-msg").removeClass("valid").removeClass("invalid");
+			const inputPw = $("#memberPw").val();
+			const inputPwRe = $("#memberPwRe").val();
+			if(inputPw === inputPwRe){
+				$(".pw-check-msg").text("비밀번호가 일치합니다.");
+				$(".pw-check-msg").addClass("valid");	
+			}else{
+				$(".pw-check-msg").text("비밀번호가 일치하지 않습니다.");
+				$(".pw-check-msg").addClass("invalid");
+			}
+		});
+		
+		// 아이디 중복체크
+		$("#memberEmail").on("keyup", function(){
+			const emailCheckMsg = $(".email-check-msg");
+			emailCheckMsg.removeClass("valid").removeClass("invalid");
+			const memberEmail = $("#memberEmail").val();
+			$.ajax({
+				url: "/member/ajaxCheckEmail",
+				type: "get",
+				data: {memberEmail : memberEmail},
+				success: function(result){
+					if(result === 0){
+						$(".email-check-msg").text("사용 가능한 이메일 입니다.");
+						$(".email-check-msg").addClass("valid");
+					}else if(result === 1){
+						$(".email-check-msg").text("이미 사용중인 이메일 입니다.");
+						$(".email-check-msg").addClass("invalid");
+					}
+				}
+			});
+		});
+	</script>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
