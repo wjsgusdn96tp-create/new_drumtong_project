@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class CustomerListData {
 	private List list;
 	private CustomerNavi customerNavi;
+	
 }
