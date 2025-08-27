@@ -53,7 +53,7 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectGjList(int reqPage, String sort) {
+	public CustomerListData selectGjList(int reqPage, String sort, String category) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -61,6 +61,7 @@ public class CustomerService {
 		param.put("start",start);
 		param.put("end", end);
 		param.put("sort", sort);
+		param.put("category", category);
 		List list = customerDao.selectGjList(param);
 		
 		int totalCount = customerDao.selectGjTotalCount();

@@ -29,7 +29,7 @@ public class CustomerController {
 	
 	@GetMapping(value="/goodjob")
 	public String goodjobList(int reqPage, String sort, String category, Model model) {
-		CustomerListData cld = customerService.selectGjList(reqPage, sort);
+		CustomerListData cld = customerService.selectGjList(reqPage, sort, category);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
 		model.addAttribute("sort", sort);
