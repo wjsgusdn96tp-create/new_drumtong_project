@@ -19,10 +19,11 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	@GetMapping(value="/list")
-	public String customerList(int reqPage, Model model) {
-		CustomerListData cld = customerService.selectCustomerList(reqPage);
+	public String customerList(int reqPage, String sort, Model model) {
+		CustomerListData cld = customerService.selectCustomerList(reqPage, sort);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
+		model.addAttribute("sort", sort);
 		return "customer/list";
 	}
 	

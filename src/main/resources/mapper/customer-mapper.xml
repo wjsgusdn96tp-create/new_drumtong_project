@@ -9,7 +9,17 @@
 			    FROM (
 			        SELECT customer_category, customer_nickname, customer_title, customer_date
 			        FROM customer_service_tbl
-			        ORDER BY customer_no DESC
+			        <choose>
+			        	<when test="sort == null">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort == 'latest'">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort == 'oldest'">
+			        		order by customer_no asc
+			        	</when>
+			        </choose>
 			    ) c
 			)
 			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
@@ -72,4 +82,6 @@
 	<select id="selectOpinionTotalCount" resultType="int">
 		select count(*) from customer_service_tbl where customer_category = '의견'
 	</select>
+	
+	
 </mapper>

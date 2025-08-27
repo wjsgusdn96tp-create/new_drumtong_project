@@ -17,13 +17,15 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 	
-	public CustomerListData selectCustomerList(int reqPage) {
+	public CustomerListData selectCustomerList(int reqPage, String sort) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
+					
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("start",start);
 		param.put("end", end);
+		param.put("sort", sort);
 		List list = customerDao.selectCustomerList(param);
 		
 		int totalCount = customerDao.selectCustomerTotalCount();
