@@ -9,18 +9,14 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CustomerDao {
 
 	List selectCustomerList(HashMap<String, Object> param);
-
 	int selectCustomerTotalCount();
 
 	List selectGjList(HashMap<String, Object> param);
-
-	List selectComplainList(HashMap<String, Object> param);
-
-	List selectOpinionList(HashMap<String, Object> param);
-
 	int selectGjTotalCount();
 
+	List selectComplainList(HashMap<String, Object> param);
 	int selectComplainTotalCount();
 
+	List selectOpinionList(HashMap<String, Object> param);
 	int selectOpinionTotalCount();
 }
