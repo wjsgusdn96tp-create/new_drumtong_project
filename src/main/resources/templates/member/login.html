@@ -33,18 +33,20 @@
                 <div class="login-btn">
                     <input type="submit" id="login-event" value="로그인">
                 </div>
-                <div class="join-btn">
-                    <input type="submit" id="join-event" value="회원가입">
-                </div>
-                <!-- 로그인 box footer 이미지 -->
-                <div class="login-footer">
-                    <img src="/img/로고.png">
-                    <p>DRUM TONG company</p>
-                </div>
             </form>
+            <form action="/member/joinFrm" method="post" id="join-frm">
+            	<div class="join-btn">
+            		<input type="submit" id="join-event" value="회원가입">
+            	</div>
+            </form>
+            <!-- 로그인 box footer 이미지 -->
+            <div class="login-footer">
+            	<img src="/img/로고.png">
+                <p>DRUM TONG company</p>
+            </div>
         </div>
     </div>
-    
+    <th:block th:include="common/footer"></th:block>
     <!-- JS 구현 -->
     <script>
  	// 이메일 찾기 커서 이벤트
