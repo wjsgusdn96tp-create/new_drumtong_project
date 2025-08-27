@@ -20,7 +20,7 @@ public class OrderController {
 	@GetMapping (value="/OrderMap")
 	public String orderMapPage(Model model) {
 		
-		List list = orderService.shoplist();
+		List list = orderService.shopList();
 		model.addAttribute("list", list);
 		
 		return "order/OrderMap";

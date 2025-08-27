@@ -12,9 +12,9 @@ public class OrderService {
 	@Autowired
 	private OrderDao orderDao;
 
-	public List shoplist() {
-		List list  = orderDao.shoplist();
-		
+	
+	public List shopList() {
+		List list  = orderDao.shopList();
 		return list;
 	}
 }
