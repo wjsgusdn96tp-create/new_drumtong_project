@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/DrumtongJs/news.js"></script>
 <link rel="stylesheet" href="/DrumtongCss/news.css">
+<style>
+
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
 	
 		<div id="main-news">
-			<img src="/img/news/main_promotion1.jpg" class="main-news1 close">
-			<img src="/img/news/main_promotion2.jpg" class="main-news2 close">
-			<img src="/img/news/main_promotion3.jpg" class="main-news3 active">
+			<img src="/img/news/main_promotion3.jpg" class="main-news3">
 			<div class="btn-div">
 				<a href="/" class="btn write-btn" style="float:right;">이미지 수정</a>	<!-- 관리자만 노출 -->
 			</div>
@@ -183,17 +184,19 @@
 					<th style="width:10%">조회수</th>
 					<th>수정</th> <!-- 관리자만 노출 -->
 					<th>삭제</th> <!-- 관리자만 노출 -->
+					
 				</tr>
-				<tr>
-					<td>1</td>
-					<td>글 제목</td>
-					<td>2025-01-05</td>
-					<td>조회수</td>
+				<tr th:each="notice : ${notice}">
+					<td th:text="${notice.noticeNo}"></td>
+					<td th:text="${notice.title}"></td>
+					<td th:text="${notice.writeDate}"></td>
+					<td>999</td>
 					<td><button>수정</button></td> <!-- 관리자만 노출 -->
 					<td><button>삭제</button></td> <!-- 관리자만 노출 -->
 				</tr>
 			</table>
 		</div>
+		<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 	</div>
 </body>
 </html>
