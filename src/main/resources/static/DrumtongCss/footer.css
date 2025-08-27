@@ -1,0 +1,52 @@
+:root{
+	/*main color */
+	--main1: #FBF8F1;
+	--main2: #F7ECDE;
+	--main3: #E9DAC1;
+	--main4: #54BAB9;
+	--main5: #6D2932;
+	
+	/*gray*/
+    --gray1: #222222;
+    --gray2: #555555;
+    --gray3: #717171;
+    --gray4: #8f8f8f;
+    --gray5: #b7b7b7;
+    --gray6: #d6d6d6;
+    --gray7: #efefef;
+    --gray8: #ffffff;
+
+    /*line-color*/
+    --line1: #222222;
+    --line2: #d6d6d6;
+    --line3: #eaeced;
+    --line4: #f6f6f6;
+    --line5: #f8f9fa;
+}
+
+.footer{
+    background-color: var(--gray2);
+    color: var(--main4);
+    padding-top: 50px;
+    width: 1200px;
+}
+.footer-all-wrap{
+    
+    display: flex;
+    justify-content: space-around;
+}
+.div-1{
+    font-size: 12px;
+    padding-top: 1%;
+}
+.div-2{
+    padding-top: 7%;
+    font-size: 12px;
+}
+.div-3{
+    text-align: right;
+    width: 60px;
+    padding-top: 5%;
+    font-size: 15px;
+    font-weight: 600;
+}
