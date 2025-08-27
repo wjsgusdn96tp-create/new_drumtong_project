@@ -13,11 +13,14 @@
 			        	<when test="sort == null">
 			        		ORDER BY customer_no DESC
 			        	</when>
-			        	<when test="sort == 'latest'">
+			        	<when test="sort.equals('lastest')">
 			        		ORDER BY customer_no DESC
 			        	</when>
-			        	<when test="sort == 'oldest'">
+			        	<when test="sort.equals('oldest')">
 			        		order by customer_no asc
+			        	</when>
+			        	<when test="sort.equals('abc')">
+			        		order by customer_title desc, customer_no desc
 			        	</when>
 			        </choose>
 			    ) c
@@ -37,7 +40,20 @@
 			       SELECT customer_category, customer_nickname, customer_title, customer_date
 			        FROM customer_service_tbl
 			        WHERE customer_category = '칭찬'
-			        ORDER BY customer_no DESC
+			        <choose>
+			        	<when test="sort == null">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort.equals('lastest')">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort.equals('oldest')">
+			        		order by customer_no asc
+			        	</when>
+			        	<when test="sort.equals('abc')">
+			        		order by customer_title desc, customer_no desc
+			        	</when>
+			        </choose>
 			    ) c
 			)
 			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
@@ -55,7 +71,20 @@
 			       SELECT customer_category, customer_nickname, customer_title, customer_date
 			        FROM customer_service_tbl
 			        WHERE customer_category = '불만'
-			        ORDER BY customer_no DESC
+			        <choose>
+			        	<when test="sort == null">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort.equals('lastest')">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort.equals('oldest')">
+			        		order by customer_no asc
+			        	</when>
+			        	<when test="sort.equals('abc')">
+			        		order by customer_title desc, customer_no desc
+			        	</when>
+			        </choose>
 			    ) c
 			)
 			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
@@ -73,7 +102,20 @@
 					select customer_category, customer_nickname, customer_title, customer_date
 					from customer_service_tbl
 					where customer_category = '의견'
-					order by customer_no desc
+					<choose>
+			        	<when test="sort == null">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort.equals('lastest')">
+			        		ORDER BY customer_no DESC
+			        	</when>
+			        	<when test="sort.equals('oldest')">
+			        		order by customer_no asc
+			        	</when>
+			        	<when test="sort.equals('abc')">
+			        		order by customer_title desc, customer_no desc
+			        	</when>
+			        </choose>
 					) c
 			)
 			where #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
