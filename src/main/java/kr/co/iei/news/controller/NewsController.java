@@ -24,4 +24,9 @@ public class NewsController {
 	public String writeFrm() {
 		return "news/writeFrm";
 	}
+	
+	@GetMapping(value="/noticeWriteFrm")
+	public String noticeWriteFrm() {
+		return "news/noticeWriteFrm";
+	}
 }
