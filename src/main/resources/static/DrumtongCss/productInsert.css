@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.productInsert_wrap{
+    width: 1200px;
+    text-align: center;
+    background-color: antiquewhite;
+}
+.productInsert_wrap>.productInsert_title_wrap{
+    width: 1200px;
+    text-align: center;
+    line-height: 100px;
+}
+
+/*--------카테고리 타이틀 버튼-------*/
+.
