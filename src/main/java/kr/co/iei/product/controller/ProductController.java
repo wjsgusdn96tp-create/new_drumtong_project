@@ -17,4 +17,8 @@ public class ProductController {
 	public String ProductList() {
 		return "/product/productList";
 	}
+	@GetMapping(value="/productInsertFrm")
+	public String ProductInsertFrm() {
+		return "/product/productInsertFrm";
+	}
 }

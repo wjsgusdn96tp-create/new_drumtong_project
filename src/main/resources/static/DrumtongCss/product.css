@@ -4,42 +4,51 @@
 }
 
 .wrap{
-	width: 1200px;
+	width: 1275px;
 	margin: auto;
 }
 .product_wrap{
-		width: 1200px;
+		width: 1275px;
 		margin: 50px auto;
-		line-height: 50px;
+		line-height: 45px;
 	}
 
 /*카테로리*/
 .product_wrap>.product_title_wrap{
-	width:1000px;
-	margin-left: 0;
+	width:1200px;
+	height: 50px;
+	margin-left: 37px;
+	
+	
 }
-.product_wrap>.product_title_wrap>.product_title>li:first-child{
-	border-left: 1px solid var(--main3);
-}
+
 .product_wrap>.product_title_wrap>.product_title>.product_title_main{
-	border: 1px solid var(--main3);
+	border-top: 2px solid var(--main3);
+	border-bottom: 2px solid var(--main3);
 	width: 210px;
 	height: 50px;
 	float: left;
 	text-align: center;
 	float: left;
-	
 	border-left: none;
-}
-.product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
-	background-color:var(--main2);
+	
 }
 
-.product_wrap>.product_title_wrap>.product_title>.product_title_main>div{
-	border: 1px solid var(--main3);
-	border-top:none;
+.product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
+	background-color:var(--main2);
+	border-top: 3px solid var(--main3);
+	background-color: var(--main2)
+	
+}
+.product_wrap>.product_title_wrap>.product_title>.product_drink:hover{
+	border-bottom: none;
+}
+.product_wrap>.product_title_wrap>.product_title>.product_drink>div{
+	border-top: 1px solid var(--main1);
 	text-align: left;
 	padding-left: 10px;
+	margin-top:0px;
+	background-color: var(--main2);
 }
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main>a{
@@ -56,11 +65,28 @@
 }
 .product_wrap>.product_title_wrap>ul>li>div>ul{
 	list-style: none;
+	line-height: 30px;
+	margin-bottom: 5px;
 }
 .product_wrap>.product_title_wrap>ul>li>div>ul>li{
 	list-style: none;
 	font-weight: 600;
 	color: var(--main5);
+	
+}
+.product_wrap>.product_title_wrap>ul>li>div>ul>li>ul{
+	line-height: 25px;
+}
+.product_wrap>.product_title_wrap>ul>li>div>ul>li>ul:listchild{
+	margin-bottom: 5px;
+}
+.product_wrap>.product_title_wrap>ul>li>div>ul>li>ul>li{
+	list-style: none;
+	padding-left: 15px;
+	font-weight: 400;
+	color: var(--main5);
+	height: 25px;
+	padding-top: 0px;
 }
 .product_wrap>.product_title_wrap>ul>li>div>ul>li>ul>li>a{
 	text-decoration: none;
@@ -69,12 +95,6 @@
 .product_wrap>.product_title_wrap>ul>li>div>ul>li>ul>li>a:hover{
 	font-weight: 500;
 }
-.product_wrap>.product_title_wrap>ul>li>div>ul>li>ul>li{
-	list-style: none;
-	padding-left: 5px;
-	font-weight: 400;
-	color: var(--main5);
-}
 .product_drink:hover>.product_title_list{
 	margin-top:3px;
 	display: block;
@@ -82,26 +102,163 @@
 .product_title_list{
 	display: none;
 }
-/*----------------------------------*/
 
-/*버튼(출력 순)*/
-.wrap>.product_wrap>.product_list_btn{
+
+.product_new_wrap{
+	margin-top: 20px;
+	margin-bottom: 70px;
+}
+
+
+
+/*카테고리 바로 밑 버튼*/
+.product_new_wrap{
+	margin-left:37px;
+	width:1200px;
+	overflow: hidden;
+	margin-bottom: 120px;
+}
+.product_new_wrap>div{
+	width: 500px;
+}
+
+/*카테고리 바로 밑 버튼 > 버튼(출력 순)*/
+.wrap>.product_wrap>.product_new_wrap>.product_list_btn{
 	text-align: right;
 }
-.product_btn{
-	margin-top: 22px;
+.product_new_wrap>.product_list_btn{
+	float: right;
 }
-/*----------------------------------*/
 
-/*버튼(관리자용_메뉴 추가)*/
-.product_insert_btn>button{
-	width: 120px;
-	height: 35px;
+/*카테고리 바로 밑 버튼 > 버튼(관리자용_메뉴 추가)*/
+.product_new_wrap>.product_insert_btn>button{
+	width: 150px;
+	height: 45px;
+	float: left;
+	background-color: var(--main2);
+	border: 1px solid var(--main3);
 }
-.product_insert_btn>button>a{
+.product_new_wrap>.product_insert_btn>button>a{
 	font-size:15px;
 	text-decoration: none;
-	font-weight: 600;
+	font-weight: 700;
 	color: var(--main4);
+}
+.product_new_wrap>.product_insert_btn>button:hover{
+	border: 2px solid var(--main3);
+	font-weight: 750;
+}
+
+
+/*상품 리스트*/
+.product_list_wrap{
+	width:1275px;
+	padding-top: 20px;
+}
+.product_list_wrap>ul{
+	overflow: hidden;
+	flex-wrap: wrap;
+}
+/*상품 리스트 one*/
+.product_list_wrap>ul>.product_one_wrap{
+	width: 350px;
+	margin-left:37px;
+	margin-right:37px;
+	float: left;
+	
+}
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div{
+	border : 1px solid var(--main3); 
+	width: 351px;
+	height: 371px;
+	background-color: var(--main2);	
+}
+
+/*상품 리스트 one > 이미지,상세정보box*/
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div>img{
+	width: 350px;
+	height: 370px;
+	position: absolute;
+	z-index:2;
+}
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div>.product_content_box{
+	
+	width: 352px;
+	height: 372px;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+	background-color: var(--main2);
+	opacity: 0.8;
+}
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div:hover>div{
+	z-index: 3;
+	
+}
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>input{
+	display: none;
+}
+.product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>.product_img_box>img{
+	width: 350px;
+	height: 370px;
+}
+
+/*상품 리스트 one> 버튼(관리자용_수정 삭제)*/
+.product_manager_btn{
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+.product_manager_btn>form>input{
+	display:none;	
+}
+.product_manager_btn>form>label>button{
+	height: 30px;	
+	width: 70px;
+	float: right;
+	margin-left: 5px;
+	font-weight: 700;
+	background-color: var(--main2);
+	border: 1px solid var(--main3); 
+	text-decoration: none;
+	color: var(--main4);
+	font-weight: 600;
+}
+.product_manager_btn>form>label>button:hover{
+	border: 2px solid var(--main3); 
+	color: var(--main4);
+	font-weight: 750;
+}
+
+
+/*상품 리스트 one > 버튼 div(장바구니,좋아요)*/
+.product_one_box>.product_icon{
+	overflow: hidden;
+}
+/*상품 리스트 one > 버튼(장바구니)*/
+.product_one_box>.product_icon>form{
+	width: 100px;
+	text-align: left;
+	float: left;
+}
+.product_one_box>.product_icon>form>.product_cart>input{
+	display: none;
+}
+.product_one_box>.product_icon>form>.product_cart>label>span{
+	color: var(--main5)
+}
+.product_one_box>.product_icon>form>.product_cart>label>span:hover{
+	color: var(--main4);
+}
+/*상품 리스트 one > 버튼(좋아요)*/
+.product_one_box>.product_icon>.product_like{
+	width: 250px;
+	text-align: right;
+	float: right;
+}
+.product_one_box>.product_icon>.product_like>ul>li>p>*{
+	color: var(--main5)
+}
+.product_one_box>.product_icon>.product_like>ul>li>p>span>.like_count{
+	font-size: 17px;
 }
 
