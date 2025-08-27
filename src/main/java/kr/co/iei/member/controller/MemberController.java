@@ -30,7 +30,7 @@ public class MemberController {
 		return "redirect:/";
 	}// login
 	
-	@GetMapping(value="joinFrm")
+	@GetMapping(value="/join")
 	public String joinFrm() {
 		return "member/joinFrm";
 	}// joinFrm
