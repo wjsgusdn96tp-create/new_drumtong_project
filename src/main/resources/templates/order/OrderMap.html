@@ -51,7 +51,7 @@
 	
 	let contentString1=[
 		"<div class='map-shopname'>",
-		"<a href='/product/productList'>"+list[0].shopName+"</a>",
+		"<a href='/product/productList?shopName="+list[0].shopName+"'>"+list[0].shopName+"</a>",
 		"<div class='map-addr'>"+list[0].shopAddress+"</div>",
     	"</div>"
     ].join("");
@@ -74,8 +74,6 @@
     	"</div>"
     ].join("");
 	
-	
-	
 	let infoWindow = new naver.maps.InfoWindow();
 	
     naver.maps.Event.addListener(marker1,"click",function(e){
@@ -85,7 +83,6 @@
     	infoWindow.open(map,marker1);
     });
 	
-
     naver.maps.Event.addListener(marker2,"click",function(e){
     	infoWindow = new naver.maps.InfoWindow({
     		content : contentString2
