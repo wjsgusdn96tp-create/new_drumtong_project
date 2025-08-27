@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/DrumtongJs/news.js"></script>
 <link rel="stylesheet" href="/DrumtongCss/news.css">
+<style>
+
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
 	
 		<div id="main-news">
-			<img src="/img/news/main_promotion1.jpg" class="main-news1 close">
-			<img src="/img/news/main_promotion2.jpg" class="main-news2 close">
-			<img src="/img/news/main_promotion3.jpg" class="main-news3 active">
+			<img src="/img/news/main_promotion3.jpg" class="main-news3">
+			<div class="btn-div">
+				<a href="/" class="btn write-btn" style="float:right;">이미지 수정</a>	<!-- 관리자만 노출 -->
+			</div>
 		</div>
-		
 		<div class="tab">
 			<ul class="first-tab">
 				<li>전체보기</li>
@@ -31,10 +34,9 @@
 		<div class="btn-div">
 			<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 쓰기</a>	
 			<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>	
-				
 		</div>
 		
-		<div class="list close">
+		<div class="list"> <!-- close class 넣기 -->
 			<ul class="news-list"> 
 				<li class="news-item"> 
 					<div class="item-img-div">
@@ -42,7 +44,7 @@
 					</div>
 					<div class="text-warp">
 						<div class="news-title">
-							<span>[프로모션]</span> 
+							<span class="type">[프로모션]</span> 
 							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
 						</div>
 						<div class="list-small">
@@ -173,22 +175,28 @@
 		
 		
 		
-		<div class="notice-list">
+		<div class="notice-list"> <!-- close class 넣기 -->
 			<table border=1>
 				<tr>
-					<th>번호</th>
-					<th>글 제목</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="width:10%">번호</th>
+					<th style="width:50%">글 제목</th>
+					<th style="width:15%">작성일</th>
+					<th style="width:10%">조회수</th>
+					<th>수정</th> <!-- 관리자만 노출 -->
+					<th>삭제</th> <!-- 관리자만 노출 -->
+					
 				</tr>
-				<tr>
-					<td>1</td>
-					<td>글 제목</td>
-					<td>2025-01-05</td>
-					<td>조회수</td>
+				<tr th:each="notice : ${notice}">
+					<td th:text="${notice.noticeNo}"></td>
+					<td th:text="${notice.title}"></td>
+					<td th:text="${notice.writeDate}"></td>
+					<td>999</td>
+					<td><button>수정</button></td> <!-- 관리자만 노출 -->
+					<td><button>삭제</button></td> <!-- 관리자만 노출 -->
 				</tr>
 			</table>
 		</div>
+		<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 	</div>
 </body>
 </html>

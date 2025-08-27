@@ -39,13 +39,14 @@
                     </ul>
                     <ul>
                         <li>
-                            <p>최신순</p>
+<!--                         	<a th:href="@{/notice/view(noticeNo=${notice.noticeNo})}" th:text="${notice.noticeTitle}"></a> -->
+                            <a href="/customer/list?reqPage=1&sort=lastest">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
                         </li>
                         <li>
-                            <p>오래된순</p>
+                            <a href="/customer/list?reqPage=1&sort=oldest">오래된순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
                         </li>
                         <li>
-                            <p>가나다순</p>
+                            <a href="/customer/list?reqPage=1&sort=abc">가나다순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
                         </li>
                     </ul>
                 </div>
@@ -80,16 +81,16 @@
             <div class="navi">
             	<ul class="navi-ul">
             		<li class="navi-li" th:if="${navi.prev}">
-            			<a th:href="@{/customer/opinion(reqPage=${navi.startNo - 1})}">
+            			<a th:href="@{/customer/opinion(reqPage=${navi.startNo - 1},sort=${sort})}">
 					    	<span class="material-icons">chevron_left</span>
 				        </a>
             		</li>
             		<li class="navi-li" th:each="pageNo : ${#numbers.sequence(navi.startNo, navi.endNo)}">
-            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page' : ''" class="page-item" th:href="@{/customer/opinion(reqPage=${pageNo})}" th:text="${pageNo}">
+            			<a th:classappend="${navi.reqPage == pageNo} ? 'active-page' : ''" class="page-item" th:href="@{/customer/opinion(reqPage=${pageNo},sort=${sort})}" th:text="${pageNo}">
 					    </a>
 					</li>
 				    <li class="navi-li" th:if="${navi.next}">
-				    	<a class="page-item" th:href="@{/customer/opinion(reqPage=${navi.endNo + 1})}">
+				    	<a class="page-item" th:href="@{/customer/opinion(reqPage=${navi.endNo + 1},sort=${sort})}">
 				        	<span class="material-icons">chevron_right</span>
 				    	</a>
    					</li>
