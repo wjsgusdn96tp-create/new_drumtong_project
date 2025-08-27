@@ -188,7 +188,7 @@
 				</tr>
 				<tr th:each="notice : ${notice}">
 					<td th:text="${notice.noticeNo}"></td>
-					<td th:text="${notice.title}"></td>
+					<td> <a th:href="@{/news/noticeView(noticeNo=${notice.noticeNo})}" th:text="${notice.title}"></a></td>
 					<td th:text="${notice.writeDate}"></td>
 					<td>999</td>
 					<td><button>수정</button></td> <!-- 관리자만 노출 -->
@@ -198,5 +198,6 @@
 		</div>
 		<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 	</div>
+	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

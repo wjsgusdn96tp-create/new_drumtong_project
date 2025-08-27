@@ -30,8 +30,8 @@
 }
 body {
     background-color: var(--main1);
+    
 }
-
 
 .logo-box{
     display: flex;
@@ -59,31 +59,31 @@ body {
 ul{
     list-style: none;
 }
-ul>li>a{
+a{
     text-decoration: none;
 }
-
 
 /*header Css*/
 .header{
     height: 100px;
     background-color: var(--main3);
-    display: flex;
     min-width: 1200px;
+    display: flex;
 }
 .nav-box{
-    width: 1200px;
+    min-width: 1200px;
     margin: 0 auto;
+    overflow: hidden
 }
 .navbox1{
     width: 100%;
-    display: flex;
+	display: flex;
     height: 40px;
-    justify-content: center;
-    padding-left: 550px;
+    justify-content: right;
+
 }
 .navi-small-box{
-    display: flex;
+	display: flex;
     gap: 25px;
     font-size: 15px;
     justify-content: center;
@@ -96,7 +96,7 @@ ul>li>a{
     justify-content: center;
 }
 .menu-box{
-    display: flex;
+	display: flex;
     gap: 150px;
 }
 .menu-box>li>a{
@@ -118,6 +118,7 @@ ul>li>a{
 .content-wrap{
 	width: 800px;
 	margin: 0 auto;
+	min-height: 75vh;
 }
 
 
@@ -203,6 +204,12 @@ table>tbody>tr>td{
     height: 30px;
     text-align: center;
     font-size: 12px;
+}
+.notice-list{
+    background-color: #F7ECDE;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 /*pagenavi*/

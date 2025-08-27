@@ -86,4 +86,9 @@ public class NewsService {
 		return noticeAll;
 	}
 
+	public Notice selectOneNotice(int noticeNo) {
+		Notice notice = newsDao.selectOneNotice(noticeNo);
+		return notice;
+	}
+
 }
