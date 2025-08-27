@@ -1,5 +1,7 @@
 package kr.co.iei.order.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,9 @@ public class OrderService {
 	@Autowired
 	private OrderDao orderDao;
 
-	
-
-	
+	public List shoplist() {
+		List list  = orderDao.shoplist();
+		
+		return list;
+	}
 }
