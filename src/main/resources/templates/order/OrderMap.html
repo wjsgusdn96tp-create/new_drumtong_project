@@ -11,15 +11,10 @@
 <body>
     <th:block th:include="/common/header"></th:block>
    
-   		<ul>
-  		<li class="dd" th:each="shop : ${list}" th:text="${shop.shopName}"></li>
-		</ul>
-	
     <div class="ordermap-mainbox">
         <div class="ordermap-name">주문할 지점을 선택하세요</div>
         <div id="map"></div>
     </div>
-    
     
     <script th:inline="javascript">
     const list = [[${list}]];
@@ -54,22 +49,57 @@
 		map : map
 	});
 	
-	let contentString=[
+	let contentString1=[
 		"<div class='iw-inner'>",
 		"<a href='/product/productList'>"+list[0].shopName+"</a>",
     	"</div>"
     ].join("");
+	let contentString2=[
+		"<div class='iw-inner'>",
+		"<a href='/product/productList'>"+list[1].shopName+"</a>",
+    	"</div>"
+    ].join("");
+	let contentString3=[
+		"<div class='iw-inner'>",
+		"<a href='/product/productList'>"+list[2].shopName+"</a>",
+    	"</div>"
+    ].join("");
+	let contentString4=[
+		"<div class='iw-inner'>",
+		"<a href='/product/productList'>"+list[3].shopName+"</a>",
+    	"</div>"
+    ].join("");
 	
-	//말풍선 형태의 정보창 객체 저장, 마커 클릭시 창이 열거나 닫거나 사용
+	
 	let infoWindow = new naver.maps.InfoWindow();
 	
 	//marker에 클릭이벤트 적용
     naver.maps.Event.addListener(marker1,"click",function(e){
     	infoWindow = new naver.maps.InfoWindow({
-    		content : contentString
+    		content : contentString1
     	});
     	infoWindow.open(map,marker1);
     });
+    naver.maps.Event.addListener(marker2,"click",function(e){
+    	infoWindow = new naver.maps.InfoWindow({
+    		content : contentString2
+    	});
+    	infoWindow.open(map,marker2);
+    });
+
+    naver.maps.Event.addListener(marker3,"click",function(e){
+    	infoWindow = new naver.maps.InfoWindow({
+    		content : contentString3
+    	});
+    	infoWindow.open(map,marker3);
+    });
+    naver.maps.Event.addListener(marker4,"click",function(e){
+    	infoWindow = new naver.maps.InfoWindow({
+    		content : contentString4
+    	});
+    	infoWindow.open(map,marker4);
+    });
+
 
 	
 	
