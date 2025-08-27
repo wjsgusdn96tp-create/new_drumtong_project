@@ -1,1 +1,277 @@
-@charset "UTF-8";
+*{
+	padding: 0;
+	margin: 0;
+}
+body {
+    background-color: var(--main1);
+}
+
+
+.logo-box{
+    display: flex;
+    padding:  10px;
+    margin-left: 50px;
+    width: 20px;
+}
+
+.logo-img{
+    width: 75px;
+    height: 75px;
+}
+.logo-name{
+    margin-left: 10px;
+    color: var(--main4);
+    width: 80px;
+    height: 50px;
+    padding-top: 20px;
+}
+.logo-name>div{
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1;
+}
+ul{
+    list-style: none;
+}
+ul>li>a{
+    text-decoration: none;
+}
+
+
+/*header Css*/
+.header{
+    height: 100px;
+    background-color: var(--main3);
+    display: flex;
+    min-width: 1200px;
+}
+.nav-box{
+    width: 1200px;
+    margin: 0 auto;
+}
+.navbox1{
+    width: 100%;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    padding-left: 550px;
+}
+.navi-small-box{
+    display: flex;
+    gap: 25px;
+    font-size: 15px;
+    justify-content: center;
+}
+.navi-small-box>li>*{
+    color: var(--gray4);
+}
+.navbox2{
+    display: flex;
+    justify-content: center;
+}
+.menu-box{
+    display: flex;
+    gap: 150px;
+}
+.menu-box>li>a{
+    color: var(--main5);
+    font-weight: 800;
+    font-size: 20px;
+}
+.navi-small-box>li>a:hover {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+.navi-small-box>li>a>img:hover{
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+.menu-box>li>a:hover {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+/* content css */
+.content-wrap{
+	width: 800px;
+	margin: 0 auto;
+}
+
+
+/* tab css */
+.tab{
+	width: 100%;
+	display: hidden;
+}
+.tab>ul{
+	margin-top: 30px;
+    font-size: 18px;
+    display: flex;
+
+}
+.tab>ul>li{
+	width: 180px;
+    color: var(--main5);
+    border: 1px solid var(--main3);
+	text-align: center;
+	font-weight: 600;
+	padding: 3px 0;
+}
+.tab>.first-tab{
+	float: left;
+}
+.tab>.second-tab{
+	float: right;
+}
+
+.tab>ul>li:hover {
+	background-color: var(--main3);
+}
+
+.close {
+	display: none;
+}
+.active {
+	display: block;
+}
+
+/*button css*/
+.btn{
+	width: 95px;
+	height: 30px;
+	color:  var(--gray4);
+	background-color: var(--main1);
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+}
+.btn:hover{
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
+	color: var(--gray2);
+	font-weight: 550;
+	background-color: var(--main2);
+}
+
+/*footer*/
+.footer{
+    background-color: var(--gray2);
+    color: var(--main4);
+    padding-top: 50px;
+    padding-bottom: 15px;
+    min-width: 1200px;
+}
+.footer-all-wrap{
+/*     display: flex; */
+	overflow: hidden;
+    justify-content: space-around;
+}
+.div-1{
+	float: left;
+    font-size: 12px;
+    padding-left: 50px;
+/*     padding-top: 1%; */
+}
+.div-2{
+	float: right;
+    padding-top: 70px;
+    font-size: 12px;
+}
+.div-3{
+	float: right;
+    text-align: right;
+    width: 100px;
+/*     padding-top: 5%; */
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 50px
+}
+
+/* join css */
+h1{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.section{
+    width: 800px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 35px;
+    background-color: #F7ECDE;
+    text-align: center;
+}
+.input-wrap>.input-title{
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.input-item>input{
+    width: 550px;
+    height: 30px;
+    margin-left: 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: #F7ECDE;
+    font-size: 20px;
+}
+.input-wrap>.verificationCode-button-box{
+    padding-top: 15px;
+}
+.verificationCode-button-box>button{
+    width: 150px;
+    height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #54BAB9;
+    color: #FBF8F1;
+}
+.agree-content{
+    width: 450px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.agree{
+    margin: 25px 0px;
+}
+.agree-explain{
+    width: 90%;
+    margin: 15px auto;
+    height: 200px;
+    overflow-y: auto;
+    font-size: 12px;
+    border: 1px solid#1e1e1e;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.agree-check{
+    width: 90%;
+    margin: 0 auto;
+    text-align: right;
+}
+.join-button-box>button{
+    width: 300px;
+    height: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: #54BAB9;
+    color: #FBF8F1;
+}
+.all-check-box{
+    width: 90%;
+    margin: 0 auto;
+    text-align: right;
+    margin-bottom: 20px;
+}
+.last{
+    margin: 20px;
+}
+.last>a{
+    color: #333333;
+    font-size: 14px;
+}
