@@ -6,4 +6,8 @@
 		select * from shop_tbl
 	</select>
 	
+	<select id="option" >
+		select product_img,product_name from product_tbl where product_no = #{productNo}
+	</select>
+	
 </mapper>

@@ -185,15 +185,18 @@ h1{
     padding-top: 40px;
     padding-bottom: 15px;
 }
-.join-btn>input{
-    font-size: 18px;
+.join-btn{
     width: 250px;
-    height: 35px;
+    height: 33px;
     border-radius: 5px;
     font-weight: bold;
     background-color: #F7F7F7;
-    color: #000000;
     border: #8f8f8f solid 2px;
+    margin: 0 auto;
+}
+.join-btn>a{
+	font-size: 18px;
+	color: #000000;
 }
 .login-footer{
     overflow: hidden;
