@@ -19,4 +19,17 @@
   <select id="selectOneNotice" resultType="notice">
   		select * from notice where notice_no = ${noticeNo}
   </select>
+  
+  <select id="selectTotalNewsCount" resultType="int">
+  		select count(*) from news
+  </select>
+  
+  <insert id="insertNews">
+  	insert into news values(news_seq.nextval, ${memberNo}, ${type}, ${startDate}, ${endDate}, ${title}, ${content}, to_char(sysdate, 'yyyy-mm-dd'), ${image})
+  </insert>
+  
+  <insert id="insertDiscount">
+  	insert into discount values(discount_seq.nextval, ${newsNo}, ${productNo}, ${discountPercent}, ${discountPrice})
+  </insert>
+  
 </mapper>

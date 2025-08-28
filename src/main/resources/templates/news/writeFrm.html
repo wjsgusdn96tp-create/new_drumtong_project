@@ -1,32 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<h1>NEWS작성하기</h1>
+	<h1>NEWS 작성하기</h1>
 		<div class="content-wrap">
 			<div class="notice-list">
-				<table border=1>
-					<tr>
-						<th>번호</th>
-						<th>글 제목</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>글 제목</td>
-						<td>2025-01-05</td>
-						<td>조회수</td>
-					</tr>
-				</table>
+				<form action="/news/write" method="post" enctype="multipart/form-data">
+					<!-- <input type="hidden" name="memberNo" th:value="${session.member.memberNo}">  -->	
+					<!-- 할인 관련 내용 추가하기  -->
+					<table border=1>
+						<tr>
+							<th style="width: 20%">글 제목</th>
+							<td style="width: 80%" colspan="3">
+								<input type="text" name=title>
+							</td>
+						</tr>
+						<tr>
+							<th>타입선택</th>
+							<td style="width: 30%">
+								<input type="radio" name="type" id="프로모션">
+								<label for="프로모션">프로모션</label>
+								<input type="radio" name="type" id="이벤트">
+								<label for="이벤트">이벤트</label>
+							</td>
+							<th style="width: 20%">썸네일 선택하기</th>
+							<td style="width: 30%">
+								<input type="file" name="newsImageFile" accept="image/*" onchange="loadImg(this);">				
+							</td>
+						</tr>
+						<tr> <!-- 상품 추가되면 추가 작성 : 반복문으로 상품 불러오기-->
+							<th>할인 적용상품</th>
+							<td colspan="3">
+							<label for="1">아메리카노</label>
+							<input type="checkbox" name="productNo" id="1">
+							<label for="2">라떼</label>
+							<input type="checkbox" name="productNo" id="2">
+							</td>
+						</tr>
+						
+						<tr>
+							<th>할인율/할인가격
+							</th>
+							<td colspan="3">
+								<input type="radio" name="discount" id="Percent">
+								<label for="Percent">할인율</label>
+								<input type="text" name="discountPercent"><span>%</span>
+								<input type="radio" name="discount" id="Price">
+								<label for="Price">할인가격</label>
+								<input type="text" name="discountPrice"><span>원</span>
+							</td>
+						</tr>
+						<tr>
+							<th>할인 적용일자</th>
+							<td colspan="3"><input type="date" name="startDate"><span> ~ </span><input type="date" name="endDate"></td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td colspan="3">
+								<textarea name="content"></textarea>
+							</td>
+						</tr>	
+										
+						<tr>
+							
+						</tr>
+						<tr>
+							<th>이미지 미리보기</th>
+							<td colspan="3">
+								<div>
+									<img id="img-view" width="500px" src="/image/default_img.png">							
+								</div>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="4">
+							<button class="btn" type="submit">등록하기</button>
+							</td>
+						</tr> 
+					</table>
+				</form>
+		
 			</div>
 		
 		
 		</div>
+			
+	<script>
+		function loadImg(obj) {
+			if(obj.files.length !== 0) {
+				const reader = new FileReader();
+				reader.readAsDataURL(obj.files[0]);
+				reader.onload=function(e){
+					$("#img-view").attr("src", e.target.result);
+				};
+			} else{
+				$("#img-view").attr("src","image/default_img.png");
+			}
+		}
+	</script> 
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
