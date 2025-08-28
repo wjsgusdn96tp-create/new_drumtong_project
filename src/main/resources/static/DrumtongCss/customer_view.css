@@ -1,0 +1,255 @@
+ :root{
+	/*main color */
+	--main1: #FBF8F1;
+	--main2: #F7ECDE;
+	--main3: #E9DAC1;
+	--main4: #54BAB9;
+	--main5: #6D2932;
+	
+	/*gray*/
+    --gray1: #222222;
+    --gray2: #555555;
+    --gray3: #717171;
+    --gray4: #8f8f8f;
+    --gray5: #b7b7b7;
+    --gray6: #d6d6d6;
+    --gray7: #efefef;
+    --gray8: #ffffff;
+
+    /*line-color*/
+    --line1: #222222;
+    --line2: #d6d6d6;
+    --line3: #eaeced;
+    --line4: #f6f6f6;
+    --line5: #f8f9fa;
+}
+*{
+	padding: 0;
+	margin: 0;
+}
+body {
+    background-color: var(--main1);
+/*     display: flex; */
+/*     justify-content: center; */
+/*     align-items: center; */
+	
+}
+.all-wrap{
+    width: 900px;
+    min-height: 900px;
+    background-color: var(--main3);
+    padding: 50px;
+    margin: 0 auto;
+}
+.all-content-wrap{
+    width: 800px;
+    min-height: 600px;
+    background-color: var(--main2);
+    margin: 0 auto;
+    /* transform: translate(0,10%); */
+}
+.tbl{
+    border: 1px solid var(--main3);
+    border-spacing: 0;
+}
+.tbl>tr{
+    border-right: 1px solid var(--main3);
+}
+.tbl th, .tbl td{
+    padding: 10px 20px;
+    border: 1px solid var(--main3);
+    border-right: none;
+    border-bottom: none;
+}
+.content{
+    min-height: 300px;
+    height: 300px;
+}
+.tbody{
+    padding: 10px 10px;
+    
+}
+
+
+/*댓글*/
+.comment-ul{
+    margin-top: 30px;
+    font-size: 18px;
+    display: flex;
+}
+.comment-ul>li{
+    
+    color: var(--main5);
+    border: 1px solid var(--main3);
+	text-align: center;
+	font-weight: 600;
+	padding: 0;
+    list-style: none;
+    height: 50px;
+    
+    
+}
+.comment-ul>:first-child{
+    width: 20%;
+}
+.comment-ul>:nth-child(2){
+    width: 60%;
+    /* padding: 5px; */
+}
+.comment-ul>:last-child{
+    width: 20%;
+    
+}
+.ccc {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    resize: none;
+    font-size: 16px;
+    line-height: 24px;
+    border: none;
+    box-sizing: border-box;
+    
+}
+.ccc:focus{
+    outline: none;
+}
+.comment-btn{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    background-color: var(--main4);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/*댓글보기*/
+.comment-ul-road{
+    margin-top: 30px;
+    font-size: 18px;
+    display: flex;
+}
+.comment-ul-road>li{
+    color: var(--main5);
+    border: 1px solid var(--main3);
+	text-align: center;
+	font-weight: 600;
+	padding: 0;
+    list-style: none;
+    height: 50px;
+    
+}
+.comment-ul-road>:first-child{
+    width: 20%;
+}
+.comment-ul-road>:nth-child(2){
+    width: 60%;
+    /* padding: 5px; */
+}
+.comment-ul-road>:last-child{
+    width: 20%;
+    
+}
+
+/*대댓글*/
+.comment-ul-ref{
+    margin-top: 5px;
+    font-size: 18px;
+    display: flex;
+}
+.comment-ul-ref>li{
+    color: var(--main5);
+    border: 1px solid var(--main3);
+	text-align: center;
+	font-weight: 600;
+	padding: 0;
+    list-style: none;
+    height: 50px;
+    
+}
+.comment-ul-ref>:first-child{
+    width: 20%;
+}
+.comment-ul-ref>:nth-child(2){
+    width: 60%;
+    /* padding: 5px; */
+}
+.comment-ul-ref>:last-child{
+    width: 20%;
+    
+}
+
+/*별점코멘트*/
+.rank{
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+/*별점*/
+.star-wrap{
+    text-align: center;
+    color: var(--gray6);
+}
+.star-wrap>span{
+    cursor: pointer;
+}
+.gong{
+    height: 50px;
+}
+.star-rank{
+    text-align: center;
+}
+
+/*버튼칸*/
+.modydele{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 80px;
+    padding-right: 50px;
+}
+.btn1{
+    display: inline-block;  /*a태그과 button태그 속성 일치 작업*/
+	width: 93px;
+	height: 28px;
+	color:  var(--gray4);
+	background-color: var(--main1);
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 30px;
+}
+.btn2{
+    display: inline-block;  /*a태그과 button태그 속성 일치 작업*/
+	width: 95px;
+	height: 30px;
+	color:  var(--gray4);
+	background-color: var(--main1);
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	border: 1px solid var(--main3);
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+    text-decoration: none;
+    
+}
+.btn:hover{
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.2);	
+	color: var(--gray2);
+	font-weight: 550;
+	background-color: var(--main2);
+}
+
+

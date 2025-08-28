@@ -30,9 +30,14 @@ public class OrderController {
 	@GetMapping (value="/product/productList")
 	public String productList() {
 		
-		
-		
 		return "/product/productList";
+	}
+	
+	@GetMapping (value="/OrderList")
+	public String orderListpage() {
+		
+		
+		return "order/OrderList";
 	}
 	
 }
