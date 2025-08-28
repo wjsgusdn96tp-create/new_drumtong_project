@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.news.model.dao.NewsDao;
+import kr.co.iei.news.model.vo.Discount;
+import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
 
 @Service
@@ -89,6 +92,23 @@ public class NewsService {
 	public Notice selectOneNotice(int noticeNo) {
 		Notice notice = newsDao.selectOneNotice(noticeNo);
 		return notice;
+	}
+
+	public int selectTotalNewsCount() {
+		int totalCount = newsDao.selectTotalNewsCount();
+		return totalCount;
+	}
+	
+	@Transactional
+	public int insertNews(News news) {
+		int result = newsDao.intsertNews(news);
+		return result;
+	}
+	
+	@Transactional
+	public int insertDiscount(Discount discount) {
+		int result = newsDao.insertDiscount(discount);
+		return result;
 	}
 
 }

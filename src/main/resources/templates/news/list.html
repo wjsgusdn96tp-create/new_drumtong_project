@@ -199,5 +199,104 @@
 		<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 	</div>
 	<th:block th:include="common/footer"></th:block>
+	
+	<script th:inline="javascript">
+		const totalCount = [[${totalCount}]]; 	// news 게시물 갯수
+		let currentCount = 0;					// 현재까지 읽어온 게시물 수
+		let start = 1;							// 게시물의 시작 번호
+		const amount = 6;						// 더보기 한번 클릭 시 추가로 가져올 게시물 수 
+		
+		$("#more-btn").on("click",function() {
+			$.ajax({
+				url: "/news/more",
+				type: "get",
+				data: {start: start, amount : amount},
+				success : function(data){
+					for(let i=0;i<data.length;i++){
+						const p = data[i];
+						
+						/* -> 최종 모양
+								<li class="posting-item">
+									<div class="posting-img">
+										<img src="db에서 조회해 온 이미지 path">
+									</div>
+									<div class="posting-info">
+										<div class="posting-title">db에서 조회한 제목</div>
+										<div class="posting-sub-info">
+											<span>DB에서 조회한 작성자 </span>
+										</div>
+									</div>
+								</li>
+						*/
+						
+						const li = $("<li>");
+						li.addClass("posting-item");
+						// <li class="posting-item"></li>
+						const imgDiv = $("<div>");
+						imgDiv.addClass("posting-img");
+						// <div class="posting-img"></div>
+						const img = $("<img>");
+						img.attr("src", "/photo/image/"+p.photoImg);
+						// <img src="da에서 조회해온 이미지path">
+											
+						imgDiv.append(img);
+						/* 
+							<div class="posting-img">
+								<img src="db에서 조회해 온 이미지 path">
+							</div>
+						*/
+						
+						const infoDiv = $("<div>");
+						infoDiv.addClass("posting-info");
+						// <div class="posting-info"></div>
+						
+						const titleDiv = $("<div>");
+						titleDiv.addClass("posting-title");
+						titleDiv.text(p.photoTitle);
+						// <div class="posting-title">db에서 조회한 제목</div>
+						
+						
+						const subDiv = $("<div>");
+						subDiv.addClass("posting-sub-info");
+						// <div class="posting-sub-info"></div>
+						
+						const span = $("<span>");
+						span.text(p.photoWriter);
+						//<span>DB에서 조회한 작성자 </span>
+						
+						/* 
+								<div class="posting-info">
+									<div class="posting-title">db에서 조회한 제목</div>
+									<div class="posting-sub-info">
+										<span>DB에서 조회한 작성자 </span>
+									</div>
+								</div>
+						*/
+						
+						subDiv.append(span);
+						infoDiv.append(titleDiv).append(subDiv);
+						
+						li.append(imgDiv).append(infoDiv);
+						
+						$(".photoWrapper").append(li);
+						
+						
+					}
+					// 화면 요소 추가 끝
+					// 더보기를 누르면 그 이후 데이터를 가저오기 위한 설정
+					start += amount; 
+					// 현재까지 읽어온 게시물 수 -> 마지막은 amount 전체가 아닐 수 있음. 
+					currentCount += data.length;  
+					if(currentCount === totalCount) {
+						$("#more-btn").remove();
+					}
+				},
+				error : function(){
+					console.log("에러");
+				}
+			})
+		});
+		
+	</script>
 </body>
 </html>
