@@ -30,7 +30,6 @@
 			style : naver.maps.ZoomControlStyle.SMALL
 		}
 	});
-	
     
 	const marker1 = new naver.maps.Marker({
 		position : new naver.maps.LatLng(37.5340956,126.8969507),
@@ -50,36 +49,51 @@
 	});
 	
 	let contentString1=[
-		"<div class='iw-inner'>",
-		"<a href='/product/productList'>"+list[0].shopName+"</a>",
+		"<div class='map-shopname'>",
+		"<a href='/product/productList?shopName="+list[0].shopName+"'>"+list[0].shopName+"</a>",
+		"<div class='map-addr'>"+list[0].shopAddress+"</div>",
     	"</div>"
     ].join("");
 	let contentString2=[
-		"<div class='iw-inner'>",
-		"<a href='/product/productList'>"+list[1].shopName+"</a>",
+		"<div class='map-shopname'>",
+		"<a href='/product/productList?shopName="+list[1].shopName+"'>"+list[1].shopName+"</a>",
+		"<div class='map-addr'>"+list[1].shopAddress+"</div>",
     	"</div>"
     ].join("");
 	let contentString3=[
-		"<div class='iw-inner'>",
-		"<a href='/product/productList'>"+list[2].shopName+"</a>",
+		"<div class='map-shopname'>",
+		"<a href='/product/productList?shopName="+list[2].shopName+"'>"+list[2].shopName+"</a>",
+		"<div class='map-addr'>"+list[2].shopAddress+"</div>",
     	"</div>"
     ].join("");
 	let contentString4=[
-		"<div class='iw-inner'>",
-		"<a href='/product/productList'>"+list[3].shopName+"</a>",
+		"<div class='map-shopname'>",
+		"<a href='/product/productList?shopName="+list[3].shopName+"'>"+list[3].shopName+"</a>",
+		"<div class='map-addr'>"+list[3].shopAddress+"</div>",
     	"</div>"
     ].join("");
 	
 	
-	let infoWindow = new naver.maps.InfoWindow();
+	let infowindow = new naver.maps.InfoWindow({
 	
-	//marker에 클릭이벤트 적용
+	    content: infoWindowElement[0],
+	
+	    borderWidth: 0,
+	    disableAnchor: true,
+	    backgroundColor: 'transparent',
+
+	    pixelOffset: new naver.maps.Point(0, -28),
+	});
+	
+	
+	
     naver.maps.Event.addListener(marker1,"click",function(e){
     	infoWindow = new naver.maps.InfoWindow({
     		content : contentString1
     	});
     	infoWindow.open(map,marker1);
     });
+	
     naver.maps.Event.addListener(marker2,"click",function(e){
     	infoWindow = new naver.maps.InfoWindow({
     		content : contentString2

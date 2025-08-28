@@ -14,4 +14,6 @@ public interface NewsDao {
 
 	int countAllNotice();
 
+	Notice selectOneNotice(int noticeNo);
+
 }

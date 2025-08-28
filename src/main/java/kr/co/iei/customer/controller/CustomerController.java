@@ -33,7 +33,6 @@ public class CustomerController {
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
 		model.addAttribute("sort", sort);
-		model.addAttribute("category", category);
 		return "customer/listGj";
 	}
 	
@@ -55,7 +54,4 @@ public class CustomerController {
 		return "customer/listOpinion";
 
 	}
-	
-	
-	
 }

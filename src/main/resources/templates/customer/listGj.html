@@ -40,13 +40,13 @@
                     <ul>
                         <li>
 <!--                         	<a th:href="@{/notice/view(noticeNo=${notice.noticeNo})}" th:text="${notice.noticeTitle}"></a> -->
-                            <a href="/customer/list?reqPage=1&sort=lastest&category=goodjob">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+                            <a th:href="@{/customer/goodjob(reqPage=1, sort='lastest')}">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
                         </li>
                         <li>
-                            <a href="/customer/list?reqPage=1&sort=oldest&category=goodjob">오래된순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+                            <a th:href="@{/customer/goodjob(reqPage=1, sort='oldest')}">오래된순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
                         </li>
                         <li>
-                            <a href="/customer/list?reqPage=1&sort=abc&category=goodjob">가나다순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+                            <a th:href="@{/customer/goodjob(reqPage=1, sort='abc')}">가나다순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
                         </li>
                     </ul>
                 </div>

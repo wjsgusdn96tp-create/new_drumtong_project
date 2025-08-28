@@ -20,7 +20,7 @@
 			        		order by customer_no asc
 			        	</when>
 			        	<when test="sort.equals('abc')">
-			        		order by customer_title desc, customer_no desc
+			        		order by customer_title asc, customer_no asc
 			        	</when>
 			        </choose>
 			    ) c
@@ -51,7 +51,7 @@
 			        		order by customer_no asc
 			        	</when>
 			        	<when test="sort.equals('abc')">
-			        		order by customer_title desc, customer_no desc
+			        		order by customer_title asc, customer_no asc
 			        	</when>
 			        </choose>
 			    ) c
@@ -82,7 +82,7 @@
 			        		order by customer_no asc
 			        	</when>
 			        	<when test="sort.equals('abc')">
-			        		order by customer_title desc, customer_no desc
+			        		order by customer_title asc, customer_no asc
 			        	</when>
 			        </choose>
 			    ) c
@@ -113,7 +113,7 @@
 			        		order by customer_no asc
 			        	</when>
 			        	<when test="sort.equals('abc')">
-			        		order by customer_title desc, customer_no desc
+			        		order by customer_title asc, customer_no asc
 			        	</when>
 			        </choose>
 					) c

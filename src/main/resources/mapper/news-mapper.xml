@@ -15,4 +15,8 @@
   <select id="countAllNotice" resultType="int">
   		select count(*) from notice
   </select>
+  
+  <select id="selectOneNotice" resultType="notice">
+  		select * from notice where notice_no = ${noticeNo}
+  </select>
 </mapper>
