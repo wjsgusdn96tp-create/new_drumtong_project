@@ -23,6 +23,9 @@
 }
 
 /*---------상품 등록 contentbox--------*/
+.productInsert_content_wrap{
+	overflow: hidden;
+}
 .productInsert_title{
 	font-weight: 600;
 	font-size: 17px;
@@ -139,10 +142,133 @@ form>.productInsert_content_wrap>.content_wrap>.title_wrap{
 /*이미지관련*/
 .content_img{
 	width: 396px;
-}
-.content_wrap content_img{
 	overflow: hidden;
+	float: left;
+}
+.img_insert_wrap{
+	line-height: 40px;
+}
+.content_img>.img_insert_wrap>.img_insert{
+	height: 40px;
+}
+.content_img>.img_insert_wrap>.img_insert_choice{
+	width: 264px;
+	height: 40px;
+	border-right:none; 
+	
+}
+.content_img>.img_insert_wrap>.img_insert_choice>input{
+	padding-left: 10.5px;
+	
+}
+.img_insert_wrap>div{
+	border-bottom: 1px solid var(--main3); 
+}
+.img_show_content{
+	height: 270px;
+	
 }
 .img_show_wrap{
+	height: 300px;
+	line-height: 264px;
 	float: left;
+}
+.img_show{
+	text-align: center;
+	height: 300px;
+	float: left;
+}
+.img_show_content{
+	width: 264px;
+	height: 300px;
+	float: left;
+}
+/*상세정보*/
+.productInsert_content_wrap>#content_detail{
+	float: left;
+	height: 341px;
+	width: 396px;
+	
+	border-right: none;
+}
+.detail_insert{
+	height: 341px;
+	line-height: 341px;
+	text-align: center;
+	padding: 0 auto;
+	margin: 0 auto;
+}
+.detail_box{
+	float: left;
+	width: 250px;	
+}
+.detail_insert_content{
+	text-align: center;
+	padding: 0;
+	
+	
+}
+.detail_insert_content>ul{
+	text-align: left;
+	line-height: 30px;
+	height: 340px;
+	width: 263px;
+}
+.detail_insert_content>ul>li{
+	width: 235px;
+	height: 30px;
+	background-color: white;
+	margin-top: 10px; 
+	font-weight: 450;
+	margin-left:10px;
+	padding-left: 10px;
+	
+}
+.detail_insert_content>ul>li>input{
+	width: 90px;
+	height: 17px;
+	padding-left: 5px;
+	border: none;
+		
+}
+
+/*btn*/
+.insert_btn_wrap{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.insert_btn_wrap>button{
+	width: 125px;
+	height: 40px;
+	background-color: var(--main5);
+	border: 1px solid var(--main3);
+	color:white;
+}
+.insert_btn_wrap>button:hover{	
+	color:var(--main4);
+	font-weight: 750;
+	background-color: var(--main5);
+	border: 1px solid var(--main3);
+}
+.insert_btn_wrap>button>a{
+	text-decoration: none;
+	
+	color:white;
+	background-color: var(--main5);
+	
+}
+.insert_btn_wrap>button:hover>a{	
+	color:var(--main4);
+	font-weight: 750;
+	
+}
+
+/*카테고리 메인 버튼*/
+.productInsert_title_btn>button{
+	background-color:  var(--main2);
+}
+.productInsert_title_btn>button:hover{
+	color:white;
+	background-color: var(--main5);
+	border: 1px solid var(--main3);
 }
