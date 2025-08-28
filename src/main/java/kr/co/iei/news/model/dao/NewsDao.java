@@ -20,7 +20,7 @@ public interface NewsDao {
 
 	int selectTotalNewsCount();
 
-	int intsertNews(News news);
+	int insertNews(News news);
 
 	int insertDiscount(Discount discount);
 

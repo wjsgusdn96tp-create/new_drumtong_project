@@ -3,9 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/DrumtongCss/customer.css">
+<link rel="stylesheet" href="/DrumtongCss/customer_view.css">
 </head>
 <body>
-    
+	<th:block th:include="common/header"></th:block>
+    <div class="all-wrap">
+        <div class="all-content-wrap">
+            <div>
+                <table class="tbl" style="width: 100%" >
+                    <tr>
+                        <th style="width: 15%">유형</th>
+                        <td style="width: 30%">유형이란</td>
+                        <th style="width: 15%">제목</th>
+                        <td style="width: 40%">제목이란</td>
+                    </tr>
+                    <tr>
+                        <th>첨부파일</th>
+                        <td colspan="3">파일첨부</td>
+                    </tr>
+                    <tr>
+                        <td class="content" colspan="4" >내용이란</td>
+                    </tr>
+                </table>
+                <div>
+                    <form action="/customer/comment" method="post">
+                        <ul class="comment-ul">
+                            <li>
+                                <span class="material-icons" style="font-size: 50px;">self_improvement</span>
+                            </li>
+                            <li>
+                                <div class="input-item">
+                                    <textarea class="ccc" style="background-color: var(--main2);" name="customerCommentContent"></textarea>
+                                </div>
+                            </li>
+                            <li>
+                                <button class="comment-btn">댓글등록</button>
+                            </li>
+                        </ul>
+                        <div class="gong"></div>
+                        <ul class="comment-ul-road">
+                            <li>
+                                <span></span>
+                            </li>
+                            <li>
+
+                            </li>
+                            <li>
+
+                            </li>
+                        </ul>
+                        <ul class="comment-ul-ref">
+                            <li>
+                                <span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
+                            </li>
+                            <li>
+
+                            </li>
+                            <li>
+
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="rank">
+                    <span>관리자 댓글에 대한 평점을 남겨주세요.</span>
+                </div>
+                <div class="star-wrap">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                </div>
+                <p class="star-rank">0점</p>
+                <div class="modydele">
+                    <th:block class="modydele-th">
+                            <a href="#" class="btn btn1">수정</a>
+                            <button class="btn btn2">삭제</button>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="common/footer"></th:block>
+    <script>
+        const star = $(".star-wrap>span")
+        star.on("click",function(){
+            star.css("color", "var(--gray6)");
+            $(this).prevAll().css("color", "var(--main4)");
+            $(this).css("color", "var(--main4)");
+            const index = star.index(this);
+            $(".star-rank").text(index+1+"점");
+        });
+    </script>
 </body>
 </html>
