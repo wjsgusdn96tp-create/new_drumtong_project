@@ -16,9 +16,9 @@
 		<!--e버튼에 따라 카테고리 상세, 상세정보 다름-->
 		<!-- productTitle 세션에서 바로 form 넘겨주면 되나? -->
 		<div class="productInsert_title_btn">
-			<button style="color:var(--main4); background-color:var(--main5)" class="btn title_drink_btn">음료</button>
-			<button class="btn title_dessert_btn"><a href="/product/productInsertDessert?productTitle=dessert">디저트</a></button>
-			<button class="btn title_goods_btn"><a class="drink_btn" href="/product/productInsertGoods?productTitle=goods">굿즈</a></button>
+			<button class="btn title_dessert_btn"><a href="/product/productInsertDrink?productTitle=drink">음료</a></button>
+			<button class="btn title_goods_btn"><a class="drink_btn" href="/product/productInsertDessert?productTitle=dessert">디저트</a></button>
+			<button style="color:var(--main4); background-color:var(--main5)" class="btn title_drink_btn">굿즈</button>
 		</div>
 		
 	
@@ -30,9 +30,10 @@
 						<input type="text" name="productName" class="name_content">
 					</div>
 				</div>
+				<!--
 				<div class="content_wrap content_category">
 					<div class="productInsert_title category_title">카테고리 상세</div>
-					<!-- 대표상품 체크 시, product_tbl/product_best_tbl 인서트 -->
+					<!-- 대표상품 체크 시, product_tbl/product_best_tbl 인서트 --
 					<div class="productInsert_title_content category_radio">
 						<div class="category_best_radio">	
 							<input type="radio" name="productBestTbl" class="product_best_radio" value="productBest" id="product_best_tbl">
@@ -61,6 +62,7 @@
 						</div>
 					</div>
 				</div>
+					-->
 				<div class="content_wrap content_img">
 					<div class="img_insert_wrap">
 						<div class="productInsert_title img_insert">이미지 등록</div>
@@ -86,27 +88,10 @@
 								<label for="price">가격(원) : </label> 
 								<input type="text" name="productPrice" id="price">
 							</li> 
-							<li>
-								<label for="kcal">칼로리(kcal) : </label> 
-								<input type="text" name="productContentKcal" id="kcal">
-							</li>  
-							<li>
-								<label for="shot">카페인(shot) : </label> 
-								<input type="text" name="productContentShot" id="shot">
-							</li>
-							<li> 
-								<label for="sugar">당류(g) : </label> 
-								<input type="text" name="productContentSugar" id="sugar">
-							</li>  
-							<li>
-								<label for="natrium">나트륨(g) : </label> 
-								<input type="text" name="productContentNatrium" id="natrium">
-							</li>
-							<li>
-								<label for="carbs">탄수화물(g) : </label> 
-								<input type="text" name="productContentCarbs" id="carbs">
-							</li>  
-							
+							<li  style="height:275px;">
+								<label for="present">상품 소개(굿즈만) : </label> 
+								<input type="text" name="productContentPresent" id="present">
+							</li> 
 						</ul>
 						
 					</div>

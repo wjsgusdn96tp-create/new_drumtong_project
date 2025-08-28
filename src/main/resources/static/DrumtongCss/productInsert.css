@@ -267,8 +267,15 @@ form>.productInsert_content_wrap>.content_wrap>.title_wrap{
 .productInsert_title_btn>button{
 	background-color:  var(--main2);
 }
+.productInsert_title_btn>button>a{
+	text-decoration: none;
+	color:  var(--gray4);
+}
 .productInsert_title_btn>button:hover{
 	color:white;
 	background-color: var(--main5);
 	border: 1px solid var(--main3);
+}
+.productInsert_title_btn>button:hover>a{
+	color:white;
 }
