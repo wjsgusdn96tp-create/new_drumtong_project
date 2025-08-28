@@ -36,12 +36,14 @@
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
 	background-color:var(--main2);
-	border-top: 3px solid var(--main3);
-	background-color: var(--main2)
+	border-top: 3px solid var(--main5);
+	background-color: var(--main2);
+	border-bottom: none;
 	
 }
 .product_wrap>.product_title_wrap>.product_title>.product_drink:hover{
 	border-bottom: none;
+	
 }
 .product_wrap>.product_title_wrap>.product_title>.product_drink>div{
 	border-top: 1px solid var(--main1);
@@ -49,6 +51,7 @@
 	padding-left: 10px;
 	margin-top:0px;
 	background-color: var(--main2);
+	
 }
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main>a{
@@ -98,6 +101,9 @@
 .product_drink:hover>.product_title_list{
 	margin-top:3px;
 	display: block;
+	position:relative;
+	opacity:0.8;
+	z-index: 10;
 }
 .product_title_list{
 	display: none;
@@ -116,7 +122,7 @@
 	margin-left:37px;
 	width:1200px;
 	overflow: hidden;
-	margin-bottom: 120px;
+	margin-bottom: 50px;
 }
 .product_new_wrap>div{
 	width: 500px;
@@ -132,21 +138,25 @@
 
 /*카테고리 바로 밑 버튼 > 버튼(관리자용_메뉴 추가)*/
 .product_new_wrap>.product_insert_btn>button{
-	width: 150px;
-	height: 45px;
+	width: 125px;
+	height: 40px;
 	float: left;
-	background-color: var(--main2);
+	background-color: var(--main5);
 	border: 1px solid var(--main3);
 }
 .product_new_wrap>.product_insert_btn>button>a{
 	font-size:15px;
 	text-decoration: none;
 	font-weight: 700;
-	color: var(--main4);
+	color: var(--main1);
 }
 .product_new_wrap>.product_insert_btn>button:hover{
-	border: 2px solid var(--main3);
+	border: 1px solid var(--main5);
+}
+
+.product_new_wrap>.product_insert_btn>button:hover>a{
 	font-weight: 750;
+	color: var(--main4)
 }
 
 
@@ -165,6 +175,7 @@
 	margin-left:37px;
 	margin-right:37px;
 	float: left;
+	margin-bottom: 50px;
 	
 }
 .product_list_wrap>ul>.product_one_wrap>.product_one_box>form>label>div{
@@ -217,16 +228,17 @@
 	float: right;
 	margin-left: 5px;
 	font-weight: 700;
-	background-color: var(--main2);
+	background-color: var(--main5);
 	border: 1px solid var(--main3); 
 	text-decoration: none;
-	color: var(--main4);
+	color: var(--main1);
 	font-weight: 600;
 }
 .product_manager_btn>form>label>button:hover{
-	border: 2px solid var(--main3); 
-	color: var(--main4);
+	border: 2px solid var(--main5);
+	background-color: var(--main5);
 	font-weight: 750;
+	color: var(--main4);
 }
 
 
