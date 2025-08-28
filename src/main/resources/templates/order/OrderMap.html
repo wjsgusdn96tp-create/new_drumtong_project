@@ -48,7 +48,6 @@
 		map : map
 	});
 	
-	
 	let contentString1=[
 		"<div class='map-shopname'>",
 		"<a href='/product/productList?shopName="+list[0].shopName+"'>"+list[0].shopName+"</a>",
@@ -74,7 +73,19 @@
     	"</div>"
     ].join("");
 	
-	let infoWindow = new naver.maps.InfoWindow();
+	
+	let infowindow = new naver.maps.InfoWindow({
+	
+	    content: infoWindowElement[0],
+	
+	    borderWidth: 0,
+	    disableAnchor: true,
+	    backgroundColor: 'transparent',
+
+	    pixelOffset: new naver.maps.Point(0, -28),
+	});
+	
+	
 	
     naver.maps.Event.addListener(marker1,"click",function(e){
     	infoWindow = new naver.maps.InfoWindow({
