@@ -54,4 +54,9 @@ public class CustomerController {
 		return "customer/listOpinion";
 
 	}
+	
+	@GetMapping(value="/view")
+	public String CustomerView() {
+		return "customer/view";
+	}
 }
