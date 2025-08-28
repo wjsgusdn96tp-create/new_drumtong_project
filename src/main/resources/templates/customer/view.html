@@ -13,16 +13,16 @@
                 <table class="tbl" style="width: 100%" >
                     <tr>
                         <th style="width: 15%">유형</th>
-                        <td style="width: 30%">유형이란</td>
+                        <td style="width: 30%" th:text="${c.customerCategory}"></td>
                         <th style="width: 15%">제목</th>
-                        <td style="width: 40%">제목이란</td>
+                        <td style="width: 40%" th:text="${c.customerTitle}"></td>
                     </tr>
                     <tr>
                         <th>첨부파일</th>
                         <td colspan="3">파일첨부</td>
                     </tr>
                     <tr>
-                        <td class="content" colspan="4" >내용이란</td>
+                        <td class="content" colspan="4" th:utext="${c.customerContent}"></td>
                     </tr>
                 </table>
                 <div>

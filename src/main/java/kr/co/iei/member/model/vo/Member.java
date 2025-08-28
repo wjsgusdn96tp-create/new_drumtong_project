@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Member {
 	private int memberNo;
 	private String memberEmail;
-	private String memberNicname;
+	private String memberNickname;
 	private String memberPw;
 	private String memberGrade;
 }
