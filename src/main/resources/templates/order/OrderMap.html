@@ -74,19 +74,6 @@
     ].join("");
 	
 	
-	let infowindow = new naver.maps.InfoWindow({
-	
-	    content: infoWindowElement[0],
-	
-	    borderWidth: 0,
-	    disableAnchor: true,
-	    backgroundColor: 'transparent',
-
-	    pixelOffset: new naver.maps.Point(0, -28),
-	});
-	
-	
-	
     naver.maps.Event.addListener(marker1,"click",function(e){
     	infoWindow = new naver.maps.InfoWindow({
     		content : contentString1

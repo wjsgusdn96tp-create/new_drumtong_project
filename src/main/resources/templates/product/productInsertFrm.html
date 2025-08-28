@@ -9,6 +9,61 @@
 </head>
 <body>
 	<th:block th:include="/common/header"></th:block>
+	<div class="productInsert_wrap">
+		<div class="productInsert_title_wrap">상품 등록</div>
+
+		<!--e버튼에 따라 카테고리 상세, 상세정보 다름-->
+		<!-- productTitle 세션에서 바로 form 넘겨주면 되나? -->
+		<div class="productInsert_title_btn">
+			<button class="btn title_drink_btn">음료</button>
+			<button class="btn title_dessert_btn">디저트</button>
+			<button class="btn title_goods_btn">굿즈</button>
+		</div>
+		
+		<form action="#" method="#">
+			<div class="productInsert_content_wrap">
+				<div class="content_name">
+					<div class="title_font name_title">상품명</div>
+					<div class="name_content_wrap">
+						<div class="name_content"></div>
+					</div>
+				</div>
+				<div class="content_category">
+					<div class="title_font category_title">카테고리 상세</div>
+					<!-- 대표상품 체크 시, product_tbl/product_best_tbl 인서트 -->
+					<div class="category_best_radio">	
+						<input type="radio" name="product_best_radio" value="productBest" id="product_best_tbl">
+						<label for="product_best_tbl">대표상품</label>
+						<input type="radio" name="product_best_radio" value="productNotBest" id="product_best_tbl_n">
+						<label for="product_best_tbl_n">일반상품</label>
+					</div>
+					<div class="category_drink_radio">
+						<div class="drink_title">아이스 :
+							<div class="drink_title_detail">
+								<input type="radio" name="product_drink_radio" value="productTitleDetail" id="iceCoffe">
+								<label for="iceCoffe">커피</label>
+								<input type="radio" name="product_drink_radio" value="productTitleDetail" id="iceTea">
+								<label for="iceTea">차</label>
+								<input type="radio" name="product_drink_radio" value="productTitleDetail" id="ice_otherDrink">
+								<label for="iceOtherDrink">그 외 제조음료</label>
+							</div>
+						</div>
+						<div class="drink_title">핫 :
+							<div class="drink_title_detail">
+								<input type="radio" name="product_drink_radio" value="productTitleDetail" id="hotCoffe">
+								<label for="hotCoffe">커피</label>
+								<input type="radio" name="product_drink_radio" value="productTitleDetail" id="hotTea">
+								<label for="hotTea">차</label>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div></div>
+				</div>
+			</div>
+		</form>
 	
+	</div>
 </body>
 </html>

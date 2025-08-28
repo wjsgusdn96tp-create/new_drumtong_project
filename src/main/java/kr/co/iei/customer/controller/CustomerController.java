@@ -29,11 +29,10 @@ public class CustomerController {
 	
 	@GetMapping(value="/goodjob")
 	public String goodjobList(int reqPage, String sort, String category, Model model) {
-		CustomerListData cld = customerService.selectGjList(reqPage, sort, category);
+		CustomerListData cld = customerService.selectGjList(reqPage, sort);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
 		model.addAttribute("sort", sort);
-		model.addAttribute("category", category);
 		return "customer/listGj";
 	}
 	
@@ -55,7 +54,4 @@ public class CustomerController {
 		return "customer/listOpinion";
 
 	}
-	
-	
-	
 }
