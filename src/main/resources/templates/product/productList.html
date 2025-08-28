@@ -192,10 +192,146 @@
 								</div>							
 							</div>
 						</li>
+						
+						<!-- 삭제 예정 -->
+						<li class="product_one_wrap">
+							<div class="product_one_box">
+								<div class="product_manager_btn">
+									<form action="#">
+									<!-- 수정 페이지로 이동<a class="btn-primary" th:href="@{/notice/updateFrm(noticeNo=${n.noticeNo})}">수정</a> <!-- updateFrm 생성 noticeNo에 해당하는 정보 수정 --> 
+										<input type="submit" class="product_update_btn" name="product_no" id="product_no" >
+										<label for="product_no">
+											<button class="btn">수정</button>
+										</label>
+									</form>
+									<form action="#"><!-- 삭제 controller 페이지로 이동(삭제 후 해당 페이지로)-->
+										<input type="submit" class="product_delete_btn" name="product_no" id="product_no">
+										<label for="product_no">
+											<button class="btn">삭제</button>
+										</label>
+									</form>
+								</div>
+								<!-- 클릭 시, 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
+								<form action="#" method="get" id="">
+									<input type="submit" class="product" name="product_no" id="product_no">	
+									<label for="product_no">
+										<div class="product_img_box">
+											<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
+											<!-- DB에서 들고올거 -->
+											<div class="product_content_box">
+												<h3>product_name</h3>
+												<p>칼로리 : ${.product_content_kcal} kcal</p>
+												<p>카페인 : ${.product_content_shot} 샷</p>
+												<p>당 : ${.product_content_sugar} g</p>
+												<p>나트륨 : ${.product_content_natrium} g</p>
+												<p>지방 :${.product_content_carbs} g</p>
+											</div>
+										</div>	
+									</label>
+								</form>
+							   	 <!-- e[관리자,회원,비회원] -->
+								<div class="product_icon">
+									<!-- 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
+									<form action="#" method="get" id="">
+										<div class="product_cart">
+											<input type="submit" class="product_cart" name="product_no" id="product_no">	
+											<label for="product_no">
+												<span class="material-icons">add_shopping_cart</span>
+											</label>
+										</div>
+									</form>
+									<!-- e[회원-좋아요 기능] -->
+									<div class="product_like">
+										<ul>
+											<li>
+												<p>
+													<span class="material-icons unlike_icon">favorite_border
+														<span class="material-icons unlike_icon">favorite_border</span>
+														<span class="material-icons like_icon">favorite</span>
+														<span class="like_count">좋아요 수</span>
+													</span>
+												</p>
+											</li>
+										</ul>
+										
+									</div>
+								</div>							
+							</div>
+						</li>
+						<li class="product_one_wrap">
+							<div class="product_one_box">
+								<div class="product_manager_btn">
+									<form action="#">
+									<!-- 수정 페이지로 이동<a class="btn-primary" th:href="@{/notice/updateFrm(noticeNo=${n.noticeNo})}">수정</a> <!-- updateFrm 생성 noticeNo에 해당하는 정보 수정 --> 
+										<input type="submit" class="product_update_btn" name="product_no" id="product_no" >
+										<label for="product_no">
+											<button class="btn">수정</button>
+										</label>
+									</form>
+									<form action="#"><!-- 삭제 controller 페이지로 이동(삭제 후 해당 페이지로)-->
+										<input type="submit" class="product_delete_btn" name="product_no" id="product_no">
+										<label for="product_no">
+											<button class="btn">삭제</button>
+										</label>
+									</form>
+								</div>
+								<!-- 클릭 시, 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
+								<form action="#" method="get" id="">
+									<input type="submit" class="product" name="product_no" id="product_no">	
+									<label for="product_no">
+										<div class="product_img_box">
+											<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
+											<!-- DB에서 들고올거 -->
+											<div class="product_content_box">
+												<h3>product_name</h3>
+												<p>칼로리 : ${.product_content_kcal} kcal</p>
+												<p>카페인 : ${.product_content_shot} 샷</p>
+												<p>당 : ${.product_content_sugar} g</p>
+												<p>나트륨 : ${.product_content_natrium} g</p>
+												<p>지방 :${.product_content_carbs} g</p>
+											</div>
+										</div>	
+									</label>
+								</form>
+							   	 <!-- e[관리자,회원,비회원] -->
+								<div class="product_icon">
+									<!-- 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
+									<form action="#" method="get" id="">
+										<div class="product_cart">
+											<input type="submit" class="product_cart" name="product_no" id="product_no">	
+											<label for="product_no">
+												<span class="material-icons">add_shopping_cart</span>
+											</label>
+										</div>
+									</form>
+									<!-- e[회원-좋아요 기능] -->
+									<div class="product_like">
+										<ul>
+											<li>
+												<p>
+													<span class="material-icons unlike_icon">favorite_border
+														<span class="material-icons unlike_icon">favorite_border</span>
+														<span class="material-icons like_icon">favorite</span>
+														<span class="like_count">좋아요 수</span>
+													</span>
+												</p>
+											</li>
+										</ul>
+										
+									</div>
+								</div>							
+							</div>
+						</li>
+						<!-- 위까지 삭제 -->
+						
 					</ul>
 				</div>	
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+		
+		</script>
 	
 </body>
 </html>
