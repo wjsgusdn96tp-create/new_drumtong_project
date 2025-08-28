@@ -140,3 +140,9 @@ form>.productInsert_content_wrap>.content_wrap>.title_wrap{
 .content_img{
 	width: 396px;
 }
+.content_wrap content_img{
+	overflow: hidden;
+}
+.img_show_wrap{
+	float: left;
+}
