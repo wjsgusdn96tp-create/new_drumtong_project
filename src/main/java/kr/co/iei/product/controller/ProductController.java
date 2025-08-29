@@ -74,23 +74,23 @@ public class ProductController {
 			model.addAttribute("title", "상품 등록 실패!!");
 			model.addAttribute("text", "상품 등록 실패 되었습니다.");
 			model.addAttribute("icon", "info");
-			model.addAttribute("loc", "/product/productInsertDrink" ); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productInsertFrm" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}else if(result == 1) {
 			model.addAttribute("title", "상품 등록!!");
 			model.addAttribute("text", "일반 상품으로 등록되었습니다.");
 			model.addAttribute("icon", "success");
-			model.addAttribute("loc", "/product/productInsertDrink" ); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productInsertList" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}else if(result == 2) {
 			model.addAttribute("title", "상품 등록!!");
 			model.addAttribute("text", "대표상품으로 등록되었습니다.");
 			model.addAttribute("icon", "success");
-			model.addAttribute("loc", "/product/productInsertDrink" ); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productInsertList" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}
 	
-		return "/product/productInsertFrm";
+		return "/product/productList";
 	}
 	
 }
