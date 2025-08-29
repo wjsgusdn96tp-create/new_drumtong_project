@@ -22,6 +22,11 @@ public interface NewsDao {
 
 	int insertNews(News news);
 
-	int insertDiscount(Discount discount);
+	int insertDiscount();
+
+	List<News> selectAllNews(HashMap<String, Object> newsListNum);
+
+	int insertNotice(Notice notice);
+
 
 }

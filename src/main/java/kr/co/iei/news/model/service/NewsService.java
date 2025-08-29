@@ -11,6 +11,8 @@ import kr.co.iei.news.model.dao.NewsDao;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.product.dao.ProductDao;
+import kr.co.iei.product.vo.Product;
 
 @Service
 public class NewsService {
@@ -102,13 +104,23 @@ public class NewsService {
 	@Transactional
 	public int insertNews(News news) {
 		int result = newsDao.insertNews(news);
-		return result;
-	}
-	
-	@Transactional
-	public int insertDiscount(Discount discount) {
-		int result = newsDao.insertDiscount(discount);
+		
 		return result;
 	}
 
+	public List selectAllNews(int start, int amount) {
+		int end = start+amount -1;
+		HashMap<String, Object> newsListNum = new HashMap<String, Object>();
+		newsListNum.put("start", start);
+		newsListNum.put("end", end);
+		List news = newsDao.selectAllNews(newsListNum);
+		return news;
+	}
+	
+	@Transactional
+	public int insertNotice(Notice notice) {
+		int result = newsDao.insertNotice(notice);
+		return result;
+	}
+	
 }

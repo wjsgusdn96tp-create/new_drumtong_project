@@ -118,7 +118,10 @@ button {
     text-align: center;
     background-color: var(--gray8);
     font-weight: bold;
+
 }
+
+
 
 .order-option-sizebtn {
     border: 1px solid black;
