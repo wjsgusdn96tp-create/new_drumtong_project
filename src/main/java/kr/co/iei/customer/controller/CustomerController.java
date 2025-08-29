@@ -7,9 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.co.iei.customer.service.CustomerService;
+import kr.co.iei.customer.vo.Customer;
 import kr.co.iei.customer.vo.CustomerListData;
+import kr.co.iei.member.model.vo.Member;
 
 @Controller
 @RequestMapping(value="/customer")
@@ -19,8 +22,8 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	@GetMapping(value="/list")
-	public String customerList(int reqPage, String sort, Model model) {
-		CustomerListData cld = customerService.selectCustomerList(reqPage, sort);
+	public String customerList(int reqPage, String sort, Model model, @SessionAttribute(required = false) Member member) {
+		CustomerListData cld = customerService.selectCustomerList(reqPage, sort, member);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
 		model.addAttribute("sort", sort);
@@ -28,8 +31,8 @@ public class CustomerController {
 	}
 	
 	@GetMapping(value="/goodjob")
-	public String goodjobList(int reqPage, String sort, String category, Model model) {
-		CustomerListData cld = customerService.selectGjList(reqPage, sort);
+	public String goodjobList(int reqPage, String sort, String category, Model model, @SessionAttribute(required = false) Member member) {
+		CustomerListData cld = customerService.selectGjList(reqPage, sort, member);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
 		model.addAttribute("sort", sort);
@@ -37,8 +40,8 @@ public class CustomerController {
 	}
 	
 	@GetMapping(value="/complain")
-	public String complainList(int reqPage, String sort, Model model) {
-		CustomerListData cld = customerService.selectComplainList(reqPage, sort);
+	public String complainList(int reqPage, String sort, Model model, @SessionAttribute(required = false) Member member) {
+		CustomerListData cld = customerService.selectComplainList(reqPage, sort, member);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
 		model.addAttribute("sort", sort);
@@ -46,8 +49,8 @@ public class CustomerController {
 	}
 	
 	@GetMapping(value="/opinion")
-	public String opinionList(int reqPage, String sort, Model model) {
-		CustomerListData cld = customerService.selectOpinionList(reqPage, sort);
+	public String opinionList(int reqPage, String sort, Model model, @SessionAttribute(required = false) Member member) {
+		CustomerListData cld = customerService.selectOpinionList(reqPage, sort, member);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
 		model.addAttribute("sort", sort);
@@ -55,8 +58,17 @@ public class CustomerController {
 
 	}
 	
+	@GetMapping(value="/writeFrm")
+	public String writeFrm() {
+		return "customer/writeFrm";
+	}
+	
 	@GetMapping(value="/view")
-	public String CustomerView() {
+	public String CustomerView(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
+		Customer c = customerService.selectOneCustomer(customerNo);
+			
+		
+		model.addAttribute("c", c);
 		return "customer/view";
 	}
 }

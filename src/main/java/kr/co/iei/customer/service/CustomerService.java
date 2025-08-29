@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.iei.customer.dao.CustomerDao;
+import kr.co.iei.customer.vo.Customer;
 import kr.co.iei.customer.vo.CustomerListData;
 import kr.co.iei.customer.vo.CustomerNavi;
+import kr.co.iei.member.model.vo.Member;
 
 
 @Service
@@ -17,7 +19,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 	
-	public CustomerListData selectCustomerList(int reqPage, String sort) {
+	public CustomerListData selectCustomerList(int reqPage, String sort, Member member) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -26,10 +28,14 @@ public class CustomerService {
 		param.put("start",start);
 		param.put("end", end);
 		param.put("sort", sort);
-		System.out.println(param);
+		if(member != null) {
+			param.put("memberGrade", member.getMemberGrade());
+			param.put("memberNickname", member.getMemberNickname());
+		}
+		
 		List list = customerDao.selectCustomerList(param);
 		
-		int totalCount = customerDao.selectCustomerTotalCount();
+		int totalCount = customerDao.selectCustomerTotalCount(param);
 		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
 		int pageNaviSize = 5;
 		int startNo = ((reqPage -1) / pageNaviSize) * pageNaviSize + 1;
@@ -53,7 +59,7 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectGjList(int reqPage, String sort) {
+	public CustomerListData selectGjList(int reqPage, String sort, Member member) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -61,9 +67,14 @@ public class CustomerService {
 		param.put("start",start);
 		param.put("end", end);
 		param.put("sort", sort);
+		
+		if(member != null) {
+			param.put("memberGrade", member.getMemberGrade());
+			param.put("memberNickname", member.getMemberNickname());
+		}
 		List list = customerDao.selectGjList(param);
 		
-		int totalCount = customerDao.selectGjTotalCount();
+		int totalCount = customerDao.selectGjTotalCount(param);
 		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
 		int pageNaviSize = 5;
 		int startNo = ((reqPage -1) / pageNaviSize) * pageNaviSize + 1;
@@ -87,7 +98,7 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectComplainList(int reqPage, String sort) {
+	public CustomerListData selectComplainList(int reqPage, String sort, Member member) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -95,9 +106,13 @@ public class CustomerService {
 		param.put("start",start);
 		param.put("end", end);
 		param.put("sort", sort);
+		if(member != null) {
+			param.put("memberGrade", member.getMemberGrade());
+			param.put("memberNickname", member.getMemberNickname());
+		}
 		List list = customerDao.selectComplainList(param);
 		
-		int totalCount = customerDao.selectComplainTotalCount();
+		int totalCount = customerDao.selectComplainTotalCount(param);
 		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
 		int pageNaviSize = 5;
 		int startNo = ((reqPage -1) / pageNaviSize) * pageNaviSize + 1;
@@ -121,7 +136,7 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectOpinionList(int reqPage, String sort) {
+	public CustomerListData selectOpinionList(int reqPage, String sort, Member member) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -129,9 +144,13 @@ public class CustomerService {
 		param.put("start",start);
 		param.put("end", end);
 		param.put("sort", sort);
+		if(member != null) {
+			param.put("memberGrade", member.getMemberGrade());
+			param.put("memberNickname", member.getMemberNickname());
+		}
 		List list = customerDao.selectOpinionList(param);
 		
-		int totalCount = customerDao.selectOpinionTotalCount();
+		int totalCount = customerDao.selectOpinionTotalCount(param);
 		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
 		int pageNaviSize = 5;
 		int startNo = ((reqPage -1) / pageNaviSize) * pageNaviSize + 1;
@@ -153,6 +172,12 @@ public class CustomerService {
 	    
 	    CustomerListData cld = new CustomerListData(list, customerNavi);
 		return cld;
+	}
+
+	public Customer selectOneCustomer(int customerNo) {
+		Customer c = customerDao.selectOneCustomer(customerNo);
+		System.out.println(c);
+		return c;
 	}
 	
 }

@@ -29,8 +29,9 @@ body{
 .allfirst-wrap{
     padding-top: 100px;
     width: 1200px;
-    height: 800px;
+/*     height: 800px; */
     margin: 0 auto;
+    min-height: 75vh;
     
 }
 .all-wrap{
@@ -205,6 +206,34 @@ body{
 	font-weight: 550;
 	background-color: var(--main2);
 }
+
+.login-warning{
+	text-align:center; 
+	height: 250px; 
+	padding: 60px 0; 
+	color:var(--gray3);
+	font-size: 15px;
+}
+.login{
+	color:var(--main4); 
+	font-weight:600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .navi{
     display: flex;
     justify-content: center;

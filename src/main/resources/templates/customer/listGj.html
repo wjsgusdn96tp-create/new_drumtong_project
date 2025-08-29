@@ -25,16 +25,16 @@
                 <div>
                     <ul>
                         <li>
-                            <a href="/customer/list?reqPage=1">전체</a>
+                            <a th:href=@{/customer/list?reqPage=1}>전체</a>
                         </li>
                         <li>
-                            <a href="/customer/goodjob?reqPage=1">칭찬</a>
+                            <a th:href="${session.member != null} ? '/customer/goodjob?reqPage=1' : '#'">칭찬</a>
                         </li>
                         <li>
-                            <a href="/customer/complain?reqPage=1">불만</a>
+                            <a th:href="${session.member != null} ? '/customer/complain?reqPage=1' : '#'">불만</a>
                         </li>
                         <li>
-                            <a href="/customer/opinion?reqPage=1">의견</a>
+                            <a th:href="${session.member != null} ? '/customer/opinion?reqPage=1' : '#'">의견</a>
                         </li>
                     </ul>
                     <ul>
@@ -64,7 +64,7 @@
                         <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
                         <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
                         <td class="title-td" style="width: 45%;">
-                        	<a href="#" th:text="${customer.customerTitle}"></a>
+                        	<a th:href="@{/customer/view(customerNo=${customer.customerNo})}" th:text="${customer.customerTitle}"></a>
                         </td>
                         <td style="width: 15%;" th:text="${customer.customerDate}"></td>
                         <td style="width: 10%;">

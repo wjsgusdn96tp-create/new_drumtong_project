@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Alias(value = "order")
+@Alias(value = "shop")
 public class ShopTbl {
 	private String shopName;
 	private String shopAddress;

@@ -3,43 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/DrumtongCss/join.css">
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
     <!-- join page -->
-	<h1>회원가입</h1>
+	<h1>Create Account</h1>
 	<main class="content">
 		<section class="section join-wrap">
-		
-			<!-- 이메일 중복체크 -->
-			<form action="/member/checkEmail" name="checkEmailFrm" method="get">
-				<input type="hidden" name="checkEmail">
-			</form>
 			<form action="/member/join" method="post" autocomplete="off">
 				<!-- 이메일 입력 -->
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberEmail">이메일 입력<span style="color: red;">*</span></label>
 					</div>
-					<div class="input-item">
+					<div class="input-item" id="email-item">
+						<div class="verificationCode-button-box">
+							<button type="submit" class="btn-vc" id="vc-btn">인증번호 전송</button>
+						</div>
 						<input type="email" name="memberEmail" id="memberEmail">
 					</div>
 					<p class="input-msg email-check-msg"></p>
-				</div>
-				
-				<!-- 이메일 인증번호 -->
-				<div class="input-wrap">
-					<div class="verificationCode-button-box">
-						<button type="submit" class="btn-vc">인증번호 전송</button>
-					</div>
-                    <div class="input-title">
+					<!-- 이메일 인증번호 -->
+                    <div class="input-title" style="display:none;" id="dp-input">
 						<label for="verificationCode">인증번호 입력</label>
+                    	<div class="input-item">
+                        	<input type="text" name="verificationCode" id="verificationCode">
+                    	</div>
 					</div>
-                    <div class="input-item">
-                        <input type="text" name="verificationCode" id="verificationCode">
-                    </div>
+					<p id="message"></p>
 				</div>
-				
+		
 				<!-- 비밀번호 입력 -->
 				<div class="input-wrap">
 					<div class="input-title">
@@ -75,8 +69,8 @@
 				<div class="agree-content">
                     <div class="agree">
                         <div class="agree-check">
-                            <label for="check1">이용 약관에 동의합니다.</label>
-                            <input type="checkbox" name="check1" id="check1">
+                            <label for="check1">이용 약관에 동의합니다.(필수)</label>
+                            <input type="checkbox" name="check1" id="check1" class="required">
                         </div>
                         <div class="agree-explain">
                             제1조(목적)이 약관은 블루보틀커피코리아 유한회사(이하”회사”)가 운영하는 사이버 몰(이하 “몰”이라 한다)에서 제공하는 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
@@ -90,8 +84,8 @@
                     <!-- 개인정보 수집 동의서 -->
                     <div class="agree">
                         <div class="agree-check">
-                            <label for="check2">개인정보 수집 및 이용에 동의합니다.</label>
-                            <input type="checkbox" name="check2" id="check2">
+                            <label for="check2">개인정보 수집 및 이용에 동의합니다.(필수)</label>
+                            <input type="checkbox" name="check2" id="check2" class="required">
                         </div>
                         <div class="agree-explain">
                             1.수집하는 개인정보 항목 및 수집방법
@@ -117,16 +111,48 @@
 
                 <!-- 가입하기 버튼 -->
                 <div class="join-button-box">
-                    <button type="submit" class="btn-primary lg">가입하기</button>
+                    <button type="submit" class="btn-primary lg" id="join-btn-box" disabled>가입하기</button>
                 </div>
                 <div class="last">
-                    <a href="#" id="last-text">이미 DrumTong계정을 가지고 계십니까?</a>
+                    <a href="/member/loginFrm" id="last-text">이미 DrumTong계정을 가지고 계십니까?</a>
                 </div>
 			</form>
 		</section>
 	</main>
 	
 	<script>
+		// text-event
+		const lastEvent = document.getElementById("last-text");
+		lastEvent.addEventListener("mouseenter", function(){
+			lastEvent.style.color = "#000000";
+		});
+		lastEvent.addEventListener("mouseleave", function(){
+			lastEvent.style.color = "#9AA6B2";
+		});
+
+		// 인증번호 버튼 디자인
+		const vcBtn = document.getElementById("vc-btn");
+		vcBtn.addEventListener("mouseenter", function(){
+			vcBtn.style.backgroundColor = "#54BAB9";
+			vcBtn.style.color ="#FBF8F1";
+		});
+		vcBtn.addEventListener("mouseleave", function(){
+			vcBtn.style.backgroundColor = "#FBF8F1";
+			vcBtn.style.color ="#333333";
+		});
+		// 가입하기 버튼 디자인
+		const joinBtn = document.getElementById("join-btn-box");
+		joinBtn.addEventListener("click", function(){
+			joinBtn.style.backgroundColor = "#54BAB9";
+			joinBtn.style.color ="#FBF8F1";
+		});
+		
+		// 인증번호 전송 버튼 누르면 input
+		document.getElementById("vc-btn").addEventListener("click", function() {
+    		document.getElementById("dp-input").style.display = "block";
+		});
+		
+	
 		// 비밀번호 확인 여부 jQ
 		$("#memberPwRe").on("keyup", function(){
 			$(".pw-check-msg").removeClass("valid").removeClass("invalid");
@@ -161,6 +187,78 @@
 				}
 			});
 		});
+
+		// 약관/개인정보 동의 체크
+		 $(".required").on("change", function() {
+		 	const total = $(".required").length;
+		    const checked = $(".required:checked").length;
+		    // 모든 체크박스가 체크되면 전체동의도 체크
+		    $("#agreeAll").prop("checked", total === checked);
+		    	toggleButton();
+		});
+		// 전체 동의 체크
+		$("#agreeAll").on("change", function() {
+      		$(".required").prop("checked", $(this).is(":checked"));
+      		toggleButton();
+    	});
+		// 버튼 활성화/비활성화
+	    function toggleButton() {
+	        const total = $(".required").length;
+	        const checked = $(".required:checked").length;
+	        if (total === checked) {
+	          $("#join-btn-box").prop("disabled", false); 	// 버튼 활성화
+	          joinBtn.style.backgroundColor = "#54BAB9";
+	          joinBtn.style.color ="#FBF8F1";
+	        } else {
+	          $("#join-btn-box").prop("disabled", true); 	// 버튼 비활성화
+	          joinBtn.style.backgroundColor = "#FBF8F1";
+	          joinBtn.style.color ="#b7b7b7";
+	        }
+	      }
+		
+	    $("#vc-btn").click(function(e){
+	        e.preventDefault();
+	        const email = $("#memberEmail").val();
+	        if (!email) {
+	            alert("이메일을 입력하세요");
+	            return;
+	        }
+	        $.ajax({
+	            url: "/api/sendMail",
+	            type: "post",
+	            data: {memberEmail : email},
+	            success: function(response) {
+	                $("#message").text(response);  // 여기에 인증번호 발송 메시지 표시
+	            },
+	            error: function(xhr, status, error) {
+	                $("#message").text("메일 전송 중 오류가 발생했습니다: " + error);
+	            }
+	        });
+	    });
+
+	    $("#verificationCode").on("keyup", function(){
+	        const code = $(this).val();
+	        if(code.length === 6){ // 6자리 입력 시 서버 확인
+	            $.ajax({
+	                url: "/api/verifyCode",
+	                type: "post",
+	                data: {code : code},
+	                success: function(result){
+	                    if(result === "인증 성공"){
+	                        $("#message").text("이메일 인증 완료");
+	                        $("#join-btn-box").prop("disabled", false); // 가입 버튼 활성화
+	                    } else {
+	                        $("#message").text("인증번호가 올바르지 않습니다.");
+	                        $("#join-btn-box").prop("disabled", true); // 가입 버튼 비활성화
+	                    }
+	                },
+	                error: function(xhr, status, error){
+	                    $("#message").text("인증 확인 중 오류 발생: " + error);
+	                }
+	            });
+	        }
+	    });
+		
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
