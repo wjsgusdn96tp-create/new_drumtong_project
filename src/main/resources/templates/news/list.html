@@ -80,6 +80,8 @@
 		let start = 1;							// 게시물의 시작 번호
 		const amount = 6;						// 더보기 한번 클릭 시 추가로 가져올 게시물 수 
 		
+
+		
 		$("#more-btn").on("click",function() {
 			$.ajax({
 				url: "/news/more",
@@ -111,8 +113,8 @@
 											</span>
 										</div>
 										<div>
-											<button >할인 적용하기</button>
-											<button class="close">할인 수정하기</button>
+											<button class="discountBtn">할인 적용하기</button>
+											<button class="close discountUpdate">할인 수정하기</button>
 										</div>
 									</div>
 								</li>
@@ -138,10 +140,10 @@
 						const titleSpan = $("<span>");
 						titleSpan.text(n.title);
 						titleDiv.append(typeSpan).append(titleSpan);
-						textWrap.append(titleDiv);
 						
 						const smallDiv = $("<div>");
 						smallDiv.addClass("list-small");
+						
 						const dateSpan = $("<span>");
 						dateSpan.addClass("date");
 						const startDateSpan = $("<span>");
@@ -161,7 +163,20 @@
 						likeSpan.append(likeCountSpan).append(likeIconSpan);
 						
 						smallDiv.append(dateSpan).append(likeSpan);
-						textWrap.append(smallDiv);
+						
+						const discountDiv = $("<div>");
+						const discountBtn = $("<a>");
+						discountBtn.addClass("discountBtn").addClass("btn");
+						discountBtn.text("할인 적용하기");
+						discountBtn.attr("href","/news/discountWriteFrm?title="+n.title+"&newsNo="+n.newsNo);
+						const discountUpdate = $("<a>");
+						discountUpdate.addClass("discountUpdate").addClass("btn");
+						
+						discountUpdate.text("할인 수정하기");
+						discountDiv.append(discountBtn).append(discountUpdate);
+						
+						
+						textWrap.append(titleDiv).append(smallDiv).append(discountDiv);
 						
 						li.append(imgDiv).append(textWrap);
 												
@@ -182,6 +197,8 @@
 				}
 			})
 		});
+
+		
 		
 	</script>
 </body>

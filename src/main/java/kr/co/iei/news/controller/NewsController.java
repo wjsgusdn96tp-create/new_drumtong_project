@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
+import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
 import kr.co.iei.util.FileUtil;
@@ -78,6 +79,20 @@ public class NewsController {
 		Notice notice = newsService.selectOneNotice(noticeNo);
 		model.addAttribute("notice", notice);
 		return "news/noticeView";
+	}
+	
+	@GetMapping(value="/discountWriteFrm")
+	public String discountWriteFrm(String title, String newsNo, Model model) {
+		model.addAttribute("title", title);
+		model.addAttribute("newsNo", newsNo);
+		return "news/discountWriteFrm";
+	}
+	
+	@GetMapping(value="/discountWrite")
+	public String discountWrite(Discount discount,List productNoList, @SessionAttribute(required = false) Member member) {
+		System.out.println(discount);
+		int result = newsService.insertDiscount(discount, productNoList);
+		return "redirect:/news/list?noticeReqPage=1";
 	}
 	
 	@ResponseBody

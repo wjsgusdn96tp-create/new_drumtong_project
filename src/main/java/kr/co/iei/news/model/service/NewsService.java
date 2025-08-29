@@ -1,5 +1,6 @@
 package kr.co.iei.news.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -120,6 +121,15 @@ public class NewsService {
 	@Transactional
 	public int insertNotice(Notice notice) {
 		int result = newsDao.insertNotice(notice);
+		return result;
+	}
+	@Transactional
+	public int insertDiscount(Discount discount, List productNoList) {
+		int result = 0;
+		for(int i=0; i<productNoList.size();i++) {
+			discount.setProductNo((int)productNoList.get(i));
+			result += newsDao.insertDiscount(discount);
+		}		
 		return result;
 	}
 	

@@ -22,7 +22,7 @@ public interface NewsDao {
 
 	int insertNews(News news);
 
-	int insertDiscount();
+	int insertDiscount(Discount discount);
 
 	List<News> selectAllNews(HashMap<String, Object> newsListNum);
 
