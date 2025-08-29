@@ -19,7 +19,7 @@
 					</div>
 					<div class="input-item" id="email-item">
 						<div class="verificationCode-button-box">
-							<button type="submit" class="btn-vc" id="vc-btn">인증번호 전송</button>
+							<button type="button" class="btn-vc" id="vc-btn">인증번호 전송</button>
 						</div>
 						<input type="email" name="memberEmail" id="memberEmail">
 					</div>
@@ -58,10 +58,10 @@
 				<!-- 닉네임 입력 -->
 				<div class="input-wrap">
 					<div class="input-title">
-						<label for="memberNicname">닉네임 입력<span style="color: red;">*</span></label>
+						<label for="memberNickname">닉네임 입력<span style="color: red;">*</span></label>
 					</div>
 					<div class="input-item">
-						<input type="text" name="memberNicname" id="memberNicname">
+						<input type="text" name="memberNickname" id="memberNickname">
 					</div>
 				</div>
 				
@@ -216,6 +216,7 @@
 	        }
 	      }
 		
+		// 인증번호 전송
 	    $("#vc-btn").click(function(e){
 	        e.preventDefault();
 	        const email = $("#memberEmail").val();
@@ -235,7 +236,8 @@
 	            }
 	        });
 	    });
-
+	
+	    // 인증번호 확인
 	    $("#verificationCode").on("keyup", function(){
 	        const code = $(this).val();
 	        if(code.length === 6){ // 6자리 입력 시 서버 확인
