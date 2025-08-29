@@ -14,74 +14,180 @@
     
     <div class="order-option-header">옵션선택</div>
 
-<div class="order-option-main-box">
-    <div class="order-option-image-box"><img src="img/로고 (1) 1.svg" alt=""></div>
-
-    <div class="order-option-option-box">
-    
-        <div class="order-option-top">
-            <div class="order-option-name">민트초코 오레오 프라페(ICE)</div>
-        </div>
-
-            <div class="order-option-quantity-box">
-                <div class="order-option-quantity">
-                    <button class="button-icons"><span class="material-icons">remove_circle_outline</span></button>
-                    <span class="order-option-count">1</span>
-                    <button class="button-icons"><span class="material-icons">add_circle_outline</span></button>
-                </div>
-                <div class="order-option-price">5,000원</div>
-            </div>
-            
-    <div class="order-option-section">
-        <div class="order-option-label">컵 선택</div>
-            <div class="order-option-choice">
-                <button class="order-option-cupbtn">개인</button>
-                <button class="order-option-cupbtn">매장</button>
-            </div>
-    </div>
- 
-    <div class="order-option-section">
-        <div class="order-option-label">사이즈 선택 (+1,000원/+2,000원)</div>
-            <div class="order-option-choice">
-                <button class="order-option-sizebtn">L</button>
-                <button class="order-option-sizebtn">XL</button>
-            </div>
-    </div>
-
-    <div class="order-option-section">
-        <div class="order-option-label">샷 추가 (+400원, 최대3회)</div>
-            <div class="order-option-choice">
-                <button class="button-icons"><span class="material-icons">remove_circle_outline</span></button>
-                    <span class="order-option-shotcount">1</span>
-                <button class="button-icons"><span class="material-icons">add_circle_outline</span></button>
-            </div>
-    </div>
-    
-    <div class="order-option-section">
-        <div class="order-option-label">휘핑크림 추가(+500원)</div>
-            <div class="order-option-choice">
-                <button class="button-icons"><span class="material-icons">check_circle_outline</span></button>
-           	</div>
-    </div>
-
-        <div class="order-option-totalbox">
-            <div class="order-option-totalname">결제금액</div>
-            <div class="order-option-totalprice">5,000
-                <span>원</span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="order-option-footer">
-    <a href="/product/productList" class="order-listpage">메뉴목록</a>
-    <button class="order-reset">옵션초기화</button>
-    <button class="order-cartadd">장바구니담기</button>
-</div>
-<script>
-
-
+	<div class="order-option-main-box">
+	    <div class="order-option-image-box"><img src="img/로고 (1) 1.svg" alt=""></div>
 	
+	    <div class="order-option-option-box">
+	    
+	        <div class="order-option-top">
+	            <div class="order-option-name">민트초코 오레오 프라페(ICE)</div>
+	        </div>
 	
+	            <div class="order-option-quantity-box">
+	                <div class="order-option-quantity">
+	                    <button class="button-minus1"><span class="material-icons">remove_circle_outline</span></button>
+	                    <span class="order-option-count">1</span>
+	                    <button class="button-plus1"><span class="material-icons">add_circle_outline</span></button>
+	                </div>
+	                <div class="order-option-price">5,000원</div>
+	            </div>
+	            
+	    <div class="order-option-section">
+	        <div class="order-option-label">컵 선택</div>
+	            <div class="order-option-cupchoice">
+	                <button class="order-option-cupbtn">개인</button>
+	                <button class="order-option-cupbtn">매장</button>
+	            </div>
+	    </div>
+	 
+	    <div class="order-option-section">
+	        <div class="order-option-label">사이즈 선택 (기본 L, XL + 2000원)</div>
+	            <div class="order-option-sizechoice">
+	                <button class="order-option-sizebtn">L</button>
+	                <button class="order-option-sizebtn">XL</button>
+	            </div>
+	    </div>
+	
+	    <div class="order-option-section">
+	        <div class="order-option-label">샷 추가 (+400원, 최대3회)</div>
+	            <div class="order-option-choice">
+	                <button class="button-minus2"><span class="material-icons">remove_circle_outline</span></button>
+	                    <span class="order-option-shotcount">0</span>
+	                <button class="button-plus2"><span class="material-icons">add_circle_outline</span></button>
+	            </div>
+	    </div>
+	    
+	    <div class="order-option-section">
+	        <div class="order-option-label">휘핑크림 추가(+500원, 최대2회)</div>
+	            <div class="order-option-choice">
+	                <button class="button-minus3"><span class="material-icons">remove_circle_outline</span></button>
+	                    <span class="order-option-creamcount" >0</span>
+	                <button class="button-plus3"><span class="material-icons">add_circle_outline</span></button>
+	           	</div>
+	    </div>
+	
+	        <div class="order-option-totalbox">
+	            <div class="order-option-totalname">결제금액</div>
+	            <div class="order-option-totalprice">5,000
+	                <span>원</span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+
+	<div class="order-option-footer">
+	    <a href="/product/productList" class="order-listpage">메뉴목록</a>
+	    <button class="order-reset">옵션초기화</button>
+	    
+	    <button class="order-cartadd">장바구니담기</button>
+	</div>
+<script th:inline="javascript">
+		
+		const btn = $(".order-option-cupbtn");
+	    
+		$(".order-option-cupbtn").on("click",function(){
+			
+			const solo = $(this);
+			
+			if(solo == "개인"){
+				
+				btn.css("border","5px solid red");
+			}
+
+			});
+		
+
+		
+		//지정한 클래스명을 눌렀을때 동작
+		$(".button-plus1").on("click",function(){
+			//지정한 클래스명의 태그 안의 문자열값을 대입
+			const optionCount = $(".order-option-count").text();
+			
+			//태그 안의 텍스트 값을 숫자로 변형
+			const plusCount = Number(optionCount)+1;
+		
+			//태그 안의 문자열갚에 플러스한 값을 대입
+			$(".order-option-count").text(plusCount);
+		});
+		$(".button-minus1").on("click",function(){
+			const optionCount = $(".order-option-count").text();
+			
+			if(optionCount == 1){
+				return;
+			}
+			const minusCount = Number(optionCount)-1;
+			
+			$(".order-option-count").text(minusCount);
+		});
+		
+		$(".button-plus2").on("click",function(){
+			const shotCount = $(".order-option-shotcount").text();
+			if(shotCount == 3){
+				return;
+			}
+			
+			const plusCount = Number(shotCount)+1;
+			
+			$(".order-option-shotcount").text(plusCount);
+		});
+		
+		$(".button-minus2").on("click",function(){
+			const shotCount = $(".order-option-shotcount").text();
+			if(shotCount == 0){
+				return;
+			}
+			const minusCount = Number(shotCount)-1;
+			$(".order-option-shotcount").text(minstCount);
+		});
+		
+		
+		$(".button-plus3").on("click",function(){
+			const creamCount = $(".order-option-creamcount").text();
+			
+			if(creamCount == 3){
+				return;
+			}
+			
+			const plusCount = Number(creamCount)+1;
+			
+			$(".order-option-creamcount").text(plusCount);
+		});
+		
+		$(".button-minus3").on("click",function(){
+			const creamCount = $(".order-option-creamcount").text();
+			
+			if(creamCount == 0){
+				return;
+			}
+			const minusCount = Number(creamCount)-1;
+			
+			$(".order-option-creamcount").text(minusCount);
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 </script>
 </body>
 </html>

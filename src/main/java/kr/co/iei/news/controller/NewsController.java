@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +18,6 @@ import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
-import kr.co.iei.product.vo.Product;
 import kr.co.iei.util.FileUtil;
 
 
@@ -34,7 +33,6 @@ public class NewsController {
 	
 	@Autowired
 	private FileUtil fileUtil;
-	
 	
 	@GetMapping(value="/list")
 	public String newsList(int noticeReqPage, Model model) {
@@ -59,11 +57,7 @@ public class NewsController {
 		news.setMemberNo(member.getMemberNo());
 		
 		int result = newsService.insertNews(news);
-		/*
-		if(news.getType()=="이벤트") {
-			result += newsService.insertDiscount(discount);			
-		}*/
-		
+			
 		return "redirect:/news/list?noticeReqPage=1";
 	}
 	
@@ -72,12 +66,28 @@ public class NewsController {
 		return "news/noticeWriteFrm";
 	}
 	
+	@GetMapping(value="/noticeWrite")
+	public String noticeWrite(Notice notice, @SessionAttribute(required = false) Member member) {
+		notice.setMemberNo(member.getMemberNo());
+		int result = newsService.insertNotice(notice);
+		return "redirect:/news/list?noticeReqPage=1";
+	}
+	
 	@GetMapping(value="/noticeView")
 	public String noticeView(int noticeNo, Model model) {
 		Notice notice = newsService.selectOneNotice(noticeNo);
 		model.addAttribute("notice", notice);
 		return "news/noticeView";
 	}
+	
+	@ResponseBody
+	@GetMapping(value="/more")
+	public List more(int start, int amount) {
+		List newsList = newsService.selectAllNews(start, amount);
+
+		return newsList;
+	}
+	
 	
 }
 
