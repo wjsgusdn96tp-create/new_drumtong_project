@@ -10,12 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
-import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.product.vo.Product;
 import kr.co.iei.util.FileUtil;
 
 
@@ -49,17 +52,19 @@ public class NewsController {
 		return "news/writeFrm";
 	}
 	@PostMapping(value="write") //뉴스 등록하기 누르면 호출
-	public String writeNews(News news, Discount discount, MultipartFile imgFile ) {
+	public String writeNews(News news, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
 		String savepath = root+"/news/";
-		String filepath = fileUtil.upload(savepath, imgFile);
+		String filepath = fileUtil.upload(savepath, newsImageFile);
 		news.setImage(filepath);
+		news.setMemberNo(member.getMemberNo());
 		
 		int result = newsService.insertNews(news);
+		/*
 		if(news.getType()=="이벤트") {
 			result += newsService.insertDiscount(discount);			
-		}
+		}*/
 		
-		return "redirect:/news/list";
+		return "redirect:/news/list?noticeReqPage=1";
 	}
 	
 	@GetMapping(value="/noticeWriteFrm")

@@ -22,10 +22,10 @@
 						<tr>
 							<th>타입선택</th>
 							<td style="width: 30%">
-								<input type="radio" name="type" id="프로모션">
-								<label for="프로모션">프로모션</label>
-								<input type="radio" name="type" id="이벤트">
-								<label for="이벤트">이벤트</label>
+								<input type="radio" name="type" id="promotion" value="프로모션">
+								<label for="promotion">프로모션</label>
+								<input type="radio" name="type" id="event" value="이벤트">
+								<label for="event">이벤트</label>
 							</td>
 							<th style="width: 20%">썸네일 선택하기</th>
 							<td style="width: 30%">
@@ -35,10 +35,10 @@
 						<tr> <!-- 상품 추가되면 추가 작성 : 반복문으로 상품 불러오기-->
 							<th>할인 적용상품</th>
 							<td colspan="3">
-							<label for="1">아메리카노</label>
-							<input type="checkbox" name="productNo" id="1">
-							<label for="2">라떼</label>
-							<input type="checkbox" name="productNo" id="2">
+							<label for="Amricano">아메리카노</label>
+							<input type="checkbox" name="productNo" id="Amricano" value="1">
+							<label for="lattle">라떼</label>
+							<input type="checkbox" name="productNo" id="lattle" value="2">
 							</td>
 						</tr>
 						
@@ -72,14 +72,14 @@
 							<th>이미지 미리보기</th>
 							<td colspan="3">
 								<div>
-									<img id="img-view" width="500px" src="/image/default_img.png">							
+									<img id="img-view" width="500px" src="/img/default_img.png">							
 								</div>
 							</td>
 						</tr>
 						
 						<tr>
 							<td colspan="4">
-							<button class="btn" type="submit">등록하기</button>
+							<button class="btn" id="insert-btn" type="submit">등록하기</button>
 							</td>
 						</tr> 
 					</table>
@@ -99,10 +99,22 @@
 					$("#img-view").attr("src", e.target.result);
 				};
 			} else{
-				$("#img-view").attr("src","image/default_img.png");
+				$("#img-view").attr("src","/img/default_img.png");
 			}
 		}
-	</script> 
+		
+		$("#insert-btn").on("click", function() {
+			var selectList = new Array();
+			$("input:checkbox[name='productNo']:checked").each(function(){
+				selectList.push($(this).val());
+			});
+			alert(selectList);
+			return;
+		}
+	</script>
+	
+	
+		});
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

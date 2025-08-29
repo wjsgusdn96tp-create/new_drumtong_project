@@ -101,7 +101,7 @@ public class NewsService {
 	
 	@Transactional
 	public int insertNews(News news) {
-		int result = newsDao.intsertNews(news);
+		int result = newsDao.insertNews(news);
 		return result;
 	}
 	

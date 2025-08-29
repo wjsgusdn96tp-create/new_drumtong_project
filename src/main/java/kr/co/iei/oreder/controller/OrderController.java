@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.ShopTbl;
+import kr.co.iei.product.vo.Product;
 
 @Controller
 @RequestMapping(value="/order")
@@ -21,23 +22,19 @@ public class OrderController {
 	public String orderMapPage(Model model) {
 		
 		List list = orderService.shopList();
+		
 		model.addAttribute("list", list);
 		
 		return "order/OrderMap";
 	}
 	
-	
-	@GetMapping (value="/product/productList")
-	public String productList() {
+	@GetMapping (value="/Orderoption")
+	public String orderListpage(int productNo,Model model) {
+		Product p = orderService.option(productNo);
 		
-		return "/product/productList";
+		
+		return "order/Orderoption";
 	}
-	
-	@GetMapping (value="/OrderList")
-	public String orderListpage() {
-		
-		
-		return "order/OrderList";
-	}
+
 	
 }
