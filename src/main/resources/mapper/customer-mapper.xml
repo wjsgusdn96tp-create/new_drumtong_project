@@ -7,9 +7,14 @@
 			FROM (
 			    SELECT rownum AS rnum, c.*
 			    FROM (
-			        SELECT customer_category, customer_nickname, customer_title, customer_date
+			        SELECT customer_no, customer_category, customer_nickname, customer_title, customer_date
 			        FROM customer_service_tbl
-			        <choose>
+			        <where>
+			        	<if test="memberGrade != null and memberGrade != '관리자'">
+			        		customer_nickname = #{memberNickname}
+			        	</if>
+			        </where>
+			        <choose>	
 			        	<when test="sort == null">
 			        		ORDER BY customer_no DESC
 			        	</when>
@@ -30,6 +35,11 @@
 	
 	<select id="selectCustomerTotalCount" resultType="int">
 		select count(*) from customer_service_tbl
+		<where>
+	        <if test="memberGrade != null and memberGrade != '관리자'">
+	            customer_nickname = #{memberNickname}
+	        </if>
+    	</where>
 	</select>
 	
 	<select id="selectGjList" resultType="customer">
@@ -37,9 +47,14 @@
 			FROM (
 			    SELECT rownum AS rnum, c.*
 			    FROM (
-			       SELECT customer_category, customer_nickname, customer_title, customer_date
+			       SELECT customer_no, customer_category, customer_nickname, customer_title, customer_date
 			        FROM customer_service_tbl
-			        WHERE customer_category = '칭찬'
+			        <where>
+				        customer_category = '칭찬'
+			        	<if test="memberGrade != null and memberGrade != '관리자'">
+			        		and customer_nickname = #{memberNickname}
+			        	</if>
+			        </where>
 			        <choose>
 			        	<when test="sort == null">
 			        		ORDER BY customer_no DESC
@@ -68,9 +83,14 @@
 			FROM (
 			    SELECT rownum AS rnum, c.*
 			    FROM (
-			       SELECT customer_category, customer_nickname, customer_title, customer_date
+			       SELECT customer_no, customer_category, customer_nickname, customer_title, customer_date
 			        FROM customer_service_tbl
-			        WHERE customer_category = '불만'
+			        <where>
+				        customer_category = '불만'
+			        	<if test="memberGrade != null and memberGrade != '관리자'">
+			        		and customer_nickname = #{memberNickname}
+			        	</if>
+			        </where>
 			        <choose>
 			        	<when test="sort == null">
 			        		ORDER BY customer_no DESC
@@ -99,9 +119,14 @@
 			from (
 				select rownum as rnum, c.* 
 				from (
-					select customer_category, customer_nickname, customer_title, customer_date
+					select customer_no, customer_category, customer_nickname, customer_title, customer_date
 					from customer_service_tbl
-					where customer_category = '의견'
+					<where>
+						customer_category = '의견'
+			        	<if test="memberGrade != null and memberGrade != '관리자'">
+			        		and customer_nickname = #{memberNickname}
+			        	</if>
+			        </where>
 					<choose>
 			        	<when test="sort == null">
 			        		ORDER BY customer_no DESC
@@ -125,5 +150,18 @@
 		select count(*) from customer_service_tbl where customer_category = '의견'
 	</select>
 	
-	
+	<select id="selectOneCustomer" resultType="customer">
+	    select
+	        customer_no,         
+	        customer_nickname, 
+	        customer_category,   
+	        customer_title,      
+	        customer_content,    
+	        customer_date,		
+	        customer_star       
+	    from
+	        customer_service_tbl
+	    where
+	        customer_no = #{customerNo}
+	</select>
 </mapper>

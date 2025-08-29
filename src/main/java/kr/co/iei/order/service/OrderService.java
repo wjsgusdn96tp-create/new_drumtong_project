@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.iei.order.dao.OrderDao;
+import kr.co.iei.product.vo.Product;
 
 @Service
 public class OrderService {
@@ -16,5 +17,12 @@ public class OrderService {
 	public List shopList() {
 		List list  = orderDao.shopList();
 		return list;
+	}
+
+
+	public Product option(int productNo) {
+		Product p = orderDao.option(productNo);
+		
+		return p;
 	}
 }
