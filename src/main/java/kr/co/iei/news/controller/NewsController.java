@@ -59,6 +59,9 @@ public class NewsController {
 		news.setMemberNo(member.getMemberNo());
 		
 		int result = newsService.insertNews(news);
+		
+		List<Integer> productNoList =  news.getProductNoList();
+		System.out.println(productNoList);
 		/*
 		if(news.getType()=="이벤트") {
 			result += newsService.insertDiscount(discount);			
