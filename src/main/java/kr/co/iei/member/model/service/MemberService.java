@@ -29,5 +29,17 @@ public class MemberService {
 		Member member = memberDao.selectOneMember(m);
 		return member;
 	}// selectOneMember
+
+	@Transactional
+	public int updateMember(Member m) {
+		int result = memberDao.updateMember(m);
+		return result;
+	}// updateMember
+
+	@Transactional
+	public int deleteMember(int memberNo) {
+		int result = memberDao.deleteMember(memberNo);
+		return result;
+	}
 	
 }// MemberService Class

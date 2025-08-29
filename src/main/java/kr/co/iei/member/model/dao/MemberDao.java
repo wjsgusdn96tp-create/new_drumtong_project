@@ -11,4 +11,8 @@ public interface MemberDao {
 
 	int insertMember(Member m);
 
+	int updateMember(Member m);
+
+	int deleteMember(int memberNo);
+
 }

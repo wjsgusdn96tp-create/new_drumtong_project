@@ -10,4 +10,12 @@
 	<select id="selectOneMember" resultType="member">
 		select * from member_tbl where member_email = #{memberEmail}
 	</select>
+	
+	<!-- 정보수정 -->
+	<update id="updateMember">
+		update member_tbl set
+			member_nickname = #{memberNickname},
+			member_pw = #{memberPw}
+		where member_email = #{memberEmail}
+	</update>
 </mapper>

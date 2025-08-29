@@ -1,4 +1,4 @@
- :root{
+:root{
 	/*main color */
 	--main1: #FBF8F1;
 	--main2: #F7ECDE;
@@ -283,12 +283,14 @@ table>tbody>tr>td{
     padding-right: 50px
 }
 
-/* join css */
-h1{
-    text-align: center;
-    padding-top: 15px;
-    padding-bottom: 45px;
-    color: #6D2932;
+/* mypage */
+.first-title>h1{
+	color: #6D2932;
+	font-weight: bold;
+	padding-left: 100px;
+}
+h1>#nickname{
+	padding-left: 550px;
 }
 .section{
     width: 550px;
@@ -297,95 +299,4 @@ h1{
     border-radius: 35px;
     background-color: #ECEEDF;
     text-align: center;
-}
-.input-wrap>.input-title{
-    padding-left: 40px;
-    padding-top: 30px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: left;
-}
-.input-item>input{
-    width: 500px;
-    height: 30px;
-    border: #333333 2px solid;
-    margin-left: 20px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: #ECEEDF;
-    font-size: 16px;
-    outline: none;
-    border-radius: 1px;
-}
-#email-item>input{
-	width: 400px;
-}
-.input-wrap>.input-item{
-	overflow: hidden;
-}
-.verificationCode-button-box{
-	float: right;
-	padding-right: 5px;
-}
-.verificationCode-button-box>button{
-    width: 100px;
-    height: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 10px;
-    border: 2px solid #333333;
-}
-.agree-content{
-    width: 450px;
-    margin: 0 auto;
-    overflow: hidden;
-}
-.agree{
-    margin: 25px 0px;
-}
-.agree-explain{
-    width: 90%;
-    margin: 5px auto;
-    height: 200px;
-    overflow-y: auto;
-    font-size: 12px;
-    border: 1px solid#1e1e1e;
-    padding: 10px;
-    box-sizing: border-box;
-}
-.agree-check{
-    width: 90%;
-    margin: 0 auto;
-    text-align: right;
-}
-.agree-check>label{
-	font-weight: bold;
-	font-size: 14px;
-}
-.all-check-box>label{
-	font-weight: bold;
-	font-size: 14px;
-}
-.join-button-box>button{
-    width: 300px;
-    height: 50px;
-    font-size: 22px;
-    font-weight: bold;
-    border-radius: 15px;
-    border: 2px solid #333333;
-}
-.all-check-box{
-    width: 90%;
-    margin: 0 auto;
-    text-align: right;
-    margin-bottom: 20px;
-}
-.last{
-    margin: 20px;
-}
-.last>a{
-    color: #333333;
-    font-size: 14px;
-    border-bottom: 1px solid;
 }
