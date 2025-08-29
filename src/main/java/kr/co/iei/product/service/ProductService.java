@@ -14,50 +14,34 @@ public class ProductService {
 	
 	@Transactional
 	public int productInsertDrink(Product p, String productBestTbl) {
-		int referencesProductNo =0;
+		/*int referencesProductNo =0;*/
 		if(productBestTbl.equals("productBest")) {
-			referencesProductNo ++;
+			/*referencesProductNo ++;*/
 			int result = productDao.productInsertDrink(p);
-			if(result == 1) {
-				int resultBest = productDao.productBestTblInsert(p, referencesProductNo);
+			if(result > 0) {
+				/*p.setProductNo(referencesProductNo);*/
+				String productName= p.getProductName();
+				Product productSearch = productDao.productInsertSearch(productName);
+				int resultBest = productDao.productBestTblInsert(productSearch);
 				if(resultBest > 0) {
-					return 2;
+					return resultBest;/*1*/
 				}else {
-					return 1;
+					int productInsertCancel = productDao.productInsertDelete(p);
+					if(productInsertCancel >0) {
+						return resultBest;/*0*/
+					}else {
+						return 10;/*일반상품등록, 대표상품 등록실패*/
+					}
 				}
-			}return result;/*0*/
-			
+			}else{
+				return result;
+			}
 		}else {
-			referencesProductNo ++;
+			/*referencesProductNo ++;*/
 			int result = productDao.productInsertDrink(p);
 			return result;/*1*/
 		}
-		
-		/*
-		if(productBestTbl.equals("productBest")) {
-			referencesProductNo ++;
-			int result = productDao.productInsertDrink(p);
-			if(result > 0) {
-				int resultBest = productDao.productBestTblInsert(p, referencesProductNo);
-				if(resultBest>0){
-				return result;				
-				}else {
-					return 
-				}
-				/*else {
-				if(result > 0) {
-					/*productBest 등록 x
-					return -1;
-				}else {
-					/*product 등록 x
-					return -2;
-				}
-			}
-		}else{
-			referencesProductNo ++;
-			int result = productDao.productInsertDrink(p);
-			return result;
-		}*/
-		
 	}
+	
+	
 }

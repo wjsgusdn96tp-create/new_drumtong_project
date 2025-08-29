@@ -9,6 +9,10 @@ public interface ProductDao {
 
 	int productInsertDrink(Product p);
 
-	int productBestTblInsert(Product p, int referencesProductNo);
+	Product productInsertSearch(String productName);
+
+	int productBestTblInsert(Product p);
+
+	int productInsertDelete(Product p);
 
 }

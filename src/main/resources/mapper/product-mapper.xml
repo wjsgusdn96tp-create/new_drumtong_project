@@ -17,7 +17,17 @@
   								#{productContentProtein},
   								#{productImg})
   </insert>
+  
+  <select id="productInsertSearch" resultType="product">
+  	select * from product_tbl where product_name=#{productName}
+  </select>
+  
   <insert id="productBestTblInsert">
-  	insert into product_best_tbl values(product_best_seq, #{referencesProductNo}, #{productName})
+  	insert into product_best_tbl values(product_best_seq.nextval, #{productNo}, #{productName})
   </insert>
+  
+  <delete id="productInsertDelete">
+  	delete from product_tbl where product_name=#{productName}
+  </delete>
+  
 </mapper>

@@ -28,6 +28,7 @@ public class ProductController {
 	
 	@GetMapping(value="/productList")
 	public String ProductList() {
+		
 		return "/product/productList";
 	}
 	@GetMapping(value="/productInsertFrm")
@@ -76,15 +77,15 @@ public class ProductController {
 			model.addAttribute("icon", "info");
 			model.addAttribute("loc", "/product/productInsertFrm" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
-		}else if(result == 1) {
-			model.addAttribute("title", "상품 등록!!");
-			model.addAttribute("text", "일반 상품으로 등록되었습니다.");
-			model.addAttribute("icon", "success");
+		}else if(result == 10) {
+			model.addAttribute("title", "대표 상품 등록 실패(일반 상품으로 등록)!!!");
+			model.addAttribute("text", "대표 상품으로 등록 원할 시 [1.상품 수정 2.삭제 후 재등록] 진행 해주세요.");
+			model.addAttribute("icon", "info");
 			model.addAttribute("loc", "/product/productList" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
-		}else if(result == 2) {
-			model.addAttribute("title", "상품 등록!!");
-			model.addAttribute("text", "대표상품으로 등록되었습니다.");
+		}else if(result == 1) {
+			model.addAttribute("title", "상품 등록 성공!!");
+			model.addAttribute("text", "상품 등록 성공 했습니다.");
 			model.addAttribute("icon", "success");
 			model.addAttribute("loc", "/product/productList" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
