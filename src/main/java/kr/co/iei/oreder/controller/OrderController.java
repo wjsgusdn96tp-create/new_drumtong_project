@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.DetailsTbl;
+//import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.ShopTbl;
 import kr.co.iei.product.vo.Product;
 
@@ -35,13 +36,6 @@ public class OrderController {
 		Product p = orderService.option(productNo);
 		
 		model.addAttribute("p", p);
-		
-		DetailsTbl dtl = new DetailsTbl();
-		
-		
-		
-		
-
 		
 		return "order/Orderoption";
 	}
