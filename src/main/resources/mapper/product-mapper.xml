@@ -14,7 +14,7 @@
   								#{productContentShot},
   								#{productContentSugar},
   								#{productContentNatrium},
-  								#{productContentCarbs},
+  								#{productContentProtein},
   								#{productImg})
   </insert>
   <insert id="productBestTblInsert">
