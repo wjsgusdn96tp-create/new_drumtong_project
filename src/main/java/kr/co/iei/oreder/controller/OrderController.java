@@ -37,18 +37,6 @@ public class OrderController {
 		
 		model.addAttribute("p", p);
 		
-		DetailsTbl dtl = new DetailsTbl();
-		
-		dtl.setCount(1);
-		dtl.setCupChoice("개인");
-		dtl.setCupSize("L");
-		dtl.setCupShot(0);
-		dtl.setCupCream(0);
-		dtl.setHeat(0);
-		
-		model.addAttribute("dtl", dtl);
-
-		
 		return "order/Orderoption";
 	}
 
