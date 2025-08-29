@@ -15,12 +15,12 @@
     <div class="order-option-header">옵션선택</div>
 
 	<div class="order-option-main-box">
-	    <div class="order-option-image-box"><img src="img/로고 (1) 1.svg" alt=""></div>
+	    <div class="order-option-image-box"><img src="/" ></div>
 	
 	    <div class="order-option-option-box">
 	    
 	        <div class="order-option-top">
-	            <div class="order-option-name">민트초코 오레오 프라페(ICE)</div>
+	            <div class="order-option-name" th:text=${p.productName}></div>
 	        </div>
 	
 	            <div class="order-option-quantity-box">
@@ -29,7 +29,8 @@
 	                    <span class="order-option-count">1</span>
 	                    <button class="button-plus1"><span class="material-icons">add_circle_outline</span></button>
 	                </div>
-	                <div class="order-option-price">5,000원</div>
+	                <div class="order-option-price" th:text=${p.productPrice}></div>
+	                	                <div>원</div>
 	            </div>
 	            
 	    <div class="order-option-section">
@@ -68,9 +69,8 @@
 	
 	        <div class="order-option-totalbox">
 	            <div class="order-option-totalname">결제금액</div>
-	            <div class="order-option-totalprice">5,000
-	                <span>원</span>
-	            </div>
+	            <div class="order-option-totalprice" th:text=${p.productPrice}></div>
+	                <div>원</div>
 	        </div>
 	    </div>
 	</div>
@@ -85,6 +85,7 @@
 	</div>
 <script th:inline="javascript">
 		
+		
 		const btn = $(".order-option-cupbtn");
 	    
 		$(".order-option-cupbtn").on("click",function(){
@@ -97,20 +98,33 @@
 			}
 
 			});
-		
-
-		
+			
+			const optionPrice = $(".order-option-price").text();
+			const totalPayPrice = $(".order-option-totalprice").text();
+			const shotPay =  400;
+			const creamPay = 500;
+			
+			
 		//지정한 클래스명을 눌렀을때 동작
+			
+		
 		$(".button-plus1").on("click",function(){
 			//지정한 클래스명의 태그 안의 문자열값을 대입
 			const optionCount = $(".order-option-count").text();
 			
+            const newtotalPay = $(".order-option-totalprice").text();
 			//태그 안의 텍스트 값을 숫자로 변형
 			const plusCount = Number(optionCount)+1;
-		
-			//태그 안의 문자열갚에 플러스한 값을 대입
+			const totalPrice = optionPrice * plusCount;
+			const payPrice = newtotalPay * plusCount;
+			
+			//태그 안의 문자열값에 플러스한 값을 대입
 			$(".order-option-count").text(plusCount);
+			$(".order-option-price").text(totalPrice);
+			$(".order-option-totalprice").text(payPrice);
+			
 		});
+		
 		$(".button-minus1").on("click",function(){
 			const optionCount = $(".order-option-count").text();
 			
@@ -118,10 +132,17 @@
 				return;
 			}
 			const minusCount = Number(optionCount)-1;
+			const totalPrice = optionPrice * minusCount;
+			const payPrice = totalPayPrice * minusCount;
+			
+			
 			
 			$(".order-option-count").text(minusCount);
+			$(".order-option-price").text(totalPrice);
+			$(".order-option-totalprice").text(payPrice);
 		});
 		
+
 		$(".button-plus2").on("click",function(){
 			const shotCount = $(".order-option-shotcount").text();
 			if(shotCount == 3){
@@ -129,8 +150,15 @@
 			}
 			
 			const plusCount = Number(shotCount)+1;
+			const shotTotal = plusCount * shotPay;
 			
 			$(".order-option-shotcount").text(plusCount);
+			
+			const total =  Number(totalPayPrice)+Number(shotTotal);
+			
+			
+			$(".order-option-totalprice").text(total);
+			
 		});
 		
 		$(".button-minus2").on("click",function(){
@@ -138,8 +166,15 @@
 			if(shotCount == 0){
 				return;
 			}
+			
 			const minusCount = Number(shotCount)-1;
-			$(".order-option-shotcount").text(minstCount);
+			const shotTotal = minusCount * shotPay;
+			
+			$(".order-option-shotcount").text(minusCount);
+			
+			const total =  Number(totalPayPrice)+Number(shotTotal);
+			
+			$(".order-option-totalprice").text(total);
 		});
 		
 		
@@ -151,8 +186,11 @@
 			}
 			
 			const plusCount = Number(creamCount)+1;
+			const creamTotal = plusCount * creamPay;
 			
 			$(".order-option-creamcount").text(plusCount);
+			$(".order-option-totalprice").text(creamTotal);
+			
 		});
 		
 		$(".button-minus3").on("click",function(){
@@ -162,8 +200,10 @@
 				return;
 			}
 			const minusCount = Number(creamCount)-1;
+			const creamTotal = minusCount * creamPay;
 			
 			$(".order-option-creamcount").text(minusCount);
+			$(".order-option-totalprice").text(creamTotal);
 		});
 		
 		

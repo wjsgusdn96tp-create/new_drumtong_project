@@ -90,6 +90,7 @@ button {
 }
 .order-option-price {
     font-weight: bold;
+    padding-left: 180px
 }
 .order-option-quantity {
     display: flex;
@@ -140,7 +141,9 @@ button {
     padding-left: 10px;
     font-weight: bold;
 }
-
+.order-option-totalprice {
+	padding-left: 200px
+}
 
 .material-icons:active {
     color: var(--main4);
