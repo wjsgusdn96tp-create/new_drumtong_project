@@ -22,12 +22,12 @@
 		</div>
 		
 	
-		<form action="#" method="#">
+		<form action="/product/productInsertDrink?productTitle=drink" method="post" enctype="multipart/form-data">
 			<div class="productInsert_content_wrap">
 				<div class="content_wrap content_name">
 					<div class="productInsert_title name_title">상품명</div>
 					<div class="productInsert_title_content name_content_wrap">
-						<input type="text" name="productName" class="name_content">
+						<input type="text" name="productName" id="productName" class="name_content">
 					</div>
 				</div>
 				<div class="content_wrap content_category">
@@ -43,11 +43,11 @@
 						<div class="category_drink_radio">	
 							<div class="drink_title">
 								<span>아이스 :</span>
-								<input type="radio" name="productTitleDetail" class="product_drink_radio" value="" id="iceCoffe">
+								<input type="radio" name="productTitleDetail" class="product_drink_radio" value="iceCoffe" id="iceCoffe">
 								<label for="iceCoffe">커피</label>
-								<input type="radio" name="productTitleDetail" class="product_drink_radio" value="차" id="iceTea">
+								<input type="radio" name="productTitleDetail" class="product_drink_radio" value="iceTea" id="iceTea">
 								<label for="iceTea">차</label>
-								<input type="radio" name="productTitleDetail" class="product_drink_radio" value="productTitleDetail" id="iceOtherDrink">
+								<input type="radio" name="productTitleDetail" class="product_drink_radio" value="iceOtherDrink" id="iceOtherDrink">
 								<label for="iceOtherDrink">그 외 제조음료</label>
 							</div>
 							<div class="div">/</div>
@@ -66,7 +66,7 @@
 						<div class="productInsert_title img_insert">이미지 등록</div>
 						<div class="productInsert_title img_insert_choice">
 						<!-- <input type="file" name="imageFile" accept="image/*" onchange="loadImg(this);"><!-- (추가메모)accept="image/*" 이미지 말고 다른 파일 선택 불가 --> 
-							<input type="file" name="productImg" accept="image/*" onchange="loadImg(this);">
+							<input type="file" name="imageFile" accept="image/*" onchange="loadImg(this);">
 						</div>
 					</div>
 					<div class="img_show_wrap">
@@ -103,7 +103,7 @@
 								<input type="text" name="productContentNatrium" id="natrium">
 							</li>
 							<li>
-								<label for="carbs">탄수화물(g) : </label> 
+								<label for="carbs">단백질(g) : </label> 
 								<input type="text" name="productContentCarbs" id="carbs">
 							</li>  
 							
@@ -113,9 +113,11 @@
 				</div>
 			</div>
 			
+				<button class="btn insert_btn" type="submit">등록</button>
 		</form>
 		<div class="insert_btn_wrap">
-			<button class="btn insert_btn" type="submit">등록</button>
+			<form action="/product/productInsertDrink" method="post" enctype="multipart/form-data">
+			</form>
 			<button class="btn no_btn"><a href="/product/productList">취소</a></button>
 		
 		</div>
@@ -123,6 +125,7 @@
 	</div>
 	
 	<script>
+	console.log(Product);
 		function loadImg(obj){
 			//매개변수로 받은 obj는 input type="file" 인 요소
 			//해당 객체에 files라는 속성에 접근하면 첨부파일 정보를 볼 수 있음
@@ -146,5 +149,7 @@
 			}
 		}
 	</script>
+	
+	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

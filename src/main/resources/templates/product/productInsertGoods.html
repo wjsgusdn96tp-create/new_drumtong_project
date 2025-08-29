@@ -27,7 +27,7 @@
 				<div class="content_wrap content_name">
 					<div class="productInsert_title name_title">상품명</div>
 					<div class="productInsert_title_content name_content_wrap">
-						<input type="text" name="productName" class="name_content">
+						<input type="text" name="productName" id="productName" class="name_content">
 					</div>
 				</div>
 				<!--
@@ -68,7 +68,7 @@
 						<div class="productInsert_title img_insert">이미지 등록</div>
 						<div class="productInsert_title img_insert_choice">
 						<!-- <input type="file" name="imageFile" accept="image/*" onchange="loadImg(this);"><!-- (추가메모)accept="image/*" 이미지 말고 다른 파일 선택 불가 --> 
-							<input type="file" name="productImg" accept="image/*" onchange="loadImg(this);">
+							<input type="file" name="imageFile" accept="image/*" onchange="loadImg(this);">
 						</div>
 					</div>
 					<div class="img_show_wrap">
@@ -107,6 +107,7 @@
 	</div>		
 	</div>
 	
+	
 		<script>
 		function loadImg(obj){
 			//매개변수로 받은 obj는 input type="file" 인 요소
@@ -131,6 +132,6 @@
 			}
 		}
 	</script>
-	
+	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
