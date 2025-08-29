@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.co.iei.order.dao.OrderDao">
 	
-	<select id="shopList" resultType="order">
+	<select id="shopList" resultType="shop">
 		select * from shop_tbl
 	</select>
 	
 	<select id="option" >
-		select product_img,product_name from product_tbl where product_no = #{productNo}
+		select product_img,product_name,product_price from product_tbl where product_no = #{productNo}
 	</select>
 	
 </mapper>

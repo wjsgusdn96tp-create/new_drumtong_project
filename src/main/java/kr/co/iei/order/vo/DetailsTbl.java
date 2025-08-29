@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Alias(value = "order")
+@Alias(value = "details")
 public class DetailsTbl {
 	private int detailsNo;
 	private String cupChoice;

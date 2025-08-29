@@ -44,7 +44,7 @@ public class ApiController {
     @PostMapping("/verifyCode")
     public String verifyCode(@RequestParam String code, HttpSession session) {
         String savedCode = (String) session.getAttribute("verificationCode");
-
+        session.setAttribute("emailVerified", true); // 세션에 emailVerified 값을 넣기위해
         if (savedCode != null && savedCode.equals(code)) {
             session.setAttribute("isVerified", true); // 인증 성공 플래그
             return "인증 성공";  // AJAX가 바로 받는 메시지
