@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.DetailsTbl;
+//import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.ShopTbl;
 import kr.co.iei.product.vo.Product;
 
@@ -38,9 +39,14 @@ public class OrderController {
 		
 		DetailsTbl dtl = new DetailsTbl();
 		
+		dtl.setCount(1);
+		dtl.setCupChoice("개인");
+		dtl.setCupSize("L");
+		dtl.setCupShot(0);
+		dtl.setCupCream(0);
+		dtl.setHeat(0);
 		
-		
-		
+		model.addAttribute("dtl", dtl);
 
 		
 		return "order/Orderoption";
