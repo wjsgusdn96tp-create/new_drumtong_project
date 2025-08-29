@@ -22,7 +22,7 @@ public class Product {
 	private int productContentShot;
 	private int productContentSugar;
 	private int productContentNatrium;
-	private int productContentCarbs;
+	private int productContentProtein;
 	private String productImg;  
 	//좋아요 기능 관련
 	/*
