@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.iei.customer.vo.Customer;
+import kr.co.iei.customer.vo.CustomerServiceFile;
 
 @Mapper
 public interface CustomerDao {
@@ -21,5 +22,12 @@ public interface CustomerDao {
 
 	List selectOpinionList(HashMap<String, Object> param);
 	int selectOpinionTotalCount(HashMap<String, Object> param);
+	
 	Customer selectOneCustomer(int customerNo);
+	
+	int insertCustomer(Customer customer);
+	
+	int getCustomerNo();
+	
+	int insertCustomerFile(CustomerServiceFile customerServiceFile);
 }

@@ -164,4 +164,18 @@
 	    where
 	        customer_no = #{customerNo}
 	</select>
+
+	<insert id="insertCustomer">
+		insert into customer_service_tbl 
+			values(#{customerNo}, #{customerNickname}, #{customerCategory}, #{customerTitle}, #{customerContent}, to_char(sysdate, 'yyyy-mm-dd'), #{customerStar})
+	</insert>
+	
+	<select id="getCustomerNo" resultType="int">
+		select customer_service_seq.nextval from dual
+	</select>
+	
+	<insert id="insertCustomerFile">
+		insert into customer_service_file
+		values(customer_service_file_seq.nextval, #{customerNo}, #{fileName}, #{filePath})
+	</insert>
 </mapper>

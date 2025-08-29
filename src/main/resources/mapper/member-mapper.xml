@@ -3,7 +3,7 @@
 <mapper namespace="kr.co.iei.member.model.dao.MemberDao">
 	<!-- 회원가입 -->
 	<insert id="insertMember">
-		insert into member_tbl values(member_seq.nextval, #{memberEmail}, #{memberNicname}, #{memberPw}, '회원')
+		insert into member_tbl values(member_seq.nextval, #{memberEmail}, #{memberNickname}, #{memberPw}, '회원')
 	</insert>
 	
 	<!-- 로그인 -->

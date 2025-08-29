@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.customer.dao.CustomerDao;
 import kr.co.iei.customer.vo.Customer;
 import kr.co.iei.customer.vo.CustomerListData;
 import kr.co.iei.customer.vo.CustomerNavi;
+import kr.co.iei.customer.vo.CustomerServiceFile;
 import kr.co.iei.member.model.vo.Member;
 
 
@@ -173,11 +175,33 @@ public class CustomerService {
 	    CustomerListData cld = new CustomerListData(list, customerNavi);
 		return cld;
 	}
-
+	
 	public Customer selectOneCustomer(int customerNo) {
 		Customer c = customerDao.selectOneCustomer(customerNo);
-		System.out.println(c);
+		
 		return c;
 	}
 	
+	@Transactional
+	public int insertCustomer(Customer customer, List<CustomerServiceFile> fileList) {
+		int newCustomerNo = customerDao.getCustomerNo();
+		customer.setCustomerNo(newCustomerNo);
+		int result = customerDao.insertCustomer(customer);
+		for(CustomerServiceFile customerServiceFile : fileList) {
+			customerServiceFile.setCustomerNo(newCustomerNo);
+			result += customerDao.insertCustomerFile(customerServiceFile);
+		}
+		return result;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
