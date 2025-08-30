@@ -79,6 +79,8 @@
 
 	<div class="order-option-footer">
 	    <a href="/product/productList" class="order-listpage">메뉴목록</a>
+	    
+	    
 	    <button class="order-cartadd">장바구니담기</button>
 	    
 	    <form action="/order/Orderoption">
@@ -94,6 +96,20 @@
 	const totalPayPrice = $(".order-option-totalprice").text();
 	const optionPrice = $(".order-option-price").text();
 	const sizePrice = 2000;
+	
+	
+	
+	$(".order-cartadd").on("click",function(){
+		const productName = $(".order-option-name").text();
+		const productCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
+		const cupType = $(".order-option-cupbtn").text();
+		const totalPrice = $(".order-option-totalprice").text();
+		
+		
+	});
+	
 	
 	
 	$(".order-option-sizebtn").on("click",function(){
