@@ -133,4 +133,20 @@ public class NewsService {
 		return result;
 	}
 	
+	@Transactional
+	public int likepush(News news, int memberNo) {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("newsNo", news.getNewsNo());
+		param.put("memberNo", memberNo);
+		/*
+		if(news.getIsLike() ==0) {
+			int result = newsDao.insertNewsLike(param);
+		} else {
+			int result = newsDao.deleteNewsLike(param);
+ 		}
+		int likeCount = newsDao.selectNewsLikeCount(news.getNewsNo());
+		*/
+		return 1;
+	}
+	
 }

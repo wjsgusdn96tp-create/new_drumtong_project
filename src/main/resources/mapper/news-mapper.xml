@@ -34,14 +34,27 @@
   </insert>
 
 	<select id="selectAllNews"  resultType="news">
-		select * 
-			from (select rownum as rnum, n.* 
-				from (select *
-						from news order by news_no desc)n) 
-		where rnum between #{start} and #{end}
+		select * from (
+  select * from (
+    select rownum as rnum, n.* from(select * from news order by news_no desc)n) 
+		where rnum between#{start} and #{end}) full join (select * from (select member_no, news_no from news_like group by (member_no, news_no)) join 
+	(select news_no, count(*) as "LIKE_COUNT" from news_like group by news_no)
+	using(news_no)) using(news_no)
 	</select>
 	
 	<insert id="insertNotice">
 		insert into notice values(notice_seq.nextval, #{memberNo}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'))
 	</insert>
+	
+	<insert id="insertNewsLike">
+		insert into news_like values(#{memberNo}, #{newsNo})
+	</insert>
+	
+	<delete id="deleteNewsLike">
+		delete from news_like where member_no = #{memberNo} and news_no = #{newsNo}
+	</delete>
+	
+	<select id="selectNewsLikeCount" resultType="int">
+		select count(*) from news_like 		
+	</select>
 </mapper>

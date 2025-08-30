@@ -28,5 +28,11 @@ public interface NewsDao {
 
 	int insertNotice(Notice notice);
 
+	int insertNewsLike(HashMap<String, Object> param);
+
+	int deleteNewsLike(HashMap<String, Object> param);
+
+	int selectNewsLikeCount(int newsNo);
+
 
 }

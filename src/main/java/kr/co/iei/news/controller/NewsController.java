@@ -52,10 +52,11 @@ public class NewsController {
 	}
 	@PostMapping(value="write") //뉴스 등록하기 누르면 호출
 	public String writeNews(News news, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
+		int memberNo = member == null ? 0 : member.getMemberNo();
 		String savepath = root+"/news/";
 		String filepath = fileUtil.upload(savepath, newsImageFile);
 		news.setImage(filepath);
-		news.setMemberNo(member.getMemberNo());
+		news.setMemberNo(memberNo);
 		
 		int result = newsService.insertNews(news);
 			
@@ -69,7 +70,8 @@ public class NewsController {
 	
 	@GetMapping(value="/noticeWrite")
 	public String noticeWrite(Notice notice, @SessionAttribute(required = false) Member member) {
-		notice.setMemberNo(member.getMemberNo());
+		int memberNo = member == null ? 0 : member.getMemberNo();
+		notice.setMemberNo(memberNo);
 		int result = newsService.insertNotice(notice);
 		return "redirect:/news/list?noticeReqPage=1";
 	}
@@ -98,11 +100,20 @@ public class NewsController {
 	@ResponseBody
 	@GetMapping(value="/more")
 	public List more(int start, int amount) {
+		
 		List newsList = newsService.selectAllNews(start, amount);
-
+		System.out.println(newsList);
 		return newsList;
 	}
 	
+	@ResponseBody
+	@PostMapping(value="/likepush")
+	public int likepush(News news, @SessionAttribute Member member) {
+		int memberNo = member.getMemberNo();
+		int result = newsService.likepush(news, memberNo);
+		System.out.println(result);
+		return result;
+	}
 	
 }
 

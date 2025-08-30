@@ -6,7 +6,15 @@
 <script src="/DrumtongJs/news.js"></script>
 <link rel="stylesheet" href="/DrumtongCss/news.css">
 <style>
-
+	.item-img-div{
+		overflow: hidden;
+	}
+	.text-warp{
+		margin-top: 10px;
+	}
+	.news-list{
+		overflow: hidden;
+	}
 </style>
 </head>
 <body>
@@ -48,29 +56,30 @@
 		
 		
 		
-		
-		<div class="notice-list close">
-			<table border=1>
-				<tr>
-					<th style="width:10%">번호</th>
-					<th style="width:50%">글 제목</th>
-					<th style="width:15%">작성일</th>
-					<th style="width:10%">조회수</th>
-					<th>수정</th> <!-- 관리자만 노출 -->
-					<th>삭제</th> <!-- 관리자만 노출 -->
-					
-				</tr>
-				<tr th:each="notice : ${notice}">
-					<td th:text="${notice.noticeNo}"></td>
-					<td> <a th:href="@{/news/noticeView(noticeNo=${notice.noticeNo})}" th:text="${notice.title}"></a></td>
-					<td th:text="${notice.writeDate}"></td>
-					<td>999</td>
-					<td><button>수정</button></td> <!-- 관리자만 노출 -->
-					<td><button>삭제</button></td> <!-- 관리자만 노출 -->
-				</tr>
-			</table>
+		<div class="notice_wrap close">
+			<div class="notice-list">
+				<table border=1>
+					<tr>
+						<th style="width:10%">번호</th>
+						<th style="width:50%">글 제목</th>
+						<th style="width:15%">작성일</th>
+						<th style="width:10%">조회수</th>
+						<th>수정</th> <!-- 관리자만 노출 -->
+						<th>삭제</th> <!-- 관리자만 노출 -->
+						
+					</tr>
+					<tr th:each="notice : ${notice}">
+						<td th:text="${notice.noticeNo}"></td>
+						<td> <a th:href="@{/news/noticeView(noticeNo=${notice.noticeNo})}" th:text="${notice.title}"></a></td>
+						<td th:text="${notice.writeDate}"></td>
+						<td>999</td>
+						<td><button>수정</button></td> <!-- 관리자만 노출 -->
+						<td><button>삭제</button></td> <!-- 관리자만 노출 -->
+					</tr>
+				</table>
+			</div>
+			<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 		</div>
-		<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 	</div>
 	<th:block th:include="common/footer"></th:block>
 	
@@ -123,6 +132,8 @@
 						const li = $("<li>");
 						li.addClass("news-item");
 						
+						
+						
 						const imgDiv = $("<div>");
 						imgDiv.addClass("item-img-div");
 						const img = $("<img>");
@@ -136,7 +147,7 @@
 						titleDiv.addClass("news-title");
 						const typeSpan = $("<span>");
 						typeSpan.addClass("type");
-						typeSpan.text(n.type);
+						typeSpan.text("["+n.type+"] ");
 						const titleSpan = $("<span>");
 						titleSpan.text(n.title);
 						titleDiv.append(typeSpan).append(titleSpan);
@@ -157,11 +168,14 @@
 						const likeSpan = $("<span>");
 						likeSpan.addClass("like");
 						const likeCountSpan = $("<span>");
-						likeCountSpan.text("99"); // 나중에 수정
-						const likeIconSpan = $("<span>");
-						likeIconSpan.addClass("material-icons").text("favorite_border");
-						likeSpan.append(likeCountSpan).append(likeIconSpan);
+						likeCountSpan.text(n.likeCount);
 						
+						const likeIconSpan = $("<span>");
+						likeIconSpan.addClass("material-icons").addClass("likeBtn").text("favorite_border");
+						likeIconSpan.addClass("material-icons").addClass("likeBtn").text("favorite");
+						const newsNo = $("<span>");
+						newsNo.text(n.newsNo).addClass("close");
+						likeSpan.append(likeIconSpan).append(newsNo).append(likeCountSpan);
 						smallDiv.append(dateSpan).append(likeSpan);
 						
 						const discountDiv = $("<div>");
@@ -171,7 +185,6 @@
 						discountBtn.attr("href","/news/discountWriteFrm?title="+n.title+"&newsNo="+n.newsNo);
 						const discountUpdate = $("<a>");
 						discountUpdate.addClass("discountUpdate").addClass("btn");
-						
 						discountUpdate.text("할인 수정하기");
 						discountDiv.append(discountBtn).append(discountUpdate);
 						
@@ -197,8 +210,34 @@
 				}
 			})
 		});
-
 		
+		
+		$(document).on("click",".likeBtn",function(){
+			const currentText = $(this).text();
+			const isLike = (currentText === "favorite")?1:0;
+			const newsNo =$(this).next().text();
+
+			$.ajax({
+				url : "/news/likepush",
+				data : {newsNo : newsNo, isLike : isLike},
+				type : "post",
+				success : function(data){
+					if(isLike === 0) {
+						$(this).text("favorite");
+					} else {
+						$(this).text("favorite_border");						
+					}
+					$(this).next().text(data);
+				}
+			})
+			
+		});
+	
+
+	$(".second-tab>li").on("click", function(){
+		$(".notice_wrap").removeClass("close");
+		$(".news-list").addClass("close");
+	});
 		
 	</script>
 </body>
