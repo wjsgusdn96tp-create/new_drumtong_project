@@ -102,7 +102,6 @@ public class NewsController {
 	public List more(int start, int amount) {
 		
 		List newsList = newsService.selectAllNews(start, amount);
-		System.out.println(newsList);
 		return newsList;
 	}
 	
