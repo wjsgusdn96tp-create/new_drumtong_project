@@ -79,140 +79,231 @@
 
 	<div class="order-option-footer">
 	    <a href="/product/productList" class="order-listpage">메뉴목록</a>
-	    <button class="order-reset">옵션초기화</button>
-	    
 	    <button class="order-cartadd">장바구니담기</button>
-	</div>
-<script th:inline="javascript">
-		
-		
-		const btn = $(".order-option-cupbtn");
 	    
-		$(".order-option-cupbtn").on("click",function(){
-			
-			const solo = $(this);
-			
-			if(solo == "개인"){
-				
-				btn.css("border","5px solid red");
-			}
-
-			});
-			
-			const optionPrice = $(".order-option-price").text();
-			const totalPayPrice = $(".order-option-totalprice").text();
-			const shotPay =  400;
-			const creamPay = 500;
-			
-			
-		//지정한 클래스명을 눌렀을때 동작
-			
+	    <form action="/order/Orderoption">
+	    	<input type="hidden" value=${p.productNo} name="productNo">
+	    	<button type="submit" class="order-reset">옵션초기화</button>
+	    </form>
+	    
+	</div>
+	
+<script th:inline="javascript">
+	const shotPay =  400;
+	const creamPay = 500;
+	const totalPayPrice = $(".order-option-totalprice").text();
+	const optionPrice = $(".order-option-price").text();
+	const sizePrice = 2000;
+	
+	
+	$(".order-option-sizebtn").on("click",function(){
 		
-		$(".button-plus1").on("click",function(){
-			//지정한 클래스명의 태그 안의 문자열값을 대입
-			const optionCount = $(".order-option-count").text();
-			
-            const newtotalPay = $(".order-option-totalprice").text();
+		const shop = $(this).text();	
+		console.log(shop);
+		$(".order-option-sizebtn").css("border","1px solid black");
+		$(this).css("border","3px solid green");
+		
+		const optionCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
+		let plusCount = 0;
+		
+		if(shop=="XL") {
+			plusCount = 1;
+		} 
+			// 마지막 결제 금액
+	        // const newtotalPay = $(".order-option-totalprice").text();
 			//태그 안의 텍스트 값을 숫자로 변형
-			const plusCount = Number(optionCount)+1;
-			const totalPrice = optionPrice * plusCount;
-			const payPrice = newtotalPay * plusCount;
 			
+		const sizeTotal = sizePrice * plusCount;
+		const totalPrice = optionPrice * optionCount
+		const shotTotal = shotCount * shotPay;
+		const creamTotal = creamCount * creamPay;
+					
+		const payPrice = totalPrice + shotTotal + creamTotal + sizeTotal;
+					
 			//태그 안의 문자열값에 플러스한 값을 대입
-			$(".order-option-count").text(plusCount);
 			$(".order-option-price").text(totalPrice);
 			$(".order-option-totalprice").text(payPrice);
-			
-		});
 		
-		$(".button-minus1").on("click",function(){
-			const optionCount = $(".order-option-count").text();
-			
-			if(optionCount == 1){
-				return;
-			}
-			const minusCount = Number(optionCount)-1;
-			const totalPrice = optionPrice * minusCount;
-			const payPrice = totalPayPrice * minusCount;
-			
-			
-			
-			$(".order-option-count").text(minusCount);
-			$(".order-option-price").text(totalPrice);
-			$(".order-option-totalprice").text(payPrice);
-		});
 		
+		
+		
+	});
+	
+	
+	
+	
+	//지정한 클래스명을 눌렀을때 동작		
+	$(".button-plus1").on("click",function(){
+		//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
+		const optionCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
+		
+		// 마지막 결제 금액
+        // const newtotalPay = $(".order-option-totalprice").text();
+		//태그 안의 텍스트 값을 숫자로 변형
+		const plusCount = Number(optionCount)+1;
+		
+		const totalPrice = optionPrice * plusCount;
+		const shotTotal = shotCount * shotPay;
+		const creamTotal = creamCount * creamPay;
+				
+		const payPrice = totalPrice+shotTotal+creamTotal;
+				
+		//태그 안의 문자열값에 플러스한 값을 대입
+		$(".order-option-count").text(plusCount);
+		$(".order-option-price").text(totalPrice);
+		$(".order-option-totalprice").text(payPrice);
+			
+	});
+	
+	$(".button-plus2").on("click", function(){
+		//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
+		const optionCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
+		
+		
+		// 마지막 결제 금액
+        // const newtotalPay = $(".order-option-totalprice").text();
+		//태그 안의 텍스트 값을 숫자로 변형
+		const plusCount = Number(shotCount)+1;
+		
+		if(shotCount == 3){
+			return;
+		}
+		
+		const totalPrice = optionPrice * optionCount;
+		const shotTotal = plusCount * shotPay;
+		const creamTotal = creamCount * creamPay;
+				
+		const payPrice = totalPrice+shotTotal+creamTotal;
+				
+		//태그 안의 문자열값에 플러스한 값을 대입
+		$(".order-option-shotcount").text(plusCount);
+		$(".order-option-price").text(totalPrice);
+		$(".order-option-totalprice").text(payPrice);
+			
+	});
+	
+	$(".button-plus3").on("click",function(){
+		//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
+		const optionCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
+		
+		const plusCount = Number(creamCount)+1;
+		
+		if(creamCount == 2){
+			return;	
+		}
+	
+		const totalPrice = optionPrice *optionCount;
+		const shotTotal = shotCount * shotPay;
+		const creamTotal = plusCount * creamPay;
+				
+		const payPrice = totalPrice + shotTotal + creamTotal;
+				
+		//태그 안의 문자열값에 플러스한 값을 대입
+		$(".order-option-creamcount").text(plusCount);
+		$(".order-option-price").text(totalPrice);
+		$(".order-option-totalprice").text(payPrice);
+			
+	});
+		
+		
+	$(".button-minus1").on("click",function(){
+		const optionCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
+		
+		const minusCount = Number(optionCount)-1;
+		
+		if(optionCount == 1 ){
+			return;
+		}
+		
+		
+		const totalPrice = optionPrice * minusCount;
+		const shotTotal = shotCount * shotPay;
+		const creamTotal = creamCount * creamPay;
+				
+		const payPrice = totalPrice+shotTotal+creamTotal;
+				
+		$(".order-option-count").text(minusCount);
+		$(".order-option-price").text(totalPrice);
+		$(".order-option-totalprice").text(payPrice);
+			
+	});
+			
 
-		$(".button-plus2").on("click",function(){
-			const shotCount = $(".order-option-shotcount").text();
-			if(shotCount == 3){
-				return;
-			}
-			
-			const plusCount = Number(shotCount)+1;
-			const shotTotal = plusCount * shotPay;
-			
-			$(".order-option-shotcount").text(plusCount);
-			
-			const total =  Number(totalPayPrice)+Number(shotTotal);
-			
-			
-			$(".order-option-totalprice").text(total);
-			
-		});
-		
-		$(".button-minus2").on("click",function(){
-			const shotCount = $(".order-option-shotcount").text();
-			if(shotCount == 0){
-				return;
-			}
-			
-			const minusCount = Number(shotCount)-1;
-			const shotTotal = minusCount * shotPay;
-			
-			$(".order-option-shotcount").text(minusCount);
-			
-			const total =  Number(totalPayPrice)+Number(shotTotal);
-			
-			$(".order-option-totalprice").text(total);
-		});
+	
+	$(".button-minus2").on("click", function(){
+		//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
+		const optionCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
 		
 		
-		$(".button-plus3").on("click",function(){
-			const creamCount = $(".order-option-creamcount").text();
+		// 마지막 결제 금액
+        // const newtotalPay = $(".order-option-totalprice").text();
+		//태그 안의 텍스트 값을 숫자로 변형
+		const minusCount = Number(shotCount)-1;
+		
+		if(shotCount == 0){
+			return;
+		}
+		
+		const totalPrice = optionPrice * optionCount;
+		const shotTotal = minusCount * shotPay;
+		const creamTotal = creamCount * creamPay;
+				
+		const payPrice = totalPrice+shotTotal+creamTotal;
+				
+		//태그 안의 문자열값에 플러스한 값을 대입
+		$(".order-option-shotcount").text(minusCount);
+		$(".order-option-price").text(totalPrice);
+		$(".order-option-totalprice").text(payPrice);
 			
-			if(creamCount == 3){
-				return;
-			}
+	});
+		
+		
+	$(".button-minus3").on("click",function(){
+		//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
+		const optionCount = $(".order-option-count").text();
+		const shotCount = $(".order-option-shotcount").text();
+		const creamCount = $(".order-option-creamcount").text();
+		
+		const minusCount = Number(creamCount)-1;
+		
+		if(creamCount == 0){
+			return;	
+		}
+	
+		const totalPrice = optionPrice *optionCount;
+		const shotTotal = shotCount * shotPay;
+		const creamTotal = minusCount * creamPay;
+				
+		const payPrice = totalPrice + shotTotal + creamTotal;
+				
+		//태그 안의 문자열값에 플러스한 값을 대입
+		$(".order-option-creamcount").text(minusCount);
+		$(".order-option-price").text(totalPrice);
+		$(".order-option-totalprice").text(payPrice);
 			
-			const plusCount = Number(creamCount)+1;
-			const creamTotal = plusCount * creamPay;
+	});
+	
+	$(".order-option-cupbtn").on("click",function(){
+		const solo = $(this).text();
+
+		$(".order-option-cupbtn").css("border","1px solid black");		
+		
+			$(this).css("border", "3px solid green").css("box-sizing","border-box" );
 			
-			$(".order-option-creamcount").text(plusCount);
-			$(".order-option-totalprice").text(creamTotal);
-			
-		});
-		
-		$(".button-minus3").on("click",function(){
-			const creamCount = $(".order-option-creamcount").text();
-			
-			if(creamCount == 0){
-				return;
-			}
-			const minusCount = Number(creamCount)-1;
-			const creamTotal = minusCount * creamPay;
-			
-			$(".order-option-creamcount").text(minusCount);
-			$(".order-option-totalprice").text(creamTotal);
-		});
-		
-		
-		
-		
-		
-		
-		
-		
+	
+	});
 		
 		
 		
