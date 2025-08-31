@@ -28,10 +28,6 @@ public class OrderService {
 		return p;
 	}
 
-	@Transactional
-	public int insertCart(DetailsTbl dt) {
-		int result = orderDao.insertCart(dt);
-		
-		return result;
-	}
+
+	
 }

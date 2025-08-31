@@ -13,11 +13,9 @@ public interface OrderDao {
 
 	List shopList(int reqPage);
 
-
 	Product option(int productNo);
 
 
-	int insertCart(DetailsTbl dt);
 
 }
 

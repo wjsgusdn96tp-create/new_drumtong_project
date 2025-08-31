@@ -11,8 +11,7 @@
 		select product_no, product_img,product_name,product_price from product_tbl where product_no = #{productNo}
 	</select>
 
-	<insert id="insertCart">
-		insert into order_details_tbl
-	</insert>
+
+	
 		
 </mapper>

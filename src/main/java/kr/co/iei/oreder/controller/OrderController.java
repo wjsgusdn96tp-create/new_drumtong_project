@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.ShopTbl;
@@ -36,13 +38,19 @@ public class OrderController {
 	}
 	
 	@GetMapping (value="/Orderoption")
-	public String orderListpage(int productNo,Model model) {
+	public String orderListpage(int productNo,Model model,
+			@SessionAttribute(required = false) Member member) {
 		Product p = orderService.option(productNo);
 		
 		//productNo = DB에 물품번호 기준으로 담겨있는 정보들 이름,이미지,가격 등등
 		
 		model.addAttribute("p", p);
 		
+		 if(member != null) {
+	        model.addAttribute("memberNo", member.getMemberNo());
+	        }
+		 
+		 
 		return "order/Orderoption";
 	}
 	
@@ -59,15 +67,8 @@ public class OrderController {
 	*/
 
 	@PostMapping (value= "/DrumtongCart")
-	public String cartPage(Model model,DetailsTbl dt) {
+	public String cartPage(Model model) {
 		
-		int result = orderService.insertCart(dt);
-		
-		if(result == 1) {
-			System.out.println("성공");
-		}else {
-			System.out.println("실패");
-		}
 		
 		return "order/DrumtongCart";
 	}
