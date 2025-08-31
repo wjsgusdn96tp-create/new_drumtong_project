@@ -81,7 +81,23 @@
 	    <a href="/product/productList" class="order-listpage">메뉴목록</a>
 	    
 	    
-	    <button class="order-cartadd">장바구니담기</button>
+	     <form id="cartForm" action="/cart/add" method="post">
+	      <input type="hidden" name="product_no" th:value="${p.productNo}">
+	      <input type="hidden" name="productName" th:value="${p.productName}">
+	      <input type="hidden" name="productPrice" th:value="${p.productPrice}">
+	      <input type="hidden" name="count" id="countInput">
+	      <input type="hidden" name="cupShot" id="shotInput">
+	      <input type="hidden" name="cupCream" id="creamInput">
+	      <input type="hidden" name="cupChoice" id="cupInput">
+	      <input type="hidden" name="cupSize" id="sizeInput">
+	      <input type="hidden" name="pay" id="payInput">
+	   
+	   
+	    <button type="submit" class="order-cartadd">장바구니담기</button>
+	    </form>
+	    
+	    
+	    
 	    
 	    <form action="/order/Orderoption" method="get">
 	    	<input type="hidden" value="${p.productNo}" name="productNo">
@@ -99,16 +115,6 @@
 	
 	
 	
-	$(".order-cartadd").on("click",function(){
-		const productName = $(".order-option-name").text();
-		const productCount = $(".order-option-count").text();
-		const shotCount = $(".order-option-shotcount").text();
-		const creamCount = $(".order-option-creamcount").text();
-		const cupType = $(".order-option-cupbtn").text();
-		const totalPrice = $(".order-option-totalprice").text();
-		
-		
-	});
 	
 	
 	
@@ -146,8 +152,6 @@
 		
 		
 	});
-	
-	
 	
 	
 	//지정한 클래스명을 눌렀을때 동작		
