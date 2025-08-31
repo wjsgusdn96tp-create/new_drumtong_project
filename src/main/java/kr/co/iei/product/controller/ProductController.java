@@ -35,7 +35,6 @@ public class ProductController {
 		return "product/productList";
 	}
 	
-	
 
 	@GetMapping(value="/productInsertFrm")
 	public String ProductInsertFrm() {

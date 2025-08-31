@@ -15,6 +15,12 @@
     <div>
    	로그인 회원 번호: <span th:text="${memberNo}"></span>
 	</div>
+	<div>
+    shopName 값: <span th:text="${shopName}"></span>
+	</div>
+	<div>
+    productNo 값: <span th:text="${p.productNo}"></span>
+	</div>
     
     <div class="order-option-header">옵션선택</div>
 
@@ -93,6 +99,7 @@
 		      <input type="hidden" name="productNo" th:value="${p.productNo}">
 		      <input type="hidden" name="productName" th:value="${p.productName}">
 		      <input type="hidden" name="productPrice" th:value="${p.productPrice}">
+		      <input type="hidden" name="shopName" th:value="${shopName}">
 		 <!-- 이미지 받을것 <input type="hidden" name="productImg" th:value="${p.productImg}"> -->   
 		      <input type="hidden" name="count" id="countInput" th:value="1">
 		      <input type="hidden" name="cupShot" id="shotInput" th:value="0">
@@ -242,7 +249,7 @@
 		if(creamCount == 2){
 			return;	
 		}
-	
+		
 		const totalPrice = optionPrice *optionCount;
 		const shotTotal = shotCount * shotPay;
 		const creamTotal = plusCount * creamPay;

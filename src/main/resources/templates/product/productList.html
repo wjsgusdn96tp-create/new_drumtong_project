@@ -81,6 +81,8 @@
 								</div>
 								<!-- 클릭 시, 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
 								<form action="/order/Orderoption" method="get" id="">
+									<!-- 자명님 주소값 보내는게 없어서 밑에 한줄만 추가했습니다! -전인턴- -->
+									<input type="hidden" name="shopName" th:value="${shopName}">
 									<input type="submit" class="product" name="productNo" id="product_no1" value="1">	
 									<label for="product_no1">
 										<div class="product_img_box">

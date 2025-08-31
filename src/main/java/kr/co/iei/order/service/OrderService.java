@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.order.dao.OrderDao;
+import kr.co.iei.order.vo.CartItem;
 import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.product.vo.Product;
 
@@ -27,6 +28,14 @@ public class OrderService {
 		
 		return p;
 	}
+
+
+	public int insertCart(CartItem ct) {
+		int result = orderDao.insertCart(ct);
+		
+		return 0;
+	}
+
 
 
 	
