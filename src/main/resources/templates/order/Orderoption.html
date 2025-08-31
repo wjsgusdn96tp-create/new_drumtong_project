@@ -83,8 +83,8 @@
 	    
 	    <button class="order-cartadd">장바구니담기</button>
 	    
-	    <form action="/order/Orderoption">
-	    	<input type="hidden" value=${p.productNo} name="productNo">
+	    <form action="/order/Orderoption" method="get">
+	    	<input type="hidden" value="${p.productNo}" name="productNo">
 	    	<button type="submit" class="order-reset">옵션초기화</button>
 	    </form>
 	    

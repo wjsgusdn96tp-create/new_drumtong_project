@@ -34,7 +34,7 @@
   	select count(*) from product_tbl
   </select>
   
-  <select id="selectProductList">
+  <select id="selectProductList" resultType="product">
   	select * from 
     		(select rownum as rnum, n.* from 
         		(select 

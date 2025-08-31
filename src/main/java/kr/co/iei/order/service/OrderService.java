@@ -14,8 +14,8 @@ public class OrderService {
 	private OrderDao orderDao;
 
 	
-	public List shopList() {
-		List list  = orderDao.shopList();
+	public List shopList(int reqPage) {
+		List list  = orderDao.shopList(reqPage);
 		return list;
 	}
 

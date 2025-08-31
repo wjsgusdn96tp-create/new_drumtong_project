@@ -10,7 +10,7 @@ import kr.co.iei.product.vo.Product;
 public interface OrderDao {
 
 
-	List shopList();
+	List shopList(int reqPage);
 
 
 	Product option(int productNo);
