@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.DetailsTbl;
-//import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.ShopTbl;
 import kr.co.iei.product.vo.Product;
 
@@ -35,9 +35,6 @@ public class OrderController {
 	    return "order/OrderMap";
 	}
 	
-	
-
-	
 	@GetMapping (value="/Orderoption")
 	public String orderListpage(int productNo,Model model) {
 		Product p = orderService.option(productNo);
@@ -48,7 +45,6 @@ public class OrderController {
 		
 		return "order/Orderoption";
 	}
-
 	
 	/*
 	@GetMapping("/Orderoption")
@@ -61,8 +57,20 @@ public class OrderController {
 	    return "order/Orderoption";
 	}
 	*/
-	
-	
+
+	@PostMapping (value= "/DrumtongCart")
+	public String cartPage(Model model,DetailsTbl dt) {
+		
+		int result = orderService.insertCart(dt);
+		
+		if(result == 1) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		
+		return "order/DrumtongCart";
+	}
 	
 	
 }

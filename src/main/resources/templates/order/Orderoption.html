@@ -86,10 +86,11 @@
 	    <a href="/product/productList?reqPage=${reqPage}&shopName=${shopName}" class="order-listpage">
 	      -->
 	    
-	     <form id="cartForm" action="/cart/add" method="post">
+	     <form id="cartForm" action="/order/DrumtongCart" method="post">
 		      <input type="hidden" name="productNo" th:value="${p.productNo}">
 		      <input type="hidden" name="productName" th:value="${p.productName}">
 		      <input type="hidden" name="productPrice" th:value="${p.productPrice}">
+		 <!-- 이미지 받을것 <input type="hidden" name="productImg" th:value="${p.productImg}"> -->   
 		      <input type="hidden" name="count" id="countInput" th:value="1">
 		      <input type="hidden" name="cupShot" id="shotInput" th:value="0">
 		      <input type="hidden" name="cupCream" id="creamInput" th:value="0">
@@ -175,6 +176,10 @@
         // const newtotalPay = $(".order-option-totalprice").text();
 		//태그 안의 텍스트 값을 숫자로 변형
 		const plusCount = Number(optionCount)+1;
+		
+		if(optionCount == 10){
+			return;
+		}
 		
 		const totalPrice = optionPrice * plusCount;
 		const shotTotal = shotCount * shotPay;

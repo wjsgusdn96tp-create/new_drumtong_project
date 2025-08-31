@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.product.vo.Product;
 
 @Mapper
@@ -14,6 +15,9 @@ public interface OrderDao {
 
 
 	Product option(int productNo);
+
+
+	int insertCart(DetailsTbl dt);
 
 }
 

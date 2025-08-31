@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.order.dao.OrderDao;
+import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.product.vo.Product;
 
 @Service
@@ -24,5 +26,12 @@ public class OrderService {
 		Product p = orderDao.option(productNo);
 		
 		return p;
+	}
+
+	@Transactional
+	public int insertCart(DetailsTbl dt) {
+		int result = orderDao.insertCart(dt);
+		
+		return result;
 	}
 }
