@@ -8,7 +8,7 @@
 	
 
 	<select id="option" resultType="product">
-		select product_img,product_name,product_price from product_tbl where product_no = #{productNo}
+		select product_no, product_img,product_name,product_price from product_tbl where product_no = #{productNo}
 	</select>
 
 	

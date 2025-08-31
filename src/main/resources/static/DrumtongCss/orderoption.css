@@ -111,9 +111,11 @@ button {
     border-bottom: 1px solid white;
 }
 
+
+
 .order-option-cupbtn {
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 40px;
     height: 25px;
     text-align: center;
@@ -121,18 +123,23 @@ button {
     font-weight: bold;
 
 }
-
-
 
 .order-option-sizebtn {
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 40px;
     height: 25px;
     text-align: center;
     background-color: var(--gray8);
     font-weight: bold;
 }
+.order-option-cupbtn.selected,
+  .order-option-sizebtn.selected {
+    border: 3px solid var(--main4);
+  }
+
+
+
 .order-option-totalbox {
     padding-top: 100px;
     display: flex;
@@ -203,3 +210,4 @@ button {
 .order-cartadd:active{
     background-color: var(--main4);
 }
+

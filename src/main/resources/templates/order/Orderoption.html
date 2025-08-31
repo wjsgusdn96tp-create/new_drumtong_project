@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>옵션선택</title>
-    <link rel="stylesheet" href="/DrumtongCss/orderoption.css">
     <link rel="stylesheet" href="/DrumtongCss/default.css">
+    <link rel="stylesheet" href="/DrumtongCss/orderoption.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    
 </head>
 <body>
     <th:block th:include="/common/header"></th:block>
@@ -36,7 +37,7 @@
 	    <div class="order-option-section">
 	        <div class="order-option-label">컵 선택</div>
 	            <div class="order-option-cupchoice">
-	                <button class="order-option-cupbtn">개인</button>
+	                <button class="order-option-cupbtn selected">개인</button>
 	                <button class="order-option-cupbtn">매장</button>
 	            </div>
 	    </div>
@@ -44,8 +45,8 @@
 	    <div class="order-option-section">
 	        <div class="order-option-label">사이즈 선택 (기본 L, XL + 2000원)</div>
 	            <div class="order-option-sizechoice">
-	                <button class="order-option-sizebtn">L</button>
-	                <button class="order-option-sizebtn">XL</button>
+	                <button class="order-option-sizebtn selected" >L</button>
+	                <button class="order-option-sizebtn" >XL</button>
 	            </div>
 	    </div>
 	
@@ -78,29 +79,30 @@
 
 
 	<div class="order-option-footer">
-	    <a href="/product/productList" class="order-listpage">메뉴목록</a>
+	    <a href="/product/productList?reqPage=1" class="order-listpage">메뉴목록</a>
 	    
+	    <!--
+	    나중에 매장 이름으로 불러올때 새로고침 하는 경우의 값
+	    <a href="/product/productList?reqPage=${reqPage}&shopName=${shopName}" class="order-listpage">
+	      -->
 	    
 	     <form id="cartForm" action="/cart/add" method="post">
-	      <input type="hidden" name="product_no" th:value="${p.productNo}">
-	      <input type="hidden" name="productName" th:value="${p.productName}">
-	      <input type="hidden" name="productPrice" th:value="${p.productPrice}">
-	      <input type="hidden" name="count" id="countInput">
-	      <input type="hidden" name="cupShot" id="shotInput">
-	      <input type="hidden" name="cupCream" id="creamInput">
-	      <input type="hidden" name="cupChoice" id="cupInput">
-	      <input type="hidden" name="cupSize" id="sizeInput">
-	      <input type="hidden" name="pay" id="payInput">
-	   
+		      <input type="hidden" name="productNo" th:value="${p.productNo}">
+		      <input type="hidden" name="productName" th:value="${p.productName}">
+		      <input type="hidden" name="productPrice" th:value="${p.productPrice}">
+		      <input type="hidden" name="count" id="countInput" th:value="1">
+		      <input type="hidden" name="cupShot" id="shotInput" th:value="0">
+		      <input type="hidden" name="cupCream" id="creamInput" th:value="0">
+		      <input type="hidden" name="cupChoice" id="cupInput" th:value="개인">
+		      <input type="hidden" name="cupSize" id="sizeInput" th:value="L">
+		      <input type="hidden" name="pay" id="payInput" th:value="${p.productPrice}">
 	   
 	    <button type="submit" class="order-cartadd">장바구니담기</button>
 	    </form>
 	    
 	    
-	    
-	    
 	    <form action="/order/Orderoption" method="get">
-	    	<input type="hidden" value="${p.productNo}" name="productNo">
+	    	<input type="hidden" th:value="${p.productNo}" name="productNo">
 	    	<button type="submit" class="order-reset">옵션초기화</button>
 	    </form>
 	    
@@ -109,21 +111,16 @@
 <script th:inline="javascript">
 	const shotPay =  400;
 	const creamPay = 500;
-	const totalPayPrice = $(".order-option-totalprice").text();
-	const optionPrice = $(".order-option-price").text();
+	const optionPrice = Number($(".order-option-price").text());
 	const sizePrice = 2000;
-	
-	
-	
-	
-	
+	$("#payInput").val(optionPrice);
 	
 	$(".order-option-sizebtn").on("click",function(){
 		
 		const shop = $(this).text();	
 		console.log(shop);
-		$(".order-option-sizebtn").css("border","1px solid black");
-		$(this).css("border","3px solid green");
+		$(".order-option-sizebtn").removeClass("selected");	
+		$(this).addClass("selected");
 		
 		const optionCount = $(".order-option-count").text();
 		const shotCount = $(".order-option-shotcount").text();
@@ -148,11 +145,24 @@
 			$(".order-option-price").text(totalPrice);
 			$(".order-option-totalprice").text(payPrice);
 		
-		
-		
-		
+			
+			//인풋값 밸류 변경 밸류값을 대입
+
+			 $("#sizeInput").val(shop);    // "L" or "XL" 값
+  			 $("#payInput").val(payPrice);    // 결제금액
+	
 	});
 	
+	$(".order-option-cupbtn").on("click",function(){
+		const solo = $(this).text();
+
+		$(".order-option-cupbtn").removeClass("selected");	
+		
+		$(this).addClass("selected");
+		
+		$("#cupInput").val(solo);
+	
+	});
 	
 	//지정한 클래스명을 눌렀을때 동작		
 	$(".button-plus1").on("click",function(){
@@ -176,7 +186,9 @@
 		$(".order-option-count").text(plusCount);
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
-			
+		
+		$("#countInput").val(plusCount);
+		$("#payInput").val(payPrice);
 	});
 	
 	$(".button-plus2").on("click", function(){
@@ -205,7 +217,10 @@
 		$(".order-option-shotcount").text(plusCount);
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
-			
+		
+		$("#shotInput").val(plusCount);
+		$("#payInput").val(payPrice);
+		
 	});
 	
 	$(".button-plus3").on("click",function(){
@@ -231,6 +246,9 @@
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
 			
+		$("#creamInput").val(plusCount);
+		$("#payInput").val(payPrice);
+		
 	});
 		
 		
@@ -255,7 +273,9 @@
 		$(".order-option-count").text(minusCount);
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
-			
+		
+		$("#countInput").val(minusCount);
+		$("#payInput").val(payPrice);
 	});
 			
 
@@ -286,7 +306,9 @@
 		$(".order-option-shotcount").text(minusCount);
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
-			
+		
+		$("#shotInput").val(minusCount);
+		$("#payInput").val(payPrice);
 	});
 		
 		
@@ -312,18 +334,12 @@
 		$(".order-option-creamcount").text(minusCount);
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
-			
-	});
-	
-	$(".order-option-cupbtn").on("click",function(){
-		const solo = $(this).text();
-
-		$(".order-option-cupbtn").css("border","1px solid black");		
 		
-			$(this).css("border", "3px solid green").css("box-sizing","border-box" );
-			
-	
+		$("#creamInput").val(minusCount);
+		$("#payInput").val(payPrice);
+		
 	});
+	
 		
 		
 		
