@@ -13,6 +13,9 @@
 			        	<if test="memberGrade != null and memberGrade != '관리자'">
 			        		customer_nickname = #{memberNickname}
 			        	</if>
+			        	<if test="category != null">
+		                    AND customer_category = #{category}
+		                </if>
 			        </where>
 			        <choose>	
 			        	<when test="sort == null">
@@ -39,117 +42,13 @@
 	        <if test="memberGrade != null and memberGrade != '관리자'">
 	            customer_nickname = #{memberNickname}
 	        </if>
+	        <if test="category != null">
+	            AND customer_category = #{category}
+	        </if>
     	</where>
 	</select>
 	
-	<select id="selectGjList" resultType="customer">
-		SELECT *
-			FROM (
-			    SELECT rownum AS rnum, c.*
-			    FROM (
-			       SELECT customer_no, customer_category, customer_nickname, customer_title, customer_date
-			        FROM customer_service_tbl
-			        <where>
-				        customer_category = '칭찬'
-			        	<if test="memberGrade != null and memberGrade != '관리자'">
-			        		and customer_nickname = #{memberNickname}
-			        	</if>
-			        </where>
-			        <choose>
-			        	<when test="sort == null">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('lastest')">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('oldest')">
-			        		order by customer_no asc
-			        	</when>
-			        	<when test="sort.equals('abc')">
-			        		order by customer_title asc, customer_no asc
-			        	</when>
-			        </choose>
-			    ) c
-			)
-			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
-	</select>
-	
-	<select id="selectGjTotalCount" resultType="int">
-		select count(*) from customer_service_tbl where customer_category = '칭찬'
-	</select>
-	
-	<select id="selectComplainList" resultType="customer">
-		SELECT *
-			FROM (
-			    SELECT rownum AS rnum, c.*
-			    FROM (
-			       SELECT customer_no, customer_category, customer_nickname, customer_title, customer_date
-			        FROM customer_service_tbl
-			        <where>
-				        customer_category = '불만'
-			        	<if test="memberGrade != null and memberGrade != '관리자'">
-			        		and customer_nickname = #{memberNickname}
-			        	</if>
-			        </where>
-			        <choose>
-			        	<when test="sort == null">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('lastest')">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('oldest')">
-			        		order by customer_no asc
-			        	</when>
-			        	<when test="sort.equals('abc')">
-			        		order by customer_title asc, customer_no asc
-			        	</when>
-			        </choose>
-			    ) c
-			)
-			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
-	</select>
-	
-	<select id="selectComplainTotalCount" resultType="int">
-		select count(*) from customer_service_tbl where customer_category = '불만'
-	</select>
-	
-	<select id="selectOpinionList" resultType="customer">
-		select * 
-			from (
-				select rownum as rnum, c.* 
-				from (
-					select customer_no, customer_category, customer_nickname, customer_title, customer_date
-					from customer_service_tbl
-					<where>
-						customer_category = '의견'
-			        	<if test="memberGrade != null and memberGrade != '관리자'">
-			        		and customer_nickname = #{memberNickname}
-			        	</if>
-			        </where>
-					<choose>
-			        	<when test="sort == null">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('lastest')">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('oldest')">
-			        		order by customer_no asc
-			        	</when>
-			        	<when test="sort.equals('abc')">
-			        		order by customer_title asc, customer_no asc
-			        	</when>
-			        </choose>
-					) c
-			)
-			where #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
-	</select>
-	
-	<select id="selectOpinionTotalCount" resultType="int">
-		select count(*) from customer_service_tbl where customer_category = '의견'
-	</select>
-	
+
 	<select id="selectOneCustomer" resultType="customer">
 	    select
 	        customer_no,         
@@ -178,4 +77,16 @@
 		insert into customer_service_file
 		values(customer_service_file_seq.nextval, #{customerNo}, #{fileName}, #{filePath})
 	</insert>
+	
+	<select id="selectCustomerFiles" resultType="customerServiceFile">
+		select * from customer_service_file where customer_no = #{customerNo}
+	</select>
+	
+	<delete id="deleteCustomerFiles">
+		delete from customer_service_file where customer_no = #{customerNo}
+	</delete>
+	
+	<delete id="deleteCustomer">
+        DELETE FROM customer_service_tbl WHERE customer_no = #{customerNo}
+    </delete>
 </mapper>
