@@ -30,4 +30,18 @@
   	delete from product_tbl where product_name=#{productName}
   </delete>
   
+  <select id="selectProductTotalCount">
+  	select count(*) from product_tbl
+  </select>
+  
+  <select id="selectProductList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order by product_no desc
+       			 )n
+       		)
+		where rnum between #{start} and #{end}
+  </select>
 </mapper>

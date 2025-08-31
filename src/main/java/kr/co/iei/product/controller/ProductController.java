@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.iei.product.service.ProductService;
 import kr.co.iei.product.vo.Product;
+import kr.co.iei.product.vo.productListDate;
 import kr.co.iei.util.FileUtil;
 
 @Controller
@@ -25,30 +26,34 @@ public class ProductController {
 	@Autowired
 	private FileUtil fileUtil;
 	
-	
 	@GetMapping(value="/productList")
-	public String ProductList() {
-		
-		return "/product/productList";
+	private String productList(int reqPage, String shopName, Model model) {
+		productListDate pld = productService.productListDate(reqPage);
+		model.addAttribute("list", pld.getList());
+		model.addAttribute("pageNavi",pld.getPageNavi());
+		model.addAttribute("shopName",shopName);
+		return "product/productList";
 	}
+	
+
 	@GetMapping(value="/productInsertFrm")
 	public String ProductInsertFrm() {
-		return "/product/productInsertFrm";
+		return "product/productInsertFrm";
 	}
 	@GetMapping(value = "/productInsertDrink")
 	public String productInsertDrink(Model model, String drink) {
 		model.addAttribute("productTitle",drink);
-		return "/product/productInsertDrink";
+		return "product/productInsertDrink";
 	}
 	@GetMapping(value = "/productInsertDessert")
 	public String productInsertDessert(Model model, String dessert) {
 		model.addAttribute("productTitle",dessert);
-		return "/product/productInsertDessert";
+		return "product/productInsertDessert";
 	}
 	@GetMapping(value = "/productInsertGoods")
 	public String productInsertGoods(Model model, String goods) {
 		model.addAttribute("productTitle",goods);
-		return "/product/productInsertGoods";
+		return "product/productInsertGoods";
 	}
 	
 	@PostMapping(value="/productInsertDrink")
@@ -93,5 +98,7 @@ public class ProductController {
 	
 		return "product/productList";
 	}
+	
+
 	
 }

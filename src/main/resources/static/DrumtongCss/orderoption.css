@@ -90,6 +90,7 @@ button {
 }
 .order-option-price {
     font-weight: bold;
+    padding-left: 180px
 }
 .order-option-quantity {
     display: flex;
@@ -110,9 +111,11 @@ button {
     border-bottom: 1px solid white;
 }
 
+
+
 .order-option-cupbtn {
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 40px;
     height: 25px;
     text-align: center;
@@ -120,18 +123,23 @@ button {
     font-weight: bold;
 
 }
-
-
 
 .order-option-sizebtn {
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 40px;
     height: 25px;
     text-align: center;
     background-color: var(--gray8);
     font-weight: bold;
 }
+.order-option-cupbtn.selected,
+  .order-option-sizebtn.selected {
+    border: 3px solid var(--main4);
+  }
+
+
+
 .order-option-totalbox {
     padding-top: 100px;
     display: flex;
@@ -140,7 +148,9 @@ button {
     padding-left: 10px;
     font-weight: bold;
 }
-
+.order-option-totalprice {
+	padding-left: 200px
+}
 
 .material-icons:active {
     color: var(--main4);
@@ -168,7 +178,7 @@ button {
 .order-listpage:active {
     background-color: var(--main4);
 }
-.order-reset {
+.order-moveCart {
     border-radius: 10px;
     width: 150px;
     color: black;
@@ -200,3 +210,4 @@ button {
 .order-cartadd:active{
     background-color: var(--main4);
 }
+
