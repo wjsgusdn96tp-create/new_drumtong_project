@@ -178,7 +178,7 @@ button {
 .order-listpage:active {
     background-color: var(--main4);
 }
-.order-reset {
+.order-moveCart {
     border-radius: 10px;
     width: 150px;
     color: black;

@@ -23,4 +23,5 @@ public class CartItem {
 	private String shopName;
 	private String discountName;
 	private int discountPrice;
+	private int pay;
 }

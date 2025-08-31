@@ -16,7 +16,7 @@
    	로그인 회원 번호: <span th:text="${memberNo}"></span>
 	</div>
 	<div>
-    shopName 값: <span th:text="${shopName}"></span>
+    shopName 값: <span th:text="${shop.shopName}"></span>
 	</div>
 	<div>
     productNo 값: <span th:text="${p.productNo}"></span>
@@ -30,7 +30,7 @@
 	    <div class="order-option-option-box">
 	    
 	        <div class="order-option-top">
-	            <div class="order-option-name" th:text=${p.productName}></div>
+	            <div class="order-option-name" th:text="${p.productName}"></div>
 	        </div>
 	
 	            <div class="order-option-quantity-box">
@@ -39,7 +39,7 @@
 	                    <span class="order-option-count">1</span>
 	                    <button class="button-plus1"><span class="material-icons">add_circle_outline</span></button>
 	                </div>
-	                <div class="order-option-price" th:text=${p.productPrice}></div>
+	                <div class="order-option-price" th:text="${p.productPrice}"></div>
 	                	                <div>원</div>
 	            </div>
 	            
@@ -79,7 +79,7 @@
 	
 	        <div class="order-option-totalbox">
 	            <div class="order-option-totalname">결제금액</div>
-	            <div class="order-option-totalprice" th:text=${p.productPrice}></div>
+	            <div class="order-option-totalprice" th:text="${p.productPrice}"></div>
 	                <div>원</div>
 	        </div>
 	    </div>
@@ -96,25 +96,24 @@
 	      -->
 	    
 	     <form id="cartForm" action="/order/DrumtongCart" method="post">
-		      <input type="hidden" name="productNo" th:value="${p.productNo}">
-		      <input type="hidden" name="productName" th:value="${p.productName}">
-		      <input type="hidden" name="productPrice" th:value="${p.productPrice}">
-		      <input type="hidden" name="shopName" th:value="${shopName}">
-		 <!-- 이미지 받을것 <input type="hidden" name="productImg" th:value="${p.productImg}"> -->   
-		      <input type="hidden" name="count" id="countInput" th:value="1">
-		      <input type="hidden" name="cupShot" id="shotInput" th:value="0">
-		      <input type="hidden" name="cupCream" id="creamInput" th:value="0">
-		      <input type="hidden" name="cupChoice" id="cupInput" th:value="개인">
-		      <input type="hidden" name="cupSize" id="sizeInput" th:value="L">
-		      <input type="hidden" name="pay" id="payInput" th:value="${p.productPrice}">
+		      <input type="hidden" name="productNo" id="productNo" th:value="${p.productNo}">
+			  <input type="hidden" name="productName" id="productName" th:value="${p.productName}">
+			  <input type="hidden" name="productPrice" id="productPrice" th:value="${p.productPrice}">
+			  <input type="hidden" name="shopName" id="shopName" th:value="${shop.shopName}">
+			  <!-- 이미지 받을것 <input type="hidden" name="productImg" id="productImg" th:value="${p.productImg}">-->
+		      <input type="hidden" name="count" id="count" th:value="1">
+		      <input type="hidden" name="cupShot" id="cupShot" th:value="0">
+		      <input type="hidden" name="cupCream" id="cupCream" th:value="0">
+		      <input type="hidden" name="cupChoice" id="cupChoice" th:value="개인">
+		      <input type="hidden" name="cupSize" id="cupSize" th:value="L">
+		      <input type="hidden" name="pay" id="pay" th:value="${p.productPrice}">
 	   
 	    <button type="submit" class="order-cartadd">장바구니담기</button>
 	    </form>
 	    
 	    
 	    <form action="/order/Orderoption" method="get">
-	    	<input type="hidden" th:value="${p.productNo}" name="productNo">
-	    	<button type="submit" class="order-reset">옵션초기화</button>
+	    	<button type="submit" class="order-moveCart">장바구니가기</button>
 	    </form>
 	    
 	</div>
@@ -124,7 +123,7 @@
 	const creamPay = 500;
 	const optionPrice = Number($(".order-option-price").text());
 	const sizePrice = 2000;
-	$("#payInput").val(optionPrice);
+	$("#pay").val(optionPrice);
 	
 	$(".order-option-sizebtn").on("click",function(){
 		
@@ -159,8 +158,8 @@
 			
 			//인풋값 밸류 변경 밸류값을 대입
 
-			 $("#sizeInput").val(shop);    // "L" or "XL" 값
-  			 $("#payInput").val(payPrice);    // 결제금액
+			 $("#cupSize").val(shop);    // "L" or "XL" 값
+  			 $("#pay").val(payPrice);    // 결제금액
 	
 	});
 	
@@ -171,7 +170,7 @@
 		
 		$(this).addClass("selected");
 		
-		$("#cupInput").val(solo);
+		$("#cupChoice").val(solo);
 	
 	});
 	
@@ -202,8 +201,8 @@
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
 		
-		$("#countInput").val(plusCount);
-		$("#payInput").val(payPrice);
+		$("#count").val(plusCount);
+		$("#pay").val(payPrice);
 	});
 	
 	$(".button-plus2").on("click", function(){
@@ -233,8 +232,8 @@
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
 		
-		$("#shotInput").val(plusCount);
-		$("#payInput").val(payPrice);
+		$("#cupShot").val(plusCount);
+		$("#pay").val(payPrice);
 		
 	});
 	
@@ -261,8 +260,8 @@
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
 			
-		$("#creamInput").val(plusCount);
-		$("#payInput").val(payPrice);
+		$("#cupCream").val(plusCount);
+		$("#pay").val(payPrice);
 		
 	});
 		
@@ -289,8 +288,8 @@
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
 		
-		$("#countInput").val(minusCount);
-		$("#payInput").val(payPrice);
+		$("#count").val(minusCount);
+		$("#pay").val(payPrice);
 	});
 			
 
@@ -322,8 +321,8 @@
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
 		
-		$("#shotInput").val(minusCount);
-		$("#payInput").val(payPrice);
+		 $("#cupShot").val(minusCount);
+	     $("#pay").val(payPrice);
 	});
 		
 		
@@ -350,12 +349,47 @@
 		$(".order-option-price").text(totalPrice);
 		$(".order-option-totalprice").text(payPrice);
 		
-		$("#creamInput").val(minusCount);
-		$("#payInput").val(payPrice);
+		$("#cupCream").val(minusCount);
+        $("#pay").val(payPrice)
 		
 	});
 	
-		
+	$("#cartForm").on("submit", function(){
+	    
+		const productNo = $("#productNo").val();
+        const productName = $("#productName").val();
+        const productPrice = $("#productPrice").val();
+        const shopName = $("#shopName").val();
+        const count = $("#count").val();
+        const cupShot = $("#cupShot").val();
+        const cupCream = $("#cupCream").val();
+        const cupChoice = $("#cupChoice").val();
+        const cupSize = $("#cupSize").val();
+        const pay = $("#pay").val();
+
+	    $.ajax({
+	        url: "/order/DrumtongCart",
+	        type: "post",
+	        data: {
+	            productNo: productNo,
+	            productName: productName,
+	            productPrice: productPrice,
+	            shopName: shopName,
+	            count: count,
+	            cupShot: cupShot,
+	            cupCream: cupCream,
+	            cupChoice: cupChoice,
+	            cupSize: cupSize,
+	            pay: pay
+	        },
+	        success: function(result){
+	            alert("장바구니에 담겼습니다!");
+	        },
+	        error: function(){
+	            alert("장바구니 담기 실패!");
+	        }
+	    });
+	});	
 		
 		
 		
