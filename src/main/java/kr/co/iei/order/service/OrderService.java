@@ -29,11 +29,11 @@ public class OrderService {
 		return p;
 	}
 
-
+	@Transactional
 	public int insertCart(CartItem ct) {
 		int result = orderDao.insertCart(ct);
 		
-		return 0;
+		return result;
 	}
 
 

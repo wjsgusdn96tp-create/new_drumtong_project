@@ -61,9 +61,9 @@ public class OrderController {
 	public String cartPage(Model model,CartItem ct,
 			@SessionAttribute(required = false) Member member
 			) {
-		//세션에서 가져온 회원번호 세팅하기 ct에 저장 		잊지말자 
 		//오면 강사님한테 꼭 물어보기 할인에 대해서!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		
+		//세션에서 가져온 회원번호 세팅하기 ct에 저장 		잊지말자 
 		ct.setMemberNo(member.getMemberNo());
 		 
 		int result = orderService.insertCart(ct);

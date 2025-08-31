@@ -11,6 +11,15 @@
 </head>
 <body>
    <th:block th:include="/common/header"></th:block>
+	<div>
+   	로그인 회원 번호: <span th:text="${ct.memberNo}"></span>
+	</div>
+	<div>
+    shopName 값: <span th:text="${ct.shopName}"></span>
+	</div>
+	<div>
+    productNo 값: <span th:text="${ct.productNo}"></span>
+	</div>
 
     <div class="cart-mainbox">
         <div class="cart-namebox">
