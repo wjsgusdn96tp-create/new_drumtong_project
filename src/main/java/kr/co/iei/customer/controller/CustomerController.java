@@ -30,7 +30,7 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
-	@Value("${file.root}")
+	@Value("${file.root}") // application.properties의 file.root 값을 가져옴
 	private String root;
 	
 	@Autowired
@@ -114,23 +114,21 @@ public class CustomerController {
 	@GetMapping(value="/view")
 	public String CustomerView(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
 		Customer c = customerService.selectOneCustomer(customerNo);
+		List<Member> allMemberList = customerService.selectAllMember();
 		
 		model.addAttribute("c", c);
-		
+		model.addAttribute("allMembers", allMemberList);
 		return "customer/view";
 	}
 	
 	@PostMapping(value="/delete")
 	@ResponseBody
-	public String deleteCustomer(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
+	public String deleteCustomer(int customerNo, @SessionAttribute(required = false) Member member) {
 		Customer c = customerService.selectOneCustomer(customerNo);
-		CustomerListData cld = customerService.deleteCustomer(customerNo);
-		int delResult = cld.getDelResult();
-//		System.out.println(delResult);
 		
 		if (c != null && c.getCustomerNickname().equals(member.getMemberNickname())) {
-			String savepath = root+"/customer";
-			if (delResult > 0) {
+			int result = customerService.deleteCustomer(customerNo);
+			if (result > 0) {
 				return "success"; 
 			}
 		}
@@ -140,11 +138,12 @@ public class CustomerController {
 	@PostMapping(value="/insertComment")
 	public String insertComment(CustomerComment cc) {
 		
-		int result = customerService.insertCustomerComment(cc);
+		int result = customerService.insertCustomerComment(cc); //result가 1 이상이면?
 		return "redirect:/customer/view?customerNo="+cc.getCustomerServiceRef();
 	}
 	
-	@PostMapping(value="customer/deleteComment")
+	@PostMapping(value="/deleteComment")
+	@ResponseBody
 	public String deleteComment(int commentNo) {
 		int result = customerService.deleteComment(commentNo);
 		System.out.println(result);
@@ -153,6 +152,40 @@ public class CustomerController {
 		}
 		return "fail";
 	}
+	
+	@PostMapping(value="/updateComment")
+	public String updateComment(CustomerComment cc, @SessionAttribute(required = false) Member member) {
+	    CustomerComment customerComment = customerService.selectOneComment(cc.getCommentNo()); 
+	    
+	    if (member != null && customerComment != null && member.getMemberNo() == customerComment.getCustomerWriterNo()) {
+	        customerService.updateComment(cc);
+	    }
+	    return "redirect:/customer/view?customerNo=" + cc.getCustomerServiceRef();
+	}
+
+	@GetMapping(value="/deleteComment") 
+	public String deleteComment(int customerServiceRef, int commentNo, @SessionAttribute(required = false) Member member) {
+	    CustomerComment commentToDelete = customerService.selectOneComment(commentNo);
+
+	    if(member != null && commentToDelete != null && member.getMemberNo() == commentToDelete.getCustomerWriterNo()){
+	        customerService.deleteComment(commentNo);
+	    }
+	    return "redirect:/customer/view?customerNo=" + customerServiceRef;
+	}
+	
+	@PostMapping(value="/updateStar")
+	@ResponseBody
+	public String updateStar(Customer customer, @SessionAttribute(required = false) Member member) {
+		Customer c = customerService.selectOneCustomer(customer.getCustomerNo());
+		if(member != null && c != null && member.getMemberNickname().equals(c.getCustomerNickname())) {
+			int result = customerService.updateStarRating(customer);
+			if(result > 0) {
+				return "success";
+			}
+		}
+		return "fail";
+	}
+	
 }
 
 

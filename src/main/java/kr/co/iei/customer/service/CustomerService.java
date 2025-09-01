@@ -1,9 +1,11 @@
 package kr.co.iei.customer.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,10 @@ public class CustomerService {
 	
 	@Autowired
 	private CustomerDao customerDao;
+	
+	@Value("${file.root}") // application.properties의 file.root 값을 가져옴
+	private String root;
+	
 	
 	public CustomerListData selectCustomerList(int reqPage, String sort, Member member, String category) {
 		int numPerPage = 10;
@@ -90,14 +96,25 @@ public class CustomerService {
 	}
 
 	@Transactional
-	public CustomerListData deleteCustomer(int customerNo) {
-		List delFileList = customerDao.selectCustomerFiles(customerNo);
-		int delResult = customerDao.deleteCustomer(customerNo);
-		System.out.println(delResult);
+	public int deleteCustomer(int customerNo) {
+		List<CustomerServiceFile> fileList = customerDao.selectCustomerFiles(customerNo);
 		
-		CustomerListData cld = new CustomerListData(delFileList, null, delResult);
-		System.out.println(cld);
-		return cld;
+		if(!fileList.isEmpty()) {
+			String savepath = root + "/customer/";
+			for(CustomerServiceFile file : fileList) {
+				File delFile = new File(savepath + file.getFilePath());
+				if(delFile.exists()) {
+					delFile.delete();
+				}
+			}
+			// 3. DB에서 파일 정보 삭제
+			customerDao.deleteCustomerFiles(customerNo);
+		}
+		
+		// 4. 마지막으로 게시글 정보 삭제
+		int result = customerDao.deleteCustomer(customerNo);
+		
+		return result;
 	}
 
 	@Transactional
@@ -111,6 +128,24 @@ public class CustomerService {
 	public int deleteComment(int commentNo) {
 		int result = customerDao.deleteComment(commentNo);
 		return result;
+	}
+	
+	public List<Member> selectAllMember() {
+	        return customerDao.selectAllMember();
+	    }
+	 
+	@Transactional
+	public int updateComment(CustomerComment cc) {
+		return customerDao.updateComment(cc);
+	}
+
+	public CustomerComment selectOneComment(int commentNo) {
+		return customerDao.selectOneComment(commentNo);
+	}
+	
+	@Transactional
+	public int updateStarRating(Customer customer) {
+		return customerDao.updateStarRating(customer);
 	}
 
 
