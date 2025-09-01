@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/**")
 				.addResourceLocations("classpath:/templates/","classpath:/static/");
 
-		registry.addResourceHandler("/news/image/**")
+		registry.addResourceHandler("/news/**")
 				.addResourceLocations("file:///"+root+"/news/");
 	}
 	
