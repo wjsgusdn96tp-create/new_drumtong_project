@@ -61,11 +61,11 @@
                                 <div class="item-option">
                                     <div class="option-top">
                                         <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
-                                        <span class="cup">컵 : </span><span class="cup-type" th:text="${list.shopName}"></span>
+                                        <span class="cup">컵 : </span><span class="cup-type" th:text="${list.cupChoice}"></span>
                                     </div>
                                     <div class="option-bottom">
-                                        <span class="shot">샷추가 : </span><span class="shot-count">2</span>
-                                        <span class="cream">휘핑크림 : </span><span class="cream-count">0</span>
+                                        <span class="shot">샷추가 : </span><span class="shot-count" th:text="${list.cupShot}"></span>
+                                        <span class="cream">휘핑크림 : </span><span class="cream-count" th:text="${list.cupCream}"></span>
                                     </div>
                                 </div>
                                 <div class="info-bottom">
@@ -79,7 +79,7 @@
                                 <div class="price-row">
                                 <span class="label-price">상품금액</span>
                                 <div class="value-box">
-    							<span class="total-price">5000</span>
+    							<span class="total-price"th:text="${list.pay}"></span>
    								 <span class="unit">원</span>
   								</div>
                                 </div>
@@ -106,13 +106,13 @@
             </div>
             
            <div class="cart-pricebox">
-                <div class="price-summary">
+                <div class="price-summary" th:each="list : ${list}">
                     <h3>결제정보</h3>
                         <hr>
                     <div class="summary-row">
 				      <span class="label">상품수량</span>
 				      <span class="value">
-				        <span class="count">2</span>
+				        <span class="count"th:text="${list.count}"></span>
 				        <span class="unit">개</span>
 				      </span>
 				    </div>
@@ -120,11 +120,10 @@
 				    <div class="summary-row">
 				      <span class="label">상품금액</span>
 				      <span class="value">
-				        <span class="price">5000</span>
+				        <span class="price"th:text="${list.pay}"></span>
 				        <span class="unit">원</span>
 				      </span>
 				    </div>
-				
 				    <div class="summary-row">
 				      <span class="label">할인금액</span>
 				      <span class="value">
