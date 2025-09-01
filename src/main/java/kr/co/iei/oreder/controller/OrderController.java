@@ -84,7 +84,7 @@ public class OrderController {
 	    
 		if(member == null) {
 			
-			return "member/login";
+			return "redirect:/member/loginFrm";
 		}
 		
 		int num = member.getMemberNo();

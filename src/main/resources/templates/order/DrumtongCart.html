@@ -143,17 +143,16 @@
         </div>
     </div>
 	
-	<script>
-		const priceArr = new Array();
-		
-		//let listPrice = Number($(".item-price").text();
-		
-		//for(let index=0; listPrice<priceArr.length;index++){
-		//};
-		
-		
-		//console.log(listPrice);
-		
+	<script th:inline="javascript">
+
+	const price = [[${list}]];
+	
+	console.log(price);
+	
+	
+	
+	
+	
 	</script>
 	
 </body>
