@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
+import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
 import kr.co.iei.util.FileUtil;
@@ -51,10 +52,11 @@ public class NewsController {
 	}
 	@PostMapping(value="write") //뉴스 등록하기 누르면 호출
 	public String writeNews(News news, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
+		int memberNo = member == null ? 0 : member.getMemberNo();
 		String savepath = root+"/news/";
 		String filepath = fileUtil.upload(savepath, newsImageFile);
 		news.setImage(filepath);
-		news.setMemberNo(member.getMemberNo());
+		news.setMemberNo(memberNo);
 		
 		int result = newsService.insertNews(news);
 			
@@ -68,7 +70,8 @@ public class NewsController {
 	
 	@GetMapping(value="/noticeWrite")
 	public String noticeWrite(Notice notice, @SessionAttribute(required = false) Member member) {
-		notice.setMemberNo(member.getMemberNo());
+		int memberNo = member == null ? 0 : member.getMemberNo();
+		notice.setMemberNo(memberNo);
 		int result = newsService.insertNotice(notice);
 		return "redirect:/news/list?noticeReqPage=1";
 	}
@@ -80,14 +83,36 @@ public class NewsController {
 		return "news/noticeView";
 	}
 	
+	@GetMapping(value="/discountWriteFrm")
+	public String discountWriteFrm(String title, String newsNo, Model model) {
+		model.addAttribute("title", title);
+		model.addAttribute("newsNo", newsNo);
+		return "news/discountWriteFrm";
+	}
+	
+	@GetMapping(value="/discountWrite")
+	public String discountWrite(Discount discount,List productNoList, @SessionAttribute(required = false) Member member) {
+		System.out.println(discount);
+		int result = newsService.insertDiscount(discount, productNoList);
+		return "redirect:/news/list?noticeReqPage=1";
+	}
+	
 	@ResponseBody
 	@GetMapping(value="/more")
 	public List more(int start, int amount) {
+		
 		List newsList = newsService.selectAllNews(start, amount);
-
 		return newsList;
 	}
 	
+	@ResponseBody
+	@PostMapping(value="/likepush")
+	public int likepush(News news, @SessionAttribute Member member) {
+		int memberNo = member.getMemberNo();
+		int result = newsService.likepush(news, memberNo);
+		System.out.println(result);
+		return result;
+	}
 	
 }
 
