@@ -113,4 +113,26 @@ public class ProductService {
 			return result;/*1*/
 		}
 	}
+
+	@Transactional
+	public int productDelete(int productNo) {
+		Product productBest = productDao.productBestSelect(productNo);
+		if(productBest != null) {
+			int resultBestD = productDao.productBestDelete(productNo);
+			if(resultBestD > 0) {
+				int resultD = productDao.productDelete(productNo);
+				if(resultD > 0) {
+					return resultD;/*1*/
+				}else {
+					return 10;/*대표상품만 삭제*/
+				}
+			}
+		}else{
+			int resultD = productDao.productDelete(productNo);
+			if(resultD > 0) {
+				return resultD;/*1*/				
+			}
+		}return 0;/*삭제 실패*/
+		
+	}
 }

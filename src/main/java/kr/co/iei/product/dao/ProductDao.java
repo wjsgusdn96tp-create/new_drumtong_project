@@ -23,4 +23,10 @@ public interface ProductDao {
 
 	List selectProductList(HashMap<String, Object> param);
 
+	Product productBestSelect(int productNo);
+
+	int productBestDelete(int productNo);
+
+	int productDelete(int productNo);
+
 }

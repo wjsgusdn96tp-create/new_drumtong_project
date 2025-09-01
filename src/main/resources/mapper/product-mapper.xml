@@ -44,4 +44,16 @@
        		)
 		where rnum between #{start} and #{end}
   </select>
+  
+  <select id="productBestSelect" resultType="product">
+  	select * from product_best_tbl where product_no = #{productNo}
+  </select>
+  
+  <delete id="productBestDelete">
+  	delete from product_best_tbl where product_no=#{productNo}
+  </delete>
+  
+  <delete id="productDelete">
+  	delete from product_tbl where product_no=#{productNo}
+  </delete>
 </mapper>
