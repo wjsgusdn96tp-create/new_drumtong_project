@@ -22,5 +22,6 @@ public class Customer {
 	private String customerDate;
 	private int customerStar;
 	private List<CustomerServiceFile> fileList;
+	private List<CustomerComment> commentList;
 	
 }

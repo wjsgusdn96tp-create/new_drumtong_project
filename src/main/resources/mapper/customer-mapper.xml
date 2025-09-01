@@ -83,10 +83,33 @@
 	</select>
 	
 	<delete id="deleteCustomerFiles">
-		delete from customer_service_file where customer_no = #{customerNo}
+		delete from customer_service_file where customer_file_no = #{customerFileNo}
 	</delete>
 	
 	<delete id="deleteCustomer">
         DELETE FROM customer_service_tbl WHERE customer_no = #{customerNo}
+    </delete>
+    
+    <insert id="insertCustomerComment">
+    	insert into customer_comment values(
+    		customer_comment_seq.nextval,
+    		#{customerServiceRef},
+    		<if test="customerCommentRef == 0">
+    			null,
+    		</if> 
+    		<if	test="customerCommentRef != 0">
+	    	#{customerCommentRef},
+    		</if>
+    		#{commentContent},
+    		to_char(sysdate, 'yyyy-mm-dd'),
+    		#{customerWriterNo})
+    </insert>
+    
+    <select id="selectCustomerCommentList" resultType="customerComment">
+    	select * from customer_comment
+    </select>
+    
+    <delete id="deleteComment">
+    	delete from customer_comment where comment_no = #{commentNo}
     </delete>
 </mapper>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.iei.customer.vo.Customer;
+import kr.co.iei.customer.vo.CustomerComment;
 import kr.co.iei.customer.vo.CustomerServiceFile;
 
 @Mapper
@@ -26,5 +27,11 @@ public interface CustomerDao {
 	int deleteCustomerFiles(int customerNo);
 	
 	int deleteCustomer(int customerNo);
+	
+	int insertCustomerComment(CustomerComment cc);
+	
+	List<CustomerComment> selectCustomerCommentList(int customerNo);
+	
+	int deleteComment(int commentNo);
 	
 }

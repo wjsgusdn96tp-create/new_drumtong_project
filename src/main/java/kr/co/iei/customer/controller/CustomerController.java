@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.ssl.SslProperties.Bundles.Watch.File;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.iei.customer.service.CustomerService;
 import kr.co.iei.customer.vo.Customer;
+import kr.co.iei.customer.vo.CustomerComment;
 import kr.co.iei.customer.vo.CustomerListData;
 import kr.co.iei.customer.vo.CustomerServiceFile;
 import kr.co.iei.member.model.vo.Member;
@@ -112,9 +114,9 @@ public class CustomerController {
 	@GetMapping(value="/view")
 	public String CustomerView(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
 		Customer c = customerService.selectOneCustomer(customerNo);
-			
 		
 		model.addAttribute("c", c);
+		
 		return "customer/view";
 	}
 	
@@ -122,13 +124,48 @@ public class CustomerController {
 	@ResponseBody
 	public String deleteCustomer(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
 		Customer c = customerService.selectOneCustomer(customerNo);
+		CustomerListData cld = customerService.deleteCustomer(customerNo);
+		int delResult = cld.getDelResult();
+//		System.out.println(delResult);
 		
 		if (c != null && c.getCustomerNickname().equals(member.getMemberNickname())) {
-			int result = customerService.deleteCustomer(customerNo);
-			if (result > 0) {
+			String savepath = root+"/customer";
+			if (delResult > 0) {
 				return "success"; 
 			}
 		}
 		return "fail";
 	}
+	
+	@PostMapping(value="/insertComment")
+	public String insertComment(CustomerComment cc) {
+		
+		int result = customerService.insertCustomerComment(cc);
+		return "redirect:/customer/view?customerNo="+cc.getCustomerServiceRef();
+	}
+	
+	@PostMapping(value="customer/deleteComment")
+	public String deleteComment(int commentNo) {
+		int result = customerService.deleteComment(commentNo);
+		System.out.println(result);
+		if(result > 0) {
+			return "success";
+		}
+		return "fail";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
