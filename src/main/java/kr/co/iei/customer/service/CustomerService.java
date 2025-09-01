@@ -21,7 +21,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 	
-	public CustomerListData selectCustomerList(int reqPage, String sort, Member member) {
+	public CustomerListData selectCustomerList(int reqPage, String sort, Member member, String category) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -34,6 +34,9 @@ public class CustomerService {
 			param.put("memberGrade", member.getMemberGrade());
 			param.put("memberNickname", member.getMemberNickname());
 		}
+	    if (category != null) {
+	        param.put("category", category);
+	    }
 		
 		List list = customerDao.selectCustomerList(param);
 		
@@ -61,124 +64,12 @@ public class CustomerService {
 		return cld;
 	}
 
-	public CustomerListData selectGjList(int reqPage, String sort, Member member) {
-		int numPerPage = 10;
-		int end = reqPage * numPerPage;
-		int start = end - numPerPage + 1;
-		HashMap<String, Object> param = new HashMap<String, Object>();
-		param.put("start",start);
-		param.put("end", end);
-		param.put("sort", sort);
-		
-		if(member != null) {
-			param.put("memberGrade", member.getMemberGrade());
-			param.put("memberNickname", member.getMemberNickname());
-		}
-		List list = customerDao.selectGjList(param);
-		
-		int totalCount = customerDao.selectGjTotalCount(param);
-		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
-		int pageNaviSize = 5;
-		int startNo = ((reqPage -1) / pageNaviSize) * pageNaviSize + 1;
-		int endNo = startNo + (pageNaviSize - 1);
-		if(endNo > totalPage) {
-			endNo = totalPage;
-		}
-		boolean prev = startNo > 1;
-	    boolean next = endNo < totalPage;
-	    
-	    CustomerNavi customerNavi = new CustomerNavi();
-	    customerNavi.setEndNo(endNo);
-	    customerNavi.setNext(next);
-	    customerNavi.setPageNaviSize(pageNaviSize);
-	    customerNavi.setPrev(prev);
-	    customerNavi.setReqPage(reqPage);
-	    customerNavi.setStartNo(startNo);
-	    customerNavi.setTotalPage(totalPage);
-	    
-	    CustomerListData cld = new CustomerListData(list, customerNavi);
-		return cld;
-	}
-
-	public CustomerListData selectComplainList(int reqPage, String sort, Member member) {
-		int numPerPage = 10;
-		int end = reqPage * numPerPage;
-		int start = end - numPerPage + 1;
-		HashMap<String, Object> param = new HashMap<String, Object>();
-		param.put("start",start);
-		param.put("end", end);
-		param.put("sort", sort);
-		if(member != null) {
-			param.put("memberGrade", member.getMemberGrade());
-			param.put("memberNickname", member.getMemberNickname());
-		}
-		List list = customerDao.selectComplainList(param);
-		
-		int totalCount = customerDao.selectComplainTotalCount(param);
-		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
-		int pageNaviSize = 5;
-		int startNo = ((reqPage -1) / pageNaviSize) * pageNaviSize + 1;
-		int endNo = startNo + (pageNaviSize - 1);
-		if(endNo > totalPage) {
-			endNo = totalPage;
-		}
-		boolean prev = startNo > 1;
-	    boolean next = endNo < totalPage;
-	    
-	    CustomerNavi customerNavi = new CustomerNavi();
-	    customerNavi.setEndNo(endNo);
-	    customerNavi.setNext(next);
-	    customerNavi.setPageNaviSize(pageNaviSize);
-	    customerNavi.setPrev(prev);
-	    customerNavi.setReqPage(reqPage);
-	    customerNavi.setStartNo(startNo);
-	    customerNavi.setTotalPage(totalPage);
-	    
-	    CustomerListData cld = new CustomerListData(list, customerNavi);
-		return cld;
-	}
-
-	public CustomerListData selectOpinionList(int reqPage, String sort, Member member) {
-		int numPerPage = 10;
-		int end = reqPage * numPerPage;
-		int start = end - numPerPage + 1;
-		HashMap<String, Object> param = new HashMap<String, Object>();
-		param.put("start",start);
-		param.put("end", end);
-		param.put("sort", sort);
-		if(member != null) {
-			param.put("memberGrade", member.getMemberGrade());
-			param.put("memberNickname", member.getMemberNickname());
-		}
-		List list = customerDao.selectOpinionList(param);
-		
-		int totalCount = customerDao.selectOpinionTotalCount(param);
-		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
-		int pageNaviSize = 5;
-		int startNo = ((reqPage -1) / pageNaviSize) * pageNaviSize + 1;
-		int endNo = startNo + (pageNaviSize - 1);
-		if(endNo > totalPage) {
-			endNo = totalPage;
-		}
-		boolean prev = startNo > 1;
-	    boolean next = endNo < totalPage;
-	    
-	    CustomerNavi customerNavi = new CustomerNavi();
-	    customerNavi.setEndNo(endNo);
-	    customerNavi.setNext(next);
-	    customerNavi.setPageNaviSize(pageNaviSize);
-	    customerNavi.setPrev(prev);
-	    customerNavi.setReqPage(reqPage);
-	    customerNavi.setStartNo(startNo);
-	    customerNavi.setTotalPage(totalPage);
-	    
-	    CustomerListData cld = new CustomerListData(list, customerNavi);
-		return cld;
-	}
 	
 	public Customer selectOneCustomer(int customerNo) {
 		Customer c = customerDao.selectOneCustomer(customerNo);
 		
+		List<CustomerServiceFile> fileList = customerDao.selectCustomerFiles(customerNo);
+		c.setFileList(fileList);
 		return c;
 	}
 	
@@ -193,6 +84,15 @@ public class CustomerService {
 		}
 		return result;
 	}
+
+	@Transactional
+	public int deleteCustomer(int customerNo) {
+		List<CustomerServiceFile> fileList = customerDao.selectCustomerFiles(customerNo);
+		int result = customerDao.deleteCustomer(customerNo);
+		
+		return result;
+	}
+	
 	
 }
 

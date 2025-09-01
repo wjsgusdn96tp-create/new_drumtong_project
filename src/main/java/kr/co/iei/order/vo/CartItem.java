@@ -1,7 +1,4 @@
-
 package kr.co.iei.order.vo;
-
-
 
 import org.apache.ibatis.type.Alias;
 
@@ -12,20 +9,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Alias(value = "details")
-
-
-public class DetailsTbl {
-	private int detailsNo;
+@Alias(value = "cart")
+public class CartItem {
+	private int cartNo;
 	private String cupChoice;
 	private String cupSize;
 	private int cupShot;
 	private int cupCream;
 	private int heat;
 	private int count;
-	private int product_no;
-	private int order_no;
-	private int pay;
+	private int productNo;
+	private int memberNo;
+	private String shopName;
 	private String discountName;
 	private int discountPrice;
+	private int pay;
 }

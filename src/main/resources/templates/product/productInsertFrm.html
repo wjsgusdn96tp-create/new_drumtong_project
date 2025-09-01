@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<th:block th:include="/common/header"></th:block>
+<th:block th:include="/common/header"></th:block>
 	<div class="wrap">
 	<div class="productInsert_wrap">
 		<div class="productInsert_title_wrap">상품 등록</div>
@@ -20,5 +20,14 @@
 			<button class="btn title_dessert_btn"><a href="/product/productInsertDessert?productTitle=dessert">디저트</a></button>
 			<button class="btn title_goods_btn"><a href="/product/productInsertGoods?productTitle=goods">굿즈</a></button>
 		</div>
+		
+		<form>
+		<div class="productInsert_content_wrap productInsertFrm_content_wrap">
+			<div class="content_wrap content_name productInsertFrm_content">카테고리를 선택하세요</div>
+		</div>
+		</form>
+	</div>
+	</div>
+<th:block th:include="common/footer"></th:block>
 </body>
 </html>

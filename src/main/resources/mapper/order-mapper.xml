@@ -6,8 +6,26 @@
 		select * from shop_tbl
 	</select>
 	
-	<select id="option" >
-		select product_img,product_name,product_price from product_tbl where product_no = #{productNo}
+	
+	<select id="getShop" resultType="shop">
+	  select * from shop_tbl
+	  where shop_name = #{shopName}
 	</select>
 	
+	<!-- 자명님 물건값 받아오는 로직  -->
+	<select id="option" resultType="product">
+		select product_no, product_img,product_name,product_price from product_tbl where product_no = #{productNo}
+	</select>
+	
+
+	<insert id="insertCart">
+		insert into cart_item_tbl (cart_no, cup_choice, cup_size, cup_shot, cup_cream, count, product_no, 
+			member_no, shop_name, pay) 
+			values (cart_item_tbl_seq.nextval,
+			#{cupChoice}, #{cupSize}, #{cupShot}, #{cupCream},
+			#{count}, #{productNo}, #{memberNo}, #{shopName}, #{pay})
+	</insert>
+	
+
+		
 </mapper>

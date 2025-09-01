@@ -19,7 +19,17 @@
                     </tr>
                     <tr>
                         <th>첨부파일</th>
-                        <td colspan="3">파일첨부</td>
+                        <td colspan="3">
+					        <th:block th:if="${!c.fileList.isEmpty()}">
+					            <div th:each="file : ${c.fileList}">
+					                <span th:text="${file.fileName}"></span>
+					            </div>
+					        </th:block>
+					
+					        <th:block th:if="${c.fileList.isEmpty()}">
+					            <span>첨부된 파일이 없습니다.</span>
+					        </th:block>
+					    </td>
                     </tr>
                     <tr>
                         <td class="content" colspan="4" th:utext="${c.customerContent}"></td>

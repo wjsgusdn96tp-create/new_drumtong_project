@@ -1,5 +1,7 @@
 package kr.co.iei.customer.vo;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -19,5 +21,6 @@ public class Customer {
 	private String customerContent;
 	private String customerDate;
 	private int customerStar;
+	private List<CustomerServiceFile> fileList;
 	
 }
