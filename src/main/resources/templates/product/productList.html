@@ -330,34 +330,59 @@
 						
 						const img = $("<img>");
 						img.attr("src","/product/"+product.productImg);
+						//
+						imgBoxDiv.append(img);
 						
 						const contentBoxDiv=$("<div>");
 						contentBoxDiv.addClass("product_content_box");
 						
 						const h3 =$("<h3>");
+						h3.text(product.productName);
+						contentBoxDiv.append(h3);
 						if(productTitle.equals(goods)){
 							const p1=$("<p>");
 							p1.text(product.productContentPresent);
-							h3.append(p1);
+							contentBoxDiv.append(p1);
 						}else{
 							const p2=$("<p>");
 							p2.text("칼로리 : ");
 							const span2=$("<span>");
 							span2.text(product.productContentKcal+"kcal");
 							p2.append(span2);
+							contentBoxDiv.append(p2);
 							
 							const p3=$("<p>");
 							p3.text("카페인 : ");
 							const span3=$("<span>");
 							span3.text(product.productContentShot+"g");
 							p3.append(span3);
+							contentBoxDiv.append(p3);
 							
 							const p4=$("<p>");
 							p4.text("당 : ");
 							const span4=$("<span>");
 							span4.text(product.productContentSugar+"g");
 							p4.append(span4);
+							contentBoxDiv.append(p4);
+							
+							const p5=$("<p>");
+							p5.text("나트륨 : ");
+							const span5=$("<span>");
+							span5.text(product.productContentNatrium+"g");
+							p5.append(span5);
+							contentBoxDiv.append(p5);
+							
+							const p6=$("<p>");
+							p6.text("단백질 : ");
+							const span6=$("<span>");
+							span5.text(product.productContentProtein+"g");
+							p6.append(span6);
+							contentBoxDiv.append(p6);
 						}
+						imgBoxDiv.append(contentBoxDiv);
+						label2.append(imgBoxDiv);
+						div.append(imgform);
+						//위에까지가 product_one_box안에 매니저 수정 삭제 버튼 넣고/ 상품 박스까지 넣어둠
 						//
 					}
 					
