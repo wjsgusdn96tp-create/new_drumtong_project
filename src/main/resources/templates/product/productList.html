@@ -60,7 +60,7 @@
 				
 			<!-- 이미지  -->
 				<div class="product_list_wrap">
-					<ul>
+					<ul class="product_list_wrap_ul">
 						<!-- [js]for문-대표 상품 리스트 -->
 						<li class="product_one_wrap" th:each="product : ${list}">
 							<div class="product_one_box">
@@ -86,7 +86,7 @@
 									<input type="submit" class="product" name="productNo" id="product_no1" th:value="${product.productNo}">	
 									<label for="product_no1">
 										<div class="product_img_box">
-											
+										
 											<!-- img 스크립트 걸어둠 
 											<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
 											-->
@@ -215,43 +215,167 @@
 		
 		
 		<script th:inline="javascript">
-		
-		for(let i=0;i<list.length;i++){
-			const product= list[i];
-			const img = $("<img>");
-			img.attr("src","/product/"+product.productImg)
+			const reqPage=[[${reqPage}]];
+			console.log(reqPage);
+			const shopName=[[${shopName}]];
+			console.log(shopName);	
 			
-			$(".product_img_box").append(img);
-			
-			
-		$.ajax({
-			url : "/product/productList",
-			type : "get",
-			data : {reqPage : [[${reqPage}]], shopName : [[${shopName}]]},
-			success : function(data){
-				console("성공");
-				for(let i=0;i<data.length;i++){
-					const product= data[i];
-					const img = $("<img>");
-					img.attr("src","/product/"+product.productImg)
+			$.ajax({
+				url : "/product/productList",
+				type : "get",
+				data : {reqPage :reqPage , shopName : shopName},
+				success : function(data){
+					console.log("성공");
 					
-					$(".product_img_box").append(img);
-				}
+					let idNum = 1;
+					for(let i=0;i>data.length;i++){
+						const product = data[i];
+						
+						const li = $("<li>");
+						li.addClass("product_one_wrap");
+						
+						const div =$("<div>");
+						div.addClass("product_one_box");
+						
+						const divManaberBtn =$("<div>");
+						divManaberBtn.addClass("product_manager_btn");
+						
+						
+						//수정btn
+						const updateForm = $("form");
+						updateFrom.attr =("action","productUpdate");
+						updateFrom.attr =("method","get");
+						updateFrom.attr =("value",product.productNo);
+						
+						const updateInput = $("<input>");
+						updateInput.attr("type","submit");
+						updateInput.attr("value",product.productNo);
+						updateInput.attr("id",idNum);
+						updateInput.attr("name","product_no");
+						
+						const updateLabel=$("label");
+						updateLable.attr("for",idNum);
+						idNum++;
+						
+						const updateButton =$("<button>");
+						updateButton.addClass("btn");
+						updateButton.text("수정");
+						
+						//
+						updateForm.append(updateInput);
+						divManaberBtn.append(updateForm);
+						//					
+						updateLabel.append(updateButton);
+						updateForm.append(updateLabel);
+						divManaberBtn.append(updateForm);
+						
+						//삭제btn
+						const deleteForm = $("form");
+						deleteFrom.attr =("action","productDelete");
+						deleteFrom.attr =("method","get");
+						deleteFrom.attr =("value",product.productNo);
+						
+						const deleteInput = $("<input>");
+						deleteInput.attr("type","submit");
+						deleteInput.attr("value",product.productNo);
+						deleteInput.attr("id",idNum);
+						deleteInput.attr("name","product_no");
+						
+						const deleteLabel=$("label");
+						deleteLable.attr("for",idNum);
+						idNum++;
+						
+						const deleteButton =$("<button>");
+						deleteButton.addClass("btn");
+						deleteButton.text("삭제");
+						//
+						deleteForm.append(deleteInput);
+						divManaberBtn.append(deleteForm);
+						//
+						deleteLabel.append("deleteButton");
+						deleteForm.append(deleteLabel);
+						divManaberBtn.append(deleteForm);
+					
+						//--관리자버튼 완성(divonebox)
+						div.append(divManagerBtn);
+						
+						//현우님 order가는 form
+						const imgForm = $("<form>");
+						imgForm.attr("action","/order/Orderoptoin");
+						imgForm.attr("method","get");
+						
+						//매장명input
+						const input1 =$("<input>");
+						input1.attr("type","hidden");
+						input1.attr("name","shopName");
+						input1.attr("value",shopName);
+						//현우님 매장명 input 완성
+						imgForm.append(input1);
+						
+						//상품번호 input
+						const input2 =$("<input>");
+						input2.attr("type","hidden");
+						input2.attr("name","productNo");
+						input2.attr("value",productNo);
+						input2.attr("id",idNum);
+						//
+						imgForm.append(input2);
+						//input2 에 대한 label
+						const label2 = $("<label>");
+						label2.attr("for",idNum);
+						idNum++;
+						
+						const imgBoxDiv = $("<div>");
+						imgBoxDiv.addClass("product_img_box");
+						
+						const img = $("<img>");
+						img.attr("src","/product/"+product.productImg);
+						
+						const contentBoxDiv=$("<div>");
+						contentBoxDiv.addClass("product_content_box");
+						
+						const h3 =$("<h3>");
+						if(productTitle.equals(goods)){
+							const p1=$("<p>");
+							p1.text(product.productContentPresent);
+							h3.append(p1);
+						}else{
+							const p2=$("<p>");
+							p2.text("칼로리 : ");
+							const span2=$("<span>");
+							span2.text(product.productContentKcal+"kcal");
+							p2.append(span2);
+							
+							const p3=$("<p>");
+							p3.text("카페인 : ");
+							const span3=$("<span>");
+							span3.text(product.productContentShot+"g");
+							p3.append(span3);
+							
+							const p4=$("<p>");
+							p4.text("당 : ");
+							const span4=$("<span>");
+							span4.text(product.productContentSugar+"g");
+							p4.append(span4);
+						}
+						//
+					}
+					
+					
+					//상품 이미지
+						let count =0;
+						const product= data[count];
+						const img = $("<img>");
+						img.attr("src","/product/"+product.productImg)
+						
+						$(".product_img_box").append(img);
+						count++;
 				
-			},
-		error : function(){
+				},
+				error : function(){
 					console.log("에러");
 				}
-		})
-		
-		
-		
-		
-		
-		  
-		
-		
-		
+			})
 		</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
