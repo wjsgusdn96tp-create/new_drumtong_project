@@ -1,0 +1,7 @@
+.section{
+	margin: 0 auto;
+}
+.img-box>img{
+	width: 750px;
+	height: 200px;
+}

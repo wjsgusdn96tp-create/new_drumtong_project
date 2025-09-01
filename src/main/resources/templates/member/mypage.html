@@ -18,18 +18,18 @@
 				<h3 class="text-title">계정 정보</h3>
 				<form action="/member/update" method="post">
 					<table class="tbl">
+						<!-- 회원 이메일 -->
+						<tr>
+							<th>이메일</th>
+							<td class="left" th:text="${session.member.memberEmail}"></td>
+						</tr>
+						
 						<!-- 회원 닉네임 -->
 						<tr>
 							<th>닉네임</th>
 							<td class="left">
 								<input type="text" name="memberNickname" th:value="${session.member.memberNickname}">
 							</td>
-						</tr>
-						
-						<!-- 회원 이메일 -->
-						<tr>
-							<th>이메일</th>
-							<td class="left" th:text="${session.member.memberEmail}"></td>
 						</tr>
 						
 						<!-- 회원 비밀번호 -->

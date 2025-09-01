@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/DrumtongCss/membershipPage.css">
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<!-- membership Page -->
+	<main class="content">
+    	<section class="section">
+        	<div class="main-title">
+            	<h3>MemberShip 소개</h3>
+        	</div>
+        	<div class="img-box">
+            	<img src="/img/cafe.png">
+        	</div>
+        	<div class="content-box">
+            	<!-- membershipList 반복 -->
+            	<div th:each="ms : ${list}">
+                	<div class="title-text">
+                    	<p class="text" th:text="'연간 구독료 ' + ${ms.membershipPrice} + '원'"></p>
+                	</div>
+                	<div class="img">
+                    	<img th:src="@{/img/{grade}.png(grade=${ms.membershipGrade})}" alt="Membership Image">
+                    	<div class="introduction">
+                        	<span class="material-icons-outlined">coffee</span>
+                        	<p class="title" th:text="${ms.membershipGrade} + ' Grade MemberShip'"></p>
+                        	<p th:text="'등급일로부터 1년 간 모든 음료 상시 ' + ${ms.percent} + '% 할인 적용'"></p>
+                        	<div class="limk-box">
+                            	<button class="btn-primary btn-buy" th:data-grade="${ms.membershipGrade}" th:data-price="${ms.membershipPrice}"> 맴버쉽 구매하러 가기
+                                	<span class="material-icons-outlined">arrow_forward</span>
+                            	</button>
+                        	</div>
+                    	</div>
+                	</div>
+            	</div>
+        	</div>
+    	</section>
+	</main>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script>
+	$(".btn-buy").on("click", function() {
+	    const grade = $(this).data("grade");
+	    const price = $(this).data("price");
+	    const date = new Date();
+	    const dateString = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+		IMP.init("imp16665102");
+		IMP.request_pay(
+			  {
+			    channelKey: "channel-key-f2d4efff-b000-454d-b14d-0674dad2f6e5",
+			    pay_method: "card",
+			    merchant_uid: "order_no_"+dateString,
+			    name: "주문명:결제테스트",
+			    amount: price,
+			    buyer_email: "test@portone.io",
+			    buyer_name: "구매자이름",
+			    buyer_tel: "010-1234-5678",
+			    buyer_addr: "서울특별시 강남구 삼성동",
+			    buyer_postcode: "123-456",
+			  },
+			  function (rsp) {
+			  },
+			);
+		});
+	</script>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

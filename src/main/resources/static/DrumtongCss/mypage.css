@@ -287,16 +287,39 @@ table>tbody>tr>td{
 .first-title>h1{
 	color: #6D2932;
 	font-weight: bold;
-	padding-left: 100px;
+	padding-left: 60px;
+	padding-bottom: 50px;
+	padding-top: 30px;
 }
 h1>#nickname{
-	padding-left: 550px;
+	padding-left: 580px;
 }
 .section{
     width: 550px;
     margin: 0 auto;
     border: 1px solid #d6d6d6;
     border-radius: 35px;
-    background-color: #ECEEDF;
+    background-color: #F7ECDE;
     text-align: center;
+}
+.tbl>th{
+	font-size: 16px;
+}
+.left{
+	font-size: 16px;
+}
+.left>input{
+	font-size: 16px;
+	width: 250px;
+	height: 25px;
+	text-align: center;
+	background-color: #FBF8F1;
+	border: 1px solid #555555;
+	border-radius: 15px;
+}
+.mypage-btn>button{
+	width: 130px;
+	height: 30px;
+	background-color: #FBF8F1;
+	font-size: 18px;
 }

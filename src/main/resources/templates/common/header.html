@@ -25,7 +25,9 @@
         <div class="nav-box">
             <div class="navbox1">
                 <ul class="navi-small-box">
-                    <li><a href="#">Admin MemberList</a></li>
+                    <li th:if="${session.member != null && session.member.memberGrade == '관리자'}">
+    					<a href="/admin/adminPage">Admin MemberList</a>
+					</li>
                     <li>
                         <a href="/member/mypage"><span class="material-icons">perm_identity</span></a>
                     </li>
@@ -44,7 +46,7 @@
                     <li><a href="/order/OrderMap">ORDER</a></li>
                     <li><a href="/news/list?noticeReqPage=1">NEWS</a></li> 
                     <li><a href="/customer/list?reqPage=1">CUSTOMER SERVICE</a></li>   
-                    <li><a href="#">MEMBERSHIP</a></li>                    
+                    <li><a href="/membership/membershipPage">MEMBERSHIP</a></li>                    
                 </ul>
             </div>
         </div>

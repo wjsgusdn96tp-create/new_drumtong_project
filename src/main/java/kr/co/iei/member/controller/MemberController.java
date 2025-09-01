@@ -97,10 +97,10 @@ public class MemberController {
 			member.setMemberNickname(m.getMemberNickname());
 			member.setMemberPw(m.getMemberPw());
 		}
-		return "redirect:/member/mypage";
+		return "redirect:/";
 	}// update
 	
-	@GetMapping(value="delete")
+	@GetMapping(value="/delete")
 	public String delete(@SessionAttribute Member member, Model model, HttpSession session) {
 		int memberNo = member.getMemberNo();
 		int result = memberService.deleteMember(memberNo);
@@ -111,4 +111,12 @@ public class MemberController {
 		return "common/msg";
 	}// delete
 	
+	@RequestMapping(value="/adminMsg")
+	public String adminMsg(Model model) {
+		model.addAttribute("title", "관리자 페이지");
+		model.addAttribute("text", "관리자만 접근 가능합니다.");
+		model.addAttribute("icon", "warning");
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	}// adminMsg
 }// MemberController Class
