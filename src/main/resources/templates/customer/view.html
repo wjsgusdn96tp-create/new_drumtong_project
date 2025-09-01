@@ -245,13 +245,14 @@
     }
     
     function modifyComment(obj, customerNo, commentNo) {
-        const modifyBtn = $(obj);
-        const delBtn = modifyBtn.next('.delComment');
+        const modifyBtn = $(obj); 
+        const delBtn = modifyBtn.siblings('.delComment'); // 같은 부모를 가진 형제 중에서 .delComment 클래스를 가진 버튼을 찾음
+        
         const commentLi = modifyBtn.closest('li');
         const contentLi = commentLi.prev('li');
         const contentP = contentLi.find('.comment-content-p');
         const contentTextareaDiv = contentLi.find('.input-item[style*="display:none"]');
-        const recShowLink = commentLi.find('.recShow');
+        const recShowLink = commentLi.find('a.recShow');
 
         contentTextareaDiv.find('textarea').val(contentP.text());
         contentP.hide();
@@ -281,12 +282,13 @@
 
     function modifyCancel(obj, customerNo, commentNo) {
         const cancelBtn = $(obj);
-        const modifyBtn = cancelBtn.prev();
+        const modifyBtn = cancelBtn.siblings('button:not(.delComment)'); //같은 부모를 가진 형제 중에서 .delComment가 아닌 버튼을 찾음 (즉, '수정완료' 버튼)
+        
         const commentLi = cancelBtn.closest('li');
         const contentLi = commentLi.prev('li');
         const contentP = contentLi.find('.comment-content-p');
         const contentTextareaDiv = contentLi.find('.input-item[style*="display:none"]');
-        const recShowLink = commentLi.find('.recShow');
+        const recShowLink = commentLi.find('a.recShow');
 
         contentP.show();
         contentTextareaDiv.hide();
