@@ -81,11 +81,20 @@ public class OrderController {
 	public String cartPage(Model model,int productNo,String shopName,String productName,
 			@SessionAttribute(required = false) Member member) {
 	    
+		if(member == null) {
+			
+			return "member/login";
+		}
+		
 		int num = member.getMemberNo();
 		
 		List list = orderService.selectCartList(num,productNo,shopName,productName);
 		
+		
 	    model.addAttribute("list", list);
 	    return "order/DrumtongCart";
 	}
+	
+	
+	
 }
