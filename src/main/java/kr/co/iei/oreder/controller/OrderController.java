@@ -43,6 +43,7 @@ public class OrderController {
 		
 		Product p = orderService.option(productNo);
 		
+		
 		//매장이름 받아오기
 		ShopTbl shop = orderService.getShop(shopName); 
 		
@@ -81,11 +82,20 @@ public class OrderController {
 	public String cartPage(Model model,int productNo,String shopName,String productName,
 			@SessionAttribute(required = false) Member member) {
 	    
+		if(member == null) {
+			
+			return "redirect:/member/loginFrm";
+		}
+		
 		int num = member.getMemberNo();
 		
 		List list = orderService.selectCartList(num,productNo,shopName,productName);
 		
+		
 	    model.addAttribute("list", list);
 	    return "order/DrumtongCart";
 	}
+	
+	
+	
 }

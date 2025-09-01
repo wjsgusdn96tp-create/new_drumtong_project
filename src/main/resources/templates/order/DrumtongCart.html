@@ -13,12 +13,7 @@
    <th:block th:include="/common/header"></th:block>
 	
 	 
-	<div>
-   	<span th:each="list : ${list}"></span>
-   	<span th:text="${list[0].memberNo}"></span>
-   	<span th:text="${list[0].shopName}"></span>
-   	<span th:text="${list[0].productNo}"></span>
-	</div>
+
 	 
 	
 	
@@ -36,8 +31,8 @@
         </div>
         <div class="cart-box">
             <div class="cart-listbox">
-                <ul class="cartlist">
-                    <li th:each="list : ${list}">
+                <ul class="cartlist"th:each="list : ${list}">
+                    <li>
                         <div class="cart-listheader">
                                 <button class="button-icons"><span class="material-icons">check_circle_outline</span></button>
                         </div>
@@ -87,7 +82,7 @@
                                 <div class="price-row">
                                 <span class="label-price">할인금액</span>
                                 <div class="value-box">
-							    <span class="discount-price">500</span>
+							    <span class="discount-price">1000</span>
 							    <span class="unit">원</span>
 							  	</div>
                              </div>
@@ -106,13 +101,13 @@
             </div>
             
            <div class="cart-pricebox">
-                <div class="price-summary" th:each="list : ${list}">
+                <div class="price-summary">
                     <h3>결제정보</h3>
                         <hr>
                     <div class="summary-row">
 				      <span class="label">상품수량</span>
 				      <span class="value">
-				        <span class="count"th:text="${list.count}"></span>
+				        <span class="total-count"></span>
 				        <span class="unit">개</span>
 				      </span>
 				    </div>
@@ -120,14 +115,14 @@
 				    <div class="summary-row">
 				      <span class="label">상품금액</span>
 				      <span class="value">
-				        <span class="price"th:text="${list.pay}"></span>
+				        <span class="product-totalprice"></span>
 				        <span class="unit">원</span>
 				      </span>
 				    </div>
 				    <div class="summary-row">
 				      <span class="label">할인금액</span>
 				      <span class="value">
-				        <span class="discount">-500</span>
+				        <span class="total-discount"></span>
 				        <span class="unit">원</span>
 				      </span>
 				    </div>
@@ -135,7 +130,7 @@
 					    <div class="summary-row total">
 					      <span class="label">총 결제금액</span>
 					      <span class="value">
-					        <span class="total-price">4500</span>
+					        <span class="total-price"></span>
 					        <span class="unit">원</span>
 					      </span>
     					</div>
@@ -144,11 +139,21 @@
                       <button class="buy-btn">구매하기</button>
                   </div>
                 </div>
-
             </div>
-
         </div>
     </div>
+	
+	<script th:inline="javascript">
 
+	const price = [[${list}]];
+	
+	console.log(price);
+	
+	
+	
+	
+	
+	</script>
+	
 </body>
 </html>
