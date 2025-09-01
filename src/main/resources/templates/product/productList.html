@@ -60,7 +60,7 @@
 				
 			<!-- 이미지  -->
 				<div class="product_list_wrap">
-					<ul class="product_list_wrap product_list_wrap_ul">
+					<ul class="product_list_wrap_ul">
 						
 						<!--
 						<!-- [js]for문-상품 리스트 했는데 안됨. 자바스크립트로 다시 만들어야 할 수도(이미지 땜시
@@ -141,23 +141,17 @@
 		
 		<script th:inline="javascript">
 			//const reqPage=[[${reqPage}]];
-			const reqPage=1;//수정예정
-			console.log(reqPage);
-			const shopName=[[${shopName}]];
-			console.log(shopName);	
 			
-			$.ajax({
-				url : "/product/productList?shopName=shopName&reqPage=1",
-				type : "get",
-				data : {list : [[${list}]]},
-				success : function(data){
-					console.log("성공");
+			
+					console.log([[${list}]]);
 					
 					let idNum = 1;
-					for(let i=0;i<data.length;i++){
+					
+					for(let i=0;i<[[${list}]].length;i++){
 						console.log("for문 시작");
-						const product = data[i];
+						const product = [[${list}]][i];
 						console.log(product);
+						
 						const li = $("<li>");
 						li.addClass("product_one_wrap");
 						
@@ -169,7 +163,7 @@
 						
 						
 						//수정btn
-						const updateForm = $("form");
+						const updateForm = $("<form>");
 						updateForm.attr =("action","productUpdate");
 						updateForm.attr =("method","get");
 						updateForm.attr =("value",product.productNo);
@@ -180,7 +174,7 @@
 						updateInput.attr("id",idNum);
 						updateInput.attr("name","product_no");
 						
-						const updateLabel=$("label");
+						const updateLabel=$("<label>");
 						updateLabel.attr("for",idNum);
 						idNum++;
 						
@@ -197,7 +191,7 @@
 						divManagerBtn.append(updateForm);
 						
 						//삭제btn
-						const deleteForm = $("form");
+						const deleteForm = $("<form>");
 						deleteForm.attr =("action","productDelete");
 						deleteForm.attr =("method","get");
 						deleteForm.attr =("value",product.productNo);
@@ -208,7 +202,7 @@
 						deleteInput.attr("id",idNum);
 						deleteInput.attr("name","product_no");
 						
-						const deleteLabel=$("label");
+						const deleteLabel=$("<label>");
 						deleteLabel.attr("for",idNum);
 						idNum++;
 						
@@ -219,7 +213,7 @@
 						deleteForm.append(deleteInput);
 						divManagerBtn.append(deleteForm);
 						//
-						deleteLabel.append("deleteButton");
+						deleteLabel.append(deleteButton);
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
 					
@@ -235,7 +229,7 @@
 						const input1 =$("<input>");
 						input1.attr("type","hidden");
 						input1.attr("name","shopName");
-						input1.attr("value",shopName);
+						input1.attr("value",[[${shopName}]]);
 						//현우님 매장명 input 완성
 						imgForm.append(input1);
 						
@@ -306,8 +300,10 @@
 							p6.append(span6);
 							contentBoxDiv.append(p6);
 						}
+						
 						imgBoxDiv.append(contentBoxDiv);
 						label2.append(imgBoxDiv);
+						imgForm.append(label2);
 						div.append(imgForm);
 						//위에까지가 product_one_box안에 매니저 수정 삭제 버튼 넣고/ 상품 박스까지 넣어둠
 						
@@ -317,17 +313,17 @@
 						iconDiv.addClass("product_icon");
 						
 						//장바구니
-						const cartForm = $("form");
+						const cartForm = $("<form>");
 						cartForm.attr("action","/order/Orderoption");
 						cartForm.attr("method","get");
 						
-						const cartDiv =$("div");
+						const cartDiv =$("<div>");
 						cartDiv.addClass("product_cart");
 						//매장명input
 						const input3 =$("<input>");
 						input3.attr("type","hidden");
 						input3.attr("name","shopName");
-						input3.attr("value",shopName);
+						input3.attr("value",[[${shopName}]]);
 						//현우님 매장명 input 완성
 						cartDiv.append(input3);
 						
@@ -380,7 +376,7 @@
 						likeIconSpan1.append(likeIconSpan3);
 						
 						const likeCount = $("<span>")
-						likeCount.addClass("Like_Count");
+						likeCount.addClass("like_count");
 						likeCount.text("좋아요 수_추가작업 필요");
 						likeIconSpan1.append(likeCount);
 						
@@ -401,12 +397,9 @@
 						//ul에 반복문 넣기
 						$(".product_list_wrap_ul").append(li);
 					}
+					
 				
-				},
-				error : function(){
-					console.log("에러");
-				}
-			})
+				
 		</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

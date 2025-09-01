@@ -28,7 +28,9 @@ public class ProductController {
 	
 	@GetMapping(value="/productList")
 	private String productList(int reqPage, String shopName, Model model) {
+		
 		productListDate pld = productService.productListDate(reqPage);
+		System.out.println(pld);
 		model.addAttribute("list", pld.getList());
 		model.addAttribute("pageNavi",pld.getPageNavi());
 		model.addAttribute("shopName",shopName);
