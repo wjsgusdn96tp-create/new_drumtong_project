@@ -87,16 +87,17 @@
 									<label for="product_no1">
 										<div class="product_img_box">
 											
-											<!-- img 스크립트 걸거 -->
+											<!-- img 스크립트 걸어둠 
 											<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
+											-->
 											<!-- DB에서 들고올거 -->
 											<div class="product_content_box">
-												<h3>product_name</h3>
-												<p>칼로리 : <p th:text="${product.productContentKcal}"></p> kcal</p>
-												<p>카페인 : <p th:text="${product.productContentShot}"></p> g</p>
-												<p>당 : <p th:text="${product.productContentSugar}"></p> g</p>
-												<p>나트륨 : <p th:text="${product.productContentNatrium}"></p> g</p>
-												<p>단백질 :<p th:text="${product.productContentProtein}"></p> g</p>
+												<h3 th:text="${product.productName}"></h3>
+												<p>칼로리 : <span th:text="${product.productContentKcal}"></span> kcal</p>
+												<p>카페인 : <span th:text="${product.productContentShot}"></span> g</p>
+												<p>당 : <span th:text="${product.productContentSugar}"></span> g</p>
+												<p>나트륨 : <span th:text="${product.productContentNatrium}"></span> g</p>
+												<p>단백질 :<span th:text="${product.productContentProtein}"></span> g</p>
 											</div>
 										</div>	
 									</label>
@@ -214,25 +215,33 @@
 		
 		
 		<script th:inline="javascript">
-		<!--
-		<div class="product_img_box">
 		
-		<!-- img 스크립트 걸거 
-		<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
-		-->
-		
+		for(let i=0;i<list.length;i++){
+			const product= list[i];
+			const img = $("<img>");
+			img.attr("src","/product/"+product.productImg)
+			
+			$(".product_img_box").append(img);
+			
+			
 		$.ajax({
 			url : "/product/productList",
 			type : "get",
-			data : {list : list},
+			data : {reqPage : [[${reqPage}]], shopName : [[${shopName}]]},
 			success : function(data){
-				for(product:data){
+				console("성공");
+				for(let i=0;i<data.length;i++){
+					const product= data[i];
 					const img = $("<img>");
-					img.attr("src","/img/product/"+product.productImg)
-			
-		}
+					img.attr("src","/product/"+product.productImg)
+					
+					$(".product_img_box").append(img);
+				}
 				
-			}
+			},
+		error : function(){
+					console.log("에러");
+				}
 		})
 		
 		
