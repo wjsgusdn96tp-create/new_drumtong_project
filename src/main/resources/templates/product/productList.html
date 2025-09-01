@@ -221,8 +221,19 @@
 		<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
 		-->
 		
-		<!--img 불러오기-->
-		const img = $("<img>");
+		$.ajax({
+			url : "/product/productList",
+			type : "get",
+			data : {list : list},
+			success : function(data){
+				for(product:data){
+					const img = $("<img>");
+					img.attr("src","/img/product/"+product.productImg)
+			
+		}
+				
+			}
+		})
 		
 		
 		
