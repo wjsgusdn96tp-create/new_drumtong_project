@@ -12,6 +12,18 @@
 <body>
    <th:block th:include="/common/header"></th:block>
 	
+	 
+	<div>
+   	<span th:each="list : ${list}"></span>
+   	<span th:text="${list[0].memberNo}"></span>
+   	<span th:text="${list[0].shopName}"></span>
+   	<span th:text="${list[0].productNo}"></span>
+	</div>
+	 
+	
+	
+	
+	
     <div class="cart-mainbox">
         <div class="cart-namebox">
             <div class="cart-name">
@@ -25,7 +37,7 @@
         <div class="cart-box">
             <div class="cart-listbox">
                 <ul class="cartlist">
-                    <li>
+                    <li th:each="list : ${list}">
                         <div class="cart-listheader">
                                 <button class="button-icons"><span class="material-icons">check_circle_outline</span></button>
                         </div>
@@ -36,24 +48,24 @@
                             </div>
                             <div class="list-infobox">
                                 <div class="info-top">
-                                    <span class="item-name">민트초코 오레오 파르페</span>
+                                    <span class="item-name" th:text="${list.productName}"></span>
                                     <div class="quantity-box">
-                                        <span class="quantity">1</span>
+                                        <span class="quantity" th:text="${list.count}"></span>
                                         <span>개</span>
                                     </div>
                                     <div class=quantity-box2>
-                                    <span class="item-price">5000</span>
+                                    <span class="item-price" th:text="${list.pay}"></span>
                                     <span>원</span>
                                     </div>
                                 </div>
                                 <div class="item-option">
                                     <div class="option-top">
-                                        <span class="size">사이즈 : </span><span class="size-count">L</span>
-                                        <span class="cup">컵 : </span><span class="cup-type">매장</span>
+                                        <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
+                                        <span class="cup">컵 : </span><span class="cup-type" th:text="${list.cupChoice}"></span>
                                     </div>
                                     <div class="option-bottom">
-                                        <span class="shot">샷추가 : </span><span class="shot-count">2</span>
-                                        <span class="cream">휘핑크림 : </span><span class="cream-count">0</span>
+                                        <span class="shot">샷추가 : </span><span class="shot-count" th:text="${list.cupShot}"></span>
+                                        <span class="cream">휘핑크림 : </span><span class="cream-count" th:text="${list.cupCream}"></span>
                                     </div>
                                 </div>
                                 <div class="info-bottom">
@@ -67,7 +79,7 @@
                                 <div class="price-row">
                                 <span class="label-price">상품금액</span>
                                 <div class="value-box">
-    							<span class="total-price">5000</span>
+    							<span class="total-price"th:text="${list.pay}"></span>
    								 <span class="unit">원</span>
   								</div>
                                 </div>
@@ -94,13 +106,13 @@
             </div>
             
            <div class="cart-pricebox">
-                <div class="price-summary">
+                <div class="price-summary" th:each="list : ${list}">
                     <h3>결제정보</h3>
                         <hr>
                     <div class="summary-row">
 				      <span class="label">상품수량</span>
 				      <span class="value">
-				        <span class="count">2</span>
+				        <span class="count"th:text="${list.count}"></span>
 				        <span class="unit">개</span>
 				      </span>
 				    </div>
@@ -108,11 +120,10 @@
 				    <div class="summary-row">
 				      <span class="label">상품금액</span>
 				      <span class="value">
-				        <span class="price">5000</span>
+				        <span class="price"th:text="${list.pay}"></span>
 				        <span class="unit">원</span>
 				      </span>
 				    </div>
-				
 				    <div class="summary-row">
 				      <span class="label">할인금액</span>
 				      <span class="value">
