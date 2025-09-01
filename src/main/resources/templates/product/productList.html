@@ -164,7 +164,7 @@
 						
 						//수정btn
 						const updateForm = $("<form>");
-						updateForm.attr =("action","productUpdate");
+						updateForm.attr =("action","product/productUpdate");
 						updateForm.attr =("method","get");
 						updateForm.attr =("value",product.productNo);
 						
@@ -192,7 +192,7 @@
 						
 						//삭제btn
 						const deleteForm = $("<form>");
-						deleteForm.attr =("action","productDelete");
+						deleteForm.attr =("action","/product/productDelete");
 						deleteForm.attr =("method","get");
 						deleteForm.attr =("value",product.productNo);
 						
@@ -222,12 +222,13 @@
 						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
-						imgForm.attr("action","/order/Orderoptoin");
+						imgForm.attr("action","/order/Orderoption");
 						imgForm.attr("method","get");
+						
 						
 						//매장명input
 						const input1 =$("<input>");
-						input1.attr("type","hidden");
+						input1.attr("type","submit");
 						input1.attr("name","shopName");
 						input1.attr("value",[[${shopName}]]);
 						//현우님 매장명 input 완성
@@ -235,7 +236,7 @@
 						
 						//상품번호 input
 						const input2 =$("<input>");
-						input2.attr("type","hidden");
+						input2.attr("type","submit");
 						input2.attr("name","productNo");
 						input2.attr("value",product.productNo);
 						input2.attr("id",idNum);
@@ -321,7 +322,7 @@
 						cartDiv.addClass("product_cart");
 						//매장명input
 						const input3 =$("<input>");
-						input3.attr("type","hidden");
+						input3.attr("type","submit");
 						input3.attr("name","shopName");
 						input3.attr("value",[[${shopName}]]);
 						//현우님 매장명 input 완성
@@ -329,7 +330,7 @@
 						
 						//상품번호 input
 						const input4 =$("<input>");
-						input4.attr("type","hidden");
+						input4.attr("type","submit");
 						input4.attr("name","productNo");
 						input4.attr("value",product.productNo);
 						input4.attr("id",idNum);
