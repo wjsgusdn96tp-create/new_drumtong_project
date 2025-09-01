@@ -22,4 +22,6 @@ public class News {
 	private String content;
 	private String writeDate;
 	private String image;
+	private int likeCount;
+	private int isLike;
 }

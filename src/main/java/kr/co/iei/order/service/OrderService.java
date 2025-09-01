@@ -44,8 +44,8 @@ public class OrderService {
 	}
 
 
-	public List selectCartList(int num) {
-		List list = orderDao.selectCartList(num);
+	public List selectCartList(int num, int productNo, String shopName, String productName) {
+		List list = orderDao.selectCartList(num,productNo,shopName,productName);
 		
 		return list;
 	}

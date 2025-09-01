@@ -22,11 +22,17 @@ public interface NewsDao {
 
 	int insertNews(News news);
 
-	int insertDiscount();
+	int insertDiscount(Discount discount);
 
 	List<News> selectAllNews(HashMap<String, Object> newsListNum);
 
 	int insertNotice(Notice notice);
+
+	int insertNewsLike(HashMap<String, Object> param);
+
+	int deleteNewsLike(HashMap<String, Object> param);
+
+	int selectNewsLikeCount(int newsNo);
 
 
 }

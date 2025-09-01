@@ -1,5 +1,6 @@
 package kr.co.iei.news.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -121,6 +122,31 @@ public class NewsService {
 	public int insertNotice(Notice notice) {
 		int result = newsDao.insertNotice(notice);
 		return result;
+	}
+	@Transactional
+	public int insertDiscount(Discount discount, List productNoList) {
+		int result = 0;
+		for(int i=0; i<productNoList.size();i++) {
+			discount.setProductNo((int)productNoList.get(i));
+			result += newsDao.insertDiscount(discount);
+		}		
+		return result;
+	}
+	
+	@Transactional
+	public int likepush(News news, int memberNo) {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("newsNo", news.getNewsNo());
+		param.put("memberNo", memberNo);
+		/*
+		if(news.getIsLike() ==0) {
+			int result = newsDao.insertNewsLike(param);
+		} else {
+			int result = newsDao.deleteNewsLike(param);
+ 		}
+		int likeCount = newsDao.selectNewsLikeCount(news.getNewsNo());
+		*/
+		return 1;
 	}
 	
 }
