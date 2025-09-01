@@ -24,4 +24,6 @@ public class CartItem {
 	private String discountName;
 	private int discountPrice;
 	private int pay;
+	private String productName;
+	private String cartImg;
 }

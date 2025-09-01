@@ -20,8 +20,8 @@ public interface OrderDao {
 	ShopTbl getShop(String shopName);
 
 	int insertCart(CartItem ct);
-
-	List selectCartList(int num);
+	
+	List selectCartList(int num, int productNo, String shopName, String productName);
 
 
 
