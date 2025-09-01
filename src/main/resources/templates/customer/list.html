@@ -120,34 +120,36 @@
     </div>
     <th:block th:include="common/footer"></th:block>
     <script>
-    $(".delete-btn").on("click", function() {
-        
-        const deleteBtn = $(this);
-        const index = $(".delete-btn").index(this);
-		const customerNo = deleteBtn.val();
-        if (!confirm("정말로 삭제하시겠습니까?")) {
-            return;
-        }
-       
-        $.ajax({
-            url: "/customer/delete",
-            type: "POST",
-            data: {
-                customerNo: customerNo
-            },
-            success: function(response) {
-                if (response === "success") {
-                    alert("게시글이 삭제되었습니다.");
-					$(".tab-content").eq(index).remove();
-                    
-                } else {
-                    alert("게시글 삭제 실패");
-                }
-            },
-            error: function() {
-                alert("삭제 오류");
-            }
-        });
+    $(document).ready(function(){
+	    $(".delete-btn").on("click", function() {
+	        
+	        const deleteBtn = $(this);
+	        const index = $(".delete-btn").index(this);
+			const customerNo = deleteBtn.val();
+	        if (!confirm("정말로 삭제하시겠습니까?")) {
+	            return;
+	        }
+	       
+	        $.ajax({
+	            url: "/customer/delete",
+	            type: "POST",
+	            data: {
+	                customerNo: customerNo
+	            },
+	            success: function(response) {
+	                if (response === "success") {
+	                    alert("게시글이 삭제되었습니다.");
+						$(".tab-content").eq(index).remove();
+	                    
+	                } else {
+	                    alert("게시글 삭제 실패");
+	                }
+	            },
+	            error: function() {
+	                alert("삭제 오류");
+	            }
+	        });
+	    });
     });
     
     

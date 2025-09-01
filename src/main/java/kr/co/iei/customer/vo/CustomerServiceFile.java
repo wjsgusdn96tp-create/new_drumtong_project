@@ -16,4 +16,5 @@ public class CustomerServiceFile {
 	private int customerNo;
 	private String fileName;
 	private String filePath;
+	
 }

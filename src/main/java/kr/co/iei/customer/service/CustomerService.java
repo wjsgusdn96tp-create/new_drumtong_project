@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.customer.dao.CustomerDao;
 import kr.co.iei.customer.vo.Customer;
+import kr.co.iei.customer.vo.CustomerComment;
 import kr.co.iei.customer.vo.CustomerListData;
 import kr.co.iei.customer.vo.CustomerNavi;
 import kr.co.iei.customer.vo.CustomerServiceFile;
@@ -60,7 +61,7 @@ public class CustomerService {
 	    customerNavi.setStartNo(startNo);
 	    customerNavi.setTotalPage(totalPage);
 	    
-	    CustomerListData cld = new CustomerListData(list, customerNavi);
+	    CustomerListData cld = new CustomerListData(list, customerNavi, endNo);
 		return cld;
 	}
 
@@ -70,6 +71,9 @@ public class CustomerService {
 		
 		List<CustomerServiceFile> fileList = customerDao.selectCustomerFiles(customerNo);
 		c.setFileList(fileList);
+		
+		List<CustomerComment> commentList = customerDao.selectCustomerCommentList(customerNo);
+		c.setCommentList(commentList);
 		return c;
 	}
 	
@@ -86,12 +90,34 @@ public class CustomerService {
 	}
 
 	@Transactional
-	public int deleteCustomer(int customerNo) {
-		List<CustomerServiceFile> fileList = customerDao.selectCustomerFiles(customerNo);
-		int result = customerDao.deleteCustomer(customerNo);
+	public CustomerListData deleteCustomer(int customerNo) {
+		List delFileList = customerDao.selectCustomerFiles(customerNo);
+		int delResult = customerDao.deleteCustomer(customerNo);
+		System.out.println(delResult);
 		
+		CustomerListData cld = new CustomerListData(delFileList, null, delResult);
+		System.out.println(cld);
+		return cld;
+	}
+
+	@Transactional
+	public int insertCustomerComment(CustomerComment cc) {
+		int result = customerDao.insertCustomerComment(cc);
+		System.out.println(cc);
 		return result;
 	}
+
+	@Transactional
+	public int deleteComment(int commentNo) {
+		int result = customerDao.deleteComment(commentNo);
+		return result;
+	}
+
+
+	
+	
+	
+	
 	
 	
 }
