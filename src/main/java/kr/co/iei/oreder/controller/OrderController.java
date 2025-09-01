@@ -43,6 +43,7 @@ public class OrderController {
 		
 		Product p = orderService.option(productNo);
 		
+		
 		//매장이름 받아오기
 		ShopTbl shop = orderService.getShop(shopName); 
 		
