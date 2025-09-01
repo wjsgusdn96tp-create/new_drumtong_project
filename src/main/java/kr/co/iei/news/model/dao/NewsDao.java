@@ -32,7 +32,8 @@ public interface NewsDao {
 
 	int deleteNewsLike(HashMap<String, Object> param);
 
-	int selectNewsLikeCount(int newsNo);
+	News selectNewsLikeCount(int newsNo);
 
+	int selectNewsisLike(News n);
 
 }

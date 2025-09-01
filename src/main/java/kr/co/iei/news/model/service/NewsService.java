@@ -109,12 +109,26 @@ public class NewsService {
 		return result;
 	}
 
-	public List selectAllNews(int start, int amount) {
+	public List selectAllNews(int start, int amount, int memberNo, String tab) {
+
 		int end = start+amount -1;
 		HashMap<String, Object> newsListNum = new HashMap<String, Object>();
 		newsListNum.put("start", start);
 		newsListNum.put("end", end);
+		newsListNum.put("tab", tab);
 		List news = newsDao.selectAllNews(newsListNum);
+		for(int i=0 ;i<news.size();i++) {
+			News n = (News)news.get(i);
+			n.setMemberNo(memberNo);
+			News likeCountNews = newsDao.selectNewsLikeCount(n.getNewsNo());
+			if(likeCountNews != null) {
+				n.setLikeCount(likeCountNews.getLikeCount());
+			}
+			
+			int isLike = newsDao.selectNewsisLike(n);
+			n.setIsLike(isLike);
+			news.set(i, n);
+		}
 		return news;
 	}
 	
@@ -138,15 +152,23 @@ public class NewsService {
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("newsNo", news.getNewsNo());
 		param.put("memberNo", memberNo);
-		/*
-		if(news.getIsLike() ==0) {
-			int result = newsDao.insertNewsLike(param);
+		
+		news.setMemberNo(memberNo);
+		int isLike = newsDao.selectNewsisLike(news);
+		
+		int result = 0;
+		if(isLike ==0) {
+			result = newsDao.insertNewsLike(param);
 		} else {
-			int result = newsDao.deleteNewsLike(param);
+			result = newsDao.deleteNewsLike(param);
  		}
-		int likeCount = newsDao.selectNewsLikeCount(news.getNewsNo());
-		*/
-		return 1;
+		int likeCount = 0;
+		News likeCountNews = newsDao.selectNewsLikeCount(news.getNewsNo());
+		if(likeCountNews != null) {
+			likeCount = likeCountNews.getLikeCount();
+		}
+		
+		return likeCount;
 	}
 	
 }
