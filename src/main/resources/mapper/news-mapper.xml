@@ -21,7 +21,13 @@
   </select>
   
   <select id="selectTotalNewsCount" resultType="int">
-  		select count(*) from news
+  		select count(*) from news 
+  		<if test="tab == 'promotion'">
+		where type='프로모션'
+		</if>
+		<if test="tab == 'event'">
+		where type='이벤트'
+		</if>
   </select>
   
   <insert id="insertNews">
@@ -30,7 +36,13 @@
   
  
   <insert id="insertDiscount">
-  	insert into discount values(discount_seq.nextval, #{newsNo}, #{productNo}, #{discountPercent}, #{discountPrice})
+  	insert into discount values(discount_seq.nextval, #{newsNo}, #{productNo}, 
+  	<if test="discountSelect == 'Percent'">
+  	  	#{discountPercent}, null)
+  	</if>
+  	<if test="discountSelect == 'Price'">
+  	  	null, #{discountPrice})
+  	</if>
   </insert>
 
 	<select id="selectAllNews"  resultType="news">
@@ -66,5 +78,9 @@
 	
 	<select id="selectNewsisLike" resultType="int">
 		select count(*) as "IS_LIKE" from news_like where member_no = #{memberNo} and news_no = #{newsNo}
+	</select>
+	
+	<select id="selectAllProduct" resultType="product">
+		select * from product_tbl
 	</select>
 </mapper>

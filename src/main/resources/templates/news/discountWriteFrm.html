@@ -11,51 +11,51 @@
 			<div class="">
 				<form action="/news/discountWrite" method="get">
 					<!-- <input type="hidden" name="memberNo" th:value="${session.member.memberNo}">  -->	
-					
+		
+					<input type="hidden" name="newsNo" th:value="${newsNo}">
 					<table border=1>
 						<tr>
 							<th style="width: 20%">글 제목</th>
 							<td th:text="${title}" style="width: 80%" colspan="3">
-								<input type="hidden" value=${newsNo}>
 							</td>
 						</tr>
-						<tr> <!-- 상품 추가되면 추가 작성 : 반복문으로 상품 불러오기-->
+						<tr> 
 							<th>할인 적용상품</th>
 							<td colspan="3">
-							<label for="Amricano">아메리카노</label>
-							<input type="checkbox" name="productNoList" id="Amricano" value="1">
-							<label for="lattle">라떼</label>
-							<input type="checkbox" name="productNoList" id="lattle" value="2">
+								<th:block th:each="p:${product}">
+								<input type="checkbox" name="productNo" th:id="${p.productNo}" th:value="${p.productNo}">
+								<label th:for="${p.productNo}" th:text="${p.productName}"></label>
+								</th:block>
 							</td>
 						</tr>
 						
 						<tr>
-							<th>할인율/할인가격
+							<th>할인
 							</th>
 							<td colspan="3">
-								<input type="radio" name="discount" id="Percent">
-								<label for="Percent">할인율</label>
-								<input type="number" name="discountPercent"><span>%</span>
-								<input type="radio" name="discount" id="Price">
-								<label for="Price">할인가격</label>
-								<input type="number" name="discountPrice"><span>원</span>
+								<select name="discountSelect" id="discountSelect">
+									<option value="Percent" selected>할인율</option>
+									<option value="Price">할인가격</option>
+								</select>
+								<input type="number" name="discountPrice"><span>%</span>
 							</td>
 						</tr>
-						
-						
 						<tr>
 							<td colspan="4">
 							<button class="btn" id="insert-btn" type="submit">등록하기</button>
 							</td>
 						</tr> 
-						
 					</table>
 				</form>
 		
 			</div>
 		
 		</div>
+	<th:block th:include="common/footer"></th:block>
+	<script th:inline="javascript">
+		const discountSelect = $("select[name=duscountSelect] option:selected").val();
+		console.log(discountSelect);
 			
-						
+	</script>
 </body>
 </html>

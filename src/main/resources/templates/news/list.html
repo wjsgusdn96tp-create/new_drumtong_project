@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/DrumtongJs/news.js"></script>
+<link rel="stylesheet" href="/DrumtongCss/modal.css">
 <link rel="stylesheet" href="/DrumtongCss/news.css">
 <style>
 	.item-img-div{
@@ -27,6 +28,9 @@
 	.news-title{
 		text-align: left;
 	}
+	.inner>img{
+		width: 100%;
+	}
 	
 </style>
 </head>
@@ -34,6 +38,21 @@
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
 	
+		
+		<div id="modal" class="dialog">
+			<div class="tb">
+				<div class="inner" style="max-width: 800px;">
+					<div class="top">
+						<div class="title">모달창 제목</div>
+						<a href="#" class="modal-close">닫기</a>
+					</div>
+					<img src="/img/banner/poster.jfif" class="ct">
+				</div>
+			</div>
+		</div>
+		
+		
+		
 		<div id="main-news">
 			<img src="/img/news/main_promotion3.jpg" class="main-news3">
 			<div class="btn-div">
@@ -251,6 +270,14 @@
 			})
 		});
 		
+		
+
+		
+		$(".modal-close").on('click', function(e){
+			e.preventDefault();
+			const modal = $(this).parents('.dialog');
+			modal.fadeOut();
+		});
 		
 		
 		$(document).on("click",".likeBtn",function(){

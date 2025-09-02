@@ -7,24 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
-
+import kr.co.iei.customer.controller.CustomerController;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.product.vo.Product;
 import kr.co.iei.util.FileUtil;
 
 
 @Controller
 @RequestMapping("news")
 public class NewsController {
+
+    private final CustomerController customerController;
 	
 	@Autowired
 	private NewsService newsService;
@@ -34,6 +39,10 @@ public class NewsController {
 	
 	@Autowired
 	private FileUtil fileUtil;
+
+    NewsController(CustomerController customerController) {
+        this.customerController = customerController;
+    }
 	
 	@GetMapping(value="/list")
 	public String newsList(int noticeReqPage, String tab, Model model) {
@@ -42,7 +51,7 @@ public class NewsController {
 		HashMap<String, Object> noticeAll = newsService.selectAllNotice(noticeReqPage);
 		model.addAttribute("notice", noticeAll.get("notice"));
 		model.addAttribute("pageNavi", noticeAll.get("pageNavi"));
-		int totalCount = newsService.selectTotalNewsCount();
+		int totalCount = newsService.selectTotalNewsCount(tab);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("tab", tab);
 		
@@ -90,13 +99,15 @@ public class NewsController {
 	public String discountWriteFrm(String title, String newsNo, Model model) {
 		model.addAttribute("title", title);
 		model.addAttribute("newsNo", newsNo);
+		List product = newsService.selectAllProduct();
+		model.addAttribute("product", product);
 		return "news/discountWriteFrm";
 	}
 	
 	@GetMapping(value="/discountWrite")
-	public String discountWrite(Discount discount,List productNoList, @SessionAttribute(required = false) Member member) {
-		System.out.println(discount);
-		int result = newsService.insertDiscount(discount, productNoList);
+	public String discountWrite(News news, String discountSelect, String discountPrice, String productNo, @SessionAttribute(required = false) Member member) {
+		String[] list = productNo.split(",");
+		int result = newsService.insertDiscount(news, discountSelect, discountPrice, list);
 		return "redirect:/news/list?noticeReqPage=1&tab=all";
 	}
 	

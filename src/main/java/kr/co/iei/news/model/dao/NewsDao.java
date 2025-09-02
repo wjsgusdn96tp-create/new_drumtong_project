@@ -18,11 +18,11 @@ public interface NewsDao {
 
 	Notice selectOneNotice(int noticeNo);
 
-	int selectTotalNewsCount();
+	int selectTotalNewsCount(String tab);
 
 	int insertNews(News news);
 
-	int insertDiscount(Discount discount);
+	int insertDiscount(HashMap<String, Object> param);
 
 	List<News> selectAllNews(HashMap<String, Object> newsListNum);
 
@@ -35,5 +35,7 @@ public interface NewsDao {
 	News selectNewsLikeCount(int newsNo);
 
 	int selectNewsisLike(News n);
+
+	List selectAllProduct();
 
 }
