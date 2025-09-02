@@ -16,30 +16,30 @@
 		<div class="product_wrap">
 			<div class="product_title_wrap">
 				<ul class="product_title">
-					<li class="product_title_main product_all_list"><a class="product_all_list_a" href="#">전체상품</a></li>
-					<li class="product_title_main product_drink">음료
+					<li class="product_title_main product_all_list"><a class="product_all_list_a product_title_main_a" href="#">전체상품</a></li>
+					<li class="product_title_main product_drink drink_li">음료
 						<div class="product_title_list">
 							<ul class="product_title_ice">
 								<li>ICE
 									<ul>
-										<li><a href="#">커피</a></li>
-										<li><a href="#">차</a></li>
-										<li><a href="#">그 외 제조음료</a></li>
+										<li><a class="drink_a_iceCoffe" href="#">커피</a></li>
+										<li><a class="drink_a_iceTea" href="#">차</a></li>
+										<li><a class="drink_a_iceOther" href="#">그 외 제조음료</a></li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="product_title_hot">
 								<li>HOT
 									<ul>
-										<li><a href="#">커피</a></li>
-										<li><a href="#">차</a></li>
+										<li><a class="drink_a_hotCoffe" href="#">커피</a></li>
+										<li><a class="drink_a_hotTrs" href="#">차</a></li>
 									</ul>
 								</li>
 							</ul>
 						</div>
 					</li>
-					<li class="product_title_main"><a href="#">디저트</a></li>
-					<li class="product_title_main"><a href="#">굿즈</a></li>
+					<li class="product_title_main dessert_li"><a class="dessert_a product_title_main_a" href="#">디저트</a></li>
+					<li class="product_title_main goods_li"><a class="goods_a product_title_main_a" href="#">굿즈</a></li>
 				</ul>
 			</div>
 			
@@ -329,12 +329,200 @@
 						//ul에 반복문 넣기
 						$(".product_list_wrap_ul").append(li);
 					}
-					
+				
+				/*탭 호버
+				$(".product_all_list").on("mouseover",function(){
+					$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+					$(".product_all_list_a").css("borderBottom","none");
+				})
+				$(".product_all_list").on("mouseout",function(){
+					$(".product_all_list").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+					$(".product_all_list_a").css("color", "var(--main5)");
+				})
+				$(".dessert_li").on("mouseover",function(){
+					$(".dessert_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+					$(".dessert_a").css("borderBottom","none");
+				})
+				$(".dessert_li").on("mouseout",function(){
+					$(".dessert_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+					$(".dessert_a").css("color", "var(--main5)");
+				})
+				$(".goods_li").on("mouseover",function(){
+					$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+					$(".goods_a").css("borderBottom","none");
+				})
+				$(".goods_li").on("mouseout",function(){
+					$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+					$(".goods_a").css("color", "var(--main5)");
+				})
+				$(".drink_li").on("mouseover",function(){
+					$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+				})
+				$(".drink_li").on("mouseout",function(){
+					$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
+				})*/
+				
 				//기본페이지 탭 전체상품
 				$(".product_all_list").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
 				$(".product_all_list_a").css("color", "white");
 				
-				//디저트 탭
+				//전체 탭 클릭
+				$(".product_all_list").on("click", function(){
+					//디저트 탭 색상 변경 및 상품 출력
+					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+					$(".product_title_main_a").css("color", "var(--main5)");
+					$(".drink_li").css("color", "var(--main5)");
+					$(".product_all_list").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
+					$(".product_all_list_a").css("color", "white");
+					$(".dessert_li").on("mouseover",function(){
+						$(".dessert_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".dessert_a").css("borderBottom","none");
+					})
+					$(".dessert_li").on("mouseout",function(){
+						$(".dessert_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".dessert_a").css("color", "var(--main5)");
+					})
+					$(".goods_li").on("mouseover",function(){
+						$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".goods_a").css("borderBottom","none");
+					})
+					$(".goods_li").on("mouseout",function(){
+						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".goods_a").css("color", "var(--main5)");
+					})
+					$(".drink_li").on("mouseover",function(){
+						$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+					})
+					$(".drink_li").on("mouseout",function(){
+						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
+					})
+						
+					const reqPage = [[${reqPage}]];
+					const shopName = [[${shopName}]];
+					$.ajax({
+						url : "/product/productList",
+						data : {reqPage:reqPage, shopName:shopName},
+						type : "get",
+						success : function(data){
+							
+						}
+						
+					})
+				
+				
+				})
+					
+				//디저트 탭 클릭
+				$(".dessert_li").on("click", function(){
+					//디저트 탭 색상 변경 및 상품 출력
+					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+					$(".product_title_main_a").css("color", "var(--main5)");
+					$(".drink_li").css("color", "var(--main5)");
+					$(".dessert_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
+					$(".dessert_a").css("color", "white");
+					$(".product_all_list").on("mouseover",function(){
+						$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".product_all_list_a").css("borderBottom","none");
+					})
+					$(".product_all_list").on("mouseout",function(){
+						$(".product_all_list").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".product_all_list_a").css("color", "var(--main5)");
+					})
+					$(".goods_li").on("mouseover",function(){
+						$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".goods_a").css("borderBottom","none");
+					})
+					$(".goods_li").on("mouseout",function(){
+						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".goods_a").css("color", "var(--main5)");
+					})
+					$(".drink_li").on("mouseover",function(){
+						$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+					})
+					$(".drink_li").on("mouseout",function(){
+						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
+					})
+					const reqPage = [[${reqPage}]];
+					const shopName = [[${shopName}]];
+					$.ajax({
+						url : "/product/productListDessert",
+						data : {reqPage:reqPage, shopName:shopName},
+						type : "get",
+						success : function(data){
+							
+						}
+						
+					})
+					
+					
+				})
+				
+				//굿즈 탭 클릭
+				$(".goods_li").on("click", function(){
+					//디저트 탭 색상 변경 및 상품 출력
+					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+					$(".product_title_main_a").css("color", "var(--main5)");
+					$(".drink_li").css("color", "var(--main5)");
+					$(".goods_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
+					$(".goods_a").css("color", "white");
+					$(".product_all_list").on("mouseover",function(){
+						$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".product_all_list_a").css("borderBottom","none");
+					})
+					$(".product_all_list").on("mouseout",function(){
+						$(".product_all_list").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".product_all_list_a").css("color", "var(--main5)");
+					})
+					$(".dessert_li").on("mouseover",function(){
+						$(".dessert_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".dessert_a").css("borderBottom","none");
+					})
+					$(".dessert_li").on("mouseout",function(){
+						$(".dessert_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".dessert_a").css("color", "var(--main5)");
+					})
+					$(".drink_li").on("mouseover",function(){
+						$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+					})
+					$(".drink_li").on("mouseout",function(){
+						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
+					})
+				})
+				
+				//음료 탭 클릭
+				$(".drink_a_iceCoffe").on("click", function(){
+					//디저트 탭 색상 변경 및 상품 출력
+					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+					$(".product_title_main_a").css("color", "var(--main5)");
+					$(".drink_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none").css("color", "white");
+					$(".product_all_list").on("mouseover",function(){
+						$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".product_all_list_a").css("borderBottom","none");
+					})
+					$(".product_all_list").on("mouseout",function(){
+						$(".product_all_list").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".product_all_list_a").css("color", "var(--main5)");
+					})
+					$(".dessert_li").on("mouseover",function(){
+						$(".dessert_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".dessert_a").css("borderBottom","none");
+					})
+					$(".dessert_li").on("mouseout",function(){
+						$(".dessert_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".dessert_a").css("color", "var(--main5)");
+					})
+					$(".goods_li").on("mouseover",function(){
+						$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".goods_a").css("borderBottom","none");
+					})
+					$(".goods_li").on("mouseout",function(){
+						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".goods_a").css("color", "var(--main5)");
+					})
+					
+					
+				})
+				
 				
 					
 		</script>
