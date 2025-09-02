@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+    <link rel="stylesheet" href="/DrumtongCss/default.css">
+    <link rel="stylesheet" href="/DrumtongCss/Cart.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body>
+   <th:block th:include="/common/header"></th:block>
+	
+	 
+
+	 
+	
+	
+	
+	
+    <div class="cart-mainbox">
+        <div class="cart-namebox">
+            <div class="cart-name">
+               <h2>장바구니</h2>
+            </div>
+            <div class="cart-check">
+                <button class="all-btn">전체선택</button>
+                <button class="choice-btn">선택삭제</button>
+            </div>
+        </div>
+        <div class="cart-box">
+            <div class="cart-listbox">
+                <ul class="cartlist"th:each="list : ${list}">
+                    <li>
+                        <div class="cart-listheader">
+                                <button class="button-icons"><span class="material-icons">check_circle_outline</span></button>
+                        </div>
+                        
+                        <div class="cart-listbody">
+                            <div class="cart-imgbox">
+                                <img src="img/로고 (1) 1.svg" alt="" class="cart-img">
+                            </div>
+                            <div class="list-infobox">
+                                <div class="info-top">
+                                    <span class="item-name" th:text="${list.productName}"></span>
+                                    <div class="quantity-box">
+                                        <span class="quantity" th:text="${list.count}"></span>
+                                        <span>개</span>
+                                    </div>
+                                    <div class=quantity-box2>
+                                    <span class="item-price" th:text="${list.pay}"></span>
+                                    <span>원</span>
+                                    </div>
+                                </div>
+                                <div class="item-option">
+                                    <div class="option-top">
+                                        <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
+                                        <span class="cup">컵 : </span><span class="cup-type" th:text="${list.cupChoice}"></span>
+                                    </div>
+                                    <div class="option-bottom">
+                                        <span class="shot">샷추가 : </span><span class="shot-count" th:text="${list.cupShot}"></span>
+                                        <span class="cream">휘핑크림 : </span><span class="cream-count" th:text="${list.cupCream}"></span>
+                                    </div>
+                                </div>
+                                <div class="info-bottom">
+                                    <span class="sale">등급할인</span>
+                                    <a href="#" class="modify">옵션변경</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart-listfooter">
+                            <div class="footer-pricebox">
+                                <div class="price-row">
+                                <span class="label-price">상품금액</span>
+                                <div class="value-box">
+    							<span class="product-price"th:text="${list.pay}"></span>
+   								 <span class="unit">원</span>
+  								</div>
+                                </div>
+                                <span class="operator">-</span>
+                                <div class="price-row">
+                                <span class="label-price">할인금액</span>
+                                <div class="value-box">
+							    <span class="discount-price"th:text="${list.discountPrice}"></span>
+							    <span class="unit">원</span>
+							  	</div>
+                             </div>
+                                <span class="operator">=</span>
+                                <div class="price-row total">
+                                <span class="label-price">주문금액</span>
+                                 <div class="value-box">
+								    <span class="order-price"th:text="${list.pay} - ${list.discountPrice}"></span>
+								    <span class="unit">원</span>
+								  </div>
+                             </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+           <div class="cart-pricebox">
+                <div class="price-summary">
+                    <h3>결제정보</h3>
+                        <hr>
+                    <div class="summary-row">
+				      <span class="label">전체수량</span>
+				      <span class="value">
+				        <span class="total-count"></span>
+				        <span class="unit">개</span>
+				      </span>
+				    </div>
+				
+				    <div class="summary-row">
+				      <span class="label">상품총합</span>
+				      <span class="value">
+				        <span class="product-totalprice"></span>
+				        <span class="unit">원</span>
+				      </span>
+				    </div>
+				    <div class="summary-row">
+				      <span class="label">할인총합</span>
+				      <span class="value">
+				        -<span class="total-discount"></span>
+				        <span class="unit">원</span>
+				      </span>
+				    </div>
+				     <hr>
+					    <div class="summary-row total">
+					      <span class="label">총 결제금액</span>
+					      <span class="value">
+					        <span class="total-price"></span>
+					        <span class="unit">원</span>
+					      </span>
+    					</div>
+                  </div>
+                  <div class="buy-btnbox">
+                      <button class="buy-btn">구매하기</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<script th:inline="javascript">
+
+	let list = [[${list}]];
+	//상품총합
+	let totalProduct = Number($(".product-totalprice").text());
+	//상품수량총합
+	let totalCount = Number($(".total-count").text());
+	//할인총합
+	let totalDiscount = Number($(".total-discount").text());
+	//총 결제금액
+	let totalpay = Number($(".total-price").text());
+	
+	
+	
+	
+	list.forEach(function(item){
+		
+		totalProduct += (item.pay);
+		totalCount += (item.count);
+		totalDiscount += (item.discountPrice);
+		
+		
+		
+	});
+	
+	totalpay = totalProduct - totalDiscount;
+			
+		
+	$(".total-count").text(totalCount);
+	$(".product-totalprice").text(totalProduct);
+	$(".total-discount").text(totalDiscount);
+	$(".total-price").text(totalpay);
+	
+	</script>
+	
+</body>
+</html>

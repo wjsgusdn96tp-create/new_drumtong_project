@@ -76,7 +76,9 @@
 	                        </td>
 	                        <td style="width: 15%;" th:text="${customer.customerDate}"></td>
 	                        <td style="width: 10%;">
-	                            <button class="delete-btn">삭제</button>
+	                        	<th:block th:if="${session.member.memberNickname == customer.customerNickname}">
+	                            	<button class="delete-btn" th:value="${customer.customerNo}">삭제</button>
+	                            </th:block>
 	                        </td>
 	                    </tr>
 	                    <tr class="button-tr">
@@ -118,7 +120,37 @@
     </div>
     <th:block th:include="common/footer"></th:block>
     <script>
-    	
+    $(document).ready(function(){
+	    $(".delete-btn").on("click", function() {
+	        
+	        const deleteBtn = $(this);
+	        const index = $(".delete-btn").index(this);
+			const customerNo = deleteBtn.val();
+	        if (!confirm("정말로 삭제하시겠습니까?")) {
+	            return;
+	        }
+	       
+	        $.ajax({
+	            url: "/customer/delete",
+	            type: "POST",
+	            data: {
+	                customerNo: customerNo
+	            },
+	            success: function(response) {
+	                if (response === "success") {
+	                    alert("게시글이 삭제되었습니다.");
+						$(".tab-content").eq(index).remove();
+	                    
+	                } else {
+	                    alert("게시글 삭제 실패");
+	                }
+	            },
+	            error: function() {
+	                alert("삭제 오류");
+	            }
+	        });
+	    });
+    });
     
     
     </script>

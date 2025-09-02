@@ -6,7 +6,28 @@
 <script src="/DrumtongJs/news.js"></script>
 <link rel="stylesheet" href="/DrumtongCss/news.css">
 <style>
-
+	.item-img-div{
+		overflow: hidden;
+	}
+	.text-warp{
+		margin-top: 10px;
+	}
+	.news-list{
+		overflow: hidden;
+	}
+	
+	.discountDiv{
+		height: 10px;
+		margin-bottom : 50px;
+	}
+	
+	.tabSelect{
+		background-color: var(--main3)
+	}
+	.news-title{
+		text-align: left;
+	}
+	
 </style>
 </head>
 <body>
@@ -21,9 +42,9 @@
 		</div>
 		<div class="tab">
 			<ul class="first-tab">
-				<li>전체보기</li>
-				<li>이벤트</li>
-				<li>프로모션</li>
+				<li th:styleappend="${tab=='all'?'background-color:var(--main3)':'background-color:var(--main1)'}">전체보기</li>				
+				<li th:styleappend="${tab=='event'?'background-color:var(--main3)':'background-color:var(--main1)'}">이벤트</li>
+				<li th:styleappend="${tab=='promotion'?'background-color:var(--main3)':'background-color:var(--main1)'}">프로모션</li>
 			</ul>
 			<span></span>
 			<ul  class="second-tab">
@@ -36,167 +57,42 @@
 			<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>	
 		</div>
 		
-		<div class="list"> <!-- close class 넣기 -->
+		<div class="list">
 			<ul class="news-list"> 
-				<li class="news-item"> 
-					<div class="item-img-div">
-						<img src="/img/프로모션1.jpg">
-					</div>
-					<div class="text-warp">
-						<div class="news-title">
-							<span class="type">[프로모션]</span> 
-							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
-						</div>
-						<div class="list-small">
-							<span class=date>
-								<span>2025-08-26</span>
-								<span>~</span>
-								<span>2025-09-01</span>
-							</span>
-							<span class=like>
-								<span class="material-icons">favorite_border</span>
-							</span>
-						</div>
-					</div>
-					
-					<li class="news-item"> 
-					<div class="item-img-div">
-						<img src="/img/프로모션1.jpg">
-					</div>
-					<div class="text-warp">
-						<div class="news-title">
-							<span>[프로모션]</span> 
-							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
-						</div>
-						<div class="list-small">
-							<span class=date>
-								<span>2025-08-26</span>
-								<span>~</span>
-								<span>2025-09-01</span>
-							</span>
-							<span class=like>
-								<span class="material-icons">favorite_border</span>
-							</span>
-						</div>
-					</div>
-					
-					<li class="news-item"> 
-					<div class="item-img-div">
-						<img src="/img/프로모션1.jpg">
-					</div>
-					<div class="text-warp">
-						<div class="news-title">
-							<span>[프로모션]</span> 
-							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
-						</div>
-						<div class="list-small">
-							<span class=date>
-								<span>2025-08-26</span>
-								<span>~</span>
-								<span>2025-09-01</span>
-							</span>
-							<span class=like>
-								<span class="material-icons">favorite_border</span>
-							</span>
-						</div>
-					</div>
-					
-					<li class="news-item"> 
-					<div class="item-img-div">
-						<img src="/img/프로모션1.jpg">
-					</div>
-					<div class="text-warp">
-						<div class="news-title">
-							<span>[프로모션]</span> 
-							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
-						</div>
-						<div class="list-small">
-							<span class=date>
-								<span>2025-08-26</span>
-								<span>~</span>
-								<span>2025-09-01</span>
-							</span>
-							<span class=like>
-								<span class="material-icons">favorite_border</span>
-							</span>
-						</div>
-					</div>
-					
-					<li class="news-item"> 
-					<div class="item-img-div">
-						<img src="/img/프로모션1.jpg">
-					</div>
-					<div class="text-warp">
-						<div class="news-title">
-							<span>[프로모션]</span> 
-							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
-						</div>
-						<div class="list-small">
-							<span class=date>
-								<span>2025-08-26</span>
-								<span>~</span>
-								<span>2025-09-01</span>
-							</span>
-							<span class=like>
-								<span class="material-icons">favorite_border</span>
-							</span>
-						</div>
-					</div>
-					
-					<li class="news-item"> 
-					<div class="item-img-div">
-						<img src="/img/프로모션1.jpg">
-					</div>
-					<div class="text-warp">
-						<div class="news-title">
-							<span>[PROMOTION]</span> 
-							<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
-						</div>
-						<div class="list-small">
-							<span class=date>
-								<span>2025-08-26</span>
-								<span>~</span>
-								<span>2025-09-01</span>
-							</span>
-							<span class=like>
-								<span class="material-icons">favorite_border</span>
-							</span>
-						</div>
-					</div>
-				
+			
+			
 			</ul>
 			<div id="add-search"> 		
-				<button class="btn">더보기</button>
+				<button class="btn" id="more-btn">더보기</button>
 			</div>
+		</div>	
+		
+		
+		
+		<div class="notice_wrap close">
+			<div class="notice-list">
+				<table border=1>
+					<tr>
+						<th style="width:10%">번호</th>
+						<th style="width:50%">글 제목</th>
+						<th style="width:15%">작성일</th>
+						<th style="width:10%">조회수</th>
+						<th>수정</th> <!-- 관리자만 노출 -->
+						<th>삭제</th> <!-- 관리자만 노출 -->
+						
+					</tr>
+					<tr th:each="notice : ${notice}">
+						<td th:text="${notice.noticeNo}"></td>
+						<td> <a th:href="@{/news/noticeView(noticeNo=${notice.noticeNo})}" th:text="${notice.title}"></a></td>
+						<td th:text="${notice.writeDate}"></td>
+						<td>999</td>
+						<td><button>수정</button></td> <!-- 관리자만 노출 -->
+						<td><button>삭제</button></td> <!-- 관리자만 노출 -->
+					</tr>
+				</table>
+			</div>
+			<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 		</div>
-		
-		
-		
-		
-		
-		
-		<div class="notice-list"> <!-- close class 넣기 -->
-			<table border=1>
-				<tr>
-					<th style="width:10%">번호</th>
-					<th style="width:50%">글 제목</th>
-					<th style="width:15%">작성일</th>
-					<th style="width:10%">조회수</th>
-					<th>수정</th> <!-- 관리자만 노출 -->
-					<th>삭제</th> <!-- 관리자만 노출 -->
-					
-				</tr>
-				<tr th:each="notice : ${notice}">
-					<td th:text="${notice.noticeNo}"></td>
-					<td> <a th:href="@{/news/noticeView(noticeNo=${notice.noticeNo})}" th:text="${notice.title}"></a></td>
-					<td th:text="${notice.writeDate}"></td>
-					<td>999</td>
-					<td><button>수정</button></td> <!-- 관리자만 노출 -->
-					<td><button>삭제</button></td> <!-- 관리자만 노출 -->
-				</tr>
-			</table>
-		</div>
-		<div class= page-item id="pageNavi" th:utext="${pageNavi}"></div>
 	</div>
 	<th:block th:include="common/footer"></th:block>
 	
@@ -206,87 +102,145 @@
 		let start = 1;							// 게시물의 시작 번호
 		const amount = 6;						// 더보기 한번 클릭 시 추가로 가져올 게시물 수 
 		
+	
+		
+		$(".first-tab>li").on("click", function(){
+			$(".notice_wrap").addClass("close");
+			$(".list").removeClass("close");
+			$(".second-tab>li").css("backgroundColor","var(--main1)");
+			$(".first-tab>li").css("backgroundColor","var(--main1)");
+			const tabSelect = $(this).text();
+			let tab = "";
+			if(tabSelect==="이벤트"){
+				tab="event"
+			}else if(tabSelect==="프로모션"){
+				tab="promotion" 
+			}else {
+				tab="all"
+			}
+			location.href="/news/list?noticeReqPage=1&tab="+tab;
+						
+		});
+		
+		
 		$("#more-btn").on("click",function() {
 			$.ajax({
 				url: "/news/more",
 				type: "get",
-				data: {start: start, amount : amount},
-				success : function(data){
-					for(let i=0;i<data.length;i++){
-						const p = data[i];
+				data: {start: start, amount : amount, tab : [[${tab}]]},
+				success : function(newsList){
+					for(let i=0; i<newsList.length ; i++){
+						const n = newsList[i];
 						
 						/* -> 최종 모양
-								<li class="posting-item">
-									<div class="posting-img">
-										<img src="db에서 조회해 온 이미지 path">
+								<li class="news-item"> 
+									<div class="item-img-div">
+										<img src="/img/프로모션1.jpg">
 									</div>
-									<div class="posting-info">
-										<div class="posting-title">db에서 조회한 제목</div>
-										<div class="posting-sub-info">
-											<span>DB에서 조회한 작성자 </span>
+									<div class="text-warp">
+										<div class="news-title">
+											<span class="type">[프로모션]</span> 
+											<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
+										</div>
+										<div class="list-small">
+											<span class=date>
+												<span>2025-08-26</span>
+												<span>~</span>
+												<span>2025-09-01</span>
+											</span>
+											<span class=like>
+												<span>99</span>
+												<span class="material-icons">favorite_border</span>
+											</span>
+										</div>
+										<div>
+											<button class="discountBtn">할인 적용하기</button>
+											<button class="close discountUpdate">할인 수정하기</button>
 										</div>
 									</div>
 								</li>
 						*/
 						
 						const li = $("<li>");
-						li.addClass("posting-item");
-						// <li class="posting-item"></li>
+						li.addClass("news-item");
+						
+						
+						
 						const imgDiv = $("<div>");
-						imgDiv.addClass("posting-img");
-						// <div class="posting-img"></div>
+						imgDiv.addClass("item-img-div");
 						const img = $("<img>");
-						img.attr("src", "/photo/image/"+p.photoImg);
-						// <img src="da에서 조회해온 이미지path">
-											
+						img.attr("src", "/news/image/"+n.image);
+						// <img src="에서 조회해온 이미지path">
 						imgDiv.append(img);
-						/* 
-							<div class="posting-img">
-								<img src="db에서 조회해 온 이미지 path">
-							</div>
-						*/
-						
-						const infoDiv = $("<div>");
-						infoDiv.addClass("posting-info");
-						// <div class="posting-info"></div>
-						
+												
+						const textWrap = $("<div>");
+						textWrap.addClass("text-warp");
 						const titleDiv = $("<div>");
-						titleDiv.addClass("posting-title");
-						titleDiv.text(p.photoTitle);
-						// <div class="posting-title">db에서 조회한 제목</div>
+						titleDiv.addClass("news-title");
+						const typeSpan = $("<span>");
+						typeSpan.addClass("type");
+						typeSpan.text("["+n.type+"] ");
+						const titleSpan = $("<span>");
+						titleSpan.text(n.title);
+						titleDiv.append(typeSpan).append(titleSpan);
 						
+						const smallDiv = $("<div>");
+						smallDiv.addClass("list-small");
 						
-						const subDiv = $("<div>");
-						subDiv.addClass("posting-sub-info");
-						// <div class="posting-sub-info"></div>
+						const dateSpan = $("<span>");
+						dateSpan.addClass("date");
+						if(n.type === '이벤트'){
+							const startDateSpan = $("<span>");
+							startDateSpan.text(n.startDate);
+							const middleDateSpan = $("<span>");
+							middleDateSpan.text(" ~ ");
+							const endDateSpan = $("<span>");
+							endDateSpan.text(n.endDate);
+							dateSpan.append(startDateSpan).append(middleDateSpan).append(endDateSpan);
+						}
 						
-						const span = $("<span>");
-						span.text(p.photoWriter);
-						//<span>DB에서 조회한 작성자 </span>
+						const likeSpan = $("<span>");
+						likeSpan.addClass("like");
+						const likeCountSpan = $("<span>");
+						likeCountSpan.addClass("likeCount").text(n.likeCount);
 						
-						/* 
-								<div class="posting-info">
-									<div class="posting-title">db에서 조회한 제목</div>
-									<div class="posting-sub-info">
-										<span>DB에서 조회한 작성자 </span>
-									</div>
-								</div>
-						*/
+						const likeIconSpan = $("<span>");
+						if(n.isLike ===1) {
+							likeIconSpan.addClass("material-icons").addClass("likeBtn").text("favorite");								
+						} else{
+							likeIconSpan.addClass("material-icons").addClass("likeBtn").text("favorite_border");
+						}
+						const newsNo = $("<span>");
+						newsNo.text(n.newsNo).addClass("close");
 						
-						subDiv.append(span);
-						infoDiv.append(titleDiv).append(subDiv);
+						likeSpan.append(likeIconSpan).append(newsNo).append(likeCountSpan);
+						smallDiv.append(dateSpan).append(likeSpan);
 						
-						li.append(imgDiv).append(infoDiv);
+						const discountDiv = $("<div>");
+						discountDiv.addClass("discountDiv")
+						if(n.type === '이벤트'){
+							const discountBtn = $("<a>");
+							discountBtn.addClass("discountBtn").addClass("btn");
+							discountBtn.text("할인 적용하기");
+							discountBtn.attr("href","/news/discountWriteFrm?title="+n.title+"&newsNo="+n.newsNo);
+							const discountUpdate = $("<a>");
+							discountUpdate.addClass("discountUpdate").addClass("btn");
+							discountUpdate.text("할인 수정하기");
+							discountDiv.append(discountBtn).append(discountUpdate);
+						}
 						
-						$(".photoWrapper").append(li);
+						textWrap.append(titleDiv).append(smallDiv).append(discountDiv);
+						
+						li.append(imgDiv).append(textWrap);
+												
+												
+						$(".news-list").append(li);
 						
 						
 					}
-					// 화면 요소 추가 끝
-					// 더보기를 누르면 그 이후 데이터를 가저오기 위한 설정
+					
 					start += amount; 
-					// 현재까지 읽어온 게시물 수 -> 마지막은 amount 전체가 아닐 수 있음. 
-					currentCount += data.length;  
+					currentCount += newsList.length;  
 					if(currentCount === totalCount) {
 						$("#more-btn").remove();
 					}
@@ -296,6 +250,39 @@
 				}
 			})
 		});
+		
+		
+		
+		$(document).on("click",".likeBtn",function(){
+			const currentText = $(this).text();
+			const isLike = (currentText === "favorite")?1:0;
+			const newsNo =$(this).next().text();
+
+			$.ajax({
+				url : "/news/likepush",
+				data : {newsNo : newsNo, isLike : isLike},
+				type : "post",
+				dataType: 'json',
+				context: this,
+				success : function(data){
+					if($(this).text() === "favorite") {
+						$(this).text("favorite_border");
+					} else {
+						$(this).text("favorite");						
+					}
+					$(this).next().next().text(data);
+				}
+			})
+		});
+	
+
+	$(".second-tab>li").on("click", function(){
+		$(".notice_wrap").removeClass("close");
+		$(".list").addClass("close");
+		$(".second-tab>li").css("backgroundColor","var(--main3)");
+		$(".first-tab>li").css("backgroundColor","var(--main1)");
+	});
+	
 		
 	</script>
 </body>

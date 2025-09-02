@@ -10,9 +10,9 @@
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<h1>notice작성하기</h1>
+	<h1>공지사항 작성하기</h1>
 	<div class="content-wrap">
-		<form action="news/Write" method="get">
+		<form action="/news/noticeWrite" method="get">
 			<div class="notice-list">
 				<table border=1>
 				<!--
@@ -23,7 +23,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea style="width:95%"></textarea></td>
+						<td><textarea name="content" style="width:95%;"></textarea></td>
 					</tr>
 					
 					<tr>

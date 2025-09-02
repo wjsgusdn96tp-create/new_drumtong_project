@@ -1,5 +1,6 @@
 package kr.co.iei.news.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import kr.co.iei.news.model.dao.NewsDao;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.product.dao.ProductDao;
+import kr.co.iei.product.vo.Product;
 
 @Service
 public class NewsService {
@@ -102,13 +105,70 @@ public class NewsService {
 	@Transactional
 	public int insertNews(News news) {
 		int result = newsDao.insertNews(news);
+		
+		return result;
+	}
+
+	public List selectAllNews(int start, int amount, int memberNo, String tab) {
+
+		int end = start+amount -1;
+		HashMap<String, Object> newsListNum = new HashMap<String, Object>();
+		newsListNum.put("start", start);
+		newsListNum.put("end", end);
+		newsListNum.put("tab", tab);
+		List news = newsDao.selectAllNews(newsListNum);
+		for(int i=0 ;i<news.size();i++) {
+			News n = (News)news.get(i);
+			n.setMemberNo(memberNo);
+			News likeCountNews = newsDao.selectNewsLikeCount(n.getNewsNo());
+			if(likeCountNews != null) {
+				n.setLikeCount(likeCountNews.getLikeCount());
+			}
+			
+			int isLike = newsDao.selectNewsisLike(n);
+			n.setIsLike(isLike);
+			news.set(i, n);
+		}
+		return news;
+	}
+	
+	@Transactional
+	public int insertNotice(Notice notice) {
+		int result = newsDao.insertNotice(notice);
+		return result;
+	}
+	@Transactional
+	public int insertDiscount(Discount discount, List productNoList) {
+		int result = 0;
+		for(int i=0; i<productNoList.size();i++) {
+			discount.setProductNo((int)productNoList.get(i));
+			result += newsDao.insertDiscount(discount);
+		}		
 		return result;
 	}
 	
 	@Transactional
-	public int insertDiscount(Discount discount) {
-		int result = newsDao.insertDiscount(discount);
-		return result;
+	public int likepush(News news, int memberNo) {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("newsNo", news.getNewsNo());
+		param.put("memberNo", memberNo);
+		
+		news.setMemberNo(memberNo);
+		int isLike = newsDao.selectNewsisLike(news);
+		
+		int result = 0;
+		if(isLike ==0) {
+			result = newsDao.insertNewsLike(param);
+		} else {
+			result = newsDao.deleteNewsLike(param);
+ 		}
+		int likeCount = 0;
+		News likeCountNews = newsDao.selectNewsLikeCount(news.getNewsNo());
+		if(likeCountNews != null) {
+			likeCount = likeCountNews.getLikeCount();
+		}
+		
+		return likeCount;
 	}
-
+	
 }

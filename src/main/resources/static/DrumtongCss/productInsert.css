@@ -224,6 +224,18 @@ form>.productInsert_content_wrap>.content_wrap>.title_wrap{
 	padding-left: 10px;
 	
 }
+.detail_insert_content>ul>li{
+	overflow: hidden;
+}
+.detail_insert_content>ul>li>label{
+	float: left;
+}
+.detail_insert_content>ul>li>.productContentPresent{
+	width: 220px;
+	height: 220px;	
+	margin-top:5px;
+	float: left;
+}
 .detail_insert_content>ul>li>input{
 	width: 90px;
 	height: 17px;
@@ -231,6 +243,7 @@ form>.productInsert_content_wrap>.content_wrap>.title_wrap{
 	border: none;
 		
 }
+
 
 /*btn*/
 .insert_btn_wrap{
@@ -279,3 +292,6 @@ form>.productInsert_content_wrap>.content_wrap>.title_wrap{
 .productInsert_title_btn>button:hover>a{
 	color:white;
 }
+
+
+/*productInsertFrm*/

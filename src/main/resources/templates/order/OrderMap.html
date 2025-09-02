@@ -9,7 +9,7 @@
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=r6oehvpmcw&submodules=geocoder"></script>
 </head>
 <body>
-    <th:block th:include="/common/header"></th:block>
+    <th:block th:include="common/header"></th:block>
    
     <div class="ordermap-mainbox">
         <div class="ordermap-name">주문할 지점을 선택하세요</div>
@@ -17,6 +17,7 @@
     </div>
     
     <script th:inline="javascript">
+    
     const list = [[${list}]];
     
     const mapDiv = document.getElementById("map");
@@ -50,25 +51,25 @@
 	
 	let contentString1=[
 		"<div class='map-shopname'>",
-		"<a href='/product/productList?shopName="+list[0].shopName+"'>"+list[0].shopName+"</a>",
+		"<a href='/product/productList?shopName="+list[0].shopName+"&reqPage=1'>"+list[0].shopName+"</a>",
 		"<div class='map-addr'>"+list[0].shopAddress+"</div>",
     	"</div>"
     ].join("");
 	let contentString2=[
 		"<div class='map-shopname'>",
-		"<a href='/product/productList?shopName="+list[1].shopName+"'>"+list[1].shopName+"</a>",
+		"<a href='/product/productList?shopName="+list[1].shopName+"&reqPage=1'>"+list[1].shopName+"</a>",
 		"<div class='map-addr'>"+list[1].shopAddress+"</div>",
     	"</div>"
     ].join("");
 	let contentString3=[
 		"<div class='map-shopname'>",
-		"<a href='/product/productList?shopName="+list[2].shopName+"'>"+list[2].shopName+"</a>",
+		"<a href='/product/productList?shopName="+list[2].shopName+"&reqPage=1'>"+list[2].shopName+"</a>",
 		"<div class='map-addr'>"+list[2].shopAddress+"</div>",
     	"</div>"
     ].join("");
 	let contentString4=[
 		"<div class='map-shopname'>",
-		"<a href='/product/productList?shopName="+list[3].shopName+"'>"+list[3].shopName+"</a>",
+		"<a href='/product/productList?shopName="+list[3].shopName+"&reqPage=1'>"+list[3].shopName+"</a>",
 		"<div class='map-addr'>"+list[3].shopAddress+"</div>",
     	"</div>"
     ].join("");

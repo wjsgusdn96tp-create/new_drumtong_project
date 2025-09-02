@@ -6,20 +6,32 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.iei.customer.vo.Customer;
+import kr.co.iei.customer.vo.CustomerComment;
+import kr.co.iei.customer.vo.CustomerServiceFile;
 
 @Mapper
 public interface CustomerDao {
 
 	List selectCustomerList(HashMap<String, Object> param);
 	int selectCustomerTotalCount(HashMap<String, Object> param);
-
-	List selectGjList(HashMap<String, Object> param);
-	int selectGjTotalCount(HashMap<String, Object> param);
-
-	List selectComplainList(HashMap<String, Object> param);
-	int selectComplainTotalCount(HashMap<String, Object> param);
-
-	List selectOpinionList(HashMap<String, Object> param);
-	int selectOpinionTotalCount(HashMap<String, Object> param);
+	
 	Customer selectOneCustomer(int customerNo);
+	
+	int insertCustomer(Customer customer);
+	
+	int getCustomerNo();
+	
+	int insertCustomerFile(CustomerServiceFile customerServiceFile);
+	
+	List<CustomerServiceFile> selectCustomerFiles(int customerNo);
+	int deleteCustomerFiles(int customerNo);
+	
+	int deleteCustomer(int customerNo);
+	
+	int insertCustomerComment(CustomerComment cc);
+	
+	List<CustomerComment> selectCustomerCommentList(int customerNo);
+	
+	int deleteComment(int commentNo);
+	
 }

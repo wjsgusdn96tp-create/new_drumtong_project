@@ -10,48 +10,55 @@
     <div class="all-wrap">
         <div class="all-content-wrap">
             <div>
-                <table class="tbl" style="width: 100%" >
-                    <tr>
-                        <th style="width: 15%">유형</th>
-                        <td style="width: 30%">
-                        	<select>
-                        		<option>칭찬</option>
-                        		<option>불만</option>
-                        		<option>의견</option>
-                        	</select>
-                        </td>
-                        <th style="width:15%">작성자</th>
-						<td style="width:40%">
-							<span th:text="${session.member.memberNickname}"></span>
-							<input type="hidden" name="customerNickname" th:value="${session.member.memberNickname}">
-						</td>
-                    </tr>
-                    <tr>
-                        <th>제목</th>
-                        <td colspan="3">
-                        	<input class="writeContent" type="text" name="customerTitle">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>첨부파일</th>
-                        <td colspan="3">
-                        	<input type="file" name="upfile" multiple>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="content input-item" colspan="4">
-                        	<textarea class="writeContent" style="background-color: var(--main2);"  name="noticeContent"></textarea>
-                        </td>
-                    </tr>
-                </table>                
-                <div class="modydele">
-                    <th:block class="modydele-th">
-                            <button type="submit" class="btn btn2">작성</button>
-                    </th:block>
-                </div>
+            	<form action="/customer/write" method="post" enctype="multipart/form-data">
+	                <table class="tbl" style="width: 100%" >
+	                    <tr>
+	                        <th style="width: 15%">유형</th>
+	                        <td style="width: 30%">
+	                        	<div>
+		                        	<select class="select" name="customerCategory">
+		                        		<option value="칭찬" selected>칭찬</option>
+		                        		<option value="불만">불만</option>
+		                        		<option value="의견">의견</option>
+		                        	</select>
+		                        	
+	                        	</div>
+	                        </td>
+	                        <th style="width:15%">작성자</th>
+							<td style="width:40%">
+								<span th:text="${session.member.memberNickname}"></span>
+								<input type="hidden" name="customerNickname" th:value="${session.member.memberNickname}">
+							</td>
+	                    </tr>
+	                    <tr>
+	                        <th>제목</th>
+	                        <td colspan="3">
+	                        	<input class="writeContent" type="text" name="customerTitle">
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>첨부파일</th>
+	                        <td colspan="3">
+	                        	<input type="file" name="upFile" multiple>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="content input-item" colspan="4">
+	                        	<textarea class="writeContent" style="background-color: var(--main2);"  name="customerContent"></textarea>
+	                        </td>
+	                    </tr>
+	                </table>
+	                                
+	                <div class="modydele">
+	                    <th:block class="modydele-th">
+	                            <button type="submit" class="btn btn2">작성</button>
+	                    </th:block>
+	                </div>
+                </form>
             </div>
         </div>
     </div>
     <th:block th:include="common/footer"></th:block>
+    
 </body>
 </html>

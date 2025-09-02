@@ -35,10 +35,10 @@
 }
 .order-infobox {
     width: 420px;
-    height: 120px;
+    height: 150px;
     background-color: var(--main2);
-    border: 2px solid black;
-    
+    border: 2px solid var(--main4);
+    border-radius: 10px;
 }
 .order-infotop {
     display: flex;
@@ -50,23 +50,36 @@
     font-size: 14px;
 }
 
-.order-detail>a {
+.order-detail>span {
     text-decoration: none;
     color: black;
     font-weight: bold;
 }
 .order-infomid {
     display: flex;
-    padding-top: 20px;
-    padding-bottom: 15px;
     justify-content: space-around;
     font-weight: 500;
-
+}
+.detail-box {
+    font-weight: 500;
+    padding: 10px;
+    padding-left: 60px;
+}
+.orderdetail-option1 {
+    display: flex;
+    gap: 15px;
+}
+.orderdetail-option2 {
+    display: flex;
+    gap: 15px;
 }
 .order-infobottom {
-    margin-left: 150px;
+    margin-left: 100px;
     margin-top: 10px;
     display: flex;
     font-weight: 500;
     justify-content: space-around;
+}
+.material-icons {
+    color: black;
 }

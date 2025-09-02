@@ -19,51 +19,79 @@
                     </tr>
                     <tr>
                         <th>첨부파일</th>
-                        <td colspan="3">파일첨부</td>
+                        <td colspan="3">
+					        <th:block th:if="${!c.fileList.isEmpty()}">
+					            <div th:each="file : ${c.fileList}">
+					                <span th:text="${file.fileName}"></span>
+					            </div>
+					        </th:block>
+					
+					        <th:block th:if="${c.fileList.isEmpty()}">
+					            <span>첨부된 파일이 없습니다.</span>
+					        </th:block>
+					    </td>
                     </tr>
                     <tr>
                         <td class="content" colspan="4" th:utext="${c.customerContent}"></td>
                     </tr>
                 </table>
                 <div>
-                    <form action="/customer/comment" method="post">
-                        <ul class="comment-ul">
-                            <li>
-                                <span class="material-icons" style="font-size: 50px;">self_improvement</span>
-                            </li>
-                            <li>
-                                <div class="input-item">
-                                    <textarea class="ccc" style="background-color: var(--main2);" name="customerCommentContent"></textarea>
-                                </div>
-                            </li>
-                            <li>
-                                <button class="comment-btn">댓글등록</button>
-                            </li>
-                        </ul>
+                   <div>
+                   		<th:block th:if="${session.member.memberNickname == c.customerNickname}">
+	                    	<form action="/customer/insertComment" method="post">	
+		                        <ul class="comment-ul">
+		                            <li>
+		                                <span class="material-icons" style="font-size: 50px;">self_improvement</span>
+		                            </li>
+		                            <li>
+		                                <input type="hidden" name="customerWriterNo" th:value=${session.member.memberNo}>
+		                                <input type="hidden" name="customerServiceRef" th:value=${c.customerNo}>
+		                                <div class="input-item">
+		                                    <textarea class="ccc" style="background-color: var(--main2);" name="commentContent"></textarea>
+		                                </div>
+		                            </li>
+		                            <li>
+		                                <button type="submit" class="comment-btn">댓글등록</button>
+		                            </li>
+		                        </ul>
+                        	</form>
+                        </th:block>
                         <div class="gong"></div>
-                        <ul class="comment-ul-road">
-                            <li>
-                                <span></span>
-                            </li>
-                            <li>
-
-                            </li>
-                            <li>
-
-                            </li>
-                        </ul>
-                        <ul class="comment-ul-ref">
-                            <li>
-                                <span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
-                            </li>
-                            <li>
-
-                            </li>
-                            <li>
-
-                            </li>
-                        </ul>
-                    </form>
+                        <th:block th:each="cc : ${c.commentList}">
+	                        <ul class="comment-ul-road">
+	                            <li>
+	                                <span th:text="${session.member.memberNickname}"></span>
+	                            </li>
+	                            <li>
+									<div class="input-item">
+	                                    <p th:text="${cc.commentContent}"></p>
+	                                </div>
+	                            </li>
+	                            <li>
+		                            <div>
+			                            <th:block th:if="${session.member.memberNo == cc.customerWriterNo}">
+											<a href="#">수정</a>
+											<button class="delComment" th:value="${cc.commentNo}">삭제</button>
+										</th:block>
+									</div>
+									<div>
+										<a>답글달기</a>
+									</div>
+	                            </li>
+	                        </ul>
+	                        <ul class="comment-ul-ref">
+	                            <li>
+	                                <span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
+	                            </li>
+	                            <li>
+	                            
+	                            </li>
+	                            <li>
+	
+	                            </li>
+	                        </ul>
+                        </th:block>
+                    </div>
                 </div>
                 <div class="rank">
                     <span>관리자 댓글에 대한 평점을 남겨주세요.</span>
@@ -95,6 +123,38 @@
             const index = star.index(this);
             $(".star-rank").text(index+1+"점");
         });
+        
+        $(".delComment").on("click", function(){
+        	const delComment = $(this);
+        	const index = $(".delComment").index(this);
+        	const customerNo = delComment.val();
+        	if(!confirm("정말로 댓글을 삭제하시겠습니까?")) {
+        		return;
+        	}
+        	
+        	$.ajax({
+        		url: "/customer/deleteComment",
+        		type: "POST",
+        		data: {
+        			commentNo: commentNo
+        		},
+        		success: function(response) {
+        			if(response === "success") {
+        				alert("댓글이 삭제되었습니다.");
+        				$(".comment-ul-road").eq(index).remove();
+        			} else {
+        				alert("댓글 삭제 실패");
+        			}
+        		},
+        		error: function(){
+        			alert("댓글 삭제 오류");
+        		}
+        	});
+        });
+        	
+        	
+        
+
     </script>
 </body>
 </html>
