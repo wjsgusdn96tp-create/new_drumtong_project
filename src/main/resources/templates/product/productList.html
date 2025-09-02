@@ -92,6 +92,39 @@
 						divManagerBtn.addClass("product_manager_btn");
 						
 						
+						//대표상품 아이콘
+						const bestDiv =$("<div>");
+						bestDiv.addClass("best_div");
+						bestDiv.attr("style","width:150px;");
+						bestDiv.attr("style","height:30px;");
+						bestDiv.attr("style","color:var(--main4);");
+						bestDiv.attr("style","float:left;");
+						for(let j=0;j<[[${bestList}]].length;j++){
+							const best = [[${bestList}]][j];
+							if(best.productNo == product.productNo){
+								const bestIconSpan1 = $("<span>")
+								bestIconSpan1.addClass("material-icons");
+								bestIconSpan1.addClass("best_icon");
+								bestIconSpan1.text("star");
+								bestDiv.append(bestIconSpan1);
+								
+								const bestText = $("<span>")
+								bestText.addClass("best_text");
+								bestText.text("Best");
+								bestText.append(bestText);
+								bestDiv.append(bestText);
+								
+								const bestIconSpan2 = $("<span>")
+								bestIconSpan2.addClass("material-icons");
+								bestIconSpan2.addClass("best_icon");
+								bestIconSpan2.text("star");
+								bestDiv.append(bestIconSpan2);
+							}else{
+								
+							}
+						}
+						divManagerBtn.append(bestDiv);
+						
 						//수정btn
 						const updateForm = $("<form>");
 						updateForm.attr("action","product/productUpdate?productNo="+product.productNo);
@@ -442,6 +475,9 @@
 					$(".drink_li").on("mouseout",function(){
 						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
 					})
+					
+					$(".product_one_wrap").css("display","none");
+					/*
 					const reqPage = [[${reqPage}]];
 					const shopName = [[${shopName}]];
 					$.ajax({
@@ -453,7 +489,7 @@
 						}
 						
 					})
-					
+					*/
 					
 				})
 				

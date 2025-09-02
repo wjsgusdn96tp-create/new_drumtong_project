@@ -45,6 +45,17 @@
 		where rnum between #{start} and #{end}
   </select>
   
+  <select id="ProductListDessert" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl where product_title ='dessert' order by product_no desc
+       			 )n
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
   <select id="productBestSelect" resultType="product">
   	select * from product_best_tbl where product_no = #{productNo}
   </select>
@@ -60,4 +71,5 @@
   <select id="bestProductList" resultType="product">
   	select * from product_best_tbl
   </select>
+  
 </mapper>

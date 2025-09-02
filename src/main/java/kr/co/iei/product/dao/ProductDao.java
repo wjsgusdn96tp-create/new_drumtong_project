@@ -31,4 +31,6 @@ public interface ProductDao {
 
 	List bestProductList();
 
+	List ProductListDessert(HashMap<String, Object> param);
+
 }

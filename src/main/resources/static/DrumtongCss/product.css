@@ -10,7 +10,7 @@
 .product_wrap{
 		width: 1275px;
 		margin: 50px auto;
-		line-height: 45px;
+		
 	}
 
 /*카테로리*/
@@ -21,6 +21,8 @@
 	
 	
 }
+
+
 
 .product_wrap>.product_title_wrap>.product_title>.product_title_main{
 	border-top: 2px solid var(--main3);
@@ -214,9 +216,17 @@
 }
 
 /*상품 리스트 one> 버튼(관리자용_수정 삭제)*/
+
+.product_manager_btn>.best_div{
+	width: 150px;
+	float: left;
+}
+.best_div>.best_icon{
+	color: var(--main4);
+}
 .product_manager_btn{
 	overflow: hidden;
-	margin-bottom: 5px;
+	line-height: 30px;
 }
 .product_manager_btn>form>input{
 	display:none;	
@@ -232,6 +242,8 @@
 	text-decoration: none;
 	color: var(--main1);
 	font-weight: 600;
+	margin-bottom: 0px;
+	
 }
 .product_manager_btn>form>label>button:hover{
 	border: 2px solid var(--main5);
@@ -272,4 +284,7 @@
 .product_one_box>.product_icon>.product_like>ul>li>p>span>.like_count{
 	font-size: 17px;
 }
+
+
+
 
