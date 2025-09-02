@@ -74,7 +74,7 @@
                                 <div class="price-row">
                                 <span class="label-price">상품금액</span>
                                 <div class="value-box">
-    							<span class="total-price"th:text="${list.pay}"></span>
+    							<span class="product-price"th:text="${list.pay}"></span>
    								 <span class="unit">원</span>
   								</div>
                                 </div>
@@ -105,7 +105,7 @@
                     <h3>결제정보</h3>
                         <hr>
                     <div class="summary-row">
-				      <span class="label">상품수량</span>
+				      <span class="label">전체수량</span>
 				      <span class="value">
 				        <span class="total-count"></span>
 				        <span class="unit">개</span>
@@ -113,14 +113,14 @@
 				    </div>
 				
 				    <div class="summary-row">
-				      <span class="label">상품금액</span>
+				      <span class="label">상품총합</span>
 				      <span class="value">
 				        <span class="product-totalprice"></span>
 				        <span class="unit">원</span>
 				      </span>
 				    </div>
 				    <div class="summary-row">
-				      <span class="label">할인금액</span>
+				      <span class="label">할인총합</span>
 				      <span class="value">
 				        <span class="total-discount"></span>
 				        <span class="unit">원</span>
@@ -145,12 +145,26 @@
 	
 	<script th:inline="javascript">
 
-	const price = [[${list}]];
+	let list = [[${list}]];
+	//상품총합
+	let totalproduct = Number($(".product-totalprice").text());
+	//상품수량총합
+	let totalCount = Number($(".total-count").text());
+	//할인총합
+	let totalDiscount = Number($(".total-discount").text());
+	//총 결제금액
+	let totalpay = Number($(".total-price").text());
 	
-	console.log(price);
+	let productPay = Number($(".product-price")).text();
 	
+	console.log(productPay);
 	
+	list.forEach(function(item){
 	
+		totalproduct += (item.pay);
+		totalCount += (item.count);
+		totalDiscount += (item.discountPrice);		
+	});
 	
 	
 	</script>

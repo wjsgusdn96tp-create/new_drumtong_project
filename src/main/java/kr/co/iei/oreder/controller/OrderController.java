@@ -83,7 +83,6 @@ public class OrderController {
 			@SessionAttribute(required = false) Member member) {
 	    
 		if(member == null) {
-			
 			return "redirect:/member/loginFrm";
 		}
 		
