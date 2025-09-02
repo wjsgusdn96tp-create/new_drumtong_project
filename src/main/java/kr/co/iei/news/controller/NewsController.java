@@ -36,12 +36,15 @@ public class NewsController {
 	private FileUtil fileUtil;
 	
 	@GetMapping(value="/list")
-	public String newsList(int noticeReqPage, Model model) {
+	public String newsList(int noticeReqPage, String tab, Model model) {
+		
+		// notice 정보
 		HashMap<String, Object> noticeAll = newsService.selectAllNotice(noticeReqPage);
 		model.addAttribute("notice", noticeAll.get("notice"));
 		model.addAttribute("pageNavi", noticeAll.get("pageNavi"));
 		int totalCount = newsService.selectTotalNewsCount();
 		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("tab", tab);
 		
 		return "news/list";
 	}
@@ -60,7 +63,7 @@ public class NewsController {
 		
 		int result = newsService.insertNews(news);
 			
-		return "redirect:/news/list?noticeReqPage=1";
+		return "redirect:/news/list?noticeReqPage=1&tab=all";
 	}
 	
 	@GetMapping(value="/noticeWriteFrm")
@@ -94,24 +97,25 @@ public class NewsController {
 	public String discountWrite(Discount discount,List productNoList, @SessionAttribute(required = false) Member member) {
 		System.out.println(discount);
 		int result = newsService.insertDiscount(discount, productNoList);
-		return "redirect:/news/list?noticeReqPage=1";
+		return "redirect:/news/list?noticeReqPage=1&tab=all";
 	}
 	
 	@ResponseBody
 	@GetMapping(value="/more")
-	public List more(int start, int amount) {
+	public List more(int start, int amount, String tab, @SessionAttribute(required = false) Member member) {
+		int memberNo = member == null ? 0 : member.getMemberNo();
+		List newsList = newsService.selectAllNews(start, amount, memberNo, tab);
 		
-		List newsList = newsService.selectAllNews(start, amount);
 		return newsList;
 	}
 	
 	@ResponseBody
 	@PostMapping(value="/likepush")
 	public int likepush(News news, @SessionAttribute Member member) {
-		int memberNo = member.getMemberNo();
-		int result = newsService.likepush(news, memberNo);
-		System.out.println(result);
-		return result;
+		int memberNo = member == null ? 0 : member.getMemberNo();
+		int likeCount = newsService.likepush(news, memberNo);
+
+		return likeCount;
 	}
 	
 }

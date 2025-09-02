@@ -59,7 +59,7 @@ public class FileUtil {
 				String resFilename = new String(filename.getBytes("UTF-8"),"ISO-8859-1");
 				
 				
-				response.setContentType("application/octet-stream"); // HTTP Heade설정(응답형식/파일이름)
+				response.setContentType("application/octet-stream"); // HTTP Header설정(응답형식/파일이름)
 				response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
 				
 				while(true) { // 파일 읽어서 전송
