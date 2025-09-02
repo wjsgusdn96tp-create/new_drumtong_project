@@ -14,11 +14,6 @@
 	
 	 
 
-	 
-	
-	
-	
-	
     <div class="cart-mainbox">
         <div class="cart-namebox">
             <div class="cart-name">
@@ -26,7 +21,7 @@
             </div>
             <div class="cart-check">
                 <button class="all-btn">전체선택</button>
-                <button class="choice-btn">선택삭제</button>
+                <button class="delete-btn">선택삭제</button>
             </div>
         </div>
         <div class="cart-box">
@@ -136,12 +131,19 @@
     					</div>
                   </div>
                   <div class="buy-btnbox">
-                      <button class="buy-btn">구매하기</button>
+    				
+                  	<input type="hidden" name="productNo" id="productNo" th:value="${productNo}">
+					<input type="hidden" name="shopName" id="shopName" th:value="${shopName}">
+                    <input type="hidden" name="memberNo" id="memberNo" th:value="${memberNo}">
+                    <button class="buy-btn">구매하기</button>
+
                   </div>
                 </div>
             </div>
         </div>
     </div>
+	
+	
 	
 	<script th:inline="javascript">
 
@@ -175,6 +177,54 @@
 	$(".product-totalprice").text(totalProduct);
 	$(".total-discount").text(totalDiscount);
 	$(".total-price").text(totalpay);
+	
+	
+	const select =  $(".material-icons.selected");
+	
+		console.log(select);
+	
+	//전체선택 버튼 누르기
+	$(".all-btn").on("click",function(){
+
+		$(".material-icons").toggleClass("selected");
+		
+		
+	});
+
+	$(".delete-btn").on("click",function(){
+		
+	});
+	
+ 	
+	
+	$(".buy-btn").on("click",function(){
+		
+		const productNo = $("#productNo").val();
+        const shopName = $("#shopName").val();
+        const productPrice = $("#productPrice").val();
+ 		
+        console.log("Ddd");
+        
+        $.ajax({
+        	url : "/order/orderList",
+        	type : "get",
+        	data : 
+        		{
+        		
+        		productNo : productNo,
+        		shopName : shopName,
+        		productPrice : productPrice
+        		
+        		},
+        	success : function(list){
+        		alert("ㅇ");
+        	},
+        	error : function(){
+        		alert("ㄴ");
+        	}
+        })
+ 	});
+	
 	
 	</script>
 	

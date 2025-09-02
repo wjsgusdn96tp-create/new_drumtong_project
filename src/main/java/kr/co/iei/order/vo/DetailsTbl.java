@@ -3,6 +3,8 @@ package kr.co.iei.order.vo;
 
 
 
+import java.sql.Date;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -23,9 +25,11 @@ public class DetailsTbl {
 	private int cupCream;
 	private int heat;
 	private int count;
-	private int product_no;
-	private int order_no;
+	private int productNo;
+	private int orderNo;
 	private int pay;
 	private String discountName;
-	private int discountPrice;
+	private int discountPrice; 
+	private Date enrollDate;
+	private String productName;
 }

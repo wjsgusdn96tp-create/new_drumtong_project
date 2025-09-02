@@ -60,7 +60,7 @@ button {
     font-weight: bold;
 }
 
-.choice-btn {
+.delete-btn {
 	margin-left: 30px;
 	border: 1px solid black;
     border-radius: 5px;
@@ -279,16 +279,16 @@ button {
     background-color: transparent;
     border: none;
   }
-.material-icons {
+.material-icons.selected {
 	color : var(--main4);
 	
 }
 
-.all-btn {
+.all-btn.selected {
 	background-color: var(--main4);
 	border: 3px solid black;
 }
-.choice-btn {
+.delete-btn.selected {
 	background-color: var(--main4);
 	border: 3px solid black;
 }
