@@ -168,8 +168,6 @@
 		totalCount += (item.count);
 		totalDiscount += (item.discountPrice);
 		
-		
-		
 	});
 	
 	totalpay = totalProduct - totalDiscount;
@@ -205,10 +203,11 @@
         const shopName = $("#shopName").val();
         const memberNo = $("#memberNo").val();
  		
+       
         
         $.ajax({
         	url : "/order/OrderList",
-        	type : "get",
+        	type : "post",
         	data : 
         		{
         		

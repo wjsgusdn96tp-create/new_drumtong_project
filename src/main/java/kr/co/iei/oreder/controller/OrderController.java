@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.CartItem;
+import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
 import kr.co.iei.product.vo.Product;
@@ -111,9 +112,9 @@ public class OrderController {
 	    return "order/DrumtongCart";
 	}
 	
-	@GetMapping("/OrderList")
+	@PostMapping("/OrderList")
 	@ResponseBody
-	public int insertOrderTbl(Model model,String shopName,
+	public int insertOrderTbl(DetailsTbl dtl,  Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
 		Random r = new Random();
 		
