@@ -62,18 +62,18 @@
 				<div class="product_list_wrap">
 					<ul>
 						<!-- [js]for문-대표 상품 리스트 -->
-						<li class="product_one_wrap">
+						<li class="product_one_wrap" th:each="product : ${list}">
 							<div class="product_one_box">
 								<div class="product_manager_btn">
 									<form action="#">
 									<!-- 수정 페이지로 이동<a class="btn-primary" th:href="@{/notice/updateFrm(noticeNo=${n.noticeNo})}">수정</a> <!-- updateFrm 생성 noticeNo에 해당하는 정보 수정 --> 
-										<input type="submit" class="product_update_btn" name="product_no" id="product_no" >
+										<input type="submit" class="product_update_btn" name="product_no" id="product_no" th:value="${product.productNo}">
 										<label for="product_no">
 											<button class="btn">수정</button>
 										</label>
 									</form>
 									<form action="#"><!-- 삭제 controller 페이지로 이동(삭제 후 해당 페이지로)-->
-										<input type="submit" class="product_delete_btn" name="product_no" id="product_no">
+										<input type="submit" class="product_delete_btn" name="product_no" id="product_no" th:value="${product.productNo}">
 										<label for="product_no">
 											<button class="btn">삭제</button>
 										</label>
@@ -83,18 +83,21 @@
 								<form action="/order/Orderoption" method="get" id="">
 									<!-- 자명님 주소값 보내는게 없어서 밑에 한줄만 추가했습니다! -전인턴- -->
 									<input type="hidden" name="shopName" th:value="${shopName}">
-									<input type="submit" class="product" name="productNo" id="product_no1" value="1">	
+									<input type="submit" class="product" name="productNo" id="product_no1" th:value="${product.productNo}">	
 									<label for="product_no1">
 										<div class="product_img_box">
+											
+											<!-- img 스크립트 걸어둠 
 											<img src="/img/product/음료/아이스/커피/아메리카노.jpg">
+											-->
 											<!-- DB에서 들고올거 -->
 											<div class="product_content_box">
-												<h3>product_name</h3>
-												<p>칼로리 : ${.product_content_kcal} kcal</p>
-												<p>카페인 : ${.product_content_shot} g</p>
-												<p>당 : ${.product_content_sugar} g</p>
-												<p>나트륨 : ${.product_content_natrium} g</p>
-												<p>단백질 :${.product_content_protein} g</p>
+												<h3 th:text="${product.productName}"></h3>
+												<p>칼로리 : <span th:text="${product.productContentKcal}"></span> kcal</p>
+												<p>카페인 : <span th:text="${product.productContentShot}"></span> g</p>
+												<p>당 : <span th:text="${product.productContentSugar}"></span> g</p>
+												<p>나트륨 : <span th:text="${product.productContentNatrium}"></span> g</p>
+												<p>단백질 :<span th:text="${product.productContentProtein}"></span> g</p>
 											</div>
 										</div>	
 									</label>
@@ -104,7 +107,11 @@
 									<!-- 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
 									<form action="/order/Orderoption" method="get" id="">
 										<div class="product_cart">
-											<input type="submit" class="product_cart" name="product_no" id="product_no2">	
+											<input type="hidden" name="shopName" th:value="${shopName}">
+											<input type="submit" class="product" name="productNo" id="product_no1" th:value="${product.productNo}">
+											<!-- 
+												<input type="submit" class="product_cart" name="product_no" id="product_no2">
+											 -->	
 											<label for="product_no2">
 												<span class="material-icons">add_shopping_cart</span>
 											</label>
@@ -129,25 +136,27 @@
 							</div>
 						</li>
 						
-						<!-- [js]for문-상품 리스트 했는데 안됨. 자바스크립트로 다시 만들어야 할 수도(이미지 땜시_-->
+						
+						<!--
+						<!-- [js]for문-상품 리스트 했는데 안됨. 자바스크립트로 다시 만들어야 할 수도(이미지 땜시
 						<li class="product_one_wrap" th:each="product : ${list}">
 							<div class="product_one_box">
 								<div class="product_manager_btn">
 									<form action="#">
-									<!-- 수정 페이지로 이동<a class="btn-primary" th:href="@{/notice/updateFrm(noticeNo=${n.noticeNo})}">수정</a> <!-- updateFrm 생성 noticeNo에 해당하는 정보 수정 --> 
+									<!-- 수정 페이지로 이동<a class="btn-primary" th:href="@{/notice/updateFrm(noticeNo=${n.noticeNo})}">수정</a> <!-- updateFrm 생성 noticeNo에 해당하는 정보 수정 
 										<input type="submit" class="product_update_btn" name="product_no" id="product_no" >
 										<label for="product_no">
 											<button class="btn">수정</button>
 										</label>
 									</form>
-									<form action="#"><!-- 삭제 controller 페이지로 이동(삭제 후 해당 페이지로)-->
+									<form action="#"><!-- 삭제 controller 페이지로 이동(삭제 후 해당 페이지로)
 										<input type="submit" class="product_delete_btn" name="product_no" id="product_no">
 										<label for="product_no">
 											<button class="btn">삭제</button>
 										</label>
 									</form>
 								</div>
-								<!-- 클릭 시, 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
+								<!-- 클릭 시, 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)
 								<form action="/order/Orderoption" method="get" id="">
 									<input type="submit" class="product" name="productNo" id="product_no1" value="1">	
 									<label for="product_no1">
@@ -155,7 +164,7 @@
 										
 										
 											<img  src="/img/product/1.jpg">
-											<!-- DB에서 들고올거 -->
+											<!-- DB에서 들고올거 
 											<div class="product_content_box">
 												<h3>product_name</h3>
 												<p>칼로리 : <p th:text="${product.productContentKcal}"></p>kcal</p>
@@ -167,9 +176,9 @@
 										</div>	
 									</label>
 								</form>
-							   	 <!-- e[관리자,회원,비회원] -->
+							   	 <!-- e[관리자,회원,비회원] 
 								<div class="product_icon">
-									<!-- 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)-->
+									<!-- 장바구니 controller로 이동 (매장명, 회원 아이디, 상품정보 전달)
 									<form action="/order/Orderoption" method="get" id="">
 										<div class="product_cart">
 											<input type="submit" class="product_cart" name="product_no" id="product_no2">	
@@ -178,7 +187,7 @@
 											</label>
 										</div>
 									</form>
-									<!-- e[회원-좋아요 기능] -->
+									<!-- e[회원-좋아요 기능] 
 									<div class="product_like">
 										<ul>
 											<li>
@@ -196,7 +205,7 @@
 								</div>							
 							</div>
 						</li>
-						
+						  -->
 
 						
 					</ul>
@@ -205,7 +214,43 @@
 		</div>
 		
 		
-		<script type="text/javascript">
+		<script th:inline="javascript">
+		
+		for(let i=0;i<list.length;i++){
+			const product= list[i];
+			const img = $("<img>");
+			img.attr("src","/product/"+product.productImg)
+			
+			$(".product_img_box").append(img);
+			
+			
+		$.ajax({
+			url : "/product/productList",
+			type : "get",
+			data : {reqPage : [[${reqPage}]], shopName : [[${shopName}]]},
+			success : function(data){
+				console("성공");
+				for(let i=0;i<data.length;i++){
+					const product= data[i];
+					const img = $("<img>");
+					img.attr("src","/product/"+product.productImg)
+					
+					$(".product_img_box").append(img);
+				}
+				
+			},
+		error : function(){
+					console.log("에러");
+				}
+		})
+		
+		
+		
+		
+		
+		  
+		
+		
 		
 		</script>
 	<th:block th:include="common/footer"></th:block>

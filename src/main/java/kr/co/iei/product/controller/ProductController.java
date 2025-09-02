@@ -60,7 +60,7 @@ public class ProductController {
 	/*대표상품인지 아닌지도 값 받아와야함*/
 	public String productInsertDrink(Product p, MultipartFile imageFile, String productBestTbl,Model model){
 		/*저장 경로 root에 서자명 컴퓨터에는 productinsert 폴더 만들었는데 다른분들 안 만들어도 상관없음??*/
-		String savepath = root+"/productInsert/";
+		String savepath = root+"/product/";
 		System.out.println(imageFile);
 		String filepath = fileUtil.upload(savepath,imageFile);
 		p.setProductImg(filepath);

@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주문내역</title>
-    <link rel="stylesheet" href="/DrumtongCss/default.css">
-    <link rel="stylesheet" href="/DrumtongCss/orderlist.css">
+    <link rel="stylesheet" href="DrumtongCss/default.css">
+    <link rel="stylesheet" href="DrumtongCss/orderlist.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 </head>
 <body>
    <th:block th:include="/common/header"></th:block>
     
+    
     <div class="order-namebox">주문내역</div>
+    
+
+
         <div class="order-mainbox">
             <ul>
                 <li>
@@ -21,46 +25,32 @@
                         <div class="order-infobox">
                             <div class="order-infotop">
                                 <div class="order-date">2025-08-27</div>
-                                <div class="order-detail"><a href="#">주문상세보기</a>
+                                <div class="order-detail"><span class="shop_name">매장이름</span>
                                 </div>
                             </div>
                             <div class="order-infomid">
                                 <div class="order-infoname">민트초코 오레오 페라페</div>
                                 <div class="order-infocountbox">
-                                    <span class="order-infocount">1</span>개
+                                    <span class="order-infocount">1</span><span>개</span>
+                                </div>
+                            </div>
+                            <div class="detail-box">
+                                <div class="orderdetail-option1">
+                                    <span class="size">사이즈 : </span><span class="size-count">L</span>
+                                    <span class="cup">컵 : </span><span class="cup-type">매장</span>
+                                </div>
+                                <div class="orderdetail-option2">
+                                    <span class="shot">샷추가 : </span><span class="shot-count">2</span>
+                                    <span class="cream">휘핑크림 : </span><span class="cream-type">O</span>
                                 </div>
                             </div>
                             <div class="order-infobottom">
-                                <div class="order-discount">등급할인</div>
+                                <div class="order-discount-name">등급할인</div>
+                                <div class="order-discount-price"><span class="discount-price">700</span><span>원</span></div>
                                 <div class="order-pricebox">
-                                    <span class="order-price">2500</span>원
+                                    <span class="order-price">2500</span><span>원</span>
                                 </div>
-                                <div class="order-cart"><a href="#"><img src="img/addcart.svg" alt=""></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="order-contentbox">
-                        <div class="order-imgbox"><img src="img/로고 (1) 1.svg" alt=""></div>
-                        <div class="order-infobox">
-                            <div class="order-infotop">
-                                <div class="order-date">2025-08-27</div>
-                                <div class="order-detail"><a href="#">주문상세보기</a>
-                                </div>
-                            </div>
-                            <div class="order-infomid">
-                                <div class="order-infoname">민트초코 오레오 페라페</div>
-                                <div class="order-infocountbox">
-                                    <span class="order-infocount">1</span>개
-                                </div>
-                            </div>
-                            <div class="order-infobottom">
-                                <div class="order-discount">프로모션할인</div>
-                                <div class="order-pricebox">
-                                    <span class="order-price">5000</span>원
-                                </div>
-                                <div class="order-cart"><a href="#"><img src="img/addcart.svg" alt=""></a></div>
+                                <div class="order-cart"><a href="#"><span class="material-icons">add_shopping_cart</span></a></div>
                             </div>
                         </div>
                     </div>
