@@ -1,7 +1,7 @@
 package kr.co.iei.oreder.controller;
 
 import java.util.List;
-
+import kr.co.iei.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,17 +11,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.CartItem;
+import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
 import kr.co.iei.product.vo.Product;
 
 @Controller
 @RequestMapping(value="/order")
 public class OrderController {
+
+    private final FileUtil fileUtil;
 	@Autowired
 	private OrderService orderService;
+
+
+    OrderController(FileUtil fileUtil) {
+        this.fileUtil = fileUtil;
+    }
 	
 	
 	@GetMapping("/OrderMap")
@@ -91,11 +101,24 @@ public class OrderController {
 		
 		List list = orderService.selectCartList(num,productNo,shopName,productName);
 		
-
+		
 		
 	    model.addAttribute("list", list);
 	    return "order/DrumtongCart";
 	}
+	
+	@GetMapping("/OrderList")
+	public String listPage(Model model,String shopName,
+			@SessionAttribute(required = false) Member member) {
+		
+		int num =  member.getMemberNo();
+		
+		OrderTbl otb = orderService.insertOtb(shopName,num);
+
+		
+		return "order/OrderList";
+	}
+	
 	
 	
 	

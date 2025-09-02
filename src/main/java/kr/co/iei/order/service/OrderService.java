@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.iei.order.dao.OrderDao;
 import kr.co.iei.order.vo.CartItem;
 import kr.co.iei.order.vo.DetailsTbl;
+import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
 import kr.co.iei.product.vo.Product;
 
@@ -48,6 +49,16 @@ public class OrderService {
 		List list = orderDao.selectCartList(num,productNo,shopName,productName);
 		
 		return list;
+	}
+
+
+
+
+
+	public OrderTbl insertOtb(String shopName, int num) {
+		OrderTbl otb = orderDao.insertotb(shopName, num);
+		
+		return otb;
 	}
 
 
