@@ -66,7 +66,7 @@ public class ProductService {
 		// 다음버튼(최종 페이지를 출력하지 않은 경우)
 		if(pageNo <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/notice/list?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
 			pageNavi += "<span class='material-icons'> chevron_right </span>";
 			pageNavi += "</a>";
 			pageNavi += "</li>";
