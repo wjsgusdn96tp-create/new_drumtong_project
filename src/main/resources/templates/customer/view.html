@@ -23,7 +23,8 @@
                         <td colspan="3">
 					        <th:block th:if="${!c.fileList.isEmpty()}">
 					            <div th:each="file : ${c.fileList}">
-					                <span th:text="${file.fileName}"></span>
+					            	<img src="/img/file.png">
+					                <a th:href="@{/customer/filedown(customerFileNo=${file.customerFileNo})}" th:text="${file.fileName}"></a>
 					            </div>
 					        </th:block>
 					
@@ -78,8 +79,8 @@
 				                </li>
 				                <li>
 				                    <th:block th:if="${session.member != null and session.member.memberNo == cc.customerWriterNo}">
-								        <button th:onclick="|modifyComment(this, ${c.customerNo}, ${cc.commentNo})|">수정</button>
-								        <button class="delComment" th:value="${cc.commentNo}" th:onclick="|deleteComment(this)|">삭제</button>
+								        <button th:onclick="modifyComment(this, [[${c.customerNo}]], [[${cc.commentNo}]])">수정</button>
+								        <button class="delComment" th:value="${cc.commentNo}" th:onclick="deleteComment(this)">삭제</button>
 								    </th:block>
 				                    <div>
 				                        <a class="recShow" th:if="${session.member != null and (session.member.memberNickname == c.customerNickname or session.member.memberGrade == '관리자')}">댓글달기</a>
@@ -126,7 +127,7 @@
 						            </li>
 						            <li>
 						                <th:block th:if="${session.member != null and session.member.memberNo == re.customerWriterNo}">
-									        <button th:onclick="|modifyComment(this, ${c.customerNo}, ${re.commentNo})|">수정</button>
+									        <button th:onclick="modifyComment(this, [[${c.customerNo}]], [[${re.commentNo}]])">수정</button>
 									        <button class="delComment" th:value="${re.commentNo}" th:onclick="|deleteComment(this)|">삭제</button>
 									    </th:block>
 						            </li>
@@ -147,8 +148,8 @@
                 </div>
                 <p class="star-rank">0점</p>
                 <div class="modydele">
-                    <th:block class="modydele-th">
-                            <a href="#" class="btn btn1">수정</a>
+                    <th:block class="modydele-th" th:if="${session.member != null && session.member.memberGrade !='관리자'}">
+                            <a th:href="@{/customer/updateFrm(customerNo=${c.customerNo})}" class="btn btn1">수정</a>
                             <button class="btn btn2">삭제</button>
                     </th:block>
                 </div>
@@ -214,6 +215,29 @@
         $(".inputRecommentBox").eq(index).toggle();
     });
     
+    function modifyComment(obj, customerNo, CommentNo){
+		  //화면에 출력되고 있는 현재 댓글 내용을 문자열로 가져옴
+		  const customerCommentContent = $(obj).parent().prev().children().children().text();
+		  //화면에 숨겨둔 textarea에 현재 댓글내용 입력
+		  $(obj).parent().prev().children().children().next().children().text(commentContent);
+		  //화면에 출력되고있는 현재 댓글 내용을 숨김
+		  $(obj).parent().prev().children().children().hide();
+		  //화면에 숨겨둔 textarea를 감싼 div를 보여줌
+		  $(obj).parent().prev().children().next().show();
+		  
+		  /////////////////////////////////////
+		  //수정 -> 수정완료
+		  $(obj).text("수정완료");
+		  $(obj).attr("onclick", "modifyComplete(this,"+customerNo+","+CommentNo+")");
+		  //삭제 -> 수정취소
+		  $(obj).next().text("수정취소");
+		  $(obj).next().attr("onclick", "modifyCancel(this, "+customerNo+","+CommentNo+")");
+		  
+		  //답글달기버튼이 있는경우 화면에서 안보이게 처리
+		  $(obj).next().next().children().hide();
+		}
+    
+    /*
     function deleteComment(obj) {
         const clickedButton = $(obj);
         const commentNo = clickedButton.val();
@@ -303,7 +327,9 @@
             recShowLink.show();
         }
     }
+    */
 
     </script>
+    <th:block th:include="common/footer"></th:block>
 </body>
 </html>

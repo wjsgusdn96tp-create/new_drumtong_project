@@ -1,11 +1,12 @@
 package kr.co.iei.customer.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.ssl.SslProperties.Bundles.Watch.File;
+//import org.springframework.boot.autoconfigure.ssl.SslProperties.Bundles.Watch.File;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletResponse;
 import kr.co.iei.customer.service.CustomerService;
 import kr.co.iei.customer.vo.Customer;
 import kr.co.iei.customer.vo.CustomerComment;
 import kr.co.iei.customer.vo.CustomerListData;
 import kr.co.iei.customer.vo.CustomerServiceFile;
+import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.util.FileUtil;
 
@@ -29,6 +32,8 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	MemberService memberService;
 	
 	@Value("${file.root}") // application.properties의 file.root 값을 가져옴
 	private String root;
@@ -114,7 +119,9 @@ public class CustomerController {
 	@GetMapping(value="/view")
 	public String CustomerView(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
 		Customer c = customerService.selectOneCustomer(customerNo);
-		List<Member> allMemberList = customerService.selectAllMember();
+//		List<Member> allMemberList = customerService.selectAllMember();
+		String memberEmail = member.getMemberEmail();
+		Member allMemberList = memberService.selectOneMember(memberEmail);
 		
 		model.addAttribute("c", c);
 		model.addAttribute("allMembers", allMemberList);
@@ -186,6 +193,45 @@ public class CustomerController {
 		return "fail";
 	}
 	
+	@GetMapping(value="/filedown")
+	public void filedown(int customerFileNo, HttpServletResponse response) {
+		CustomerServiceFile customerFile = customerService.selectOneCustomerFile(customerFileNo);
+		System.out.println(customerFile.getFilePath());
+		System.out.println(customerFile.getFileName());
+		String savepath = root+"/customer/";
+		
+		fileUtil.downloadFile(savepath, customerFile.getFilePath(), customerFile.getFileName(), response);
+	}
+	
+	@GetMapping(value="/updateFrm")
+	public String updateFrm(int customerNo, Model model) {
+		Customer c = customerService.selectOneCustomer(customerNo);
+		model.addAttribute("c", c);
+		
+		return "customer/updateFrm";
+	}
+	
+	@PostMapping(value="/update")
+	public String update(Customer c, MultipartFile[] upfile, int[] delFileNo) {
+		List<CustomerServiceFile> fileList = new ArrayList<CustomerServiceFile>();
+		String savepath = root+"/customer/";
+		if(!upfile[0].isEmpty()) {
+			for(MultipartFile file : upfile) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileUtil.upload(savepath, file);
+				CustomerServiceFile csf = new CustomerServiceFile();
+				csf.setFileName(filename);
+				csf.setFilePath(filepath);
+				fileList.add(csf);
+			}
+		}
+		List<CustomerServiceFile> delFileList = customerService.updateCustomer(c,fileList,delFileNo);
+		for(CustomerServiceFile csf : delFileList) {
+			File delFile = new File(savepath+csf.getFilePath());
+			delFile.delete();
+		}
+		return "redirect:/customer/view?customerNo="+c.getCustomerNo();
+	}
 }
 
 

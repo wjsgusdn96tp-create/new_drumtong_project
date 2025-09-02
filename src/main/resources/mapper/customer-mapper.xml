@@ -142,4 +142,28 @@
 		where
 			customer_no = #{customerNo}
 	</update>
+	
+	<select id="selectOneCustomerFile" resultType="customerServiceFile">
+		select * from customer_service_file where customer_file_no = #{customerFileNo}
+	</select>
+	
+	<update id="updateCustomer">
+		update customer_service_tbl set
+			customer_title = #{customerTitle},
+			customer_content = #{customerContent}
+		where
+			customer_no = #{customerNo}
+	</update>
+	
+	<select id="selectCustomerFileList" resultType="customerServiceFile">
+		select *
+		from customer_service_file_no in
+		<foreach collection="array" item="customerFileNo" open="(" close=")" separator=",">
+			#{customerFileNo}
+		</foreach>
+	</select>
+	
+	<delete id="deleteCustomerFile">
+		delete from customer_service_file where customer_file_no = #{customerFileNo}
+	</delete>
 </mapper>

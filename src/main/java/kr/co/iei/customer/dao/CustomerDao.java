@@ -42,4 +42,12 @@ public interface CustomerDao {
 	int updateComment(CustomerComment cc);
 	
 	int updateStarRating(Customer customer);
+	
+	CustomerServiceFile selectOneCustomerFile(int customerFileNo);
+	
+	int updateCustomer(Customer c);
+	
+	List selectCustomerFileList(int[] delFileNo);
+	
+	int deleteCustomerFile(int customerFileNo);
 }

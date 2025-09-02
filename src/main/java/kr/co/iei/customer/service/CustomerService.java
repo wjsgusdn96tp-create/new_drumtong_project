@@ -1,6 +1,7 @@
 package kr.co.iei.customer.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -80,6 +81,8 @@ public class CustomerService {
 		
 		List<CustomerComment> commentList = customerDao.selectCustomerCommentList(customerNo);
 		c.setCommentList(commentList);
+		
+		System.out.println(c);
 		return c;
 	}
 	
@@ -138,7 +141,7 @@ public class CustomerService {
 	public int updateComment(CustomerComment cc) {
 		return customerDao.updateComment(cc);
 	}
-
+	
 	public CustomerComment selectOneComment(int commentNo) {
 		return customerDao.selectOneComment(commentNo);
 	}
@@ -146,6 +149,31 @@ public class CustomerService {
 	@Transactional
 	public int updateStarRating(Customer customer) {
 		return customerDao.updateStarRating(customer);
+	}
+
+	
+	public CustomerServiceFile selectOneCustomerFile(int customerFileNo) {
+		CustomerServiceFile customerFile = customerDao.selectOneCustomerFile(customerFileNo);
+		return customerFile;
+	}
+
+
+	public List<CustomerServiceFile> updateCustomer(Customer c, List<CustomerServiceFile> fileList, int[] delFileNo) {
+		
+		int result = customerDao.updateCustomer(c);
+		for(CustomerServiceFile csf : fileList) {
+			csf.setCustomerNo(c.getCustomerNo());
+			result += customerDao.insertCustomerFile(csf);
+		}
+		
+		List<CustomerServiceFile> delFileList = new ArrayList<CustomerServiceFile>();
+		if(delFileNo != null) {
+			List list = customerDao.selectCustomerFileList(delFileNo);
+			for(int customerFileNo : delFileNo) {
+				result += customerDao.deleteCustomerFile(customerFileNo);
+			}
+		}
+		return delFileList;
 	}
 
 
