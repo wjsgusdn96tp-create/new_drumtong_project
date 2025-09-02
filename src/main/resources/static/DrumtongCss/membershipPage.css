@@ -1,7 +1,71 @@
-.section{
+.main-title{
+	margin: 85px;
+}
+.main-title>h3{
+	font-size: 32px;
+	color: #6D2932;
+	font-weight: bold;
+	text-align: center;
+}
+.img-box{
+	width: 1200px;
+	height: 550px;
 	margin: 0 auto;
+	padding-bottom: 250px;
 }
 .img-box>img{
-	width: 750px;
-	height: 200px;
+	width: 1200px;
+	height: 550px;
+	margin: 0;					/* 기본 여백 제거 */
+	display: flex;             	/* 플렉스 박스 사용 */
+  	justify-content: center;   	/* 가로 중앙 정렬 */
+  	align-items: center;       	/* 세로 중앙 정렬 */
+}
+.content-box{
+	text-align: center;
+	font-size: 20px;
+	margin: 0 auto;
+	padding-bottom: 150px;
+}
+.title-text>.text{
+	font-size: 22px;
+	font-weight: bold;
+	color: #333333;
+	text-align: center;
+	border: 3px solid #333333;
+	border-bottom: none;
+	background-color: #E9DAC1;
+}
+.img{
+	border: 3px solid #333333;
+}
+.img>img{
+	width: 500px;
+	height: 300px;
+}
+.introduction>span{
+	padding-left: 450px;
+}
+.introduction>.title{
+	font-weight: bold;
+	color: #6D2932;
+	font-size: 20px;
+}
+.introduction>p{
+	font-size: 15px;
+	color: #333333;
+}
+/* 구매 버튼 css */
+.limk-box{
+	text-align: right;
+	padding-top: 10px;
+}
+.limk-box>button{
+	width: 180px;
+	height: 35px;
+	background-color: #F7ECDE;
+	color: #6D2932;
+	font-weight: bold;
+	border-radius: 35px;
+	border: 3px solid #6D2932;
 }
