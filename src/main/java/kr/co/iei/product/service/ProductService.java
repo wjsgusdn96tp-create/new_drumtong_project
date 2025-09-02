@@ -135,4 +135,10 @@ public class ProductService {
 		}return 0;/*삭제 실패*/
 		
 	}
+
+
+	public List bestProductList() {
+		List bestProductList = productDao.bestProductList();
+		return bestProductList;
+	}
 }

@@ -56,4 +56,8 @@
   <delete id="productDelete">
   	delete from product_tbl where product_no=#{productNo}
   </delete>
+  
+  <select id="bestProductList" resultType="product">
+  	select * from product_best_tbl
+  </select>
 </mapper>

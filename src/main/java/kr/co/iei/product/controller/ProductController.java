@@ -1,5 +1,7 @@
 package kr.co.iei.product.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,10 @@ public class ProductController {
 		model.addAttribute("list", pld.getList());
 		model.addAttribute("pageNavi",pld.getPageNavi());
 		model.addAttribute("shopName",shopName);
+		
+		/*대표상품 조회*/
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
 		return "product/productList";
 	}
 	

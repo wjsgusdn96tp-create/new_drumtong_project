@@ -29,4 +29,6 @@ public interface ProductDao {
 
 	int productDelete(int productNo);
 
+	List bestProductList();
+
 }

@@ -37,7 +37,6 @@
 .product_wrap>.product_title_wrap>.product_title>.product_title_main:hover{
 	background-color:var(--main2);
 	border-top: 3px solid var(--main5);
-	background-color: var(--main2);
 	border-bottom: none;
 	
 }
