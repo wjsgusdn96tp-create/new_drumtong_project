@@ -16,4 +16,5 @@ public class Discount {
 	private int productNo;
 	private int discountPercent;
 	private int discountPrice;
+	private String discountType;
 }

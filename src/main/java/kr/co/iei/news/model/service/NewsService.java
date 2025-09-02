@@ -192,5 +192,15 @@ public class NewsService {
 		List product = newsDao.selectAllProduct();
 		return product;
 	}
+
+	public List selectAllDiscount(String newsNo) {
+		List discount = newsDao.selectAllDiscount(newsNo);
+		return discount;
+	}
+
+	public News selectOneNews(String newsNo) {
+		News news = newsDao.selectOneNews(newsNo);
+		return news;
+	}
 	
 }

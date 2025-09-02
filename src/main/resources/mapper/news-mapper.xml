@@ -83,4 +83,12 @@
 	<select id="selectAllProduct" resultType="product">
 		select * from product_tbl
 	</select>
+	
+	<select id="selectAllDiscount" resultType="discount">
+		select * from discount where news_no = #{newsNo}
+	</select>
+	
+	<select id="selectOneNews" resultType="news">
+		select * from news where news_no = #{newsNo}
+	</select>
 </mapper>

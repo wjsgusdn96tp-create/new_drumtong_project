@@ -6,9 +6,9 @@
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<h1>NEWS 작성하기</h1>
+	<h1>news수정하기</h1>
 		<div class="content-wrap">
-			<div class="">
+			<div>
 				<form action="/news/discountWrite" method="get">
 					<!-- <input type="hidden" name="memberNo" th:value="${session.member.memberNo}">  -->	
 		
@@ -23,8 +23,10 @@
 							<th>할인 적용상품</th>
 							<td colspan="3">
 								<th:block th:each="p:${product}">
-								<input type="checkbox" name="productNo" th:id="${p.productNo}" th:value="${p.productNo}">
+									<th:block th:each="dc:${discount}">
+								<input type="checkbox" name="productNo" th:id="${p.productNo}" th:value="${p.productNo}" th:checked="${dc.productNo}==${p.productNo}">
 								<label th:for="${p.productNo}" th:text="${p.productName}"></label>
+									</th:block>
 								</th:block>
 							</td>
 						</tr>
@@ -34,10 +36,10 @@
 							</th>
 							<td colspan="3">
 								<select name="discountSelect" id="discountSelect">
-									<option value="Percent" selected>할인율</option>
-									<option value="Price">할인가격</option>
+									<option value="Percent"  th:selected="${discountType}=='Percent'">할인율</option>
+									<option value="Price"  th:selected="${discountType}=='Price'">할인가격</option>
 								</select>
-								<input type="number" name="discountPrice"><span class="priceInput" >%</span>
+								<input type="number" name="discountPrice" th:value="${discount[0].discountPrice}"><span class="priceInput" >%</span>
 							</td>
 						</tr>
 						<tr>
@@ -53,11 +55,22 @@
 		</div>
 	<th:block th:include="common/footer"></th:block>
 	<script th:inline="javascript">
+	const discountPrice = [[${discount[0].discountPrice}]];
+	console.log(discountPrice);
+	
+	
+	const discountSelect = $("#discountSelect option:selected").val();
+	
+	if(discountSelect == "Percent"){
+		$(".priceInput").text("%");
+	} else if(discountSelect == "Price") {
+		$(".priceInput").text("원");			
+	}
+	
 	$("#discountSelect").on("change", function(){
 		
 		const discountSelect = $("#discountSelect option:selected").val();
-		
-		
+				
 		if(discountSelect == "Percent"){
 			$(".priceInput").text("%");
 		} else if(discountSelect == "Price") {

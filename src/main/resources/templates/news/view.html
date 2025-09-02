@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<h1>NEWS 상세보기</h1>
+		<div class="content-wrap">
+			<div class="notice-list">
+					<table border=1>
+						<tr>
+							<th style="width: 20%">글 제목</th>
+							<td style="width: 80%" colspan="3">
+								<div th:text="${news.title}"></div>
+							</td>
+						</tr>
+						<tr>
+							<th>타입</th>
+							<td style="width: 30%">
+								<div th:text="${news.type}"></div>
+							</td>
+							<th style="width: 20%">적용일자</th>
+							<td style="width: 30%">
+								<span th:text="${news.startDate}"></span><span> ~ </span><span th:text="${news.endDate}"></span>
+							</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td colspan="3">
+								<div th:text="${news.content}"></div>
+							</td>
+						</tr>	
+						
+						<tr>
+							<th>포스터</th>
+							<td colspan="3">
+								<div>
+									<img id="img-view" width="500px" th:src="@{'/news/image/'+${news.image}}">							
+								</div>
+							</td>
+						</tr>
+					
+					</table>
+
+		
+			</div>
+		
+		
+		</div>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

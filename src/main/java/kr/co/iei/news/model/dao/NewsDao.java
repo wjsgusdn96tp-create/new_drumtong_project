@@ -38,4 +38,8 @@ public interface NewsDao {
 
 	List selectAllProduct();
 
+	List selectAllDiscount(String newsNo);
+
+	News selectOneNews(String newsNo);
+
 }

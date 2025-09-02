@@ -129,6 +129,42 @@ public class NewsController {
 		return likeCount;
 	}
 	
+	@GetMapping(value="/discountUpdateFrm")
+	public String discountUpdateFrm(String title, String newsNo, Model model) {
+		
+		model.addAttribute("title", title);
+		model.addAttribute("newsNo", newsNo);
+		List product = newsService.selectAllProduct();
+		model.addAttribute("product", product);
+		List list= newsService.selectAllDiscount(newsNo);
+		if(!list.isEmpty()) {
+			Discount discount = (Discount)list.get(0);
+			if(discount.getDiscountPercent() != 0) {
+				model.addAttribute("discountType","Percent");
+				
+			} else if(discount.getDiscountPrice() != 0) {
+				model.addAttribute("discountType","Price");
+			}
+			
+		}
+		model.addAttribute("discount", list);
+		return "news/discountUpdateFrm";
+	}
+	
+	@GetMapping(value="view")
+	public String newsView(String newsNo, Model model) {
+		News news = newsService.selectOneNews(newsNo);
+		model.addAttribute("news", news);
+		return "news/view";
+	}
+	
+	@GetMapping(value="updateNews")
+	public String updateNews(String newsNo, Model model) {
+		News news = newsService.selectOneNews(newsNo);
+		model.addAttribute("news", news);
+		System.out.println(news);
+		return "news/updateNews";
+	}
 }
 
 
