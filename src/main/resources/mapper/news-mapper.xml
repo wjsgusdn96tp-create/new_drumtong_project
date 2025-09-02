@@ -35,11 +35,15 @@
 
 	<select id="selectAllNews"  resultType="news">
 		select * from (
-  select * from (
-    select rownum as rnum, n.* from(select * from news order by news_no desc)n) 
-		where rnum between#{start} and #{end}) full join (select * from (select member_no, news_no from news_like group by (member_no, news_no)) join 
-	(select news_no, count(*) as "LIKE_COUNT" from news_like group by news_no)
-	using(news_no)) using(news_no)
+  			select * from (
+    			select rownum as rnum, n.* from(select * from news order by news_no desc)n) 
+		where rnum between #{start} and #{end})
+		<if test="tab == 'promotion'">
+		where type='프로모션'
+		</if>
+		<if test="tab == 'event'">
+		where type='이벤트'
+		</if>
 	</select>
 	
 	<insert id="insertNotice">
@@ -54,7 +58,13 @@
 		delete from news_like where member_no = #{memberNo} and news_no = #{newsNo}
 	</delete>
 	
-	<select id="selectNewsLikeCount" resultType="int">
-		select count(*) from news_like 		
+	<select id="selectNewsLikeCount" resultType="news">
+		select news_no, count(*) as LIKE_COUNT from news_like 
+			group by news_no
+			having news_no = #{newsNo}
+	</select>
+	
+	<select id="selectNewsisLike" resultType="int">
+		select count(*) as "IS_LIKE" from news_like where member_no = #{memberNo} and news_no = #{newsNo}
 	</select>
 </mapper>
