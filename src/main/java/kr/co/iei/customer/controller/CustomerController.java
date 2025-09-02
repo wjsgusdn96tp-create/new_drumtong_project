@@ -120,6 +120,9 @@ public class CustomerController {
 	public String CustomerView(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
 		Customer c = customerService.selectOneCustomer(customerNo);
 //		List<Member> allMemberList = customerService.selectAllMember();
+		
+		
+		
 		String memberEmail = member.getMemberEmail();
 		Member allMemberList = memberService.selectOneMember(memberEmail);
 		
@@ -182,10 +185,14 @@ public class CustomerController {
 	
 	@PostMapping(value="/updateStar")
 	@ResponseBody
-	public String updateStar(Customer customer, @SessionAttribute(required = false) Member member) {
-		Customer c = customerService.selectOneCustomer(customer.getCustomerNo());
+	public String updateStar(int customerNo, int customerStar, @SessionAttribute(required = false) Member member) {
+		Customer c = customerService.selectOneCustomer(customerNo);
 		if(member != null && c != null && member.getMemberNickname().equals(c.getCustomerNickname())) {
-			int result = customerService.updateStarRating(customer);
+			Customer customerToUpdate = new Customer();
+            customerToUpdate.setCustomerNo(customerNo);
+            customerToUpdate.setCustomerStar(customerStar);
+			
+			int result = customerService.updateStarRating(customerToUpdate);
 			if(result > 0) {
 				return "success";
 			}
