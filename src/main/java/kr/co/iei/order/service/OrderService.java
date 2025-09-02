@@ -45,21 +45,22 @@ public class OrderService {
 	}
 
 
-	public List selectCartList(int num, int productNo, String shopName, String productName) {
-		List list = orderDao.selectCartList(num,productNo,shopName,productName);
+	public List selectCartList(int num, int productNo, String shopName) {
+		List list = orderDao.selectCartList(num,productNo,shopName);
 		
 		return list;
 	}
 
-
-
-
-
-	public OrderTbl insertOtb(String shopName, int num) {
-		OrderTbl otb = orderDao.insertotb(shopName, num);
+	@Transactional
+	public int insertOrderTbl(OrderTbl otb) {
+		int result = orderDao.insertOrderTbl(otb);
 		
-		return otb;
+		return result;
 	}
+
+
+
+
 
 
 

@@ -22,9 +22,10 @@ public interface OrderDao {
 
 	int insertCart(CartItem ct);
 	
-	List selectCartList(int num, int productNo, String shopName, String productName);
+	List selectCartList(int num, int productNo, String shopName);
 
-	OrderTbl insertotb(String shopName, int num);
+	int insertOrderTbl(OrderTbl otb);
+
 
 
 

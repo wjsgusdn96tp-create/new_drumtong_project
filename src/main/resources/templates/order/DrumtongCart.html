@@ -12,7 +12,9 @@
 <body>
    <th:block th:include="/common/header"></th:block>
 	
-	 
+	 <div>상품번호: <span th:text="${productNo}">상품번호</span></div>
+    <div>상점명: <span th:text="${shopName}">상점명</span></div>
+    <div>회원번호: <span th:text="${num}">회원번호</span></div>	
 
     <div class="cart-mainbox">
         <div class="cart-namebox">
@@ -142,7 +144,7 @@
             </div>
         </div>
     </div>
-	
+
 	
 	
 	<script th:inline="javascript">
@@ -181,7 +183,7 @@
 	
 	const select =  $(".material-icons.selected");
 	
-		console.log(select);
+	
 	
 	//전체선택 버튼 누르기
 	$(".all-btn").on("click",function(){
@@ -201,26 +203,25 @@
 		
 		const productNo = $("#productNo").val();
         const shopName = $("#shopName").val();
-        const productPrice = $("#productPrice").val();
+        const memberNo = $("#memberNo").val();
  		
-        console.log("Ddd");
         
         $.ajax({
-        	url : "/order/orderList",
+        	url : "/order/OrderList",
         	type : "get",
         	data : 
         		{
         		
         		productNo : productNo,
         		shopName : shopName,
-        		productPrice : productPrice
+        		memberNo : memberNo
         		
         		},
         	success : function(list){
-        		alert("ㅇ");
+        		alert("됐다!!!!!!!!!!!!!!!!!!");
         	},
         	error : function(){
-        		alert("ㄴ");
+        		alert("안됐다 ㅠㅠㅠㅠㅠㅠ");
         	}
         })
  	});

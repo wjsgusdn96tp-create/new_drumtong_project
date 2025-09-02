@@ -1,6 +1,8 @@
 package kr.co.iei.oreder.controller;
 
 import java.util.List;
+import java.util.Random;
+
 import kr.co.iei.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,7 +91,7 @@ public class OrderController {
 	
 	// 장바구니 페이지 열기
 	@GetMapping("/DrumtongCart")
-	public String cartPage(Model model,int productNo,String shopName,String productName,
+	public String cartPage(Model model,int productNo,String shopName,
 			@SessionAttribute(required = false) Member member) {
 	    
 		
@@ -99,25 +101,37 @@ public class OrderController {
 		
 		int num = member.getMemberNo();
 		
-		List list = orderService.selectCartList(num,productNo,shopName,productName);
+		List list = orderService.selectCartList(num,productNo,shopName);
 		
-		
+		model.addAttribute("productNo", productNo);
+		model.addAttribute("shopName", shopName);
+		model.addAttribute("num", num);
 		
 	    model.addAttribute("list", list);
 	    return "order/DrumtongCart";
 	}
 	
 	@GetMapping("/OrderList")
-	public String listPage(Model model,String shopName,
+	@ResponseBody
+	public int insertOrderTbl(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
+		Random r = new Random();
 		
-		int num =  member.getMemberNo();
+		int rNum = r.nextInt(10000000)+1;
 		
-		OrderTbl otb = orderService.insertOtb(shopName,num);
+		int memberNo =  member.getMemberNo();
+		
+		OrderTbl otb = new OrderTbl(); 
+		
+		otb.setOrderNo(rNum);
+		otb.setMemberNo(memberNo);
+		otb.setShopName(shopName);
+		
+		int result = orderService.insertOrderTbl(otb);
 
-		
-		return "order/OrderList";
+		return result;
 	}
+	
 	
 	
 	

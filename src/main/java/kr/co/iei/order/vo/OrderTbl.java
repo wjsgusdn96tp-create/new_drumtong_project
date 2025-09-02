@@ -15,5 +15,6 @@ import lombok.NoArgsConstructor;
 public class OrderTbl {
 	private int orderNo;
 	private int memberNo;
-	private int shopName;
+	private String shopName;
+	private Date enrollDate;
 }

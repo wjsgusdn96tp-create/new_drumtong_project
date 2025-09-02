@@ -38,8 +38,10 @@
 		select * from cart_item_tbl
 	</select>
 	
-	<insert id="order">
-		insert into order_tbl values(order_tbl_seq.nextval,#{memberNo},#{shopName})
+		
+	<insert id="insertOrderTbl">
+		insert into order_tbl values(#{orderNo},#{memberNo},#{shopName},to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
+	 
 		
 </mapper>
