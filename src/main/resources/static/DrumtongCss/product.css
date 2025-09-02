@@ -10,6 +10,7 @@
 .product_wrap{
 		width: 1275px;
 		margin: 50px auto;
+		line-height: 45px;
 		
 	}
 
@@ -227,6 +228,8 @@
 .product_manager_btn{
 	overflow: hidden;
 	line-height: 30px;
+	height:30px;
+	margin-bottom: 3px;
 }
 .product_manager_btn>form>input{
 	display:none;	

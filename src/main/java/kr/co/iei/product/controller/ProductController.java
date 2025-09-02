@@ -37,6 +37,7 @@ public class ProductController {
 		model.addAttribute("pageNavi",pld.getPageNavi());
 		model.addAttribute("shopName",shopName);
 		
+		
 		/*대표상품 조회*/
 		List bestProductList = productService.bestProductList();
 		model.addAttribute("bestList",bestProductList);

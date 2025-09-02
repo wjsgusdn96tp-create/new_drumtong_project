@@ -110,6 +110,8 @@
 								
 								const bestText = $("<span>")
 								bestText.addClass("best_text");
+								bestText.attr("style","fontWeight:600");
+								bestText.attr("style","color:var(--main5)");
 								bestText.text("Best");
 								bestText.append(bestText);
 								bestDiv.append(bestText);
@@ -444,7 +446,7 @@
 				
 				
 				})
-					
+				/*	
 				//디저트 탭 클릭
 				$(".dessert_li").on("click", function(){
 					//디저트 탭 색상 변경 및 상품 출력
@@ -489,7 +491,7 @@
 						}
 						
 					})
-					*/
+					
 					
 				})
 				
@@ -558,11 +560,13 @@
 					
 					
 				})
+				*/
 				
 				
-					
+				
 		</script>
 		<div id="pageNavi" th:utext="${pageNavi}"></div>
+	
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

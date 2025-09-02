@@ -39,7 +39,7 @@ public class ProductService {
 		String pageNavi = "<ul class='pagination circle-style'>";
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/notice/list?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
 			pageNavi += "<span class='material-icons'> chevron_left </span>";
 			pageNavi += "</a>";
 			pageNavi += "</li>";
@@ -49,9 +49,9 @@ public class ProductService {
 		for(int i=0; i<pageNaviSize; i++) {
 			pageNavi += "<li>";
 			if(pageNo == reqPage) {
-				pageNavi += "<a class='page-item active-page' href='/notice/list?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
 			} else {
-				pageNavi += "<a class='page-item' href='/notice/list?reqPage="+pageNo+"'>";				
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
 			}
 			pageNavi += pageNo;
 			pageNavi += "</a>";
@@ -165,7 +165,7 @@ public class ProductService {
 		String pageNavi = "<ul class='pagination circle-style'>";
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/notice/list?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
 			pageNavi += "<span class='material-icons'> chevron_left </span>";
 			pageNavi += "</a>";
 			pageNavi += "</li>";
@@ -175,9 +175,9 @@ public class ProductService {
 		for(int i=0; i<pageNaviSize; i++) {
 			pageNavi += "<li>";
 			if(pageNo == reqPage) {
-				pageNavi += "<a class='page-item active-page' href='/notice/list?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
 			} else {
-				pageNavi += "<a class='page-item' href='/notice/list?reqPage="+pageNo+"'>";				
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
 			}
 			pageNavi += pageNo;
 			pageNavi += "</a>";
@@ -207,4 +207,7 @@ public class ProductService {
 		
 		return pld;
 	}
+
+
+
 }
