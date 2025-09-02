@@ -84,11 +84,11 @@ public class ProductService {
 	
 	
 	@Transactional
-	public int productInsertDrink(Product p, String productBestTbl) {
+	public int productInsert(Product p, String productBestTbl) {
 		/*int referencesProductNo =0;*/
 		if(productBestTbl.equals("productBest")) {
 			/*referencesProductNo ++;*/
-			int result = productDao.productInsertDrink(p);
+			int result = productDao.productInsert(p);
 			if(result > 0) {
 				/*p.setProductNo(referencesProductNo);*/
 				String productName= p.getProductName();
@@ -109,7 +109,7 @@ public class ProductService {
 			}
 		}else {
 			/*referencesProductNo ++;*/
-			int result = productDao.productInsertDrink(p);
+			int result = productDao.productInsert(p);
 			return result;/*1*/
 		}
 	}

@@ -11,7 +11,7 @@ import kr.co.iei.product.vo.Product;
 @Mapper
 public interface ProductDao {
 
-	int productInsertDrink(Product p);
+	int productInsert(Product p);
 
 	Product productInsertSearch(String productName);
 

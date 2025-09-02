@@ -58,25 +58,27 @@ public class ProductController {
 		return "product/productInsertGoods";
 	}
 	
-	@PostMapping(value="/productInsertDrink")
+	@PostMapping(value="/productInsert")
 	/*대표상품인지 아닌지도 값 받아와야함*/
-	public String productInsertDrink(String shopName, Product p, MultipartFile imageFile, String productBestTbl,Model model){
+	public String productInsert(String shopName, Product p, MultipartFile imageFile, String productBestTbl,Model model){
 		/*저장 경로 root에 서자명 컴퓨터에는 productinsert 폴더 만들었는데 다른분들 안 만들어도 상관없음??*/
 		String savepath = root+"/product/";
 		System.out.println(imageFile);
 		String filepath = fileUtil.upload(savepath,imageFile);
 		p.setProductImg(filepath);
 		
-		if(p.getProductTitleDetail().equals("iceCoffe") || 
-			p.getProductTitleDetail().equals("iceTea") || 
-			p.getProductTitleDetail().equals("iceOtherDrink")) {
-			p.setProductTilteTemp("ice");
-		}else if(p.getProductTitleDetail().equals("hotCoffe") || 
-				p.getProductTitleDetail().equals("hotTea")) {
-			p.setProductTilteTemp("hot");
+		if(p.getProductTitle().equals("drink")) {
+			if(p.getProductTitleDetail().equals("iceCoffe") || 
+					p.getProductTitleDetail().equals("iceTea") || 
+					p.getProductTitleDetail().equals("iceOtherDrink")) {
+				p.setProductTilteTemp("ice");
+			}else if(p.getProductTitleDetail().equals("hotCoffe") || 
+					p.getProductTitleDetail().equals("hotTea")) {
+				p.setProductTilteTemp("hot");
+			}			
 		}
 		
-		int result = productService.productInsertDrink(p, productBestTbl);
+		int result = productService.productInsert(p, productBestTbl);
 		
 		if(result == 0) {
 			model.addAttribute("title", "상품 등록 실패!!");
