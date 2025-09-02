@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="/DrumtongCss/membershipPage.css">
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<!-- membership Page -->
+	<main class="content">
+    	<section class="section">
+    		<div class="main-title">
+      			<h3>MemberShip</h3>
+    		</div>
+    		<div class="img-box">
+      			<img src="/img/cafe.png">
+    		</div>
+    		<!-- 멤버쉽 카드 3개를 가로로 배치할 부모 div -->
+    		<div class="content-box" style="display: flex; justify-content: space-around; gap: 20px;">
+    		
+      			<!-- Robusta 멤버쉽 카드 -->
+      			<div class="membership-card" th:object="${list[0]}">
+        			<div class="title-text">
+          				<p class="text" th:text="'연간 구독료 ' + *{membershipPrice} + '원'"></p>
+        			</div>
+        			<!-- 이미지 box -->
+        			<div class="img">
+          				<img src="/img/Robusta.png">
+          				<div class="introduction">
+            				<span class="material-icons-outlined">coffee_maker</span>
+            				<p class="title" th:text="*{membershipGrade} + ' Grade MemberShip'"></p>
+            				<p th:text="'매 음료 주문 시 상시 ' + *{percent} + '% 할인'"></p>
+          				</div>
+        			</div>
+        			<!-- 구매 버튼 -->
+        			<div class="limk-box">
+          				<button class="btn-primary btn-buy" th:data-grade="*{membershipGrade}" th:data-price="*{membershipPrice}"> 맴버쉽 구매하러 가기
+            				<span class="material-icons-outlined">arrow_forward</span>
+          				</button>
+        			</div>
+      			</div>
+
+      			<!-- Arabica 멤버쉽 카드 -->
+      			<div class="membership-card" th:object="${list[1]}">
+        			<div class="title-text">
+          				<p class="text" th:text="'연간 구독료 ' + *{membershipPrice} + '원'"></p>
+        			</div>
+        			<!-- 이미지 box -->
+ 		       		<div class="img">
+          				<img src="/img/Arabica.png">
+          				<div class="introduction">
+            				<span class="material-icons-outlined">coffee_maker</span>
+            				<p class="title" th:text="*{membershipGrade} + ' Grade MemberShip'"></p>
+            				<p th:text="'매 음료 주문 시 상시 ' + *{percent} + '% 할인'"></p>
+          				</div>
+        			</div>
+        			<!-- 구매 버튼 -->
+        			<div class="limk-box">
+          				<button class="btn-primary btn-buy" th:data-grade="*{membershipGrade}" th:data-price="*{membershipPrice}"> 맴버쉽 구매하러 가기
+            				<span class="material-icons-outlined">arrow_forward</span>
+          				</button>
+        			</div>
+      			</div>
+
+      			<!-- Excelsa 멤버쉽 카드 -->
+      			<div class="membership-card" th:object="${list[2]}">
+        			<div class="title-text">
+          				<p class="text" th:text="'연간 구독료 ' + *{membershipPrice} + '원'"></p>
+        			</div>
+        			<!-- 이미지 box -->
+        			<div class="img">
+          				<img src="/img/Excelsa.png">
+          				<div class="introduction">
+            				<span class="material-icons-outlined">coffee_maker</span>
+            				<p class="title" th:text="*{membershipGrade} + ' Grade MemberShip'"></p>
+            				<p th:text="'매 음료 주문 시 상시 ' + *{percent} + '% 할인'"></p>
+          				</div>
+        			</div>
+        			<!-- 구매 버튼 -->
+        			<div class="limk-box">
+          				<button class="btn-primary btn-buy" th:data-grade="*{membershipGrade}" th:data-price="*{membershipPrice}"> 맴버쉽 구매하러 가기
+            				<span class="material-icons-outlined">arrow_forward</span>
+          				</button>
+        			</div>
+      			</div>
+      		<!-- content-box 끝 -->	
+    		</div>
+    	</section>
+	</main>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script>
+		$(".btn-buy").on("click", function() {
+	    	const grade = $(this).data("grade");   // membershipGrade
+	    	const price = $(this).data("price");   // membershipPrice
+	    	const date = new Date();
+	    	const dateString = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+	    	IMP.init("imp16665102");
+	    	IMP.request_pay(
+	        	{
+	            	channelKey: "channel-key-f2d4efff-b000-454d-b14d-0674dad2f6e5",
+	            	pay_method: "card",
+	            	merchant_uid: "order_no_" + dateString,
+	            	name: "멤버쉽 구매 (" + grade + ")",
+	            	amount: price,
+	            	buyer_email: "test@portone.io",
+	            	buyer_name: "구매자이름",
+	            	buyer_tel: "010-1234-5678",
+	            	buyer_addr: "서울특별시 강남구 삼성동",
+	            	buyer_postcode: "123-456",
+	        	},
+	        	function (rsp) {
+	            	if (rsp.success) {
+	                	alert("결제가 성공했습니다!");
+	                	// 오늘 날짜
+	                	const startDate = new Date().toISOString().slice(0, 10);
+	                	// 만료일 = 시작일 + 1년
+	                	const endDateObj = new Date();
+	                	endDateObj.setFullYear(endDateObj.getFullYear() + 1);
+	                	const endDate = endDateObj.toISOString().slice(0, 10);
+	                	// Ajax로 서버에 결제정보 저장 요청
+	                	$.ajax({
+	                    	type: "POST",
+	                    	url: "/membershipRecode/insert", 
+	                    	data: {
+	                        	membershiprecodeStart: startDate,
+	                        	membershiprecodeLast: endDate,
+	                        	membershiprecodeNickname: "세션에서 닉네임 가져오기",
+	                        	membershiprecodeMemberNo: 1
+	                    	},
+	                    	success: function(result) {
+	                        	alert("DB 저장 성공!");
+	                    	},
+	                    	error: function(err) {
+	                        	alert("DB 저장 실패!");
+	                        	console.log(err);
+	                    	}
+	                	});
+	            	}else {
+	                	alert("결제 실패: " + rsp.error_msg);
+	            	}
+	        	}
+	    	);
+		});
+	</script>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

@@ -24,10 +24,13 @@
 						<input type="email" name="memberEmail" id="memberEmail">
 					</div>
 					<p class="input-msg email-check-msg"></p>
-					<!-- 이메일 인증번호 -->
-                    <div class="input-title" style="display:none;" id="dp-input">
-						<label for="verificationCode">인증번호 입력</label>
+					<p class="input-msg re-email-check-msg"></p>
+				</div>
+				<!-- 이메일 인증번호 -->
+				<div class="input-wrap">
+                	<div class="input-title" style="display:none;" id="dp-input">
                     	<div class="input-item">
+							<label for="verificationCode">인증번호 입력</label>
                         	<input type="text" name="verificationCode" id="verificationCode">
                     	</div>
 					</div>
@@ -42,6 +45,7 @@
 					<div class="input-item">
 						<input type="password" name="memberPw" id="memberPw">
 					</div>
+					<p class="input-msg password-check-msg"></p>
 				</div>
 				
 				<!-- 비밀번호 확인 -->
@@ -63,6 +67,7 @@
 					<div class="input-item">
 						<input type="text" name="memberNickname" id="memberNickname">
 					</div>
+					<p class="input-msg nickname-check-msg"></p>
 				</div>
 				
 				<!-- 이용약관 동의서 -->
@@ -260,7 +265,45 @@
 	            });
 	        }
 	    });
-		
+	    
+	 	// 이메일 정규표현식 제약 조건 
+	 		$("#memberEmail").on("keyup", function(){
+	 			const email = $(this).val(); 
+	 			const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; 
+	 			const msgElem = $(".re-email-check-msg"); 
+	 			msgElem.removeClass("valid invalid"); 
+	 			if(!emailRegex.test(email)){ 
+	 				msgElem.text("이메일 형태는 @gmail 형태만 가입 가능합니다."); 
+	 				msgElem.css("color","red"); 
+	 			}else { 
+	 				msgElem.text("올바른 이메일 형식입니다."); 
+	 				msgElem.css("color","green"); 
+	 			} 
+	 		});
+	 		// 닉네임 정규표현식 제약 조건 
+	 		$("#memberNickname").on("keyup", function(){ 
+	 			const nickname = $(this).val(); 
+	 			const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,12}$/; 
+	 			const msgElem = $(".nickname-check-msg"); 
+	 			msgElem.removeClass("valid invalid"); 
+	 			if(nicknameRegex.test(nickname)){ 
+	 				msgElem.text("사용 가능한 닉네임입니다.").addClass("valid"); 
+	 			}else { 
+	 				msgElem.text("닉네임은 한글/영문/숫자 2~12자만 입력 가능합니다.").addClass("invalid"); 
+	 			} 
+	 		});
+	 		// 비밀번호 정규표현식 제약 조건 
+	 		$("#memberPw").on("keyup", function(){ 
+	 			const password = $(this).val(); 
+	 			const passwordRegex = /^[a-z A-Z 0-9]{5,12}$/; 
+	 			const msgElem =$(".password-check-msg"); 
+	 			msgElem.removeClass("valid invalid"); 
+	 			if(passwordRegex.test(password)){ 
+	 				msgElem.text("사용 가능한 비밀번호 입니다.").addClass("valid"); 
+	 			}else{ 
+	 				msgElem.text("비밀번호는 영문/숫자 조합 5~12자만 입력 가능합니다.").addClass("invalid"); 
+	 			} 
+	 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
