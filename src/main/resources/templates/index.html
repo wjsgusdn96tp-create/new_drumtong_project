@@ -27,7 +27,7 @@
 			<table class="best_tbl">
 				<tr th:each="p:${product}">
 					<td style="width: 30%; border: 1px, solid, var(--main1);">
-						<img th:src="@{/product/${p.product_img}}">
+						<img th:src="@{'/product/'+${p.productImg}}">
 					</td>
 					<td style="border: 1px, solid, var(--main1); text-align:left;">
 						<h3 th:text="${p.productName} "></h3>

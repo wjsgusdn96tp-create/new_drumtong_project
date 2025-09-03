@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
 
@@ -43,5 +42,13 @@ public interface NewsDao {
 	News selectOneNews(String newsNo);
 
 	List selectBestProduct();
+
+	int deleteDiscount(HashMap<String, Object> param);
+
+	int getNewsNo();
+
+	int updateNews(News news);
+
+	int deleteNews(int newsNo);
 
 }
