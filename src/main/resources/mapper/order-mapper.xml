@@ -37,6 +37,11 @@
 	<select id="selectCartList" resultType="cart">
 		select * from cart_item_tbl
 	</select>
-
+	
+		
+	<insert id="insertOrderTbl">
+		insert into order_tbl values(#{orderNo},#{memberNo},#{shopName},to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
+	 
 		
 </mapper>

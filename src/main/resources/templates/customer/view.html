@@ -5,12 +5,16 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/DrumtongCss/customer_view.css">
 </head>
+
 <body>
 	<th:block th:include="common/header"></th:block>
+
     <div class="all-wrap">
         <div class="all-content-wrap">
+        	<input type="hidden" id="customerNo" th:value="${c.customerNo}">
+            <input type="hidden" id="customerStar" th:value="${c.customerStar}">
             <div>
-                <table class="tbl" style="width: 100%" >
+                <table class="tbl" style="width: 100%">
                     <tr>
                         <th style="width: 15%">유형</th>
                         <td style="width: 30%" th:text="${c.customerCategory}"></td>
@@ -20,141 +24,270 @@
                     <tr>
                         <th>첨부파일</th>
                         <td colspan="3">
-					        <th:block th:if="${!c.fileList.isEmpty()}">
-					            <div th:each="file : ${c.fileList}">
-					                <span th:text="${file.fileName}"></span>
-					            </div>
-					        </th:block>
-					
-					        <th:block th:if="${c.fileList.isEmpty()}">
-					            <span>첨부된 파일이 없습니다.</span>
-					        </th:block>
-					    </td>
+                            <th:block th:if="${!c.fileList.isEmpty()}">
+                                <div th:each="file : ${c.fileList}">
+                                    <img src="/img/file.png">
+                                    <a th:href="@{/customer/filedown(customerFileNo=${file.customerFileNo})}" th:text="${file.fileName}"></a>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${c.fileList.isEmpty()}">
+                                <span>첨부된 파일이 없습니다.</span>
+                            </th:block>
+                        </td>
                     </tr>
                     <tr>
                         <td class="content" colspan="4" th:utext="${c.customerContent}"></td>
                     </tr>
                 </table>
+
+                <!-- 댓글-->
                 <div>
-                   <div>
-                   		<th:block th:if="${session.member.memberNickname == c.customerNickname}">
-	                    	<form action="/customer/insertComment" method="post">	
-		                        <ul class="comment-ul">
-		                            <li>
-		                                <span class="material-icons" style="font-size: 50px;">self_improvement</span>
-		                            </li>
-		                            <li>
-		                                <input type="hidden" name="customerWriterNo" th:value=${session.member.memberNo}>
-		                                <input type="hidden" name="customerServiceRef" th:value=${c.customerNo}>
-		                                <div class="input-item">
-		                                    <textarea class="ccc" style="background-color: var(--main2);" name="commentContent"></textarea>
-		                                </div>
-		                            </li>
-		                            <li>
-		                                <button type="submit" class="comment-btn">댓글등록</button>
-		                            </li>
-		                        </ul>
-                        	</form>
+                    <div>
+                        <!-- 댓글 입력-->
+                        <th:block th:if="${session.member != null and (session.member.memberNickname == c.customerNickname or session.member.memberGrade == '관리자')}">
+                            <form action="/customer/insertComment" method="post">
+                                <ul class="comment-ul">
+                                    <li>
+                                        <span th:if="${session.member.memberGrade == '관리자'}" class="material-icons" style="font-size: 50px;">manage_accounts</span>
+                                        <span th:if="${session.member.memberGrade != '관리자'}" class="material-icons" style="font-size: 50px;">self_improvement</span>
+                                    </li>
+                                    <li>
+                                        <input type="hidden" name="customerWriterNo" th:value="${session.member.memberNo}">
+                                        <input type="hidden" name="customerServiceRef" th:value="${c.customerNo}">
+                                        <div class="input-item">
+                                            <textarea class="ccc" style="background-color: var(--main2);" name="commentContent" placeholder="답변을 입력하세요."></textarea>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <button type="submit" class="comment-btn">댓글등록</button>
+                                    </li>
+                                </ul>
+                            </form>
                         </th:block>
+
                         <div class="gong"></div>
-                        <th:block th:each="cc : ${c.commentList}">
-	                        <ul class="comment-ul-road">
-	                            <li>
-	                                <span th:text="${session.member.memberNickname}"></span>
-	                            </li>
-	                            <li>
-									<div class="input-item">
-	                                    <p th:text="${cc.commentContent}"></p>
-	                                </div>
-	                            </li>
-	                            <li>
-		                            <div>
-			                            <th:block th:if="${session.member.memberNo == cc.customerWriterNo}">
-											<a href="#">수정</a>
-											<button class="delComment" th:value="${cc.commentNo}">삭제</button>
-										</th:block>
-									</div>
-									<div>
-										<a>답글달기</a>
-									</div>
-	                            </li>
-	                        </ul>
-	                        <ul class="comment-ul-ref">
-	                            <li>
-	                                <span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
-	                            </li>
-	                            <li>
-	                            
-	                            </li>
-	                            <li>
-	
-	                            </li>
-	                        </ul>
+
+                        <!-- 댓글 출력 -->
+                        <th:block th:each="cc : ${c.commentList}" th:if="${cc.customerCommentRef == 0 or cc.customerCommentRef == null}">
+                            <ul class="comment-ul-road">
+                                <li style="font-weight: bold; width: 120px; text-align: center;">
+                                    <th:block th:each="m : ${allMembers}" th:if="${m.memberNo == cc.customerWriterNo}">
+                                        <span th:if="${m.memberGrade == '관리자'}">관리자</span>
+                                        <span th:if="${m.memberGrade != '관리자'}" th:text="${m.memberNickname}"></span>
+                                    </th:block>
+                                </li>
+                                <li>
+                                    <div class="input-item">
+                                        <p class="comment-content-p" th:text="${cc.commentContent}"></p>
+                                        <div class="input-item" style="display:none;">
+                                            <textarea class="ccc" name="commentContent"></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <th:block th:if="${session.member != null and session.member.memberNo == cc.customerWriterNo}">
+                                        <button th:onclick="modifyComment(this, [[${c.customerNo}]], [[${cc.commentNo}]])">수정</button>
+                                        <button class="delComment" th:value="${cc.commentNo}" th:onclick="deleteComment([[${c.customerNo}]], [[${cc.commentNo}]])">삭제</button>
+                                    </th:block>
+                                    <div>
+                                        <a class="recShow" th:if="${session.member != null and (session.member.memberNickname == c.customerNickname or session.member.memberGrade == '관리자')}">댓글달기</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <!-- 대댓글 입력 -->
+                            <div class="inputRecommentBox" style="display:none;">
+                                <form action="/customer/insertComment" method="post">
+                                    <ul class="comment-ul-ref">
+                                        <li><span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span></li>
+                                        <li>
+                                            <input type="hidden" name="customerCommentRef" th:value="${cc.commentNo}">
+                                            <input type="hidden" name="customerWriterNo" th:value="${session.member.memberNo}">
+                                            <input type="hidden" name="customerServiceRef" th:value="${c.customerNo}">
+                                            <div class="input-item"><textarea class="ccc" name="commentContent" placeholder="댓글을 입력하세요."></textarea></div>
+                                        </li>
+                                        <li><button type="submit" class="comment-btn">답글등록</button></li>
+                                    </ul>
+                                </form>
+                            </div>
+
+                            <!-- 대댓글 출력 -->
+                            <th:block th:each="re : ${c.commentList}" th:if="${re.customerCommentRef == cc.commentNo}">
+                                <!-- ====================== [수정 1] : 대댓글 HTML도 원래 구조로 되돌립니다 ====================== -->
+                                <ul class="comment-ul-ref">
+                                    <li style="font-weight: bold; width: 120px; text-align: center;">
+                                        <span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
+                                        <th:block th:each="m : ${allMembers}" th:if="${m.memberNo == re.customerWriterNo}">
+                                            <span th:if="${m.memberGrade == '관리자'}">관리자</span>
+                                            <span th:unless="${m.memberGrade == '관리자'}" th:text="${m.memberNickname}"></span>
+                                        </th:block>
+                                    </li>
+                                    <li>
+                                        <p class="comment-content-p" th:text="${re.commentContent}"></p>
+                                        <div class="input-item" style="display:none;">
+                                            <textarea class="ccc" name="commentContent"></textarea>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <th:block th:if="${session.member != null and session.member.memberNo == re.customerWriterNo}">
+                                            <button th:onclick="modifyComment(this, [[${c.customerNo}]], [[${re.commentNo}]])">수정</button>
+                                            <button class="delComment" th:value="${re.commentNo}" th:onclick="deleteComment([[${c.customerNo}]], [[${re.commentNo}]])">삭제</button>
+                                        </th:block>
+                                    </li>
+                                </ul>
+                            </th:block>
                         </th:block>
                     </div>
                 </div>
-                <div class="rank">
-                    <span>관리자 댓글에 대한 평점을 남겨주세요.</span>
-                </div>
-                <div class="star-wrap">
-                    <span class="material-icons">star</span>
-                    <span class="material-icons">star</span>
-                    <span class="material-icons">star</span>
-                    <span class="material-icons">star</span>
-                    <span class="material-icons">star</span>
+
+                <!-- 별점 -->
+                <div class="rank"><span>관리자 댓글에 대한 평점을 남겨주세요.</span></div>
+                <div class="star-wrap" th:classappend="${session.member != null and session.member.memberGrade == '관리자'} ? 'admin-view' : ''">
+                    <span class="material-icons">star</span><span class="material-icons">star</span><span class="material-icons">star</span><span class="material-icons">star</span><span class="material-icons">star</span>
                 </div>
                 <p class="star-rank">0점</p>
                 <div class="modydele">
-                    <th:block class="modydele-th">
-                            <a href="#" class="btn btn1">수정</a>
-                            <button class="btn btn2">삭제</button>
+                    <th:block class="modydele-th" th:if="${session.member != null && session.member.memberGrade !='관리자'}">
+                        <a th:href="@{/customer/updateFrm(customerNo=${c.customerNo})}" class="btn btn1">수정</a>
+                        <button class="btn btn2">삭제</button>
                     </th:block>
                 </div>
             </div>
         </div>
     </div>
+
     <th:block th:include="common/footer"></th:block>
     <script>
-        const star = $(".star-wrap>span")
-        star.on("click",function(){
-            star.css("color", "var(--gray6)");
-            $(this).prevAll().css("color", "var(--main4)");
-            $(this).css("color", "var(--main4)");
-            const index = star.index(this);
-            $(".star-rank").text(index+1+"점");
+    $(document).ready(function(){
+    	const savedRating = $("#customerStar").val();
+        
+        if(savedRating > 0){
+            updateStarUI(savedRating);
+        }
+    });
+
+    function updateStarUI(rating){
+        const stars = $(".star-wrap>span");
+        
+        stars.each(function(i){
+            if(i < rating){
+                $(this).css("color", "var(--main4)");
+            } else {
+                $(this).css("color", "var(--gray6)");
+            }
         });
         
-        $(".delComment").on("click", function(){
-        	const delComment = $(this);
-        	const index = $(".delComment").index(this);
-        	const customerNo = delComment.val();
-        	if(!confirm("정말로 댓글을 삭제하시겠습니까?")) {
-        		return;
-        	}
-        	
-        	$.ajax({
-        		url: "/customer/deleteComment",
-        		type: "POST",
-        		data: {
-        			commentNo: commentNo
-        		},
-        		success: function(response) {
-        			if(response === "success") {
-        				alert("댓글이 삭제되었습니다.");
-        				$(".comment-ul-road").eq(index).remove();
-        			} else {
-        				alert("댓글 삭제 실패");
-        			}
-        		},
-        		error: function(){
-        			alert("댓글 삭제 오류");
-        		}
-        	});
+        $(".star-rank").text(rating + "점");
+    }
+
+    $(".star-wrap>span").on("click",function(){
+    	if ($(this).parent().hasClass('admin-view')) {
+            return; 
+        }
+    	
+        const clickedIndex = $(this).index();
+        const newRating = clickedIndex + 1;
+        const customerNo = $("#customerNo").val();
+
+        $.ajax({
+            url: "/customer/updateStar",
+            type: "post",
+            data: {
+                customerNo: customerNo,
+                customerStar: newRating
+            },
+            success: function(response){
+                if(response === "success"){
+                    alert("별점이 저장되었습니다.");
+                    updateStarUI(newRating);
+                    $("#customerStar").val(newRating);
+                } else {
+                    alert("별점 저장 실패");
+                }
+            },
+            error: function(){
+                alert("별점 저장 오류");
+            }
         });
-        	
-        	
-        
+    });
+    
+    $(".recShow").on("click", function() {
+        const index = $(".recShow").index(this);
+        if ($(this).text() === "댓글달기") {
+            $(this).text("취소");
+        } else {
+            $(this).text("댓글달기");
+        }
+        $(".inputRecommentBox").eq(index).toggle();
+    });
+    
+    function modifyComment(obj, customerNo, commentNo){
+        const buttonLi = $(obj).parent();
+        const contentLi = buttonLi.prev();
+
+        const contentP = contentLi.find(".comment-content-p");
+        const textareaDiv = contentLi.find(".input-item[style*='display:none']");
+
+        textareaDiv.find("textarea").val(contentP.text());
+
+        contentP.hide();
+        textareaDiv.show();
+
+        $(obj).text("수정완료");
+        $(obj).attr("onclick", `modifyComplete(this, ${customerNo}, ${commentNo})`);
+        $(obj).next().text("수정취소");
+        $(obj).next().attr("onclick", `modifyCancel(this, ${customerNo}, ${commentNo})`);
+
+        if(buttonLi.find(".recShow").length > 0){
+            buttonLi.find(".recShow").hide();
+        }
+    }
+
+    function modifyComplete(obj, customerNo, commentNo){
+        const buttonLi = $(obj).parent();
+        const contentLi = buttonLi.prev();
+
+        const form = $("<form>");
+        form.attr("action", "/customer/updateComment").attr("method", "post");
+
+        const commentNoInput = $("<input>").attr("type", "hidden").attr("name", "commentNo").val(commentNo);
+        const refInput = $("<input>").attr("type", "hidden").attr("name", "customerServiceRef").val(customerNo);
+
+        const contentTextarea = contentLi.find("textarea").clone();
+
+        form.append(commentNoInput).append(refInput).append(contentTextarea);
+        $("body").append(form);
+        form.submit();
+    }
+
+    function modifyCancel(obj, customerNo, commentNo){
+        const buttonLi = $(obj).parent();
+        const contentLi = buttonLi.prev();
+
+        const contentP = contentLi.find(".comment-content-p");
+        const textareaDiv = contentLi.find(".input-item[style*='display:none']");
+
+        textareaDiv.hide();
+        contentP.show();
+
+        $(obj).prev().text("수정");
+        $(obj).prev().attr("onclick", `modifyComment(this, ${customerNo}, ${commentNo})`);
+        $(obj).text("삭제");
+        $(obj).attr("onclick", `deleteComment(${customerNo}, ${commentNo})`);
+
+        if(buttonLi.find(".recShow").length > 0){
+            buttonLi.find(".recShow").show();
+        }
+    }
+
+    function deleteComment(customerNo, commentNo){
+        if(confirm("댓글을 삭제하시겠습니까?")){
+            location.href = "/customer/deleteComment?customerServiceRef=" + customerNo + "&commentNo=" + commentNo;
+        }
+    }
+    
 
     </script>
+    
 </body>
 </html>

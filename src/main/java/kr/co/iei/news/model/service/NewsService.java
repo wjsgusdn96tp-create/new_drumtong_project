@@ -97,8 +97,8 @@ public class NewsService {
 		return notice;
 	}
 
-	public int selectTotalNewsCount() {
-		int totalCount = newsDao.selectTotalNewsCount();
+	public int selectTotalNewsCount(String tab) {
+		int totalCount = newsDao.selectTotalNewsCount(tab);
 		return totalCount;
 	}
 	
@@ -138,11 +138,28 @@ public class NewsService {
 		return result;
 	}
 	@Transactional
-	public int insertDiscount(Discount discount, List productNoList) {
+	public int insertDiscount(News news, String discountSelect, String discountPrice, String[] list) {
 		int result = 0;
-		for(int i=0; i<productNoList.size();i++) {
-			discount.setProductNo((int)productNoList.get(i));
-			result += newsDao.insertDiscount(discount);
+		for(int i=0; i<list.length;i++) {
+			Discount discount = new Discount();
+			discount.setNewsNo(news.getNewsNo());
+			discount.setProductNo(Integer.parseInt(list[i]));
+			if(discountSelect.equals("Percent")) {
+				discount.setDiscountPercent(Integer.parseInt(discountPrice));
+			} else if(discountSelect.equals("Price")) {
+				discount.setDiscountPrice(Integer.parseInt(discountPrice));
+			}
+			
+			System.out.println(discountSelect);
+			System.out.println(discount);
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			param.put("newsNo", discount.getNewsNo());
+			param.put("productNo", discount.getProductNo());
+			param.put("discountPercent", discount.getDiscountPercent());
+			param.put("discountPrice", discount.getDiscountPrice());
+			param.put("discountSelect",discountSelect);
+			
+			result += newsDao.insertDiscount(param);
 		}		
 		return result;
 	}
@@ -169,6 +186,27 @@ public class NewsService {
 		}
 		
 		return likeCount;
+	}
+
+	public List selectAllProduct() {
+		List product = newsDao.selectAllProduct();
+		return product;
+	}
+
+	public List selectAllDiscount(String newsNo) {
+		List discount = newsDao.selectAllDiscount(newsNo);
+		return discount;
+	}
+
+	public News selectOneNews(String newsNo) {
+		News news = newsDao.selectOneNews(newsNo);
+		return news;
+	}
+
+	public List selectBestProduct() {
+		List product = newsDao.selectBestProduct();
+		
+		return product;
 	}
 	
 }
