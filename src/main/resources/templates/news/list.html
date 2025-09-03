@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/DrumtongJs/news.js"></script>
+<link rel="stylesheet" href="/DrumtongCss/modal.css">
 <link rel="stylesheet" href="/DrumtongCss/news.css">
 <style>
 	.item-img-div{
@@ -18,7 +19,7 @@
 	
 	.discountDiv{
 		height: 10px;
-		margin-bottom : 50px;
+		margin-bottom : 20px;
 	}
 	
 	.tabSelect{
@@ -27,6 +28,9 @@
 	.news-title{
 		text-align: left;
 	}
+	.inner>img{
+		width: 100%;
+	}
 	
 </style>
 </head>
@@ -34,6 +38,21 @@
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
 	
+		
+		<div id="modal" class="dialog">
+			<div class="tb">
+				<div class="inner" style="max-width: 800px;">
+					<div class="top">
+						<div class="title">모달창 제목</div>
+						<a href="#" class="modal-close">닫기</a>
+					</div>
+					<img src="/img/banner/poster.jfif" class="ct">
+				</div>
+			</div>
+		</div>
+		
+		
+		
 		<div id="main-news">
 			<img src="/img/news/main_promotion3.jpg" class="main-news3">
 			<div class="btn-div">
@@ -53,8 +72,10 @@
 		</div>
 		
 		<div class="btn-div">
-			<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 쓰기</a>	
-			<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>	
+			<div style="overflow:hidden;">
+				<a href="/news/noticeWriteFrm" class="btn write-btn" s>공지사항 쓰기</a>
+				<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>					
+			</div>
 		</div>
 		
 		<div class="list">
@@ -66,8 +87,6 @@
 				<button class="btn" id="more-btn">더보기</button>
 			</div>
 		</div>	
-		
-		
 		
 		<div class="notice_wrap close">
 			<div class="notice-list">
@@ -101,8 +120,6 @@
 		let currentCount = 0;					// 현재까지 읽어온 게시물 수
 		let start = 1;							// 게시물의 시작 번호
 		const amount = 6;						// 더보기 한번 클릭 시 추가로 가져올 게시물 수 
-		
-	
 		
 		$(".first-tab>li").on("click", function(){
 			$(".notice_wrap").addClass("close");
@@ -211,7 +228,7 @@
 							likeIconSpan.addClass("material-icons").addClass("likeBtn").text("favorite_border");
 						}
 						const newsNo = $("<span>");
-						newsNo.text(n.newsNo).addClass("close");
+						newsNo.text(n.newsNo).addClass("close").addClass("newsNo");
 						
 						likeSpan.append(likeIconSpan).append(newsNo).append(likeCountSpan);
 						smallDiv.append(dateSpan).append(likeSpan);
@@ -226,10 +243,16 @@
 							const discountUpdate = $("<a>");
 							discountUpdate.addClass("discountUpdate").addClass("btn");
 							discountUpdate.text("할인 수정하기");
+							discountUpdate.attr("href","/news/discountUpdateFrm?title="+n.title+"&newsNo="+n.newsNo);
 							discountDiv.append(discountBtn).append(discountUpdate);
 						}
-						
-						textWrap.append(titleDiv).append(smallDiv).append(discountDiv);
+						const btnDiv = $("<div>");
+						const newsUpdate = $("<a>");
+						newsUpdate.addClass("newsUpate").addClass("btn");
+						newsUpdate.text("News 수정하기");
+						newsUpdate.attr("href","/news/updateNews?newsNo="+n.newsNo);
+						btnDiv.append(newsUpdate);
+						textWrap.append(titleDiv).append(smallDiv).append(discountDiv).append(btnDiv);
 						
 						li.append(imgDiv).append(textWrap);
 												
@@ -251,6 +274,14 @@
 			})
 		});
 		
+		
+
+		
+		$(".modal-close").on('click', function(e){
+			e.preventDefault();
+			const modal = $(this).parents('.dialog');
+			modal.fadeOut();
+		});
 		
 		
 		$(document).on("click",".likeBtn",function(){
@@ -283,6 +314,11 @@
 		$(".first-tab>li").css("backgroundColor","var(--main1)");
 	});
 	
+	
+	$(document).on("click",".news-item",function(){
+		const newsNo = $(this).find('.newsNo').text();
+		location.href="/news/view?newsNo="+newsNo;
+	});
 		
 	</script>
 </body>
