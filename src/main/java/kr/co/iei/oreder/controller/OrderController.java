@@ -1,6 +1,7 @@
 package kr.co.iei.oreder.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -143,9 +144,21 @@ public class OrderController {
 		
 		
 		
-		
 		return "order/OrderList";
 		
 	}
+	
+	
+	@PostMapping(value="/cartdel")
+	@ResponseBody
+	public int cartdel(int cartNo) {
+		
+		int result = orderService.cartdel(cartNo);
+		
+		return result;
+	}
+	
+	
+	
 	
 }

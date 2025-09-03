@@ -50,8 +50,6 @@ public class OrderService {
 	
 	public List selectCartList(int memberNo,String shopName) {
 		
-		
-		
 		HashMap<String, Object> param = new HashMap<String,Object>();
 		
 		param.put("memberNo", memberNo);
@@ -118,6 +116,19 @@ public class OrderService {
 		
 		return result;
 	}
+
+	
+	@Transactional
+	public int cartdel(int cartNo) {
+		int result = orderDao.cartdel(cartNo);
+		
+		return result;
+	}
+
+
+	
+	
+
 
 
 

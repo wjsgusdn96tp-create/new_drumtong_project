@@ -71,6 +71,10 @@
 	 <delete id="deleteCart">
 	 	delete from cart_item_tbl where member_no = #{memberNo} and shop_name = #{shopName}
 	 </delete>
-	 
+	
+		<delete id="cartdel">
+			delete from cart_item_tbl where cart_no = #{cartNo}
+		</delete>
+		
 		
 </mapper>

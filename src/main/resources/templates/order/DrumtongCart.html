@@ -18,7 +18,6 @@
                <h2>장바구니</h2>
             </div>
             <div class="cart-check">
-                <button class="all-btn">전체선택</button>
                 <button class="delete-btn">선택삭제</button>
             </div>
         </div>
@@ -28,6 +27,8 @@
                     <li>
                         <div class="cart-listheader">
                                 <button class="button-icons"><span class="material-icons">check_circle_outline</span></button>
+                        			<span class="shop-name" th:text="${list.shopName}"></span>
+                        			<input type="hidden" class="cart-no" th:value="${list.cartNo}">
                         </div>
                         
                         <div class="cart-listbody">
@@ -46,10 +47,12 @@
                                     <span>원</span>
                                     </div>
                                 </div>
+                                <span class="hidden-title" th:text="${list.productTitle}" style="display:none;"></span>
                                 <div class="item-option">
                                     <div class="option-top">
                                         <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
                                         <span class="cup">컵 : </span><span class="cup-type" th:text="${list.cupChoice}"></span>
+                                    	    <span class="heat">데우기 : </span><span class="heat-check"></span>
                                     </div>
                                     <div class="option-bottom">
                                         <span class="shot">샷추가 : </span><span class="shot-count" th:text="${list.cupShot}"></span>
@@ -58,7 +61,6 @@
                                 </div>
                                 <div class="info-bottom">
                                     <span class="sale">등급할인</span>
-                                    <a href="#" class="modify">옵션변경</a>
                                 </div>
                             </div>
                         </div>
@@ -176,25 +178,110 @@
 	const select =  $(".material-icons.selected");
 	
 	
-	
-	//전체선택 버튼 누르기
-	$(".all-btn").on("click",function(){
-
-		$(".material-icons").toggleClass("selected");
+	//카트리스트 안에있는 li들을 다 돌기 each문
+	$(".cartlist li").each(function(){
+		const title = $(this).find(".hidden-title").text().trim();
+		//li 안에있는 모든 요소중 히든타이틀 찾아서 값 대입하고 공백 제거완료
+		//핀드는 신이다
+		const optionBox = $(this).find(".item-option");
+		
+		
+		
+		
+		if (title === "drink") {
+			optionBox.show();
+			optionBox.find(".heat").hide();
+			optionBox.find(".heat-check").hide();
+		}else if (title === "dessert") {
+			optionBox.show();
+			optionBox.find(".size, .cup, .shot, .cream").hide();
+			optionBox.find(".size-count, .cup-type, .shot-count, .cream-count").hide();
+			optionBox.find(".heat").show();
+		}else if (title === "goods") {
+			optionBox.hide();
+			optionBox.find(".heat").hide();
+		}
 		
 		
 	});
-
-	$(".delete-btn").on("click",function(){
+	
+	
+	
+	
+	
+	//두개이상 클릭막기.. 내실력 부족 전체 삭제는 안돼겠다
+	$(".button-icons .material-icons").on("click", function () {
+    		
+		let inselect = $(".material-icons.selected");
+			
+		//랭스로 개수 확인 
+		 if (inselect.length >= 1 && !$(this).hasClass("selected")) {
+		        alert("한 번에 하나만 선택할 수 있습니다.");
+		        return; 
+		    }
 		
+		
+		$(this).toggleClass("selected");
+    
+	});
+	
+	
+	$(".delete-btn").on("click",function(){
+		let cartNo = null;
+		
+		$(".cartlist li").each(function(){
+			
+			let cartLi = $(this);
+			let icon = cartLi.find(".material-icons");
+			
+			let selectIcon = icon.hasClass("selected");
+			
+			if(selectIcon === true) {
+				
+				cartNo = cartLi.find(".cart-no").val();
+				
+				return false;
+				
+			}
+		});
+		
+		  if (!cartNo) {
+		        alert("삭제할 물건을 체크하세요");
+		        return;
+		    }
+	
+			console.log("매장값확인",shopName)
+			
+		
+			 $.ajax({
+			        url: "/order/cartdel",
+			        type: "post",
+			        data: { cartNo: cartNo },
+			        success: function () {
+			            alert("삭제 성공");
+			            location.reload();
+			        },
+			        error: function () {
+			            alert("삭제 실패");
+			        }
+			    });
+	   
 	});
 	
  	
+	
 	
 	$(".buy-btn").on("click",function(){
 		
         const shopName = $("#shopName").val();
- 	
+        //태그가 몇개있는지 렝스로 확인
+        const itemCount = $(".cartlist li").length; 
+	
+        if (itemCount === 0) {
+            alert("장바구니에 담긴 물건이 없습니다.");
+            location.href = "/";
+            return;
+        }
        
         $.ajax({
         	url : "/order/pay",

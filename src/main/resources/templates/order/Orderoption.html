@@ -171,10 +171,7 @@
 
 	    
 	    
-	    <form action="/order/DrumtongCart" method="get">
-	    	<input type="hidden" name="shopName" id="shopName" th:value="${shop.shopName}">
-	    	<button type="submit" class="order-moveCart">장바구니가기</button>
-	    </form>
+	    
 	</div>
 	
 	<script th:inline="javascript">
@@ -183,6 +180,7 @@
 			
 			$("#drinkBox, #dessertBox, #goodsBox").hide();
 			
+			//쇼 하이드로 보이기 숨기
 			if (productTitle === "drink") {
 				$("#drinkBox").show();
 			}else if (productTitle === "dessert") {
