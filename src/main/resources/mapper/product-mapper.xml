@@ -45,6 +45,15 @@
 		where rnum between #{start} and #{end}
   </select>
   
+  <select id="productListPriceDate" resultType="product">
+  	 	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl order by product_price asc
+       			 )n
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
   <select id="ProductListDessert" resultType="product">
   	select * from 
     		(select rownum as rnum, n.* from 

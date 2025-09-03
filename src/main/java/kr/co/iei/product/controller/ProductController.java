@@ -34,13 +34,21 @@ public class ProductController {
 		List productListDate = productService.productListDate(pageNavi, reqPage);
 		//productListDate pld = productService.productListDate(reqPage);
 		//System.out.println(pld);
-		productListDate pld = new productListDate(productListDate, pageNavi);
-		model.addAttribute("list", pld.getList());
-		model.addAttribute("pageNavi",pld.getPageNavi());
+		
+		//전체 상품 리스트
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		model.addAttribute("list", productListDate);
+		model.addAttribute("pageNavi",pageNavi);
 		model.addAttribute("shopName",shopName);
 		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
 		
 		
+		//가격순
+		List productListPriceDate =productService.productListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", productListPriceDate);
 		return "product/productList";
 	}
 	
