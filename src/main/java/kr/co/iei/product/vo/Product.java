@@ -23,10 +23,11 @@ public class Product {
 	private int productContentSugar;
 	private int productContentNatrium;
 	private int productContentProtein;
-	private String productImg;  
+	private String productImg;
 	//좋아요 기능 관련
 	/*
 	private int isLike;
 	private int likeCount;
 	*/
+	private int productBestNo;
 }

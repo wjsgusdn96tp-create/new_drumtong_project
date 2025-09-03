@@ -38,6 +38,17 @@ public class MemberController {
 	
 	@PostMapping(value="/join")
 	public String join(Member m, Model model, HttpSession session) {
+		// 필수값 (500 방지)
+	    if (m.getMemberEmail()==null || m.getMemberEmail().isEmpty()
+	        || m.getMemberPw()==null || m.getMemberPw().isEmpty()
+	        || m.getMemberNickname()==null || m.getMemberNickname().isEmpty()) {
+	    	model.addAttribute("title", "회원가입 실패");
+	    	model.addAttribute("text", "필수정보 ! 이메일/비밀번호/닉네임을 모두 입력하세요.");
+	    	model.addAttribute("icon", "error");
+	    	model.addAttribute("loc", "/member/joinFrm");
+	    	return "common/msg";	    	
+	    }
+	        
 	    // 1. 세션에서 인증 성공 여부 가져오기
 	    Boolean emailVerified = (Boolean) session.getAttribute("emailVerified");
 	    // 2. 인증 안됐을 경우
@@ -54,7 +65,7 @@ public class MemberController {
 	    model.addAttribute("icon", "success");
 	    model.addAttribute("loc", "/member/loginFrm");	    
 	    session.removeAttribute("emailVerified");
-	    return "common/msg";	    	
+	    return "common/msg";	    		    	
 	}// join
 	
 	// ajax 이메일 조회

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<th:block th:include="common/header"></th:block>
+<div class="content-wrap">
+	<form action="/news/banner" method="post" enctype="multipart/form-data">
+			<table border=1>
+					
+						<tr>
+							<th style="width: 20%">배너 등록하기</th>
+							<td style="width: 80%">
+								<input type="file" name="posterImageFile" accept="image/*" onchange="loadImg(this);">
+							</td>
+						</tr>
+						<tr>
+							<th>배너 미리보기</th>
+							<td>
+								<div>
+									<img id="banner-view" width="500px" src="/img/default_img.png">							
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>포스터 연결하기</th>
+							<td>
+								<select name="newsNo" id="newsNo">
+									<th:block th:each="n:${newsList}" >
+											<option th:value="${n.newsNo}" th:text="${n.title}"></option>
+											<div style="display:none;" th:text=${n.image}></div>
+											
+									</th:block>
+								</select>
+
+							 </td>					
+						</tr>
+						<tr>
+							<th>포스터 미리보기</th>
+							<td>
+								<div>
+									<img id="poster-view" width="500px" src="/img/default_img.png">							
+								</div>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="4">
+							<button class="btn" id="insert-btn" type="submit">배너 등록하기</button>
+							<button class="btn" id="cancle" >목록가기</button>
+							</td>
+						</tr> 
+						
+					</table>
+				</form>
+	
+	
+</div>
+<th:block th:include="common/footer"></th:block>
+
+<script th:inline="javascript">
+//삭제 ajax
+
+
+
+	$("#cancle").on("click", function(){
+		location.href="/list?noticeReqPage=1&tab=all";		
+	})
+
+	function loadImg(obj) {
+		if(obj.files.length !== 0) {
+			const reader = new FileReader();
+			reader.readAsDataURL(obj.files[0]);
+			reader.onload=function(e){
+				$("#banner-view").attr("src", e.target.result);
+			};
+		} else{
+			$("#banner-view").attr("src","/img/default_img.png");
+		}
+	}
+
+	$("#newsNo").on("change", function() {
+		$("#poster-view").attr("src", "/news/image/"+$("select[name=newsNo] option:selected").next().text());
+	})
+
+
+</script>
+</body>
+</html>

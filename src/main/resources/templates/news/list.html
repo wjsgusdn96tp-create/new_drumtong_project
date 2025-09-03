@@ -8,13 +8,37 @@
 <link rel="stylesheet" href="/DrumtongCss/news.css">
 <style>
 	.item-img-div{
-		overflow: hidden;
+		width: 200px;
+		height: 250px;
+		margin: 0 auto;
+		overflow: hidden
 	}
+	.item-img-div:hover img{
+	transition-duration: 0.5s;
+	width: 95%;
+}
+	.news-title:hover {
+		cursor: pointer;
+	}
+	.item-img-div:hover{
+		cursor: pointer;
+	}
+	
+	
 	.text-warp{
 		margin-top: 10px;
 	}
 	.news-list{
 		overflow: hidden;
+		margin: 40px 0;
+	}
+	.news-item{
+		padding: 15px;
+		width: calc(800px/3);
+		float: left;
+		padding: 10px;
+		margin: 10px 0;
+		box-sizing: border-box;
 	}
 	
 	.discountDiv{
@@ -31,14 +55,18 @@
 	.inner>img{
 		width: 100%;
 	}
-	
+	.newDelete{
+		margin-right:5px;
+	}
+	.newsDelete{
+		margin-left:10px;
+	}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
-	
-		
+				
 		<div id="modal" class="dialog">
 			<div class="tb">
 				<div class="inner" style="max-width: 800px;">
@@ -55,13 +83,14 @@
 		
 		<div id="main-news">
 			<img src="/img/news/main_promotion3.jpg" class="main-news3">
-			<div class="btn-div">
-				<a href="/" class="btn write-btn" style="float:right;">이미지 수정</a>	<!-- 관리자만 노출 -->
+			<div th:if="${session.member != null && session.member.memberGrade == '관리자'}" class="btn-div">
+				<a href="/news/bannerSelect" class="btn write-btn" style="float:right;">배너 선정</a>
+				<a href="/news/bannerWrite" class="btn write-btn" style="float:right;">배너 등록</a>	
 			</div>
 		</div>
 		<div class="tab">
 			<ul class="first-tab">
-				<li th:styleappend="${tab=='all'?'background-color:var(--main3)':'background-color:var(--main1)'}">전체보기</li>				
+				<li th:styleappend="${tab=='all'?'background-color:var(--main3)':'background-color:var(--main1)'}">전체보기</li>
 				<li th:styleappend="${tab=='event'?'background-color:var(--main3)':'background-color:var(--main1)'}">이벤트</li>
 				<li th:styleappend="${tab=='promotion'?'background-color:var(--main3)':'background-color:var(--main1)'}">프로모션</li>
 			</ul>
@@ -72,8 +101,8 @@
 		</div>
 		
 		<div class="btn-div">
-			<div style="overflow:hidden;">
-				<a href="/news/noticeWriteFrm" class="btn write-btn" s>공지사항 쓰기</a>
+			<div th:if="${session.member != null && session.member.memberGrade == '관리자'}" style="overflow:hidden;">
+				<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 쓰기</a>
 				<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>					
 			</div>
 		</div>
@@ -121,6 +150,15 @@
 		let start = 1;							// 게시물의 시작 번호
 		const amount = 6;						// 더보기 한번 클릭 시 추가로 가져올 게시물 수 
 		
+		window.onload=function(){
+			document.getElementById('more-btn').click();
+	
+		}
+		
+		const memberGrade = [[${session.member?.memberGrade}]];
+		
+		
+		
 		$(".first-tab>li").on("click", function(){
 			$(".notice_wrap").addClass("close");
 			$(".list").removeClass("close");
@@ -147,37 +185,9 @@
 				data: {start: start, amount : amount, tab : [[${tab}]]},
 				success : function(newsList){
 					for(let i=0; i<newsList.length ; i++){
+
 						const n = newsList[i];
-						
-						/* -> 최종 모양
-								<li class="news-item"> 
-									<div class="item-img-div">
-										<img src="/img/프로모션1.jpg">
-									</div>
-									<div class="text-warp">
-										<div class="news-title">
-											<span class="type">[프로모션]</span> 
-											<span>DRUMTONG 텀블러 출시! 아주아주 긴 제목으로 씁니다. 길면 축약</span> 
-										</div>
-										<div class="list-small">
-											<span class=date>
-												<span>2025-08-26</span>
-												<span>~</span>
-												<span>2025-09-01</span>
-											</span>
-											<span class=like>
-												<span>99</span>
-												<span class="material-icons">favorite_border</span>
-											</span>
-										</div>
-										<div>
-											<button class="discountBtn">할인 적용하기</button>
-											<button class="close discountUpdate">할인 수정하기</button>
-										</div>
-									</div>
-								</li>
-						*/
-						
+												
 						const li = $("<li>");
 						li.addClass("news-item");
 						
@@ -227,32 +237,29 @@
 						} else{
 							likeIconSpan.addClass("material-icons").addClass("likeBtn").text("favorite_border");
 						}
+						
+							
 						const newsNo = $("<span>");
 						newsNo.text(n.newsNo).addClass("close").addClass("newsNo");
 						
 						likeSpan.append(likeIconSpan).append(newsNo).append(likeCountSpan);
 						smallDiv.append(dateSpan).append(likeSpan);
+						textWrap.append(titleDiv).append(smallDiv)
 						
-						const discountDiv = $("<div>");
-						discountDiv.addClass("discountDiv")
-						if(n.type === '이벤트'){
-							const discountBtn = $("<a>");
-							discountBtn.addClass("discountBtn").addClass("btn");
-							discountBtn.text("할인 적용하기");
-							discountBtn.attr("href","/news/discountWriteFrm?title="+n.title+"&newsNo="+n.newsNo);
-							const discountUpdate = $("<a>");
-							discountUpdate.addClass("discountUpdate").addClass("btn");
-							discountUpdate.text("할인 수정하기");
-							discountUpdate.attr("href","/news/discountUpdateFrm?title="+n.title+"&newsNo="+n.newsNo);
-							discountDiv.append(discountBtn).append(discountUpdate);
+						if(memberGrade == '관리자') {
+							const btnDiv = $("<div>");
+							const newsUpdate = $("<a>");
+							newsUpdate.addClass("newsUpate").addClass("btn");
+							newsUpdate.text("News 수정");
+							newsUpdate.attr("href","/news/updateNews?newsNo="+n.newsNo);
+							const newsDelete = $("<a>");
+							newsDelete.addClass("newsDelete").addClass("btn");
+							newsDelete.text("News 삭제");
+							newsDelete.attr("href","/news/deleteNews?newsNo="+n.newsNo);
+							btnDiv.append(newsUpdate).append(newsDelete);
+							textWrap.append(btnDiv);
+							
 						}
-						const btnDiv = $("<div>");
-						const newsUpdate = $("<a>");
-						newsUpdate.addClass("newsUpate").addClass("btn");
-						newsUpdate.text("News 수정하기");
-						newsUpdate.attr("href","/news/updateNews?newsNo="+n.newsNo);
-						btnDiv.append(newsUpdate);
-						textWrap.append(titleDiv).append(smallDiv).append(discountDiv).append(btnDiv);
 						
 						li.append(imgDiv).append(textWrap);
 												
@@ -315,8 +322,14 @@
 	});
 	
 	
-	$(document).on("click",".news-item",function(){
-		const newsNo = $(this).find('.newsNo').text();
+	$(document).on("click",".item-img-div",function(){
+		const newsNo = $(this).parent().find('.newsNo').text();
+		location.href="/news/view?newsNo="+newsNo;
+	});
+	
+
+	$(document).on("click",".news-title",function(){
+		const newsNo = $(this).parent().find('.newsNo').text();
 		location.href="/news/view?newsNo="+newsNo;
 	});
 		
