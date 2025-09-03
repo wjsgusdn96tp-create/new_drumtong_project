@@ -91,4 +91,8 @@
 	<select id="selectOneNews" resultType="news">
 		select * from news where news_no = #{newsNo}
 	</select>
+	
+	<select id="selectBestProduct" resultType="product">
+		select * from product_best_tbl inner join product_tbl using(product_no)
+	</select>
 </mapper>

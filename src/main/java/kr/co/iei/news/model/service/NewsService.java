@@ -202,5 +202,11 @@ public class NewsService {
 		News news = newsDao.selectOneNews(newsNo);
 		return news;
 	}
+
+	public List selectBestProduct() {
+		List product = newsDao.selectBestProduct();
+		
+		return product;
+	}
 	
 }

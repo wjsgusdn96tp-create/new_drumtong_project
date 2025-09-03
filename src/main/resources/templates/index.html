@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.title{
+		margin: 20px 0;
+	}
+
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -14,6 +20,21 @@
 			<div class="btn-div">
 				<a href="/" class="btn write-btn" style="float:right;">이미지 수정</a>	<!-- 관리자만 노출 -->
 			</div>
+		</div>
+		
+		<div class="content-wrap">
+			<h2 class="title">DRUM TONG BEST!</h2>
+			<table class="best_tbl">
+				<tr th:each="p:${product}">
+					<td style="width: 30%; border: 1px, solid, var(--main1);">
+						<img th:src="@{/product/${p.product_img}}">
+					</td>
+					<td style="border: 1px, solid, var(--main1); text-align:left;">
+						<h3 th:text="${p.productName} "></h3>
+					</td>
+				</tr>
+				
+			</table>
 		</div>
 	</div>
 	
