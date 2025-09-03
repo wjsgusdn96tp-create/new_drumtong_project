@@ -35,4 +35,12 @@ public class AdminController {
 		boolean result = memberService.checkedChangeGrade(no,grade);
 		return "redirect:/admin/adminPage";
 	}
+	
+	
+	@GetMapping(value="/adminChart")
+	public String adminChart(Model mdoel) {
+		
+		return "/admin/adminChart";
+	}
+	
 }// AdminController Class

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.news.model.vo.Poster;
 
 @Mapper
 public interface NewsDao {
@@ -50,5 +51,15 @@ public interface NewsDao {
 	int updateNews(News news);
 
 	int deleteNews(int newsNo);
+
+	List selectAllNewsBanner();
+
+	int insertPoster(Poster poster);
+
+	List selectAllPoster();
+
+	Poster selectMainPoster();
+
+	Poster selectNewsPoster();
 
 }

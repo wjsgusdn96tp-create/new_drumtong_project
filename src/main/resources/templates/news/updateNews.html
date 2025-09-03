@@ -86,7 +86,6 @@
 	<script th:inline="javascript">
 			const discount = [[${discount}]];
 			for (var i = 0; i <discount.length; i++) {
-				console.log(discount[i].productNo);
 				$("input[id="+discount[i].productNo+"]").prop("checked",true);
 			}
 		
