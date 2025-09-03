@@ -222,5 +222,10 @@ public class NewsService {
 		
 		return result;
 	}
+
+	public int deleteNews(int newsNo) {
+		int result = newsDao.deleteNews(newsNo);
+		return 0;
+	}
 	
 }

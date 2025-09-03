@@ -49,4 +49,6 @@ public interface NewsDao {
 
 	int updateNews(News news);
 
+	int deleteNews(int newsNo);
+
 }

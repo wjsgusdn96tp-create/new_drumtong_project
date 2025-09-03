@@ -90,7 +90,7 @@ public class NewsController {
 		int memberNo = member == null ? 0 : member.getMemberNo();
 		
 		int result = newsService.insertNotice(notice);
-		return "redirect:/news/list?noticeReqPage=1";
+		return "redirect:/news/list?noticeReqPage=1&tab=all";
 	}
 	
 	@GetMapping(value="/noticeView")
@@ -162,6 +162,13 @@ public class NewsController {
 		int result = newsService.updateNews(news, productList, discountType, discountPrice);		
 		
 		return "redirect:/news/view?newsNo="+news.getNewsNo();
+	}
+	
+	@GetMapping(value="deleteNews")
+	public String deleteNews(int newsNo) {
+		int result = newsService.deleteNews(newsNo);
+		
+		return "redirect:/news/list?noticeReqPage=1&tab=all";
 	}
 }
 
