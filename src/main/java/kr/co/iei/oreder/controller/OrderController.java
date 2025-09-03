@@ -44,7 +44,7 @@ public class OrderController {
     }
 	
 	
-	@GetMapping("/OrderMap")
+	@GetMapping(value="/OrderMap")
 	public String orderMapPage(Model model) {
 
 	    int reqPage = 1; 
@@ -83,7 +83,7 @@ public class OrderController {
 	
 	
 	//에이잭스에서 db로 추가만 하는 로직들
-	@PostMapping("/DrumtongCart")
+	@PostMapping(value="/DrumtongCart")
 	@ResponseBody
 	public int insertCart(CartItem ct, @SessionAttribute(required = false) Member member) {
 		
@@ -98,7 +98,7 @@ public class OrderController {
 	
 	
 	// 장바구니 페이지 열기
-	@GetMapping("/DrumtongCart")
+	@GetMapping(value="/DrumtongCart")
 	public String cartPage(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
 	    
@@ -121,7 +121,7 @@ public class OrderController {
 	    return "order/DrumtongCart";
 	}
 	
-	@PostMapping("/pay")
+	@PostMapping(value="/pay")
 	@ResponseBody
 	public int insertOrderTbl(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
@@ -136,11 +136,19 @@ public class OrderController {
 		
 		int result = orderService.insertOrderTbl(otb);
 		
-		
 		return result;
 	}
 	
+	@GetMapping(value="/OrderList")
 	
-	
+	public String orderListPage(Model model,
+			@SessionAttribute(required = false) Member member) {
+		
+		
+		
+		
+		return "order/OrderList";
+		
+	}
 	
 }
