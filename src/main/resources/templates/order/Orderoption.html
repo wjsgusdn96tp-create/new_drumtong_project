@@ -115,7 +115,6 @@
 	    <form action="/order/DrumtongCart" method="get">
 	    	<input type="hidden" name="productNo" id="productNo" th:value="${p.productNo}">
 	    	<input type="hidden" name="shopName" id="shopName" th:value="${shop.shopName}">
-	    	<input type="hidden" name="productName" id="productName" th:value="${p.productName}">
 	    	<button type="submit" class="order-moveCart">장바구니가기</button>
 	    </form>
 	</div>
@@ -419,6 +418,7 @@
 	        url: "/order/DrumtongCart",
 	        type: "post",
 	        data: {
+	        	
 	            productNo: productNo,
 	            productName: productName,
 	            productPrice: productPrice,
@@ -429,12 +429,13 @@
 	            cupChoice: cupChoice,
 	            cupSize: cupSize,
 	            pay: pay
+	            
 	        },
 	        success: function(result){
 	            const check = confirm("장바구니에 담았습니다! 결제페이지로 가겠습니까?");
 	          	
 	            if(check) {
-	            	location.href = "/order/DrumtongCart?productNo="+[[${p.productNo}]]+"&shopName="+[[${shop.shopName}]]+"&prdouctName="+[[${p.productName}]];
+	            	location.href = "/order/DrumtongCart?productNo="+[[${p.productNo}]]+"&shopName="+[[${shop.shopName}]];
 	            }else {
 	            	location.href = "/product/productList?shopName="+[[${shop.shopName}]]+"&reqPage="+1;
 	            }
