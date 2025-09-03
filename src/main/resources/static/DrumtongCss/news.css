@@ -15,27 +15,14 @@
 	text-decoration: none;
 }
 
-.news-item{
-	width: calc(800px/3);
-	float: left;
-	padding: 10px;
-	box-sizing: border-box;
-}
-
 .item-img-div>img{
 	width: 90%;
 	margin: auto;
 	display: block;
 }
-.item-img-div {
-	width: 200px;
-	height: 250px;
-}
-.news-item:hover  img{
-	cursor: pointer;
-	transition-duration: 0.5s;
-	width: 95%;
-}
+
+
+
 
 .news-title{
 	width: 100%;

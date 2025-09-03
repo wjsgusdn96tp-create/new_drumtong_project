@@ -103,8 +103,6 @@ public class NewsService {
 	public int insertNews(News news, String[] productList, String discountType, String discountPrice) {
 		int newsNo = newsDao.getNewsNo();
 		news.setNewsNo(newsNo);
-		System.out.println(discountType);
-		System.out.println(discountPrice);
 		
 		int result = newsDao.insertNews(news);
 		
@@ -195,29 +193,33 @@ public class NewsService {
 		return product;
 	}
 
-	public int updateDiscount(News news, String discountSelect, String discountPrice, String[] list) {
-		int result = 0;
-		for(int i=0; i<list.length;i++) {
-			Discount discount = new Discount();
-			discount.setNewsNo(news.getNewsNo());
-			discount.setProductNo(Integer.parseInt(list[i]));
-			if(discountSelect.equals("Percent")) {
-				discount.setDiscountPercent(Integer.parseInt(discountPrice));
-			} else if(discountSelect.equals("Price")) {
-				discount.setDiscountPrice(Integer.parseInt(discountPrice));
-			}
-						
-			HashMap<String, Object> param = new HashMap<String, Object>();
-			param.put("newsNo", discount.getNewsNo());
-			param.put("productNo", discount.getProductNo());
-			param.put("discountPercent", discount.getDiscountPercent());
-			param.put("discountPrice", discount.getDiscountPrice());
-			param.put("discountSelect",discountSelect);
-			
-			
-			result = newsDao.deleteDiscount(param);
+	@Transactional
+	public int updateNews(News news, String[] productList, String discountType, String discountPrice) {
 		
-		}		
+		int result = newsDao.updateNews(news);
+		if(productList != null) {
+			for(int i=0; i<productList.length;i++) {
+				Discount discount = new Discount();
+				discount.setNewsNo(news.getNewsNo());
+				discount.setProductNo(Integer.parseInt(productList[i]));
+				if(discountType.equals("Percent")) {
+					discount.setDiscountPercent(Integer.parseInt(discountPrice));
+				} else if(discountType.equals("Price")) {
+					discount.setDiscountPrice(Integer.parseInt(discountPrice));
+				}
+				
+				HashMap<String, Object> param = new HashMap<String, Object>();
+				param.put("newsNo", news.getNewsNo());
+				param.put("productNo", productList[i]);
+				param.put("discountType", discountType);
+				param.put("discountPrice", discountPrice);
+				
+				result = newsDao.deleteDiscount(param);
+				result = newsDao.insertDiscount(param);
+			}		
+			
+		}
+		
 		return result;
 	}
 	

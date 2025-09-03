@@ -102,7 +102,9 @@
 	<delete id="deleteDiscount">
 		delete from discount where news_no = #{newsNo}
 	</delete>
-	
+	<update id = "updateNews">
+		update news set member_no = #{memberNo}, type = #{type}, start_date = #{startDate}, end_date = #{endDate}, title = #{title}, content = #{content} where news_no = #{newsNo}
+	</update>
 	
 
 </mapper>

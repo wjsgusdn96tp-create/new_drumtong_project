@@ -15,18 +15,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import kr.co.iei.customer.controller.CustomerController;
+import kr.co.iei.customer.service.CustomerService;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
-import kr.co.iei.product.vo.Product;
 import kr.co.iei.util.FileUtil;
 
 
 @Controller
 @RequestMapping("news")
 public class NewsController {
+
+    private final CustomerService customerService;
 
     private final CustomerController customerController;
 	
@@ -39,8 +41,9 @@ public class NewsController {
 	@Autowired
 	private FileUtil fileUtil;
 
-    NewsController(CustomerController customerController) {
+    NewsController(CustomerController customerController, CustomerService customerService) {
         this.customerController = customerController;
+        this.customerService = customerService;
     }
 	
 	@GetMapping(value="/list")
@@ -67,7 +70,6 @@ public class NewsController {
 	public String writeNews(News news, String productNoStr, String discountType, String discountPrice, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
 		int memberNo = member == null ? 0 : member.getMemberNo();
 		String[] productList = productNoStr.split(",");
-		
 		String savepath = root+"/news/";
 		String filepath = fileUtil.upload(savepath, newsImageFile);
 		news.setImage(filepath);
@@ -116,33 +118,6 @@ public class NewsController {
 		return likeCount;
 	}
 	
-	@GetMapping(value="/discountUpdateFrm")
-	public String discountUpdateFrm(String title, String newsNo, Model model) {
-		
-	
-		List product = newsService.selectAllProduct();
-		model.addAttribute("product", product);
-		List list= newsService.selectAllDiscount(newsNo);
-		if(!list.isEmpty()) {
-			Discount discount = (Discount)list.get(0);
-			if(discount.getDiscountPercent() != 0) {
-				model.addAttribute("discountType","Percent");
-				
-			} else if(discount.getDiscountPrice() != 0) {
-				model.addAttribute("discountType","Price");
-			}
-			
-		}
-		model.addAttribute("discount", list);
-		return "news/discountUpdateFrm";
-	}
-	
-	@GetMapping(value="/discountUpdate")
-	public String discountUpdate(News news, String discountSelect, String discountPrice, String productNo, @SessionAttribute(required = false) Member member) {
-		String[] list = productNo.split(",");
-		int result = newsService.updateDiscount(news, discountSelect, discountPrice, list);
-		return "redirect:/news/list?noticeReqPage=1&tab=all";
-	}
 	
 	@GetMapping(value="/view")
 	public String newsView(String newsNo, Model model) {
@@ -155,8 +130,38 @@ public class NewsController {
 	public String updateNews(String newsNo, Model model) {
 		News news = newsService.selectOneNews(newsNo);
 		model.addAttribute("news", news);
-		System.out.println(news);
+		
+		List product = newsService.selectAllProduct();
+		model.addAttribute("product", product);
+		
+		List discount = newsService.selectAllDiscount(newsNo);
+		Discount d = (Discount)discount.get(0);
+		
+		if(d.getDiscountPercent()== 0) {
+			model.addAttribute("discountPrice",d.getDiscountPrice());
+		} else {
+			model.addAttribute("discountPrice",d.getDiscountPercent());
+		}
+		model.addAttribute("discount", discount);
+		
 		return "news/updateNews";
+	}
+	
+	@PostMapping(value="updatewrite")
+	public String updateWrite(News news, String productNoStr, String discountType, String discountPrice,@SessionAttribute(required = false) Member member) {
+		int memberNo = member == null ? 0 : member.getMemberNo();
+		news.setMemberNo(memberNo);
+		
+		String[] productList;
+		if(productNoStr != null) {	
+			productList = productNoStr.split(",");
+		} else {
+			productList = null;
+		}
+		
+		int result = newsService.updateNews(news, productList, discountType, discountPrice);		
+		
+		return "redirect:/news/view?newsNo="+news.getNewsNo();
 	}
 }
 
