@@ -72,10 +72,7 @@ public class OrderController {
 		model.addAttribute("p", p);
 		model.addAttribute("shop", shop);
 		
-		//로그인 하면 회원번호 나오게하기
-		 if(member != null) {
-	        model.addAttribute("memberNo", member.getMemberNo());
-	        }
+		
 		 
 		return "order/Orderoption";
 	}
