@@ -35,13 +35,41 @@
 	</insert>
 	
 	<select id="selectCartList" resultType="cart">
-		select * from cart_item_tbl
+		select * from cart_item_tbl where member_no = #{memberNo} and shop_name = #{shopName}
 	</select>
 	
 		
 	<insert id="insertOrderTbl">
-		insert into order_tbl values(#{orderNo},#{memberNo},#{shopName},to_char(sysdate, 'yyyy-mm-dd'))
+		insert into order_tbl values(#{orderNo},#{memberNo},#{shopName},to_char(sysdate,'yyyy-mm-dd'))
 	</insert>
+	 
+	 <select id="getorderNo" resultType="int">
+		select order_tbl_seq.nextval from dual
+	 </select>
+	 
+	 <insert id="insertDetailsTbl">
+	 	insert into order_details_tbl values(order_details_tbl_seq.nextval,
+	 	#{cupChoice},
+	 	#{cupSize},
+	 	#{cupShot},
+	 	#{cupCream},
+	 	#{heat},
+	 	#{count},
+	 	#{productNo},
+	 	#{orderNo},
+	 	#{pay},
+	 	#{discountName},
+	 	#{discountPrice},
+	 	to_char(sysdate,'yyyy-mm-dd'),
+	 	#{productName},
+	 	#{shopName}
+	 	
+	 	)
+	 </insert>
+	 
+	 <delete id="deleteCart">
+	 	delete from cart_item_tbl where member_no = #{memberNo} and shop_name = #{shopName}
+	 </delete>
 	 
 		
 </mapper>

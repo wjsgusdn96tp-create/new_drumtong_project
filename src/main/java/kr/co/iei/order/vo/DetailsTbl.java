@@ -32,4 +32,5 @@ public class DetailsTbl {
 	private int discountPrice; 
 	private Date enrollDate;
 	private String productName;
+	private String shopName;
 }

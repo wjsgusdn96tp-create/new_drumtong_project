@@ -17,6 +17,9 @@
 	.inputbox:focus{
 	    outline: none;
 	}
+	.changeLevel{
+		width: 50px;
+	}
 </style>
 </head>
 <body>
@@ -29,7 +32,25 @@
 	                    <tr class="table-tr">
 	                        <th style="width: 15%">유형</th>
 	                        <td style="width: 30%">
-	                        	<input type="text" class="inputbox" name="customerCategory" th:value="${c.customerCategory}">
+	                        	<div th:switch="${c.customerCategory}">
+		                        	<select th:case="칭찬" name="customerCategory" th:value="${c.customerCategory}">
+		                        		<option value="칭찬" selected>칭찬</option>
+		                        		<option value="불만">불만</option>
+		                        		<option value="의견">의견</option>
+		                        	</select>
+		                        	<select th:case="불만" name="customerCategory" th:value="${c.customerCategory}" >
+		                        		<option value="칭찬">칭찬</option>
+		                        		<option value="불만" selected>불만</option>
+		                        		<option value="의견">의견</option>
+		                        	</select>
+		                        	<select th:case="의견" name="customerCategory" th:value="${c.customerCategory}">
+		                        		<option value="칭찬">칭찬</option>
+		                        		<option value="불만">불만</option>
+		                        		<option value="의견" selected>의견</option>
+		                        	</select>
+<!-- 		                        	<input type="button" class="changeLevel" th:text="변경"> -->
+<!-- 		                        	<input type="hidden" name="customerCategory" th:value="${c.customerCategory}"> -->
+                        		</div>
 	                        </td>
 	                        <th style="width: 15%">제목</th>
 	                        <td style="width: 40%">
@@ -69,7 +90,7 @@
 	             	<button type="submit" class="modybtn">수정</button>
 	             	<a class="modybtn" th:href="@{/customer/view(customerNo=${c.customerNo})}">취소</a>
 	             </div>
-	             <input type="hidden" name="customerNo" th:value="${c.customerNo}">
+	             <input class="inp" type="hidden" name="customerNo" th:value="${c.customerNo}">
 	        </form>
          </div>      
      </div>
@@ -82,6 +103,11 @@
      		$(".all-content-wrap").append(input);
      		$(obj).parent().remove();
      	};
+     	
+//      	$(".changeLevel").on("click",function(){
+// 			const memberLevel = $(this).parent().children().val();
+// 			console.log(memberLevel);
+// 		});
      </script>
      <th:block th:include="common/footer"></th:block>     
 </body>
