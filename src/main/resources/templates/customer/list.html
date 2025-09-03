@@ -84,7 +84,7 @@
 	                            	<button class="delete-btn" th:value="${customer.customerNo}">삭제</button>
 	                            </th:block>
 	                            <th:block th:if="${session.member.memberGrade == '관리자'}">
-	                            	<input type="checkbox" class="checkbox">
+	                            	<input type="checkbox" class="checkbox" th:checked="${customer.adminCommented > 0}" disabled>
 	                            </th:block>
 	                        </td>
 	                    </tr>

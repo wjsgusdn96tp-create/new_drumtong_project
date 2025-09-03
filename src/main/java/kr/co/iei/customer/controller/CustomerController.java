@@ -148,6 +148,10 @@ public class CustomerController {
 	@PostMapping(value="/delete")
 	@ResponseBody
 	public String deleteCustomer(int customerNo, @SessionAttribute(required = false) Member member) {
+		if (member == null) {
+	        return "fail";
+	    }
+		
 		Customer c = customerService.selectOneCustomer(customerNo);
 		
 		if (c != null && c.getCustomerNickname().equals(member.getMemberNickname())) {
