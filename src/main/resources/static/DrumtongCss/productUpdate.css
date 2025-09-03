@@ -20,14 +20,17 @@
 	text-align: center;
 }
 /*-------------------*/
+.productUpdate_title_wrap{
+	margin: 50px;
+}
 
-.productUpdate_title_wrap>h1{
-	text-align: center;
+.productUpdate_title_wrap>h2{
+	    text-align: center;
     line-height: 100px;
     font-size: 24px;
     font-weight: bold;
     color: var(--gray1);
-    margin-top: 50px
+    margin-top: 50px;
 }
 form{
 	width: 800px;
@@ -98,4 +101,21 @@ button{
 }
 .return_div>a{
 	width: 50px;
+}
+
+
+
+
+
+.content_title>input{
+	text-align: center;
+    line-height: 100px;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--gray1);
+    margin:10px;
+    height:40px;
+    border: none;
+    
+    
 }

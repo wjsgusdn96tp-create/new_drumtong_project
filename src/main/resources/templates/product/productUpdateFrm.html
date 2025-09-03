@@ -31,10 +31,15 @@
 					
 					<div class="content_wrap">
 						<div class="content_div">
-							<div class="content_title"><h2 th:text="${product.productName}"></h2></div>
+							<div class="content_title"><input name="productName" th:value="${product.productName}" type="text"></div>
 							<ul class="script_wrap">
-								<li>가격 : <span th:text="${product.productPrice}"></span> 
-									<input style="display:hidden;" type="text" th:value="${product.productPrice}">
+								<li><input type="hidden" name="productNo" th:value="${product.productNo}"></li>
+								
+								<li class="product_titl_li">카테고리 : </span></li>
+								
+								<li>가격 : 
+									<input type="text" name="productPrice" th:value="${product.productPrice}">
+									<span>원</span> 
 								</li>
 							</ul>					
 						</div>
@@ -54,21 +59,154 @@
 				</div>
 			</div>
 			
-			<!-- 
-		<script th:inline="javascript">
 			
+		<script th:inline="javascript">
 			const product = [[${product}]];
 			
+			//이미지 넣기(수정 불가)
+			const img = $("<img>");
+			img.attr("src","/product/"+product.productImg);
+			
+			$(".img_div").append(img);
+			
+			
+			//카테고리별 상세정보 출력
 			if(product.productTitle == "goods"){
+				//product_content_present
+				
+				//카테고리
+				const span = $("<span>");
+				span.attr("text","굿즈");
+				$(".product_title_li").append(span);
+				
+				//카테고리 별 상세 정보
+				const li = $("<li>");
+				li.attr("text","상품 설명 : ")
+				
+				const presentSpan = $("<span>");
+				presentSpan.attr("text",product.productContentPresent);
+				
+				li.append(presentSpan);
+					
+
+				$(".script_wrap").append(li);
+				
+			}else if(product.productTitle == "dessert"){
+				//카테고리
+				const span = $("<span>");
+				span.attr("text","디저트");
+				$(".product_title_li").append(span);
+				
+				
+				
+				//카테고리 별 상세 정보
+				const li1 = $("<li>");
+				li1.attr("text","칼로리 : ")
+				
+				const Span1 = $("<span>");
+				Span1.attr("text",product.productContentKcal);
+				
+				li.append(presentSpan);
+					
+
+				$(".script_wrap").append(li);
+				
+				product_content_kcal        number,
+    product_content_shot        number,
+    product_content_sugar       number,
+    product_content_natrium     number,
+    product_content_carbs
+				
 				const
 				
 				$(".script_wrap").append
+			}else if(product.productTitleDetail == "iceTea"){
+				//카테고리
+				const span = $("<span>");
+				span.attr("text","(ice) 차");
+				$(".product_title_li").append(span);
+				
+				product_content_kcal        number,
+    product_content_shot        number,
+    product_content_sugar       number,
+    product_content_natrium     number,
+    product_content_carbs
+				
+				const
+				
+				$(".script_wrap").append
+			}else if(product.productTitleDetail == "iceCoffe"){
+				//카테고리
+				const span = $("<span>");
+				span.attr("text","(ice) 커피");
+				$(".product_title_li").append(span);
+				
+				product_content_kcal        number,
+    product_content_shot        number,
+    product_content_sugar       number,
+    product_content_natrium     number,
+    product_content_carbs
+				
+				const
+				
+				$(".script_wrap").append
+			}else if(product.productTitleDetail == "iceOtherDrink"){
+				//카테고리
+				const span = $("<span>");
+				span.attr("text","(ice) 그 외 제조음료");
+				$(".product_title_li").append(span);
+				
+				product_content_kcal        number,
+    product_content_shot        number,
+    product_content_sugar       number,
+    product_content_natrium     number,
+    product_content_carbs
+				
+				const
+				
+				$(".script_wrap").append
+			}else if(product.productTitleDetail == "hotTea"){
+				//카테고리
+				const span = $("<span>");
+				span.attr("text","(hot) 차");
+				$(".product_title_li").append(span);
+				
+				product_content_kcal        number,
+    product_content_shot        number,
+    product_content_sugar       number,
+    product_content_natrium     number,
+    product_content_carbs
+				
+				const
+				
+				$(".script_wrap").append
+				const
+				
+
+			}else if(product.productTitleDetail == "hotCoffe"){
+				//카테고리
+				const span = $("<span>");
+				span.attr("text","(hot) 커피");
+				$(".product_title_li").append(span);
+				
+				product_content_kcal        number,
+    product_content_shot        number,
+    product_content_sugar       number,
+    product_content_natrium     number,
+    product_content_carbs
+				
+				const
+				
+				$(".script_wrap").append
+				const
+				
+
 			}
 			
 			
-			$(".script_wrap")
+			
 		</script>
-			 -->
+			 
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
