@@ -43,7 +43,7 @@ public class ProductController {
 		model.addAttribute("bestList",bestProductList);
 		return "product/productList";
 	}
-	
+	/*
 	@GetMapping(value="/productListDessert")
 	public String productListDessert(int reqPage, String shopName, Model model) {
 		productListDate pld = productService.productListDessertDate(reqPage);
@@ -52,12 +52,12 @@ public class ProductController {
 		model.addAttribute("pageNavi",pld.getPageNavi());
 		model.addAttribute("shopName",shopName);
 		
-		/*대표상품 조회*/
+		/*대표상품 조회
 		List bestProductList = productService.bestProductList();
 		model.addAttribute("bestList",bestProductList);
 		return "product/productList";
 	}
-	
+	*/
 
 	@GetMapping(value="/productInsertFrm")
 	public String ProductInsertFrm() {

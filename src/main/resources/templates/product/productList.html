@@ -46,9 +46,9 @@
 			<div class="product_new_wrap">
 				<!--출력순 버튼-->
 				<div class="product_list_btn">
-					<button class="btn product_btn">가격순</button>
-					<button class="btn product_btn">최신순</button>
-					<button class="btn product_btn">좋아요순</button>
+					<button class="btn product_btn price_btn">가격순</button>
+					<button class="btn product_btn day_btn">최신순</button>
+					<button class="btn product_btn like_btn">좋아요순</button>
 				</div>
 			
 				<!--e(관리자버튼)메뉴 추가 -->
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 		
-		
+		<div id="pageNavi" th:utext="${pageNavi}"></div>
 		<script th:inline="javascript">
 			//const reqPage=[[${reqPage}]];
 			
@@ -401,6 +401,65 @@
 				$(".product_all_list").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
 				$(".product_all_list_a").css("color", "white");
 				
+				//가격순 눌렀을 때
+				$(".price_btn").on("click",function(){
+					$(".price_btn").css("backgroundColor","var(--main3)").css("fontWeight","600").css("color","var(--gray2)");
+					$(".like_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
+					$(".day_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
+					/*hover
+					$(".day_btn").on("mouseover",function(){
+						$(".day_btn").css("backgroundColor","var(--main2)");
+					})
+					$(".day_btn").on("mouseout",function(){
+						$(".day_btn").css("backgroundColor","var(--main1)");
+					})
+					$(".like_btn").on("mouseover",function(){
+						$(".like_btn").css("backgroundColor","var(--main2)");
+					})
+					$(".like_btn").on("mouseout",function(){
+						$(".like_btn").css("backgroundColor","var(--main1)");
+					})*/
+				
+				})
+				//좋아요순 눌렀을 때
+				$(".like_btn").on("click",function(){
+					$(".like_btn").css("backgroundColor","var(--main3)").css("fontWeight","600").css("color","var(--gray2)");
+					$(".day_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");
+					$(".price_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
+					/*
+					$(".day_btn").on("mouseover",function(){
+						$(".day_btn").css("backgroundColor","var(--main2)");
+					})
+					$(".day_btn").on("mouseout",function(){
+						$(".day_btn").css("backgroundColor","var(--main1)");
+					})
+					$(".price_btn").on("mouseover",function(){
+						$(".price_btn").css("backgroundColor","var(--main2)");
+					})
+					$(".price_btn").on("mouseout",function(){
+						$(".price_btn").css("backgroundColor","var(--main1)");
+					})*/
+				})
+				//최신순 눌렸을 때
+				$(".day_btn").on("click",function(){
+					$(".day_btn").css("backgroundColor","var(--main3)").css("fontWeight","600").css("color","var(--gray2)");;
+					$(".like_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
+					$(".price_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
+					/*
+					$(".like_btn").on("mouseover",function(){
+						$(".like_btn").css("backgroundColor","var(--main2)");
+					})
+					$(".like_btn").on("mouseout",function(){
+						$(".like_btn").css("backgroundColor","var(--main1)");
+					})
+					$(".price_btn").on("mouseover",function(){
+						$(".price_btn").css("backgroundColor","var(--main2)");
+					})
+					$(".like_btn").on("mouseout",function(){
+						$(".like_btn").css("backgroundColor","var(--main1)");
+					})*/
+				})
+				
 				//전체 탭 클릭
 				$(".product_all_list").on("click", function(){
 					//디저트 탭 색상 변경 및 상품 출력
@@ -431,7 +490,10 @@
 					$(".drink_li").on("mouseout",function(){
 						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
 					})
-						
+					
+					
+					
+					/*
 					const reqPage = [[${reqPage}]];
 					const shopName = [[${shopName}]];
 					$.ajax({
@@ -442,7 +504,7 @@
 							
 						}
 						
-					})
+					})*/
 				
 				
 				})
@@ -565,7 +627,7 @@
 				
 				
 		</script>
-		<div id="pageNavi" th:utext="${pageNavi}"></div>
+		
 	
 	<th:block th:include="common/footer"></th:block>
 </body>
