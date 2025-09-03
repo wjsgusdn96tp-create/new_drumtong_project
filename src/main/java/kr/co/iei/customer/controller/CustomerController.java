@@ -98,8 +98,6 @@ public class CustomerController {
 				
 				String filename = file.getOriginalFilename();
 				String filepath = fileUtil.upload(savepath, file);
-				System.out.println("filename : "+filename);
-				System.out.println("filepath : "+filepath);
 				
 				CustomerServiceFile customerServiceFile = new CustomerServiceFile();
 				customerServiceFile.setFileName(filename);
@@ -119,12 +117,12 @@ public class CustomerController {
 	@GetMapping(value="/view")
 	public String CustomerView(int customerNo, @SessionAttribute(required = false) Member member, Model model) {
 		Customer c = customerService.selectOneCustomer(customerNo);
-//		List<Member> allMemberList = customerService.selectAllMember();
+		List<Member> allMemberList = customerService.selectAllMember();
 		
 		
 		
-		String memberEmail = member.getMemberEmail();
-		Member allMemberList = memberService.selectOneMember(memberEmail);
+//		String memberEmail = member.getMemberEmail();
+//		Member allMemberList = memberService.selectOneMember(memberEmail);
 		
 		model.addAttribute("c", c);
 		model.addAttribute("allMembers", allMemberList);
@@ -156,7 +154,7 @@ public class CustomerController {
 	@ResponseBody
 	public String deleteComment(int commentNo) {
 		int result = customerService.deleteComment(commentNo);
-		System.out.println(result);
+		
 		if(result > 0) {
 			return "success";
 		}
@@ -203,8 +201,6 @@ public class CustomerController {
 	@GetMapping(value="/filedown")
 	public void filedown(int customerFileNo, HttpServletResponse response) {
 		CustomerServiceFile customerFile = customerService.selectOneCustomerFile(customerFileNo);
-		System.out.println(customerFile.getFilePath());
-		System.out.println(customerFile.getFileName());
 		String savepath = root+"/customer/";
 		
 		fileUtil.downloadFile(savepath, customerFile.getFilePath(), customerFile.getFileName(), response);

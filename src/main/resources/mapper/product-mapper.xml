@@ -45,6 +45,26 @@
 		where rnum between #{start} and #{end}
   </select>
   
+  <select id="productListPriceDate" resultType="product">
+  	 	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl order by product_price asc
+       			 )n
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="ProductListDessert" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl where product_title ='dessert' order by product_no desc
+       			 )n
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
   <select id="productBestSelect" resultType="product">
   	select * from product_best_tbl where product_no = #{productNo}
   </select>
@@ -56,4 +76,36 @@
   <delete id="productDelete">
   	delete from product_tbl where product_no=#{productNo}
   </delete>
+  
+  <select id="bestProductList" resultType="product">
+  	select * 
+		from product_tbl p
+		join product_best_tbl b on (b.product_no = p.product_no)
+  </select>
+  
+  <select id="notBestProductList" resultType="product">
+  	select *
+	from product_tbl p
+	left join product_best_tbl b on (b.product_no = p.product_no)
+	where product_best_no is null
+  </select>
+  
+  <select id="allproductList" resultType="product">
+  	select * from
+    (select rownum as rnum, n.* from 
+                (select *
+                    from product_tbl p
+                    left join product_best_tbl b on (b.product_no = p.product_no)
+                    order by product_best_no asc
+                )n
+        )
+        where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="searchProductUpdate" resultType="product">
+  	select *
+    from product_tbl p
+    left join product_best_tbl b on (b.product_no = p.product_no)
+    where p.product_no=#{productNo}
+  </select>
 </mapper>

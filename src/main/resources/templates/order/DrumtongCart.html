@@ -12,10 +12,6 @@
 <body>
    <th:block th:include="/common/header"></th:block>
 	
-	 <div>상품번호: <span th:text="${productNo}">상품번호</span></div>
-    <div>상점명: <span th:text="${shopName}">상점명</span></div>
-    <div>회원번호: <span th:text="${num}">회원번호</span></div>	
-
     <div class="cart-mainbox">
         <div class="cart-namebox">
             <div class="cart-name">
@@ -134,9 +130,7 @@
                   </div>
                   <div class="buy-btnbox">
     				
-                  	<input type="hidden" name="productNo" id="productNo" th:value="${productNo}">
 					<input type="hidden" name="shopName" id="shopName" th:value="${shopName}">
-                    <input type="hidden" name="memberNo" id="memberNo" th:value="${memberNo}">
                     <button class="buy-btn">구매하기</button>
 
                   </div>
@@ -199,28 +193,25 @@
 	
 	$(".buy-btn").on("click",function(){
 		
-		const productNo = $("#productNo").val();
         const shopName = $("#shopName").val();
-        const memberNo = $("#memberNo").val();
- 		
+ 	
        
-        
         $.ajax({
-        	url : "/order/OrderList",
+        	url : "/order/pay",
         	type : "post",
         	data : 
         		{
         		
-        		productNo : productNo,
-        		shopName : shopName,
-        		memberNo : memberNo
-        		
+        		shopName : shopName
+   
         		},
-        	success : function(list){
-        		alert("됐다!!!!!!!!!!!!!!!!!!");
+        		
+        	success : function(){
+        		alert("구매하기 성공");
+        		location.href = "/";
         	},
         	error : function(){
-        		alert("안됐다 ㅠㅠㅠㅠㅠㅠ");
+        		alert("구매하기 실패");
         	}
         })
  	});

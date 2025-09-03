@@ -29,4 +29,16 @@ public interface ProductDao {
 
 	int productDelete(int productNo);
 
+	List bestProductList();
+
+	List ProductListDessert(HashMap<String, Object> param);
+
+	List productListPriceDate(HashMap<String, Object> param);
+
+	List notBestProductList();
+
+	List allproductList(HashMap<String, Object> param);
+
+	Product searchProductUpdate(int productNo);
+
 }
