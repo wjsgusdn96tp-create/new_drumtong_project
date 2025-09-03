@@ -30,34 +30,20 @@ public class ProductController {
 	
 	@GetMapping(value="/productList")
 	private String productList(int reqPage, String shopName, Model model) {
-		
-		productListDate pld = productService.productListDate(reqPage);
-		System.out.println(pld);
+		String pageNavi = productService.pageNavi(reqPage);
+		List productListDate = productService.productListDate(pageNavi, reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		productListDate pld = new productListDate(productListDate, pageNavi);
 		model.addAttribute("list", pld.getList());
 		model.addAttribute("pageNavi",pld.getPageNavi());
 		model.addAttribute("shopName",shopName);
 		
 		
-		/*대표상품 조회*/
-		List bestProductList = productService.bestProductList();
-		model.addAttribute("bestList",bestProductList);
-		return "product/productList";
-	}
-	/*
-	@GetMapping(value="/productListDessert")
-	public String productListDessert(int reqPage, String shopName, Model model) {
-		productListDate pld = productService.productListDessertDate(reqPage);
-		System.out.println(pld);
-		model.addAttribute("list", pld.getList());
-		model.addAttribute("pageNavi",pld.getPageNavi());
-		model.addAttribute("shopName",shopName);
 		
-		/*대표상품 조회
-		List bestProductList = productService.bestProductList();
-		model.addAttribute("bestList",bestProductList);
 		return "product/productList";
 	}
-	*/
+	
 
 	@GetMapping(value="/productInsertFrm")
 	public String ProductInsertFrm() {

@@ -17,15 +17,13 @@ public class ProductService {
 	private ProductDao productDao;
 	
 
-	public productListDate productListDate(int reqPage) {
-		/*한페이지당 출력 리스트 갯수 설정 완료*/
+	public String pageNavi (int reqPage) {
 		int numPerPage =6;
 		int end = reqPage*numPerPage;
 		int start = end-numPerPage+1;
 		HashMap<String,Object> param = new HashMap<String, Object>();
 		param.put("start", start);
 		param.put("end", end);
-		
 		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
 		int totalCount = productDao.selectProductTotalCount();
 		/*페이지 수 계산(올림계산)*/
@@ -51,7 +49,7 @@ public class ProductService {
 			if(pageNo == reqPage) {
 				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
 			} else {
-				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+				pageNavi += "<a class='page-item' href='/porduct/productList?reqPage="+pageNo+"'>";				
 			}
 			pageNavi += pageNo;
 			pageNavi += "</a>";
@@ -72,14 +70,22 @@ public class ProductService {
 			pageNavi += "</li>";
 		}
 		pageNavi += "</ul>"; 
-		
-		//System.out.println(pageNavi);
+		return pageNavi;
+	}
+	
+	public List productListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
 		
 		List list = productDao.selectProductList(param);
 		
-		productListDate pld= new productListDate(list, pageNavi);
+		//productListDate pld= new productListDate(list, pageNavi);
 		
-		return pld;
+		return list;
 	}
 	
 	
