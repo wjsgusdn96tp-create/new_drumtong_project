@@ -137,7 +137,7 @@
 						
 						//수정btn
 						const updateForm = $("<form>");
-						updateForm.attr("action","product/productUpdate");
+						updateForm.attr("action","/product/productUpdate");
 						updateForm.attr("method","get");
 						updateForm.attr("value",product.productNo);
 						
@@ -145,7 +145,7 @@
 						updateInput.attr("type","hidden");
 						updateInput.attr("value",product.productNo);
 						updateInput.attr("id",idNum);
-						updateInput.attr("name","product_no");
+						updateInput.attr("name","productNo");
 						
 						const updateLabel=$("<label>");
 						updateLabel.attr("for",idNum);
@@ -153,6 +153,7 @@
 						
 						const updateButton =$("<button>");
 						updateButton.addClass("btn");
+						updateButton.attr("type","submit");
 						updateButton.text("수정");
 						
 						//

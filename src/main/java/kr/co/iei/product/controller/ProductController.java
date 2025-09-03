@@ -160,6 +160,7 @@ public class ProductController {
 	
 	@GetMapping(value="/productUpdate")
 	public String productUpdateFrm(int productNo, Model model) {
+		System.out.println(productNo);
 		Product searchProductUpdate = productService.searchProductUpdate(productNo);
 		model.addAttribute("product",searchProductUpdate);
 		return "product/productUpdateFrm";
