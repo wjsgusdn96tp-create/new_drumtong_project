@@ -224,15 +224,15 @@
 		// 인증번호 전송
 	    $("#vc-btn").click(function(e){
 	        e.preventDefault();
-	        const email = $("#memberEmail").val();
-	        if (!email) {
+	        const memberEmail = $("#memberEmail").val();
+	        if (!memberEmail) {
 	            alert("이메일을 입력하세요");
 	            return;
 	        }
 	        $.ajax({
 	            url: "/api/sendMail",
 	            type: "post",
-	            data: {memberEmail : email},
+	            data: {memberEmail : memberEmail},
 	            success: function(response) {
 	                $("#message").text(response);  // 여기에 인증번호 발송 메시지 표시
 	            },
@@ -265,45 +265,44 @@
 	            });
 	        }
 	    });
-	    
-	 	// 이메일 정규표현식 제약 조건 
-	 		$("#memberEmail").on("keyup", function(){
-	 			const email = $(this).val(); 
-	 			const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; 
-	 			const msgElem = $(".re-email-check-msg"); 
-	 			msgElem.removeClass("valid invalid"); 
-	 			if(!emailRegex.test(email)){ 
-	 				msgElem.text("이메일 형태는 @gmail 형태만 가입 가능합니다."); 
-	 				msgElem.css("color","red"); 
-	 			}else { 
-	 				msgElem.text("올바른 이메일 형식입니다."); 
-	 				msgElem.css("color","green"); 
-	 			} 
-	 		});
-	 		// 닉네임 정규표현식 제약 조건 
-	 		$("#memberNickname").on("keyup", function(){ 
-	 			const nickname = $(this).val(); 
-	 			const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,12}$/; 
-	 			const msgElem = $(".nickname-check-msg"); 
-	 			msgElem.removeClass("valid invalid"); 
-	 			if(nicknameRegex.test(nickname)){ 
-	 				msgElem.text("사용 가능한 닉네임입니다.").addClass("valid"); 
-	 			}else { 
-	 				msgElem.text("닉네임은 한글/영문/숫자 2~12자만 입력 가능합니다.").addClass("invalid"); 
-	 			} 
-	 		});
-	 		// 비밀번호 정규표현식 제약 조건 
-	 		$("#memberPw").on("keyup", function(){ 
-	 			const password = $(this).val(); 
-	 			const passwordRegex = /^[a-z A-Z 0-9]{5,12}$/; 
-	 			const msgElem =$(".password-check-msg"); 
-	 			msgElem.removeClass("valid invalid"); 
-	 			if(passwordRegex.test(password)){ 
-	 				msgElem.text("사용 가능한 비밀번호 입니다.").addClass("valid"); 
-	 			}else{ 
-	 				msgElem.text("비밀번호는 영문/숫자 조합 5~12자만 입력 가능합니다.").addClass("invalid"); 
-	 			} 
-	 		});
+		// 이메일 정규표현식 제약 조건
+		$("#memberEmail").on("keyup", function(){
+	 		const email = $(this).val(); 
+	 		const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; 
+	 		const msgElem = $(".re-email-check-msg"); 
+	 		msgElem.removeClass("valid invalid"); 
+	 		if(!emailRegex.test(email)){ 
+	 			msgElem.text("이메일 형태는 @gmail 형태만 가입 가능합니다."); 
+	 			msgElem.css("color","red"); 
+	 		}else { 
+	 			msgElem.text("올바른 이메일 형식입니다."); 
+	 			msgElem.css("color","green"); 
+	 		} 
+	 	});
+	 	// 닉네임 정규표현식 제약 조건 
+	 	$("#memberNickname").on("keyup", function(){ 
+	 		const nickname = $(this).val(); 
+	 		const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,12}$/; 
+	 		const msgElem = $(".nickname-check-msg"); 
+	 		msgElem.removeClass("valid invalid"); 
+	 		if(nicknameRegex.test(nickname)){ 
+	 			msgElem.text("사용 가능한 닉네임입니다.").addClass("valid"); 
+	 		}else { 
+	 			msgElem.text("닉네임은 한글/영문/숫자 2~12자만 입력 가능합니다.").addClass("invalid"); 
+	 		} 
+	 	});
+	 	// 비밀번호 정규표현식 제약 조건 
+	 	$("#memberPw").on("keyup", function(){ 
+	 		const password = $(this).val(); 
+	 		const passwordRegex = /^[a-z A-Z 0-9]{5,12}$/; 
+	 		const msgElem =$(".password-check-msg"); 
+	 		msgElem.removeClass("valid invalid"); 
+	 		if(passwordRegex.test(password)){ 
+	 			msgElem.text("사용 가능한 비밀번호 입니다.").addClass("valid"); 
+	 		}else{ 
+	 			msgElem.text("비밀번호는 영문/숫자 조합 5~12자만 입력 가능합니다.").addClass("invalid"); 
+	 		} 
+	 	});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

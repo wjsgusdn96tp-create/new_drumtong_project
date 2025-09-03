@@ -1,5 +1,6 @@
 package kr.co.iei.order.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -22,9 +23,16 @@ public interface OrderDao {
 
 	int insertCart(CartItem ct);
 	
-	List selectCartList(int num, int productNo, String shopName);
+	List selectCartList(HashMap<String, Object> param);
 
 	int insertOrderTbl(OrderTbl otb);
+
+	int getorderNo();
+
+	int insertDetailsTbl(DetailsTbl dtl);
+
+	int deleteCart(HashMap<String, Object> param);
+
 
 
 

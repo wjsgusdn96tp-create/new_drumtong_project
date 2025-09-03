@@ -150,7 +150,8 @@
 	<update id="updateCustomer">
 		update customer_service_tbl set
 			customer_title = #{customerTitle},
-			customer_content = #{customerContent}
+			customer_content = #{customerContent},
+			customer_category = #{customerCategory}
 		where
 			customer_no = #{customerNo}
 	</update>

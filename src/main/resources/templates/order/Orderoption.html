@@ -12,15 +12,7 @@
 </head>
 <body>
     <th:block th:include="/common/header"></th:block>
-    <div>
-   	로그인 회원 번호: <span th:text="${memberNo}"></span>
-	</div>
-	<div>
-    shopName 값: <span th:text="${shop.shopName}"></span>
-	</div>
-	<div>
-    productNo 값: <span th:text="${p.productNo}"></span>
-	</div>
+
     
     <div class="order-option-header">옵션선택</div>
 
@@ -113,13 +105,12 @@
 	    
 	    
 	    <form action="/order/DrumtongCart" method="get">
-	    	<input type="hidden" name="productNo" id="productNo" th:value="${p.productNo}">
 	    	<input type="hidden" name="shopName" id="shopName" th:value="${shop.shopName}">
 	    	<button type="submit" class="order-moveCart">장바구니가기</button>
 	    </form>
 	</div>
 	
-<script th:inline="javascript">
+	<script th:inline="javascript">
 			const shotPay =  400;
 			const creamPay = 500;
 			const sizePrice = 2000;
