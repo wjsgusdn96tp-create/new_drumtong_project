@@ -104,6 +104,7 @@ public class OrderService {
 		 dtl.setDiscountName(o.getDiscountName());
 		 dtl.setDiscountPrice(o.getDiscountPrice());
 		 dtl.setProductName(o.getProductName());
+		 dtl.setProductTitle(o.getProductTitle());
 		 
 		 System.out.println(dtl.getOrderNo());
 		 System.out.println(dtl.getProductNo());
@@ -123,6 +124,14 @@ public class OrderService {
 		int result = orderDao.cartdel(cartNo);
 		
 		return result;
+	}
+
+
+	public List selectDetail(int memberNo) {
+		
+		List detailList = orderDao.selectDetail(memberNo);
+		
+		return detailList;
 	}
 
 

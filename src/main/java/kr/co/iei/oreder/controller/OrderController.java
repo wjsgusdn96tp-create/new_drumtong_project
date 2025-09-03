@@ -100,7 +100,7 @@ public class OrderController {
 	public String cartPage(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
 	    
-		
+		//로그인 체크하기
 		if(member == null) {
 			return "redirect:/member/loginFrm";
 		}
@@ -141,6 +141,16 @@ public class OrderController {
 	
 	public String orderListPage(Model model,
 			@SessionAttribute(required = false) Member member) {
+		
+
+		if(member == null) {
+			return "redirect:/member/loginFrm";
+		}
+		 int memberNo = member.getMemberNo();
+		
+		List list = orderService.selectDetail(memberNo);
+		 
+		model.addAttribute("list", list);
 		
 		
 		

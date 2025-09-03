@@ -63,7 +63,8 @@
 	 	#{discountPrice},
 	 	to_char(sysdate,'yyyy-mm-dd'),
 	 	#{productName},
-	 	#{shopName}
+	 	#{shopName},
+	 	#{productTitle}
 	 	
 	 	)
 	 </insert>
@@ -75,6 +76,10 @@
 		<delete id="cartdel">
 			delete from cart_item_tbl where cart_no = #{cartNo}
 		</delete>
+	
+	<select id="selectDetail" resultType="details" >
+		select * from order_details_tbl
+	</select>
 		
 		
 </mapper>
