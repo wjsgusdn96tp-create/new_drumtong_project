@@ -35,4 +35,8 @@ public interface ProductDao {
 
 	List productListPriceDate(HashMap<String, Object> param);
 
+	List notBestProductList();
+
+	List allproductList(HashMap<String, Object> param);
+
 }

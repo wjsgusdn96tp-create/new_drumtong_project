@@ -78,7 +78,27 @@
   </delete>
   
   <select id="bestProductList" resultType="product">
-  	select * from product_best_tbl
+  	select * 
+		from product_tbl p
+		join product_best_tbl b on (b.product_no = p.product_no)
   </select>
   
+  <select id="notBestProductList" resultType="product">
+  	select *
+	from product_tbl p
+	left join product_best_tbl b on (b.product_no = p.product_no)
+	where product_best_no is null
+  </select>
+  
+  <select id="allproductList" resultType="product">
+  	select * from
+    (select rownum as rnum, n.* from 
+                (select *
+                    from product_tbl p
+                    left join product_best_tbl b on (b.product_no = p.product_no)
+                    order by product_best_no asc
+                )n
+        )
+        where rnum between #{start} and #{end}
+  </select>
 </mapper>

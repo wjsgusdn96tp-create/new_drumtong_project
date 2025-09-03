@@ -31,25 +31,34 @@ public class ProductController {
 	@GetMapping(value="/productList")
 	private String productList(int reqPage, String shopName, Model model) {
 		String pageNavi = productService.pageNavi(reqPage);
-		List productListDate = productService.productListDate(pageNavi, reqPage);
 		//productListDate pld = productService.productListDate(reqPage);
 		//System.out.println(pld);
 		
-		//전체 상품 리스트
-		//productListDate pld = new productListDate(productListDate, pageNavi);
-		model.addAttribute("list", productListDate);
+		
 		model.addAttribute("pageNavi",pageNavi);
 		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List allProductList = productService.allProductList(pageNavi, reqPage);
+		model.addAttribute("allList",allProductList);
 		
 		//베스트 상품
 		List bestProductList = productService.bestProductList();
 		model.addAttribute("bestList",bestProductList);
 		
 		
+		//최신순
+		List productListDate = productService.productListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", productListDate);
+		
+		
 		//가격순
 		List productListPriceDate =productService.productListPriceDate(pageNavi, reqPage);
 		model.addAttribute("priceList", productListPriceDate);
 		return "product/productList";
+		
+		//좋아요 순
 	}
 	
 

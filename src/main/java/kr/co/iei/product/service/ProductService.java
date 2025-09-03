@@ -228,6 +228,22 @@ public class ProductService {
 		return pld;
 	}
 
+	public List allProductList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List allProductList = productDao.allproductList(param);
+		
+		
+		return allProductList;
+	}
+
 	
 
 
