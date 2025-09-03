@@ -13,9 +13,11 @@
 <body>
 	<th:block th:include="/common/header"></th:block>
 		<div class="wrap">
-			<div class="productUpdate_title_wrap">상품 상세설명 수정</div>
+		
+		<div class="wrap_wrap">
+			<div class="productUpdate_title_wrap"><h1>상품 정보 수정<h1></h1></div>
 				
-				<form action="/n">
+				<form th:action="@{/product/productUpdate(productNo=${productNo})}">
 				<div class="updateContent_wrap">
 					<div class="img_wrap">
 						<div class="img_div">
@@ -23,24 +25,50 @@
 						</div>
 						<div class="icon_div">
 							<span class="material-icons">favorite</span>
+							<span class="like_count">좋아요 수</span>
 						</div>
 					</div>
 					
 					<div class="content_wrap">
 						<div class="content_div">
 							<div class="content_title"><h2 th:text="${product.productName}"></h2></div>
-							<div class="script_wrap">
-							
-							</div>					
-						</div>
-						<div class="btn_div">
-							<button class="btn update_btn">수정하기</button>
+							<ul class="script_wrap">
+								<li>가격 : <span th:text="${product.productPrice}"></span> 
+									<input style="display:hidden;" type="text" th:value="${product.productPrice}">
+								</li>
+							</ul>					
 						</div>
 					</div>
 				</div>
+				
+				<div class="btn_div update_div">
+					<button type="submit" class="btn update_btn">수정하기</button>
+				</div>
+						
 				</form>
 				
+				<div style="width:50px;" class="btn_div return_div">
+					<a style="width:50px;" href="/product/productList?reqPage=1&shopName=manager"><button type="button" class="btn return_btn">수정취소</button></a>
+				</div>
+				
+				</div>
 			</div>
+			
+			<!-- 
+		<script th:inline="javascript">
+			
+			const product = [[${product}]];
+			
+			if(product.productTitle == "goods"){
+				const
+				
+				$(".script_wrap").append
+			}
+			
+			
+			$(".script_wrap")
+		</script>
+			 -->
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
