@@ -33,13 +33,15 @@ body{
     margin: 0 auto;
     min-height: 75vh;
     
+    
 }
 .all-wrap{
     width: 800px;
-    height: 130px;
+/*     height: 130px; */
     margin: 0 auto;
     margin-bottom: 50px;
-    
+    max-height: 900px;
+    overflow: hidden;
 }
 
 .all-wrap>:first-child>:first-child{

@@ -82,7 +82,6 @@ public class CustomerService {
 		List<CustomerComment> commentList = customerDao.selectCustomerCommentList(customerNo);
 		c.setCommentList(commentList);
 		
-		System.out.println(c);
 		return c;
 	}
 	
@@ -123,7 +122,6 @@ public class CustomerService {
 	@Transactional
 	public int insertCustomerComment(CustomerComment cc) {
 		int result = customerDao.insertCustomerComment(cc);
-		System.out.println(cc);
 		return result;
 	}
 

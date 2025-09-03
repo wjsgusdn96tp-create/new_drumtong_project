@@ -77,7 +77,7 @@
                                     </th:block>
                                 </li>
                                 <li>
-                                    <div class="input-item">
+                                    <div class="input-item1">
                                         <p class="comment-content-p" th:text="${cc.commentContent}"></p>
                                         <div class="input-item" style="display:none;">
                                             <textarea class="ccc" name="commentContent"></textarea>
@@ -99,27 +99,32 @@
                             <div class="inputRecommentBox" style="display:none;">
                                 <form action="/customer/insertComment" method="post">
                                     <ul class="comment-ul-ref">
-                                        <li><span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span></li>
+                                        <li>
+                                        	<span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
+                                        </li>
                                         <li>
                                             <input type="hidden" name="customerCommentRef" th:value="${cc.commentNo}">
                                             <input type="hidden" name="customerWriterNo" th:value="${session.member.memberNo}">
                                             <input type="hidden" name="customerServiceRef" th:value="${c.customerNo}">
-                                            <div class="input-item"><textarea class="ccc" name="commentContent" placeholder="댓글을 입력하세요."></textarea></div>
+                                            <div class="input-item">
+                                            	<textarea class="ccc" name="commentContent" placeholder="댓글을 입력하세요."></textarea>
+                                            </div>
                                         </li>
-                                        <li><button type="submit" class="comment-btn">답글등록</button></li>
+                                        <li>
+                                        	<button type="submit" class="comment-btn">답글등록</button>
+                                        </li>
                                     </ul>
                                 </form>
                             </div>
 
                             <!-- 대댓글 출력 -->
                             <th:block th:each="re : ${c.commentList}" th:if="${re.customerCommentRef == cc.commentNo}">
-                                <!-- ====================== [수정 1] : 대댓글 HTML도 원래 구조로 되돌립니다 ====================== -->
                                 <ul class="comment-ul-ref">
                                     <li style="font-weight: bold; width: 120px; text-align: center;">
                                         <span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
                                         <th:block th:each="m : ${allMembers}" th:if="${m.memberNo == re.customerWriterNo}">
                                             <span th:if="${m.memberGrade == '관리자'}">관리자</span>
-                                            <span th:unless="${m.memberGrade == '관리자'}" th:text="${m.memberNickname}"></span>
+                                            <span th:if="${m.memberGrade != '관리자'}" th:text="${m.memberNickname}"></span>
                                         </th:block>
                                     </li>
                                     <li>
@@ -143,13 +148,17 @@
                 <!-- 별점 -->
                 <div class="rank"><span>관리자 댓글에 대한 평점을 남겨주세요.</span></div>
                 <div class="star-wrap" th:classappend="${session.member != null and session.member.memberGrade == '관리자'} ? 'admin-view' : ''">
-                    <span class="material-icons">star</span><span class="material-icons">star</span><span class="material-icons">star</span><span class="material-icons">star</span><span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
                 </div>
                 <p class="star-rank">0점</p>
                 <div class="modydele">
                     <th:block class="modydele-th" th:if="${session.member != null && session.member.memberGrade !='관리자'}">
                         <a th:href="@{/customer/updateFrm(customerNo=${c.customerNo})}" class="btn btn1">수정</a>
-                        <button class="btn btn2">삭제</button>
+                        <button class="btn btn2" th:value=${c.customerNo}>삭제</button>
                     </th:block>
                 </div>
             </div>
@@ -158,6 +167,33 @@
 
     <th:block th:include="common/footer"></th:block>
     <script>
+    $(document).ready(function(){
+    	$(".btn2").on("click", function(){
+    		const customerNo = $(this).val();
+    		if(!confirm("게시글을 삭제하시겠습니까?")){
+    			return;
+    		}
+    		$.ajax({
+    			url: "/customer/delete",
+    			type: "post",
+    			data:{
+    				customerNo : customerNo
+    			},
+    			success: function(response){
+    				if(response ==="success") {
+						alert("게시글이 삭제되었습니다.")    					
+ 		   				window.location.href ='/customer/list?reqPage=1';
+    				} else{
+    					alert("게시글 삭제 실패");
+    				}
+    			},
+    			error: function(){
+    				alert("삭제 오류");
+    			}
+    		});
+    	});
+    });
+    
     $(document).ready(function(){
     	const savedRating = $("#customerStar").val();
         
@@ -231,6 +267,7 @@
         textareaDiv.find("textarea").val(contentP.text());
 
         contentP.hide();
+        $(".ccc").show();
         textareaDiv.show();
 
         $(obj).text("수정완료");
@@ -268,6 +305,7 @@
         const textareaDiv = contentLi.find(".input-item[style*='display:none']");
 
         textareaDiv.hide();
+        $(".ccc").hide();
         contentP.show();
 
         $(obj).prev().text("수정");

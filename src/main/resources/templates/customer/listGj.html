@@ -39,7 +39,6 @@
                     </ul>
                     <ul>
                         <li>
-<!--                         	<a th:href="@{/notice/view(noticeNo=${notice.noticeNo})}" th:text="${notice.noticeTitle}"></a> -->
                             <a th:href="@{/customer/goodjob(reqPage=1, sort='lastest')}">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
                         </li>
                         <li>
@@ -58,7 +57,12 @@
                         <th style="width: 15%;">작성자</th>
                         <th style="width: 45%;">제목</th>
                         <th style="width: 15%;">작성일</th>
-                        <th style="width: 10%;">삭제</th>
+                        <th:block th:if="${session.member.memberGrade != '관리자'}">
+                        	<th style="width: 10%;">삭제</th>
+                        </th:block>
+                        <th:block th:if="${session.member.memberGrade == '관리자'}">
+                        	<th style="width: 10%;">답변</th>
+                        </th:block>
                     </tr>
                     <tr class="tab-content"  th:each="customer : ${list}">
                         <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
@@ -68,7 +72,12 @@
                         </td>
                         <td style="width: 15%;" th:text="${customer.customerDate}"></td>
                         <td style="width: 10%;">
-                            <button class="delete-btn">삭제</button>
+							<th:block th:if="${session.member.memberNickname == customer.customerNickname}">
+                            	<button class="delete-btn" th:value="${customer.customerNo}">삭제</button>
+                            </th:block>
+                            <th:block th:if="${session.member.memberGrade == '관리자'}">
+                            	<input type="checkbox" class="checkbox">
+                            </th:block>
                         </td>
                     </tr>
                     <tr class="button-tr">
@@ -98,6 +107,7 @@
             </div>
         </div>
     </div>
+    <th:block th:include="common/footer"></th:block>
     <script>
     	
     
