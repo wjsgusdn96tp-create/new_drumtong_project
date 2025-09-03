@@ -1,7 +1,8 @@
 package kr.co.iei.oreder.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import kr.co.iei.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.co.iei.customer.controller.CustomerController;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.CartItem;
@@ -27,17 +31,20 @@ import kr.co.iei.product.vo.Product;
 @RequestMapping(value="/order")
 public class OrderController {
 
+    private final CustomerController customerController;
+
     private final FileUtil fileUtil;
 	@Autowired
 	private OrderService orderService;
 
 
-    OrderController(FileUtil fileUtil) {
+    OrderController(FileUtil fileUtil, CustomerController customerController) {
         this.fileUtil = fileUtil;
+        this.customerController = customerController;
     }
 	
 	
-	@GetMapping("/OrderMap")
+	@GetMapping(value="/OrderMap")
 	public String orderMapPage(Model model) {
 
 	    int reqPage = 1; 
@@ -76,7 +83,7 @@ public class OrderController {
 	
 	
 	//에이잭스에서 db로 추가만 하는 로직들
-	@PostMapping("/DrumtongCart")
+	@PostMapping(value="/DrumtongCart")
 	@ResponseBody
 	public int insertCart(CartItem ct, @SessionAttribute(required = false) Member member) {
 		
@@ -91,8 +98,8 @@ public class OrderController {
 	
 	
 	// 장바구니 페이지 열기
-	@GetMapping("/DrumtongCart")
-	public String cartPage(Model model,int productNo,String shopName,
+	@GetMapping(value="/DrumtongCart")
+	public String cartPage(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
 	    
 		
@@ -100,41 +107,48 @@ public class OrderController {
 			return "redirect:/member/loginFrm";
 		}
 		
-		int num = member.getMemberNo();
+		int memberNo = member.getMemberNo();
 		
-		List list = orderService.selectCartList(num,productNo,shopName);
 		
-		model.addAttribute("productNo", productNo);
+		List list = orderService.selectCartList(memberNo,shopName);
+		
+		
 		model.addAttribute("shopName", shopName);
-		model.addAttribute("num", num);
+		model.addAttribute("memberNo", memberNo);
 		
 	    model.addAttribute("list", list);
+	    
 	    return "order/DrumtongCart";
 	}
 	
-	@PostMapping("/OrderList")
+	@PostMapping(value="/pay")
 	@ResponseBody
-	public int insertOrderTbl(DetailsTbl dtl,  Model model,String shopName,
+	public int insertOrderTbl(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
-		Random r = new Random();
 		
-		int rNum = r.nextInt(10000000)+1;
 		
 		int memberNo =  member.getMemberNo();
 		
 		OrderTbl otb = new OrderTbl(); 
 		
-		otb.setOrderNo(rNum);
 		otb.setMemberNo(memberNo);
 		otb.setShopName(shopName);
 		
 		int result = orderService.insertOrderTbl(otb);
-
+		
 		return result;
 	}
 	
+	@GetMapping(value="/OrderList")
 	
-	
-	
+	public String orderListPage(Model model,
+			@SessionAttribute(required = false) Member member) {
+		
+		
+		
+		
+		return "order/OrderList";
+		
+	}
 	
 }

@@ -2,6 +2,25 @@
     list-style: none;
 }
 
+.order-orderuibox {
+    border: 5px solid var(--main3);
+
+    width: 600px;
+    height: 100%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+.order-libox {
+    padding: 10px;
+    
+}
+.order-count {
+    border: 3px solid var(--main4);
+    width: 150px;
+    border-radius: 10px;
+    text-align: center;
+}
 .order-mainbox {
     margin: 0 auto;
 }

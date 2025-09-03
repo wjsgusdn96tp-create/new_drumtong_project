@@ -1,6 +1,7 @@
 package kr.co.iei.order.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -17,4 +18,5 @@ public class OrderTbl {
 	private int memberNo;
 	private String shopName;
 	private Date enrollDate;
+	private List<DetailsTbl> detailsList;
 }
