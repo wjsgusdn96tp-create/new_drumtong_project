@@ -104,6 +104,11 @@
     		</div>
     	</section>
 	</main>
+	<!-- 로그인 한 회원 정보 -->
+	<form id="memberInfo" style="display:none">
+  		<input type="hidden" id="memberEmail" name="memberEmail" th:value="${session.member != null ? session.member.memberEmail : ''}">
+  		<input type="hidden" id="memberName"  name="memberName" th:value="${session.member != null ? session.member.memberNickname : ''}">
+	</form>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script>
 		// 결제창 띄어주는 js함수
@@ -120,6 +125,8 @@
 	    	const price    = $(this).data("price");
 	    	const level    = $(this).data("level");
 	    	const loggedIn = $(this).data("loggedIn");
+	    	const buyerEmail = $("#memberEmail").val();
+	    	const buyerName = $("#memberName").val();
 	    	if (!loggedIn) {
 	      		window.location.href = "/membershipRecode/requireLogin";
 	      		return;
@@ -130,7 +137,9 @@
 	      		pay_method   : "card",
 	      		merchant_uid : "order_no_" + uid(),
 	      		name         : "멤버쉽 구매 (" + grade + ")",
-	      		amount       : price
+	      		amount       : price,
+			    buyer_email: buyerEmail,
+			    buyer_name: buyerName
 	    	},function(rsp){
 	      		if(!rsp.success){
 	        		alert("결제 실패: " + rsp.error_msg);
