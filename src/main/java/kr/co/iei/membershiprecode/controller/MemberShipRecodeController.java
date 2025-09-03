@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
+import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.membershiprecode.model.service.MemberShipRecodeService;
 import kr.co.iei.membershiprecode.model.vo.MemberShipRecode;
 
@@ -19,14 +20,16 @@ public class MemberShipRecodeController {
 	@Autowired
 	private MemberShipRecodeService membershiprecodeService;
 	
-	@PostMapping(value="/insert")
+	@PostMapping("/insert")
 	@ResponseBody
 	public String insertRecode(MemberShipRecode recode, HttpSession session) {
-	    if (session.getAttribute("member") == null) {
-	        return "member/loginFrm";
+	    Member login = (Member) session.getAttribute("member");
+	    if (login == null) {
+	        return "/membershipRecode/requireLogin";
 	    }
-		int result = membershiprecodeService.insertRecode(recode);
-		return "redirect:/";
+	    recode.setMembershiprecodeNickname(login.getMemberNickname()); // 세션으로 주입
+	    int result = membershiprecodeService.insertRecode(recode);
+	    return (result > 0) ? "/" : "/membershipRecode/saveFail";
 	}
 	
 	@GetMapping("/membership")
@@ -38,7 +41,7 @@ public class MemberShipRecodeController {
 	
 	// 비 로그인시 로그인 요구 메세지페이지로 이동
 	@GetMapping("/requireLogin")
-	public String requireLogin(Model model) {
+	public String requireLogin(Model model, Member m, HttpSession session) {
 	    model.addAttribute("title", "로그인이 필요합니다");
 	    model.addAttribute("text", "로그인 후 이용바랍니다.");
 	    model.addAttribute("icon", "error");
