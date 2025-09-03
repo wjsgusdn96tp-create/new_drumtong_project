@@ -6,7 +6,7 @@
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<h1>news수정하기</h1>
+	<h1>할인수정하기</h1>
 		<div class="content-wrap">
 			<div>
 				<form action="/news/discountWrite" method="get">
@@ -44,14 +44,12 @@
 						</tr>
 						<tr>
 							<td colspan="4">
-							<button class="btn" id="insert-btn" type="submit">등록하기</button>
+							<button class="btn" id="insert-btn" type="submit">수정하기</button>
 							</td>
 						</tr> 
 					</table>
 				</form>
-		
 			</div>
-		
 		</div>
 	<th:block th:include="common/footer"></th:block>
 	<script th:inline="javascript">
@@ -77,8 +75,6 @@
 			$(".priceInput").text("원");			
 		}
 	});
-		
-			
 	</script>
 </body>
 </html>

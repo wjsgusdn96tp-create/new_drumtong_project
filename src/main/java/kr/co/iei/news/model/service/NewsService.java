@@ -1,6 +1,5 @@
 package kr.co.iei.news.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,8 +11,6 @@ import kr.co.iei.news.model.dao.NewsDao;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
-import kr.co.iei.product.dao.ProductDao;
-import kr.co.iei.product.vo.Product;
 
 @Service
 public class NewsService {
@@ -103,8 +100,22 @@ public class NewsService {
 	}
 	
 	@Transactional
-	public int insertNews(News news) {
+	public int insertNews(News news, String[] productList, String discountType, String discountPrice) {
+		int newsNo = newsDao.getNewsNo();
+		news.setNewsNo(newsNo);
+		System.out.println(discountType);
+		System.out.println(discountPrice);
+		
 		int result = newsDao.insertNews(news);
+		
+		for(int i=0 ;i<productList.length;i++) {
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			param.put("newsNo", newsNo);
+			param.put("productNo", productList[i]);
+			param.put("discountType", discountType);
+			param.put("discountPrice", discountPrice);
+			result += newsDao.insertDiscount(param);			
+		}
 		
 		return result;
 	}
@@ -137,32 +148,7 @@ public class NewsService {
 		int result = newsDao.insertNotice(notice);
 		return result;
 	}
-	@Transactional
-	public int insertDiscount(News news, String discountSelect, String discountPrice, String[] list) {
-		int result = 0;
-		for(int i=0; i<list.length;i++) {
-			Discount discount = new Discount();
-			discount.setNewsNo(news.getNewsNo());
-			discount.setProductNo(Integer.parseInt(list[i]));
-			if(discountSelect.equals("Percent")) {
-				discount.setDiscountPercent(Integer.parseInt(discountPrice));
-			} else if(discountSelect.equals("Price")) {
-				discount.setDiscountPrice(Integer.parseInt(discountPrice));
-			}
-			
-			System.out.println(discountSelect);
-			System.out.println(discount);
-			HashMap<String, Object> param = new HashMap<String, Object>();
-			param.put("newsNo", discount.getNewsNo());
-			param.put("productNo", discount.getProductNo());
-			param.put("discountPercent", discount.getDiscountPercent());
-			param.put("discountPrice", discount.getDiscountPrice());
-			param.put("discountSelect",discountSelect);
-			
-			result += newsDao.insertDiscount(param);
-		}		
-		return result;
-	}
+	
 	
 	@Transactional
 	public int likepush(News news, int memberNo) {
@@ -207,6 +193,32 @@ public class NewsService {
 		List product = newsDao.selectBestProduct();
 		
 		return product;
+	}
+
+	public int updateDiscount(News news, String discountSelect, String discountPrice, String[] list) {
+		int result = 0;
+		for(int i=0; i<list.length;i++) {
+			Discount discount = new Discount();
+			discount.setNewsNo(news.getNewsNo());
+			discount.setProductNo(Integer.parseInt(list[i]));
+			if(discountSelect.equals("Percent")) {
+				discount.setDiscountPercent(Integer.parseInt(discountPrice));
+			} else if(discountSelect.equals("Price")) {
+				discount.setDiscountPrice(Integer.parseInt(discountPrice));
+			}
+						
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			param.put("newsNo", discount.getNewsNo());
+			param.put("productNo", discount.getProductNo());
+			param.put("discountPercent", discount.getDiscountPercent());
+			param.put("discountPrice", discount.getDiscountPrice());
+			param.put("discountSelect",discountSelect);
+			
+			
+			result = newsDao.deleteDiscount(param);
+		
+		}		
+		return result;
 	}
 	
 }

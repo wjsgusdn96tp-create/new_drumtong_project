@@ -3,6 +3,7 @@ package kr.co.iei.news.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.javassist.bytecode.analysis.MultiArrayType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.product.vo.Product;
 import kr.co.iei.util.FileUtil;
 
 
@@ -56,19 +58,23 @@ public class NewsController {
 	}
 	
 	@GetMapping(value="/writeFrm")
-	public String writeFrm() {
+	public String writeFrm(Model model) {
+		List product = newsService.selectAllProduct();
+		model.addAttribute("product", product);
 		return "news/writeFrm";
 	}
 	@PostMapping(value="write") //뉴스 등록하기 누르면 호출
-	public String writeNews(News news, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
+	public String writeNews(News news, String productNoStr, String discountType, String discountPrice, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
 		int memberNo = member == null ? 0 : member.getMemberNo();
+		String[] productList = productNoStr.split(",");
+		
 		String savepath = root+"/news/";
 		String filepath = fileUtil.upload(savepath, newsImageFile);
 		news.setImage(filepath);
 		news.setMemberNo(memberNo);
 		
-		int result = newsService.insertNews(news);
-			
+		int result = newsService.insertNews(news, productList, discountType, discountPrice);		
+		
 		return "redirect:/news/list?noticeReqPage=1&tab=all";
 	}
 	
@@ -80,7 +86,7 @@ public class NewsController {
 	@GetMapping(value="/noticeWrite")
 	public String noticeWrite(Notice notice, @SessionAttribute(required = false) Member member) {
 		int memberNo = member == null ? 0 : member.getMemberNo();
-		notice.setMemberNo(memberNo);
+		
 		int result = newsService.insertNotice(notice);
 		return "redirect:/news/list?noticeReqPage=1";
 	}
@@ -91,23 +97,7 @@ public class NewsController {
 		model.addAttribute("notice", notice);
 		return "news/noticeView";
 	}
-	
-	@GetMapping(value="/discountWriteFrm")
-	public String discountWriteFrm(String title, String newsNo, Model model) {
-		model.addAttribute("title", title);
-		model.addAttribute("newsNo", newsNo);
-		List product = newsService.selectAllProduct();
-		model.addAttribute("product", product);
-		return "news/discountWriteFrm";
-	}
-	
-	@GetMapping(value="/discountWrite")
-	public String discountWrite(News news, String discountSelect, String discountPrice, String productNo, @SessionAttribute(required = false) Member member) {
-		String[] list = productNo.split(",");
-		int result = newsService.insertDiscount(news, discountSelect, discountPrice, list);
-		return "redirect:/news/list?noticeReqPage=1&tab=all";
-	}
-	
+
 	@ResponseBody
 	@GetMapping(value="/more")
 	public List more(int start, int amount, String tab, @SessionAttribute(required = false) Member member) {
@@ -129,8 +119,7 @@ public class NewsController {
 	@GetMapping(value="/discountUpdateFrm")
 	public String discountUpdateFrm(String title, String newsNo, Model model) {
 		
-		model.addAttribute("title", title);
-		model.addAttribute("newsNo", newsNo);
+	
 		List product = newsService.selectAllProduct();
 		model.addAttribute("product", product);
 		List list= newsService.selectAllDiscount(newsNo);
@@ -148,7 +137,14 @@ public class NewsController {
 		return "news/discountUpdateFrm";
 	}
 	
-	@GetMapping(value="view")
+	@GetMapping(value="/discountUpdate")
+	public String discountUpdate(News news, String discountSelect, String discountPrice, String productNo, @SessionAttribute(required = false) Member member) {
+		String[] list = productNo.split(",");
+		int result = newsService.updateDiscount(news, discountSelect, discountPrice, list);
+		return "redirect:/news/list?noticeReqPage=1&tab=all";
+	}
+	
+	@GetMapping(value="/view")
 	public String newsView(String newsNo, Model model) {
 		News news = newsService.selectOneNews(newsNo);
 		model.addAttribute("news", news);

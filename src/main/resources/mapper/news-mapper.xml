@@ -30,19 +30,22 @@
 		</if>
   </select>
   
+  <select id="getNewsNo" resultType="int">
+  	select news_seq.nextval from dual
+  </select>
+  
   <insert id="insertNews">
-  	insert into news values(news_seq.nextval, #{memberNo}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'), #{image})
+  	insert into news values(#{newsNo}, #{memberNo}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'), #{image})
   </insert>
   
- 
   <insert id="insertDiscount">
   	insert into discount values(discount_seq.nextval, #{newsNo}, #{productNo}, 
-  	<if test="discountSelect == 'Percent'">
-  	  	#{discountPercent}, null)
-  	</if>
-  	<if test="discountSelect == 'Price'">
-  	  	null, #{discountPrice})
-  	</if>
+	  	<if test="discountType == 'Percent'">
+	  	  	#{discountPrice}, null)
+	  	</if>
+	  	<if test="discountType == 'Price'">
+	  	  	null, #{discountPrice})
+	  	</if>
   </insert>
 
 	<select id="selectAllNews"  resultType="news">
@@ -95,4 +98,11 @@
 	<select id="selectBestProduct" resultType="product">
 		select * from product_best_tbl inner join product_tbl using(product_no)
 	</select>
+	
+	<delete id="deleteDiscount">
+		delete from discount where news_no = #{newsNo}
+	</delete>
+	
+	
+
 </mapper>

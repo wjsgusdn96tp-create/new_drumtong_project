@@ -44,4 +44,8 @@ public interface NewsDao {
 
 	List selectBestProduct();
 
+	int deleteDiscount(HashMap<String, Object> param);
+
+	int getNewsNo();
+
 }
