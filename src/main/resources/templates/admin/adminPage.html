@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/DrumtongCss/adminpage.css">
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="content">
+		<section class="section">
+			<div class="page-title">관리자 페이지</div>
+			<table class="tbl tbl-hover">
+				<tr>
+					<th style="width:5%;">선택</th>
+					<th style="width:10%;">회원번호</th>
+					<th style="width:20%;">회원이메일</th>
+					<th style="width:15%;">회원닉네임</th>
+					<th style="width:5%;">회원등급</th>
+					<th style="width:10%;">등급변경</th>
+				</tr>
+				<tr th:each="m,status : ${list}">
+					<td>
+						<div class="input-wrap">
+							<input type="checkbox" class="chk" th:id="${'chk'+status.count}">
+							<label th:for="${'chk'+status.count}"></label>
+						</div>
+					</td>
+					<td th:text="${m.memberNo}"></td>
+					<td th:text="${m.memberEmail}"></td>
+					<td th:text="${m.memberNickname}"></td>
+					<!-- 
+					<td>
+						<div class="select" th:switch="${m.membershipGrade}">
+							<select th:case="1">
+								<option value="1" selected>Standard</option>
+								<option value="2">Primeum</option>
+								<option value="3">Specialty</option>
+							</select>
+							<select th:case="2">
+								<option value="1">Standard</option>
+								<option value="2" selected>Primeum</option>
+								<option value="3">Specialty</option>
+							</select>
+							<select th:case="3">
+								<option value="1">Standard</option>
+								<option value="2">Primeum</option>
+								<option value="3" selected>Specialty</option>
+							</select>
+						</div>
+					</td>
+					 -->
+					<td>
+						<div class="select" th:switch="${m.memberGrade}">
+							<select th:case="'관리자'">
+								<option value="관리자" selected>관리자</option>
+								<option value="회원">회원</option>
+							</select>
+							<select th:case="'회원'">
+								<option value="관리자">관리자</option>
+								<option value="회원" selected>회원</option>
+							</select>
+						</div>
+					</td>
+					<!-- 맴버쉽 변경 버튼 
+					<td>
+						<button class="btn-primary changeMembershipGrade">맴버쉽 변경</button>
+					</td>					 
+					 -->
+					<td>
+						<!-- 회원등급 변경 버튼 -->
+						<button class="btn-primary changeMemberGrade">등급변경</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="9">
+						<button style="width:100%" class="btn-point chekedChangeGrade">선택 회원 등급/맴버쉽 변경</button>
+					</td>
+				</tr>
+			</table>
+		</section>
+	</main>
+	<script>
+	$(".changeMemberGrade").on("click", function(){
+		const memberNo = $(this).parent().parent().children().eq(1).text();
+		const memberGrade = $(this).parent().prev().children().children().val();		
+		location.href="/admin/changeMemberGrade?memberNo="+memberNo+"&memberGrade="+memberGrade;
+	});
+	$(".chekedChangeGrade").on("click", function(){
+		const checkbox = $(".chk:checked");
+		if(checkbox.length === 0){
+			return;
+		}
+		const no = new Array();
+		const grade = new Array();
+		checkbox.each(function(index,item){
+			const memberNo = $(item).parent().parent().next().text();
+			no.push(memberNo);
+			const memberGrade = $(item).parent().parent().parent().find("select").val();
+			grade.push(memberGrade);
+		});
+		location.href="/admin/checkedChangeGrade?no="+no.join("/")+"&grade="+grade.join("/");
+	});
+	</script>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

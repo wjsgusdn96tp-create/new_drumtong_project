@@ -11,7 +11,7 @@ import kr.co.iei.product.vo.Product;
 @Mapper
 public interface ProductDao {
 
-	int productInsertDrink(Product p);
+	int productInsert(Product p);
 
 	Product productInsertSearch(String productName);
 
@@ -22,5 +22,11 @@ public interface ProductDao {
 	int selectProductTotalCount();
 
 	List selectProductList(HashMap<String, Object> param);
+
+	Product productBestSelect(int productNo);
+
+	int productBestDelete(int productNo);
+
+	int productDelete(int productNo);
 
 }

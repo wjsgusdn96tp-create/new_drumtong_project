@@ -66,7 +66,7 @@ public class ProductService {
 		// 다음버튼(최종 페이지를 출력하지 않은 경우)
 		if(pageNo <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/notice/list?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
 			pageNavi += "<span class='material-icons'> chevron_right </span>";
 			pageNavi += "</a>";
 			pageNavi += "</li>";
@@ -84,11 +84,11 @@ public class ProductService {
 	
 	
 	@Transactional
-	public int productInsertDrink(Product p, String productBestTbl) {
+	public int productInsert(Product p, String productBestTbl) {
 		/*int referencesProductNo =0;*/
 		if(productBestTbl.equals("productBest")) {
 			/*referencesProductNo ++;*/
-			int result = productDao.productInsertDrink(p);
+			int result = productDao.productInsert(p);
 			if(result > 0) {
 				/*p.setProductNo(referencesProductNo);*/
 				String productName= p.getProductName();
@@ -109,8 +109,30 @@ public class ProductService {
 			}
 		}else {
 			/*referencesProductNo ++;*/
-			int result = productDao.productInsertDrink(p);
+			int result = productDao.productInsert(p);
 			return result;/*1*/
 		}
+	}
+
+	@Transactional
+	public int productDelete(int productNo) {
+		Product productBest = productDao.productBestSelect(productNo);
+		if(productBest != null) {
+			int resultBestD = productDao.productBestDelete(productNo);
+			if(resultBestD > 0) {
+				int resultD = productDao.productDelete(productNo);
+				if(resultD > 0) {
+					return resultD;/*1*/
+				}else {
+					return 10;/*대표상품만 삭제*/
+				}
+			}
+		}else{
+			int resultD = productDao.productDelete(productNo);
+			if(resultD > 0) {
+				return resultD;/*1*/				
+			}
+		}return 0;/*삭제 실패*/
+		
 	}
 }

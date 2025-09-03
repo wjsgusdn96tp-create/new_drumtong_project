@@ -98,7 +98,7 @@
     			null,
     		</if> 
     		<if	test="customerCommentRef != 0">
-	    	#{customerCommentRef},
+	    		#{customerCommentRef},
     		</if>
     		#{commentContent},
     		to_char(sysdate, 'yyyy-mm-dd'),
@@ -106,10 +106,64 @@
     </insert>
     
     <select id="selectCustomerCommentList" resultType="customerComment">
-    	select * from customer_comment
+    	select * 
+    	from customer_comment 
+    	where customer_service_ref = #{customerNo}
+    	order by nvl(customer_comment_ref, comment_no), comment_no asc
     </select>
     
     <delete id="deleteComment">
     	delete from customer_comment where comment_no = #{commentNo}
     </delete>
+    
+    <select id="selectAllMember" resultType="member">
+	    select member_no, member_nickname, member_grade
+	    from member_tbl
+	</select>
+	
+	<select id="selectOneComment" resultType="customerComment">
+    	select * from customer_comment where comment_no = #{commentNo}
+    </select>
+    
+    <update id="updateComment">
+    	update
+    		customer_comment
+    	set
+    		comment_content = #{commentContent}
+    	where
+    		comment_no = #{commentNo}
+    </update>
+    
+    <update id="updateStarRating">
+		update
+			customer_service_tbl
+		set
+			customer_star = #{customerStar}
+		where
+			customer_no = #{customerNo}
+	</update>
+	
+	<select id="selectOneCustomerFile" resultType="customerServiceFile">
+		select * from customer_service_file where customer_file_no = #{customerFileNo}
+	</select>
+	
+	<update id="updateCustomer">
+		update customer_service_tbl set
+			customer_title = #{customerTitle},
+			customer_content = #{customerContent}
+		where
+			customer_no = #{customerNo}
+	</update>
+	
+	<select id="selectCustomerFileList" resultType="customerServiceFile">
+		select *
+		from customer_service_file_no in
+		<foreach collection="array" item="customerFileNo" open="(" close=")" separator=",">
+			#{customerFileNo}
+		</foreach>
+	</select>
+	
+	<delete id="deleteCustomerFile">
+		delete from customer_service_file where customer_file_no = #{customerFileNo}
+	</delete>
 </mapper>

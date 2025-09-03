@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.co.iei.customer.vo.Customer;
 import kr.co.iei.customer.vo.CustomerComment;
 import kr.co.iei.customer.vo.CustomerServiceFile;
+import kr.co.iei.member.model.vo.Member;
 
 @Mapper
 public interface CustomerDao {
@@ -34,4 +35,19 @@ public interface CustomerDao {
 	
 	int deleteComment(int commentNo);
 	
+	List<Member> selectAllMember(); //멤버 객체 불러오기용
+	
+	CustomerComment selectOneComment(int commentNo);
+	
+	int updateComment(CustomerComment cc);
+	
+	int updateStarRating(Customer customer);
+	
+	CustomerServiceFile selectOneCustomerFile(int customerFileNo);
+	
+	int updateCustomer(Customer c);
+	
+	List selectCustomerFileList(int[] delFileNo);
+	
+	int deleteCustomerFile(int customerFileNo);
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/DrumtongCss/mypage.css">
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<div class="first-title">
+		<h1>Drum Tong
+			<span id="nickname" th:text="${session.member.memberNickname} + '님 환영합니다' "></span>		
+		</h1>
+	</div>
+	<main class="content">
+		<section class="section mypage-wrap">
+			<div class="my-info-wrap">
+				<h3 class="text-title">계정 정보</h3>
+				<form action="/member/update" method="post">
+					<table class="tbl">
+						<!-- 회원 이메일 -->
+						<tr>
+							<th>이메일</th>
+							<td class="left" th:text="${session.member.memberEmail}"></td>
+						</tr>
+						
+						<!-- 회원 닉네임 -->
+						<tr>
+							<th>닉네임</th>
+							<td class="left">
+								<input type="text" name="memberNickname" th:value="${session.member.memberNickname}">
+							</td>
+						</tr>
+						
+						<!-- 회원 비밀번호 -->
+						<tr>
+							<th>비밀번호</th>
+							<td class="left">
+								<input type="password" name="memberPw" th:value="${session.member.memberPw}">
+							</td>
+						</tr>
+					</table>
+					
+					<!-- 회원정보 수정/회원탈퇴 버튼 생성 -->
+					<div class="mypage-btn">
+						<input type="hidden" name="memberEmail" th:value="${session.member.memberEmail}">
+						<button type="submit" class="btn-primary lg">회원 정보 수정</button>
+						<button type="button" class="btn-secondary lg del-btn">회원탈퇴</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+	<script src="/DrumtongJs/sweetalert.min.js"></script>
+	<script>
+		$(".del-btn").on("click", function(){
+			swal({
+				title: "회원탈퇴",
+				text: "정말 탈퇴하시겠습니까?",
+				icon: "warning",
+				buttons: {
+					cancel: {
+						text: "취소",
+						value: false,
+						visible: true,
+						className: "btn-secondary",
+						closeModal: true
+					},
+					confirm: {
+						text: "탈퇴",
+						value: true,
+						visible: true,
+						className: "btn-primary",
+						closeModal: true
+					}
+				}
+			}).then(function(isConfirm){
+				if(isConfirm){
+					location.href="/member/delete";
+				}
+			});
+		});
+	</script>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

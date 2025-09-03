@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberService;
@@ -69,4 +70,53 @@ public class MemberController {
 		}
 	}// ajaxCheckEmail
 	
+	@GetMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}// logout
+	
+	@GetMapping(value="/mypage")
+	public String mypage(@SessionAttribute(required = false) Member member, Model model) {
+		if(member == null) {
+			model.addAttribute("title", "로그인 확인");
+			model.addAttribute("text", "로그인 후 이용 가능합니다.");
+			model.addAttribute("icon", "info");
+			model.addAttribute("loc", "/member/loginFrm");
+			return "common/msg";
+		}else {
+			return "member/mypage";
+		}
+	}// mypage
+	
+	@PostMapping(value="/update")
+	public String update(Member m, HttpSession session) {
+		int result = memberService.updateMember(m);
+		if(result > 0) {
+			Member member = (Member)session.getAttribute("member");
+			member.setMemberNickname(m.getMemberNickname());
+			member.setMemberPw(m.getMemberPw());
+		}
+		return "redirect:/";
+	}// update
+	
+	@GetMapping(value="/delete")
+	public String delete(@SessionAttribute Member member, Model model, HttpSession session) {
+		int memberNo = member.getMemberNo();
+		int result = memberService.deleteMember(memberNo);
+		model.addAttribute("title", "회원 탈퇴 완료");
+		model.addAttribute("text", "회원탈퇴가 정상적으로 완료되었습니다.");
+		model.addAttribute("icon", "success");
+		model.addAttribute("loc", "/member/logout");
+		return "common/msg";
+	}// delete
+	
+	@RequestMapping(value="/adminMsg")
+	public String adminMsg(Model model) {
+		model.addAttribute("title", "관리자 페이지");
+		model.addAttribute("text", "관리자만 접근 가능합니다.");
+		model.addAttribute("icon", "warning");
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	}// adminMsg
 }// MemberController Class

@@ -8,7 +8,6 @@ ul {
 }
 button {
     border: none;
-    background-color: transparent;
     cursor: pointer;
     outline: none;
 }
@@ -61,7 +60,7 @@ button {
     font-weight: bold;
 }
 
-.choice-btn {
+.delete-btn {
 	margin-left: 30px;
 	border: 1px solid black;
     border-radius: 5px;
@@ -136,10 +135,12 @@ button {
 .option-top {
   display: flex;
   gap: 20px;
+  font-weight: bold;
 }
 .option-bottom {
   display: flex;
   gap: 20px;
+  font-weight: bold;
 }
 
 
@@ -274,8 +275,22 @@ button {
 .buy-btn:hover {
    background-color: var(--main4);
 }
-
-.material-icons {
-
+.button-icons{
+    background-color: transparent;
+    border: none;
+  }
+.material-icons.selected {
+	color : var(--main4);
+	
 }
+
+.all-btn.selected {
+	background-color: var(--main4);
+	border: 3px solid black;
+}
+.delete-btn.selected {
+	background-color: var(--main4);
+	border: 3px solid black;
+}
+
 
