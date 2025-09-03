@@ -101,4 +101,11 @@
         )
         where rnum between #{start} and #{end}
   </select>
+  
+  <select id="searchProductUpdate" resultType="product">
+  	select *
+    from product_tbl p
+    left join product_best_tbl b on (b.product_no = p.product_no)
+    where p.product_no=#{productNo}
+  </select>
 </mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="/DrumtongCss/productUpdate.css">
+    <link rel="stylesheet" href="/DrumtongCss/default.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      
+</head>
+<body>
+	<th:block th:include="/common/header"></th:block>
+		<div class="wrap">
+			<div class="productUpdate_title_wrap">상품 상세설명 수정</div>
+				<div class="updateContent_wrap">
+					<div class="img_wrap">
+						<div class="img_div">
+							<!-- 이미지 -->
+						</div>
+						<div class="icon_div">
+							<span class="material-icons">favorite</span>
+						</div>
+					</div>
+					
+					<div class="content_wrap">
+						<div class="content_div">
+							<div class="content_title"><h2 th:text="${product.productName}"></h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

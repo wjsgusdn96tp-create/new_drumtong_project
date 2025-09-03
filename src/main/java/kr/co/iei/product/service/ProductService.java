@@ -244,6 +244,11 @@ public class ProductService {
 		return allProductList;
 	}
 
+	public Product searchProductUpdate(int productNo) {
+		Product searchProductUpdate = productDao.searchProductUpdate(productNo);
+		return searchProductUpdate;
+	}
+
 	
 
 

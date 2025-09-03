@@ -39,4 +39,6 @@ public interface ProductDao {
 
 	List allproductList(HashMap<String, Object> param);
 
+	Product searchProductUpdate(int productNo);
+
 }

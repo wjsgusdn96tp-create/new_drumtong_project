@@ -158,6 +158,12 @@ public class ProductController {
 		return "product/productList?reqPage=1";
 	}
 	
+	@GetMapping(value="/productUpdate")
+	public String productUpdateFrm(int productNo, Model model) {
+		Product searchProductUpdate = productService.searchProductUpdate(productNo);
+		model.addAttribute("product",searchProductUpdate);
+		return "product/productUpdateFrm";
+	}
 
 	
 }
