@@ -1,125 +1,12 @@
-:root{
-	/*main color */
-	--main1: #FBF8F1;
-	--main2: #F7ECDE;
-	--main3: #E9DAC1;
-	--main4: #54BAB9;
-	--main5: #6D2932;
-	
-	  /*gray*/
-  --gray1: #222222;
-  --gray2: #555555;
-  --gray3: #717171;
-  --gray4: #8f8f8f;
-  --gray5: #b7b7b7;
-  --gray6: #d6d6d6;
-  --gray7: #efefef;
-  --gray8: #ffffff;
-
-  /*line-color*/
-  --line1: #222222;
-  --line2: #d6d6d6;
-  --line3: #eaeced;
-  --line4: #f6f6f6;
-  --line5: #f8f9fa;
-}
-
-*{
-	padding: 0;
-	margin: 0;
-}
-body {
-    background-color: var(--main1);
-}
-
-
-.logo-box{
-    display: flex;
-    padding:  10px;
-    margin-left: 50px;
-    width: 20px;
-}
-
-.logo-img{
-    width: 75px;
-    height: 75px;
-}
-.logo-name{
-    margin-left: 10px;
-    color: var(--main4);
-    width: 80px;
-    height: 50px;
-    padding-top: 20px;
-}
-.logo-name>div{
-    font-size: 23px;
-    font-weight: 800;
-    line-height: 1;
-}
-ul{
-    list-style: none;
-}
-ul>li>a{
-    text-decoration: none;
-}
-
-
-/*header Css*/
-.header{
-    height: 100px;
-    background-color: var(--main3);
-    display: flex;
-}
-.nav-box{
-    width: 1200px;
-    margin: 0 auto;
-}
-.navbox1{
-    width: 100%;
-    display: flex;
-    height: 40px;
-    justify-content: center;
-    padding-left: 550px;
-}
-.navi-small-box{
-    display: flex;
-    gap: 25px;
-    font-size: 15px;
-    justify-content: center;
-}
-.navi-small-box>li>*{
-    color: var(--gray4);
-}
-.navbox2{
-    display: flex;
-    justify-content: center;
-}
-.menu-box{
-    display: flex;
-    gap: 150px;
-}
-.menu-box>li>a{
-    color: var(--main5);
-    font-weight: 700;
-    font-size: 20px;
-}
-.navi-small-box>li>a:hover {
-   	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-}
-.navi-small-box>li>a>img:hover{
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-}
-.menu-box>li>a:hover {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-}
-
+@charset "UTF-8";
 /* login */
 h1{
     text-align: center;
     color: #31363F;
     padding-bottom: 15px;
-    padding-top: 5px;
+    padding-top: 300px;
 }
+
 .login-box{
     width: 500px;
     border: 1px #d6d6d6 solid;
@@ -146,6 +33,7 @@ h1{
     border-left: none;
     border-right: none;
     background-color: #F7ECDE;
+    outline: none;
 }
 .search-email>a{
     font-size: 14px;
@@ -168,7 +56,7 @@ h1{
 }
 .search-password>a{
     font-size: 14px;
-    padding-left: 240px;
+    padding-left: 210px;
     color: #9AA6B2;
 }
 .login-btn>input{
@@ -213,4 +101,8 @@ h1{
     padding-top: 110px;
     padding-left: 5px;
     font-size: 12px;
+}
+.content-web{
+	height: auto;
+	min-height: 800px;
 }

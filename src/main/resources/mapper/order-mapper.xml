@@ -14,13 +14,13 @@
 	
 	<!-- 자명님 물건값 받아오는 로직  -->
 	<select id="option" resultType="product">
-		select product_no, product_img,product_name,product_price from product_tbl where product_no = #{productNo}
+		select product_title, product_no, product_img,product_name,product_price from product_tbl where product_no = #{productNo}
 	</select>
 	
 
 	<insert id="insertCart">
 		insert into cart_item_tbl (cart_no, cup_choice, cup_size, cup_shot, cup_cream, count, product_no, 
-			member_no, shop_name, pay, product_name)
+			member_no, shop_name, pay, product_name, product_title)
 			values (cart_item_tbl_seq.nextval,
 			#{cupChoice}, 
 			#{cupSize}, 
@@ -31,7 +31,8 @@
 			#{memberNo}, 
 			#{shopName}, 
 			#{pay},
-			#{productName})
+			#{productName},
+			#{productTitle})
 	</insert>
 	
 	<select id="selectCartList" resultType="cart">
@@ -62,7 +63,8 @@
 	 	#{discountPrice},
 	 	to_char(sysdate,'yyyy-mm-dd'),
 	 	#{productName},
-	 	#{shopName}
+	 	#{shopName},
+	 	#{productTitle}
 	 	
 	 	)
 	 </insert>
@@ -82,4 +84,18 @@
 	<select id="selectOrderShop" resultType="chart">
 		select shop_name, sum(pay) as sum_pay, sum(count) as sum_count from order_details_tbl join shop_tbl using(shop_name) group by shop_name
 	</select>
+	
+		<delete id="cartdel">
+			delete from cart_item_tbl where cart_no = #{cartNo}
+		</delete>
+	<select id="selectOrderList" resultType="order">
+		select * from order_tbl where member_no = #{memberNo}
+	</select>
+	<select id="selectDetailList" resultType="details" >
+		select * from order_details_tbl where order_no = #{orderNo}
+	</select>
+	
+	
+		
+		
 </mapper>

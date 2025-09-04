@@ -37,6 +37,17 @@ public interface OrderDao {
 	List<Chart> selectOrderPay();
 
 	List<Chart> selectOrderCount();
+	int cartdel(int cartNo);
+
+	List<OrderTbl> selectOrderList(int memberNo);
+
+	List<DetailsTbl> selectDetailList(int orderNo);
+
+
+
+
+
+	
 
 	List<Chart> selectOrderShop();
 

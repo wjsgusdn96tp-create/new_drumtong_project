@@ -50,4 +50,6 @@ public interface CustomerDao {
 	List selectCustomerFileList(int[] delFileNo);
 	
 	int deleteCustomerFile(int customerFileNo);
+	
+	int checkAdminComment(int customerNo); 
 }

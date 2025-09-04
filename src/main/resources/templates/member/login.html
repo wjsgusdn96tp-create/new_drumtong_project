@@ -8,53 +8,45 @@
 <body>
 	<th:block th:include="common/header"></th:block>
     <!-- login page -->
-    <h1>Sing In</h1>
-    <div class="login-box">
-        <h3>Welcome! Drum Tong 에 오신 것을 환영합니다.</h3>
-        <div class="login-content">
-            <form action="/member/login" method="post" id="login-frm">
-                <!-- 이메일 입력 -->
-                <div class="email-input">
-                    <p>이메일 <span style="color: red;">*</span></p>
-                    <input type="email" name="memberEmail" placeholder="이메일을 입력하세요 *">
-                </div>
-                <div class="search-email">
-                    <a href="#" id="email-event">이메일을 잊으셨나요?</a>
-                </div>
-                <!-- 비밀번호 입력 -->
-                <div class="password-input">
-                    <p>비밀번호 <span style="color: red;">*</span></p>
-                    <input type="password" name="memberPw" placeholder="비밀번호를 입력하세요 *">
-                </div>
-                <div class="search-password">
-                    <a href="#" id="password-event">비밀번호를 잊으셨나요?</a>
-                </div>
-                <!-- 로그인/회원가입 -->
-                <div class="login-btn">
-                    <input type="submit" id="login-event" value="로그인">
-                </div>
-            	<div class="join-btn">
-            		<a href="/member/joinFrm">회원가입</a>
+    <h1 style="margin-top:50px;">Sing In</h1>
+    <main class="content">
+    	<div class="content-web" style="height:700px;">    	
+    	<section class="section" >	
+    		<div class="login-box">
+        		<h3>Welcome! Drum Tong 에 오신 것을 환영합니다.</h3>
+            	<form action="/member/login" method="post" id="login-frm">
+                	<!-- 이메일 입력 -->
+                	<div class="email-input">
+                    	<p>이메일 <span style="color: red;">*</span></p>
+                    	<input type="email" name="memberEmail" placeholder="이메일을 입력하세요 *">
+                	</div>
+                	<!-- 비밀번호 입력 -->
+                	<div class="password-input">
+                    	<p>비밀번호 <span style="color: red;">*</span></p>
+                    	<input type="password" name="memberPw" placeholder="비밀번호를 입력하세요 *">
+                	</div>
+                	<div class="search-password">
+                    	<a href="/member/passwordResetFrm" id="password-event">비밀번호를 잊으셨나요?</a>
+                	</div>
+                	<!-- 로그인/회원가입 -->
+                	<div class="login-btn">
+                    	<input type="submit" id="login-event" value="로그인">
+                	</div>
+            		<div class="join-btn" id="join-event">
+            			<a href="/member/joinFrm" id="join-text">회원가입</a>
+            		</div>
+            	</form>
+            	<!-- 로그인 box footer 이미지 -->
+            	<div class="login-footer">
+            		<img src="/img/로고.png">
+                	<p>DRUM TONG company</p>
             	</div>
-            </form>
-            <!-- 로그인 box footer 이미지 -->
-            <div class="login-footer">
-            	<img src="/img/로고.png">
-                <p>DRUM TONG company</p>
-            </div>
-        </div>
-    </div>
-    <th:block th:include="common/footer"></th:block>
+        	</div>
+        </section>
+    	</div>
+    </main>
     <!-- JS 구현 -->
     <script>
- 	// 이메일 찾기 커서 이벤트
-    const emailEvent = document.getElementById("email-event");
-    emailEvent.addEventListener("mouseenter", function(){
-        emailEvent.style.color = "#000000";
-    });
-    emailEvent.addEventListener("mouseleave", function(){
-        emailEvent.style.color = "#9AA6B2";
-    });
     // 비밀번호 찾기 커서 이벤트
     const passwordEvent = document.getElementById("password-event");
     passwordEvent.addEventListener("mouseenter", function(){
@@ -63,18 +55,9 @@
     passwordEvent.addEventListener("mouseleave", function(){
         passwordEvent.style.color = "#9AA6B2";
     });
-
-    // 로그인 box 클릭 이벤트
     const loginEvent = document.getElementById("login-event");
-    loginEvent.addEventListener("click", function(){
-        loginEvent.style.backgroundColor = "#000000";
-        window.location.href ="/member/login";
-    });
-    // 회원가입 box 클릭 이벤트
     const joinEvent = document.getElementById("join-event");
-    joinEvent.addEventListener("click", function(){
-        joinEvent.style.backgroundColor = "#000000";
-    });
+    const joinText = document.getElementById("join-text");
     // 로그인 box 커서 이벤트
     loginEvent.addEventListener("mouseenter", function(){
         loginEvent.style.backgroundColor = "#54BAB9";
@@ -93,6 +76,14 @@
         joinEvent.style.backgroundColor = "#f8f9fa";
         joinEvent.style.color = "#333333";
     });
+    // 회원가입 box text 색상 변경
+    joinText.addEventListener("mouseenter", function(){
+    	joinText.style.color = "#f8f9fa";
+    });
+    joinText.addEventListener("mouseleave", function(){
+    	joinText.style.color = "#333333";
+    });
     </script>
+    <th:block th:include="common/footer"></th:block>
 </body>
 </html>

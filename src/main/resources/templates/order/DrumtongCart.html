@@ -11,14 +11,13 @@
 </head>
 <body>
    <th:block th:include="/common/header"></th:block>
-	
+	<div class="cart-primarlbox">
     <div class="cart-mainbox">
         <div class="cart-namebox">
             <div class="cart-name">
                <h2>장바구니</h2>
             </div>
             <div class="cart-check">
-                <button class="all-btn">전체선택</button>
                 <button class="delete-btn">선택삭제</button>
             </div>
         </div>
@@ -28,6 +27,8 @@
                     <li>
                         <div class="cart-listheader">
                                 <button class="button-icons"><span class="material-icons">check_circle_outline</span></button>
+                        			<span class="shop-name" th:text="${list.shopName}"></span>
+                        			<input type="hidden" class="cart-no" th:value="${list.cartNo}">
                         </div>
                         
                         <div class="cart-listbody">
@@ -46,6 +47,7 @@
                                     <span>원</span>
                                     </div>
                                 </div>
+                                <span class="hidden-title" th:text="${list.productTitle}" style="display:none;"></span>
                                 <div class="item-option">
                                     <div class="option-top">
                                         <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
@@ -56,37 +58,6 @@
                                         <span class="cream">휘핑크림 : </span><span class="cream-count" th:text="${list.cupCream}"></span>
                                     </div>
                                 </div>
-                                <div class="info-bottom">
-                                    <span class="sale">등급할인</span>
-                                    <a href="#" class="modify">옵션변경</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-listfooter">
-                            <div class="footer-pricebox">
-                                <div class="price-row">
-                                <span class="label-price">상품금액</span>
-                                <div class="value-box">
-    							<span class="product-price"th:text="${list.pay}"></span>
-   								 <span class="unit">원</span>
-  								</div>
-                                </div>
-                                <span class="operator">-</span>
-                                <div class="price-row">
-                                <span class="label-price">할인금액</span>
-                                <div class="value-box">
-							    <span class="discount-price"th:text="${list.discountPrice}"></span>
-							    <span class="unit">원</span>
-							  	</div>
-                             </div>
-                                <span class="operator">=</span>
-                                <div class="price-row total">
-                                <span class="label-price">주문금액</span>
-                                 <div class="value-box">
-								    <span class="order-price"th:text="${list.pay} - ${list.discountPrice}"></span>
-								    <span class="unit">원</span>
-								  </div>
-                             </div>
                             </div>
                         </div>
                     </li>
@@ -113,11 +84,6 @@
 				      </span>
 				    </div>
 				    <div class="summary-row">
-				      <span class="label">할인총합</span>
-				      <span class="value">
-				        -<span class="total-discount"></span>
-				        <span class="unit">원</span>
-				      </span>
 				    </div>
 				     <hr>
 					    <div class="summary-row total">
@@ -140,7 +106,8 @@
     </div>
 
 	
-	
+	<th:block th:include="common/footer"></th:block>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script th:inline="javascript">
 
 	let list = [[${list}]];
@@ -173,48 +140,165 @@
 	$(".total-price").text(totalpay);
 	
 	
+	
+	
 	const select =  $(".material-icons.selected");
 	
 	
-	
-	//전체선택 버튼 누르기
-	$(".all-btn").on("click",function(){
+	//카트리스트 안에있는 li들을 다 돌기 each문
+	$(".cartlist li").each(function(){
+		const title = $(this).find(".hidden-title").text().trim();
+		//li 안에있는 모든 요소중 히든타이틀 찾아서 값 대입하고 공백 제거완료
 
-		$(".material-icons").toggleClass("selected");
+		const optionBox = $(this).find(".item-option");
+		
+		
+		
+		
+		if (title === "drink") {
+			optionBox.show();
+			optionBox.find(".heat").hide();
+			optionBox.find(".heat-check").hide();
+		}else if (title === "dessert") {
+			optionBox.show();
+			optionBox.find(".size, .cup, .shot, .cream").hide();
+			optionBox.find(".size-count, .cup-type, .shot-count, .cream-count").hide();
+			optionBox.find(".heat").show();
+		}else if (title === "goods") {
+			optionBox.hide();
+			optionBox.find(".heat").hide();
+		}
 		
 		
 	});
-
-	$(".delete-btn").on("click",function(){
+	
+	
+	
+	
+	
+	//두개이상 클릭막기.. 내실력 부족 전체 삭제는 안돼겠다
+	$(".button-icons .material-icons").on("click", function () {
+    		
+		let inselect = $(".material-icons.selected");
+			
+		//랭스로 개수 확인 
+		 if (inselect.length >= 1 && !$(this).hasClass("selected")) {
+		        alert("한 번에 하나만 선택할 수 있습니다.");
+		        return; 
+		    }
 		
+		
+		$(this).toggleClass("selected");
+    
+	});
+	
+	
+	$(".delete-btn").on("click",function(){
+		let cartNo = null;
+		
+		$(".cartlist li").each(function(){
+			
+			let cartLi = $(this);
+			let icon = cartLi.find(".material-icons");
+			
+			let selectIcon = icon.hasClass("selected");
+			
+			if(selectIcon === true) {
+				
+				cartNo = cartLi.find(".cart-no").val();
+				
+				return false;
+				
+			}
+		});
+		
+		  if (!cartNo) {
+		        alert("삭제할 물건을 체크하세요");
+		        return;
+		    }
+	
+			console.log("매장값확인",shopName)
+			
+		
+			 $.ajax({
+			        url: "/order/cartdel",
+			        type: "post",
+			        data: { cartNo: cartNo },
+			        success: function () {
+			            alert("삭제 성공");
+			            location.reload();
+			        },
+			        error: function () {
+			            alert("삭제 실패");
+			        }
+			    });
+	   
 	});
 	
  	
+	
 	
 	$(".buy-btn").on("click",function(){
 		
         const shopName = $("#shopName").val();
- 	
-       
-        $.ajax({
-        	url : "/order/pay",
-        	type : "post",
-        	data : 
-        		{
-        		
-        		shopName : shopName
-   
-        		},
-        		
-        	success : function(){
-        		alert("구매하기 성공");
-        		location.href = "/";
-        	},
-        	error : function(){
-        		alert("구매하기 실패");
-        	}
-        })
- 	});
+        
+        //태그가 몇개있는지 렝스로 확인
+        const itemCount = $(".cartlist li").length; 
+	
+        
+        if (itemCount === 0) {
+            alert("장바구니에 담긴 물건이 없습니다.");
+            location.href = "/";
+            return;
+        }
+			        $.ajax({
+			        	url : "/order/pay",
+			        	type : "post",
+			        	data : 
+			        		{
+			        		
+			        		shopName : shopName
+			   
+			        		},
+			        		
+			        	success : function(){
+			        		const totalprice = $(".total-price").text();
+
+			                
+			                const date = new Date();
+			        		const dateString = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+			        		
+			        		IMP.init("imp57046341");
+			        		IMP.request_pay(
+			        				  {
+			        				    channelKey: "channel-key-d17f31e0-d991-403f-bc94-3f28deb3cce8",
+			        				    pay_method: "card",
+			        				    merchant_uid: "order_no_"+dateString, 
+			        				    name: "드럼통 주식회사",
+			        				    amount: totalprice,
+			        				    buyer_email: "test@portone.io",
+			        				    buyer_name: "구매자이름",
+			        				    buyer_tel: "010-1234-5678", 
+			        				    buyer_addr: "서울특별시 강남구 삼성동",
+			        				    buyer_postcode: "123-456",
+			        				  function (rsp) {
+			        				    	if(rsp.success) {
+			        				    	const form = document.createElement("form");
+			        				    	form.setAttribute("action","/order/OrderMap");
+			        				    	form.setAttribute("method","get");
+			        				    	
+			        				    	document.body.appendChild(form);
+			        				    	form.submit();
+			        				    		
+			        				    	}else {
+			        				    		return;
+			        				    	}
+			        				    	
+			        			      	}
+			        			})
+			        	}
+			   })
+	});
 	
 	
 	</script>
