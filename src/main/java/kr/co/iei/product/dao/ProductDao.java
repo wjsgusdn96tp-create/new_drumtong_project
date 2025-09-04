@@ -67,4 +67,52 @@ public interface ProductDao {
 
 	List goodsListPriceDate(HashMap<String, Object> param);
 
+	
+	List IceCoffeList(HashMap<String, Object> param);
+
+	List IceTeaList(HashMap<String, Object> param);
+
+	List IceOtherDrinkList(HashMap<String, Object> param);
+
+	List HotCoffeList(HashMap<String, Object> param);
+
+	List HotTeaList(HashMap<String, Object> param);
+	
+	//
+	List selectIceCoffeList(HashMap<String, Object> param);
+
+	List selectIceTeaList(HashMap<String, Object> param);
+
+	List selectIceOtherDrinkList(HashMap<String, Object> param);
+
+	List selectHotCoffeList(HashMap<String, Object> param);
+
+	List selectHotTeaList(HashMap<String, Object> param);
+
+	//
+	List IceCoffeListPriceDate(HashMap<String, Object> param);
+
+	List IceTeaListPriceDate(HashMap<String, Object> param);
+
+	List IceOtherDrinkListPriceDate(HashMap<String, Object> param);
+
+	List HotCoffeListPriceDate(HashMap<String, Object> param);
+
+	List HotTeaListPriceDate(HashMap<String, Object> param);
+
+	int selectDessertTotalCount();
+
+	int selectGoodsTotalCount();
+	
+	int selectIceCoffeTotalCount();
+	
+	int selectIceTeaTotalCount();
+	
+	int selectIceOtherDrinkTotalCount();
+	
+	int selectHotCoffeTotalCount();
+	
+	int selectHotTeaTotalCount();
+	
+
 }

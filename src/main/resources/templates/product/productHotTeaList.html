@@ -22,16 +22,16 @@
 							<ul class="product_title_ice">
 								<li>ICE
 									<ul>
-										<li><a class="drink_a_iceCoffe" href="#">커피</a></li>
-										<li><a class="drink_a_iceTea" href="#">차</a></li>
-										<li><a class="drink_a_iceOther" href="#">그 외 제조음료</a></li>
+										<li><a class="drink_a_iceCoffe" th:href="@{/product/productIceCoffeList(reqPage=1,shopName=${shopName})}">커피</a></li>
+										<li><a class="drink_a_iceTea" th:href="@{/product/productIceTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
+										<li><a class="drink_a_iceOther" th:href="@{/product/productHotCoffeList(reqPage=1,shopName=${shopName})}">그 외 제조음료</a></li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="product_title_hot">
 								<li>HOT
 									<ul>
-										<li><a class="drink_a_hotCoffe" href="#">커피</a></li>
+										<li><a class="drink_a_hotCoffe" th:href="@{/product/productHotCoffeList(reqPage=1,shopName=${shopName})}">커피</a></li>
 										<li><a class="drink_a_hotTrs" href="#">차</a></li>
 									</ul>
 								</li>
@@ -75,10 +75,9 @@
 			//const reqPage=[[${reqPage}]];
 			
 			
-					const member = [[${session}]];
-
+					const member = [[${session.member}]];
 					
-					if(member.memberGrade!="관리자"){
+					if(member.memberGrade != "관리자"){
 						$(".product_insert_manager_btn").css("display","none");
 					}
 					
@@ -386,7 +385,7 @@
 					
 					
 					
-				$(".goods_li").on("click",function(){
+				$(".drink_a_hotTrs").on("click",function(){
 						
 					$(".product_one_wrap").css("display","none");
 
@@ -1333,18 +1332,18 @@
 				
 				//기본페이지 탭 디저트
 				$(".drink_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
-				$(".drink_a").css("color", "white");
+				$(".drink_li").css("color", "white");
 				
 
 				//전체 탭 클릭
-				$(".drink_li").on("click", function(){
+				$(".drink_a_hotTrs").on("click", function(){
 					//디저트 탭 색상 변경 및 상품 출력
 			
 					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
 					$(".product_title_main_a").css("color", "var(--main5)");
 					
 					$(".drink_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
-					$(".drink_a").css("color", "white");
+					$(".drink_li").css("color", "white");
 					
 					
 					$(".product_all_list").on("mouseover",function(){
@@ -1364,12 +1363,13 @@
 						$(".dessert_a").css("color", "var(--main5)");
 					})
 					$(".goods_li").on("mouseover",function(){
-						$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
+						$(".goods_a").css("borderBottom","none");
 					})
 					$(".goods_li").on("mouseout",function(){
-						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
+						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
+						$(".goods_a").css("color", "var(--main5)");
 					})
-					
 					
 					
 					

@@ -32,7 +32,7 @@
 								<li>HOT
 									<ul>
 										<li><a class="drink_a_hotCoffe" th:href="@{/product/productHotCoffetList(reqPage=1,shopName=${shopName})}">커피</a></li>
-										<li><a class="drink_a_hotTrs" th:href="@{/product/productTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
+										<li><a class="drink_a_hotTrs" th:href="@{/product/productHotTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -75,10 +75,9 @@
 			//const reqPage=[[${reqPage}]];
 			
 			
-					const member = [[${session}]];
-
+					const member = [[${session.member}]];
 					
-					if(member.memberGrade!="관리자"){
+					if(member.memberGrade != "관리자"){
 						$(".product_insert_manager_btn").css("display","none");
 					}
 					

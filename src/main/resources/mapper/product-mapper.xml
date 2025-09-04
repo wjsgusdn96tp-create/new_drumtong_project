@@ -34,6 +34,34 @@
   	select count(*) from product_tbl
   </select>
   
+  <select id="selectDessertTotalCount">
+  select count(*) from product_tbl where product_title='dessert'
+  </select>
+  
+  <select id="selectGoodsTotalCount">
+  select count(*) from product_tbl where product_title='goods'
+  </select>
+  
+  <select id="selectIceCoffeTotalCount">
+  select count(*) from product_tbl where product_title_detail='iceCoffe'
+  </select>
+  
+  <select id="selectIceTeaTotalCount">
+  select count(*) from product_tbl where product_title_detail='iceTea'
+  </select>
+  
+    <select id="selectIceOtherDrinkTotalCount">
+  select count(*) from product_tbl where product_title_detail='iceOtherDrink'
+  </select>
+  
+  <select id="selectHotCoffeTotalCount">
+  select count(*) from product_tbl where product_title_detail='HotCoffe'
+  </select>
+  
+  <select id="selectHotTeaTotalCount">
+  select count(*) from product_tbl where product_title_detail='HotTea'
+  </select>
+  
   <select id="selectProductList" resultType="product">
   	select * from 
     		(select rownum as rnum, n.* from 
@@ -241,4 +269,206 @@
 		where rnum between #{start} and #{end}
   </select>
   
+  
+    <select id="IceCoffeList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='iceCoffe'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="IceTeaList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='iceTea'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="IceOtherDrinkList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='iceOtherDrink'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+    <select id="HotCoffeList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='hotCoffe'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  
+    <select id="HotTeaList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='hotTea'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="selectIceCoffeList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='iceCoffe'
+       		)
+		where rnum between #{start} and #{end}
+	</select>
+		
+	<select id="selectIceTeaList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='iceTea'
+       		)
+		where rnum between #{start} and #{end}
+	</select>
+		
+	<select id="selectIceOtherDrinkList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='iceOtherDrink'
+       		)
+		where rnum between #{start} and #{end}
+	</select>	
+	
+	<select id="selectHotCoffeList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='hotCoffe'
+       		)
+		where rnum between #{start} and #{end}
+	</select>	
+	
+	<select id="selectHotTeaList" resultType="product">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title_detail='hotTea'
+       		)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="IceCoffeListPriceDate" resultType="product">
+  select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl 
+        		
+        		order by product_price asc
+       			 )n
+       			 where product_title_detail='iceCoffe'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="IceTeaListPriceDate" resultType="product">
+  select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl 
+        		
+        		order by product_price asc
+       			 )n
+       			 where product_title_detail='iceTea'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="IceOtherDrinkListPriceDate" resultType="product">
+  select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl 
+        		
+        		order by product_price asc
+       			 )n
+       			 where product_title_detail='iceOtherDrink'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+   <select id="HotCoffeListPriceDate" resultType="product">
+  select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl 
+        		
+        		order by product_price asc
+       			 )n
+       			 where product_title_detail='hotCoffe'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="HotTeaListPriceDate" resultType="product">
+  select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl 
+        		
+        		order by product_price asc
+       			 )n
+       			 where product_title_detail='hotTea'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+		
 </mapper>
