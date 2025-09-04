@@ -45,4 +45,8 @@ public interface ProductDao {
 
 	int productGoodsUpdateBest(String productName, int productBestNo);
 
+	int productUpdate(int productNo, int productPrice, String productName);
+
+	int productUpdateBest(String productName, int productBestNo);
+
 }

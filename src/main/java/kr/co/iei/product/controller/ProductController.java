@@ -170,18 +170,59 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="/productGoodsUpdate")
-	public String productUpdate(int productNo, int productPrice, String productName, String productContentPresent, int productBestNo) {
+	public String productUpdate(Model model, int productNo, int productPrice, String productName, String productContentPresent, int productBestNo) {
 		//대표상품 아니면 -1
 		int result = productService.productGoodsUpadte(productNo, productPrice, productName, productContentPresent, productBestNo);
 		
-		return "";
+		if(result == 0) {
+			model.addAttribute("title", "상품 수정 실패!!");
+			model.addAttribute("text", "상품 정보 수정 실패 했습니다.");
+			model.addAttribute("icon", "info");
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+			return "common/msg";
+		}else if(result == 10) {
+			model.addAttribute("title", "수정 일부 성공/일부 실패!!!");
+			model.addAttribute("text", "전체 상품에서 수정 되어 화면상 문제 없으나, 대표상품 관리에서 이름 수정에 실패했습니다.[상품 삭제 후 재등록 해주세요.]");
+			model.addAttribute("icon", "info");
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+			return "common/msg";
+		}else if(result == 1) {
+			model.addAttribute("title", "상품 수정 성공!!");
+			model.addAttribute("text", "상품 정보 수정 성공 했습니다.");
+			model.addAttribute("icon", "success");
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+			return "common/msg";
+		}
+		
+		return "/product/productList?reqPage=1&shopName=manager";
 	}
 	
 	@GetMapping(value="/productUpdate")
-	public String productUpdate(int productNo, int productPrice, String productName, int productBestNo) {
-		int result = productService.productUpadte(productNo,productPrice,productName,productBestNo)
+	public String productUpdate(Model model, int productNo, int productPrice, String productName, int productBestNo) {
+		//대표상품 아니면 -1
+		int result = productService.productUpadte(productNo,productPrice,productName,productBestNo);
 		
-		return "";
+				if(result == 0) {
+					model.addAttribute("title", "상품 수정 실패!!");
+					model.addAttribute("text", "상품 정보 수정 실패 했습니다.");
+					model.addAttribute("icon", "info");
+					model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+					return "common/msg";
+				}else if(result == 10) {
+					model.addAttribute("title", "수정 일부 성공/일부 실패!!!");
+					model.addAttribute("text", "전체 상품에서 수정 되어 화면상 문제 없으나, 대표상품 관리에서 이름 수정에 실패했습니다.[상품 삭제 후 재등록 해주세요.]");
+					model.addAttribute("icon", "info");
+					model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+					return "common/msg";
+				}else if(result == 1) {
+					model.addAttribute("title", "상품 수정 성공!!");
+					model.addAttribute("text", "상품 정보 수정 성공 했습니다.");
+					model.addAttribute("icon", "success");
+					model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+					return "common/msg";
+				}
+				
+				return "/product/productList?reqPage=1&shopName=manager";
 	}
 	
 }

@@ -120,4 +120,16 @@
   		set product_name=#{productName}
   		where product_no=#{productNo}
   </update>
+  
+  <update id="productUpdate">
+  	update product_tbl 
+		set product_name=#{productName}, product_price=#{productPrice}
+		where product_no =#{productNo}
+  </update>
+  
+  <update id="productUpdateBest">
+  	update product_best_tbl
+  		set product_name=#{productName}
+  		where product_no=#{productNo}
+  </update>
 </mapper>
