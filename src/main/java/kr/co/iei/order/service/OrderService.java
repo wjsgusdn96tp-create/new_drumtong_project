@@ -110,8 +110,6 @@ public class OrderService {
 		 dtl.setProductName(o.getProductName());
 		 dtl.setProductTitle(o.getProductTitle());
 		 
-		 System.out.println(dtl.getOrderNo());
-		 System.out.println(dtl.getProductNo());
 		 
 		 int resultDt = orderDao.insertDetailsTbl(dtl);
 	

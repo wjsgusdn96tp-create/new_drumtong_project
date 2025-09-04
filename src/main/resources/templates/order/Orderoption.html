@@ -130,11 +130,11 @@
 
 
 	<div class="order-option-footer">
-	    <a href="/product/productList?reqPage=1" class="order-listpage">메뉴목록</a>
-	    <!--
-	    나중에 매장 이름으로 불러올때 새로고침 하는 경우의 값
-	    <a href="/product/productList?reqPage=${reqPage}&shopName=${shopName}" class="order-listpage">
-	      -->
+	
+	
+	    <a th:href="@{'/product/productList?shopName='+${shop.shopName}+'&reqPage=1'}" class="order-listpage">메뉴목록</a>
+	 			
+	 			
 	    
 		
 		

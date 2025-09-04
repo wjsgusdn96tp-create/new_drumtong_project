@@ -33,7 +33,7 @@
                         <a href="/member/mypage"><span class="material-icons">perm_identity</span></a>
                     </li>
                     <li><a href="/order/OrderList"><span class="material-icons">list_alt</span></a></li>
-                    <li><a th:href="@{/order/DrumtongCart(shopName=${shopName})}"><span class="material-icons">shopping_cart</span></a></li>
+                    <li><a href="/order/DrumtongCart"><span class="material-icons">shopping_cart</span></a></li>
                     <th:block th:if="${session.member == null}">
 						<li><a href="/member/loginFrm"><span class="material-icons">login</span></a></li>
 					</th:block>

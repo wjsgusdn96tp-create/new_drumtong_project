@@ -21,6 +21,7 @@
 	                	<div class="orderList-box" >
 	                		<span class="orderList-num" th:text="${orderList.orderNo}"></span>
 	                		<span class="orderList-num" th:text="${orderList.enrollDate}"></span>
+	                		<span class="orderList-num" th:text="${orderList.shopName}"></span>
 	                	</div>
             <ul class= "order-orderuibox">
                 <li class="order-libox" th:each="detail : ${orderList.detailsList}">
@@ -47,7 +48,6 @@
 	                                <div class="order-pricebox">
 	                                    <span class="order-price" th:text="${detail.pay}"></span><span>원</span>
 	                                </div>
-	                               <div class="order-cart"><a href="#"><span class="material-icons">add_shopping_cart</span></a></div>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -60,11 +60,10 @@
 	                                    <span class="order-infocount">1</span><span>개</span>
 	                                </div>
 	                            </div>
-	                            <div class="order-infobottom">
+	                            <div class="order-infobottom2">
 	                                <div class="order-pricebox">
 	                                    <span class="order-price" th:text="${detail.pay}"></span><span>원</span>
 	                                </div>
-	                               <div class="order-cart"><a href="#"><span class="material-icons">add_shopping_cart</span></a></div>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -77,11 +76,10 @@
 	                                    <span class="order-infocount">1</span><span>개</span>
 	                                </div>
 	                            </div>
-	                            <div class="order-infobottom">
+	                            <div class="order-infobottom2">
 	                                <div class="order-pricebox">
 	                                    <span class="order-price" th:text="${detail.pay}"></span><span>원</span>
 	                                </div>
-	                               <div class="order-cart"><a href="#"><span class="material-icons">add_shopping_cart</span></a></div>
 	                            </div>
 	                        </div>
 	                    </div>

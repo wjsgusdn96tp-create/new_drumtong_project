@@ -8,16 +8,16 @@
 	border: 2px solid var(--main4);
 	margin: 20px auto;
 	
-	
 }
 .orderList-box {
 	width: 600px;
 	margin: 0 auto;
 	display:flex;
-	justify-content: space-around;
-	padding-left: 10px;
-	padding-right: 10px;
+	justify-content: space-between;
+	padding-left: 20px;
+	padding-right: 20px;
 	box-sizing: border-box;
+	font-weight: bold;
 	
 }
 .order-toplistbox {
@@ -104,6 +104,7 @@
     display: flex;
     justify-content: space-around;
     font-weight: 500;
+    border-bottom: 1px solid var(--gray5);
 }
 .detail-box {
     font-weight: 500;
@@ -121,6 +122,14 @@
 .order-infobottom {
     margin-left: 100px;
     margin-top: 10px;
+    display: flex;
+    font-weight: 500;
+    justify-content: space-around;
+}
+.order-infobottom2{
+	
+	margin-left: 100px;
+    margin-top: 70px;
     display: flex;
     font-weight: 500;
     justify-content: space-around;
