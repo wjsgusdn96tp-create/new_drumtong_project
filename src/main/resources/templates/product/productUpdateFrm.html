@@ -17,8 +17,9 @@
 		<div class="wrap_wrap">
 			<div class="productUpdate_title_wrap"><h1>상품 정보 수정<h1></h1></div>
 				
-				<form th:action="@{/product/productUpdate(productNo=${productNo})}">
+				<form class="form" method="get">
 				<div class="updateContent_wrap">
+				<div class="line_wrap">
 					<div class="img_wrap">
 						<div class="img_div">
 							<!-- 이미지 -->
@@ -35,15 +36,15 @@
 							<ul class="script_wrap">
 								<li><input type="hidden" name="productNo" th:value="${product.productNo}"></li>
 								
-								<li class="product_titl_li">카테고리 : </span></li>
+								<li class="product_title_li">카테고리 : </span></li>
 								
-								<li>가격 : 
+								<li class="price_li">가격(원) : 
 									<input type="text" name="productPrice" th:value="${product.productPrice}">
-									<span>원</span> 
 								</li>
 							</ul>					
 						</div>
 					</div>
+				</div>
 				</div>
 				
 				<div class="btn_div update_div">
@@ -66,142 +67,470 @@
 			//이미지 넣기(수정 불가)
 			const img = $("<img>");
 			img.attr("src","/product/"+product.productImg);
-			
+			img.attr("style","width:350px; height:370px;");
 			$(".img_div").append(img);
 			
 			
+			console.log(product.productTitle);
 			//카테고리별 상세정보 출력
 			if(product.productTitle == "goods"){
 				//product_content_present
 				
+				$(".form").attr("action","/product/productGoodsUpdate?productNo="+product.productNo);
+				
+				if(product.productBestNo != null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 일반상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value","-1");
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}else if(product.productBestNo == null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 대표상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value",product.productBestNo);
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}
+				
 				//카테고리
 				const span = $("<span>");
-				span.attr("text","굿즈");
+				span.text("굿즈");
 				$(".product_title_li").append(span);
 				
 				//카테고리 별 상세 정보
 				const li = $("<li>");
-				li.attr("text","상품 설명 : ")
+				li.text("상품 설명 : ")
+				li.addClass("dessert_li")
 				
-				const presentSpan = $("<span>");
-				presentSpan.attr("text",product.productContentPresent);
+				const liContent = $("<li>");
+				liContent.addClass("li_content")
+				const presentInput = $("<Input>");
+				presentInput.attr("type","text");
+				presentInput.attr("name","productContentPresent");
+				presentInput.attr("value",product.productContentPresent);
 				
-				li.append(presentSpan);
-					
-
+				
+				liContent.append(presentInput);
+				li.append(liContent);	
+				product.productContentPresent
 				$(".script_wrap").append(li);
 				
-			}else if(product.productTitle == "dessert"){
-				//카테고리
-				const span = $("<span>");
-				span.attr("text","디저트");
-				$(".product_title_li").append(span);
+			
 				
+			}else if(product.productTitle == "dessert"){
+
+				$(".form").attr("action","/product/productUpdate?productNo="+product.productNo);
+				
+				if(product.productBestNo != null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 일반상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value","-1");
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}else if(product.productBestNo == null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 대표상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value",product.productBestNo);
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}
+				
+				//카테고리
+				console.log("디저트 시작")
+				const span = $("<span>");
+				span.text("디저트");
+				$(".product_title_li").append(span);
 				
 				
 				//카테고리 별 상세 정보
 				const li1 = $("<li>");
-				li1.attr("text","칼로리 : ")
-				
+				li1.text("칼로리(g) : ")
 				const Span1 = $("<span>");
-				Span1.attr("text",product.productContentKcal);
+				Span1.text(product.productContentKcal);
+				li1.append(Span1);
 				
-				li.append(presentSpan);
-					
-
-				$(".script_wrap").append(li);
+				const li2 = $("<li>");
+				li2.text("카페인(g) : ")
+				const Span2 = $("<span>");
+				Span2.text(product.productContentShot);
+				li2.append(Span2);
+	
+				const li3 = $("<li>");
+				li3.text("당(g) : ")
+				const Span3 = $("<span>");
+				Span3.text(product.productContentSugar);
+				li3.append(Span3);
 				
-				product_content_kcal        number,
-    product_content_shot        number,
-    product_content_sugar       number,
-    product_content_natrium     number,
-    product_content_carbs
+				const li4 = $("<li>");
+				li4.text("나트륨(g) : ")
+				const Span4 = $("<span>");
+				Span4.text(product.productContentNatrium);
+				li4.append(Span4);
 				
-				const
+				const li5 = $("<li>");
+				li5.text("단백질(g) : ")
+				const Span5 = $("<span>");
+				Span5.text(product.productContentProtein);
+				li5.append(Span5);
 				
-				$(".script_wrap").append
+				$(".script_wrap").append(li1).append(li2).append(li3).append(li4).append(li5);
+			
 			}else if(product.productTitleDetail == "iceTea"){
+				
+				$(".form").attr("action","/product/productUpdate?productNo="+product.productNo);
+				
+				if(product.productBestNo != null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 일반상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value","-1");
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}else if(product.productBestNo == null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 대표상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value",product.productBestNo);
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}
+				
 				//카테고리
 				const span = $("<span>");
-				span.attr("text","(ice) 차");
+				span.text("(Ice) 차");
 				$(".product_title_li").append(span);
 				
-				product_content_kcal        number,
-    product_content_shot        number,
-    product_content_sugar       number,
-    product_content_natrium     number,
-    product_content_carbs
+				//카테고리 별 상세 정보
+				const li1 = $("<li>");
+				li1.text("칼로리(g) : ")
+				const Span1 = $("<span>");
+				Span1.text(product.productContentKcal);
+				li1.append(Span1);
 				
-				const
+				const li2 = $("<li>");
+				li2.text("카페인(g) : ")
+				const Span2 = $("<span>");
+				Span2.text(product.productContentShot);
+				li2.append(Span2);
+	
+				const li3 = $("<li>");
+				li3.text("당(g) : ")
+				const Span3 = $("<span>");
+				Span3.text(product.productContentSugar);
+				li3.append(Span3);
 				
-				$(".script_wrap").append
+				const li4 = $("<li>");
+				li4.text("나트륨(g) : ")
+				const Span4 = $("<span>");
+				Span4.text(product.productContentNatrium);
+				li4.append(Span4);
+				
+				const li5 = $("<li>");
+				li5.text("단백질(g) : ")
+				const Span5 = $("<span>");
+				Span5.text(product.productContentProtein);
+				li5.append(Span5);
+				
+				$(".script_wrap").append(li1).append(li2).append(li3).append(li4).append(li5);
+			
 			}else if(product.productTitleDetail == "iceCoffe"){
+				
+				$(".form").attr("action","/product/productUpdate?productNo="+product.productNo);
+				
+				if(product.productBestNo != null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 일반상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value","-1");
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}else if(product.productBestNo == null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 대표상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value",product.productBestNo);
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}
+				
 				//카테고리
 				const span = $("<span>");
-				span.attr("text","(ice) 커피");
+				span.text("(Ice) 커피");
 				$(".product_title_li").append(span);
 				
-				product_content_kcal        number,
-    product_content_shot        number,
-    product_content_sugar       number,
-    product_content_natrium     number,
-    product_content_carbs
+				//카테고리 별 상세 정보
+				const li1 = $("<li>");
+				li1.text("칼로리(g) : ")
+				const Span1 = $("<span>");
+				Span1.text(product.productContentKcal);
+				li1.append(Span1);
 				
-				const
+				const li2 = $("<li>");
+				li2.text("카페인(g) : ")
+				const Span2 = $("<span>");
+				Span2.text(product.productContentShot);
+				li2.append(Span2);
+	
+				const li3 = $("<li>");
+				li3.text("당(g) : ")
+				const Span3 = $("<span>");
+				Span3.text(product.productContentSugar);
+				li3.append(Span3);
 				
-				$(".script_wrap").append
+				const li4 = $("<li>");
+				li4.text("나트륨(g) : ")
+				const Span4 = $("<span>");
+				Span4.text(product.productContentNatrium);
+				li4.append(Span4);
+				
+				const li5 = $("<li>");
+				li5.text("단백질(g) : ")
+				const Span5 = $("<span>");
+				Span5.text(product.productContentProtein);
+				li5.append(Span5);
+				
+				$(".script_wrap").append(li1).append(li2).append(li3).append(li4).append(li5);
+			
+			
 			}else if(product.productTitleDetail == "iceOtherDrink"){
+				
+				$(".form").attr("action","/product/productUpdate?productNo="+product.productNo);
+				
+				if(product.productBestNo != null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 일반상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value","-1");
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}else if(product.productBestNo == null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 대표상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value",product.productBestNo);
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}
+				
 				//카테고리
 				const span = $("<span>");
-				span.attr("text","(ice) 그 외 제조음료");
+				span.text("(Ice) 그 외 제조음료");
 				$(".product_title_li").append(span);
 				
-				product_content_kcal        number,
-    product_content_shot        number,
-    product_content_sugar       number,
-    product_content_natrium     number,
-    product_content_carbs
+				//카테고리 별 상세 정보
+				const li1 = $("<li>");
+				li1.text("칼로리(g) : ")
+				const Span1 = $("<span>");
+				Span1.text(product.productContentKcal);
+				li1.append(Span1);
 				
-				const
+				const li2 = $("<li>");
+				li2.text("카페인(g) : ")
+				const Span2 = $("<span>");
+				Span2.text(product.productContentShot);
+				li2.append(Span2);
+	
+				const li3 = $("<li>");
+				li3.text("당(g) : ")
+				const Span3 = $("<span>");
+				Span3.text(product.productContentSugar);
+				li3.append(Span3);
 				
-				$(".script_wrap").append
+				const li4 = $("<li>");
+				li4.text("나트륨(g) : ")
+				const Span4 = $("<span>");
+				Span4.text(product.productContentNatrium);
+				li4.append(Span4);
+				
+				const li5 = $("<li>");
+				li5.text("단백질(g) : ")
+				const Span5 = $("<span>");
+				Span5.text(product.productContentProtein);
+				li5.append(Span5);
+				
+				$(".script_wrap").append(li1).append(li2).append(li3).append(li4).append(li5);
+			
+			
 			}else if(product.productTitleDetail == "hotTea"){
+				
+				$(".form").attr("action","/product/productUpdate?productNo="+product.productNo);
+				
+				if(product.productBestNo != null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 일반상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value","-1");
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}else if(product.productBestNo == null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 대표상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value",product.productBestNo);
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}
+				
 				//카테고리
 				const span = $("<span>");
-				span.attr("text","(hot) 차");
+				span.text("(Hot) 차");
 				$(".product_title_li").append(span);
 				
-				product_content_kcal        number,
-    product_content_shot        number,
-    product_content_sugar       number,
-    product_content_natrium     number,
-    product_content_carbs
+				//카테고리 별 상세 정보
+				const li1 = $("<li>");
+				li1.text("칼로리(g) : ")
+				const Span1 = $("<span>");
+				Span1.text(product.productContentKcal);
+				li1.append(Span1);
 				
-				const
+				const li2 = $("<li>");
+				li2.text("카페인(g) : ")
+				const Span2 = $("<span>");
+				Span2.text(product.productContentShot);
+				li2.append(Span2);
+	
+				const li3 = $("<li>");
+				li3.text("당(g) : ")
+				const Span3 = $("<span>");
+				Span3.text(product.productContentSugar);
+				li3.append(Span3);
 				
-				$(".script_wrap").append
-				const
+				const li4 = $("<li>");
+				li4.text("나트륨(g) : ")
+				const Span4 = $("<span>");
+				Span4.text(product.productContentNatrium);
+				li4.append(Span4);
 				
-
+				const li5 = $("<li>");
+				li5.text("단백질(g) : ")
+				const Span5 = $("<span>");
+				Span5.text(product.productContentProtein);
+				li5.append(Span5);
+				
+				$(".script_wrap").append(li1).append(li2).append(li3).append(li4).append(li5);
+			
+			
 			}else if(product.productTitleDetail == "hotCoffe"){
+				
+				$(".form").attr("action","/product/productUpdate?productNo="+product.productNo);
+				
+				if(product.productBestNo != null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 일반상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value","-1");
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}else if(product.productBestNo == null){
+					const bestLi = $("<li>");
+					bestLi.text("상품 유형 : 대표상품")
+					
+					const bestInput = $("<Input>");
+					bestInput.attr("type","hidden");
+					bestInput.attr("name","productBestNo");
+					bestInput.attr("value",product.productBestNo);
+				
+					bestLi.append(bestInput);
+					$(".script_wrap").prepend(bestLi);
+				}
+				
 				//카테고리
 				const span = $("<span>");
-				span.attr("text","(hot) 커피");
+				span.text("(Hot) 커피");
 				$(".product_title_li").append(span);
 				
-				product_content_kcal        number,
-    product_content_shot        number,
-    product_content_sugar       number,
-    product_content_natrium     number,
-    product_content_carbs
+				//카테고리 별 상세 정보
+				const li1 = $("<li>");
+				li1.text("칼로리(g) : ")
+				const Span1 = $("<span>");
+				Span1.text(product.productContentKcal);
+				li1.append(Span1);
 				
-				const
+				const li2 = $("<li>");
+				li2.text("카페인(g) : ")
+				const Span2 = $("<span>");
+				Span2.text(product.productContentShot);
+				li2.append(Span2);
+	
+				const li3 = $("<li>");
+				li3.text("당(g) : ")
+				const Span3 = $("<span>");
+				Span3.text(product.productContentSugar);
+				li3.append(Span3);
 				
-				$(".script_wrap").append
-				const
+				const li4 = $("<li>");
+				li4.text("나트륨(g) : ")
+				const Span4 = $("<span>");
+				Span4.text(product.productContentNatrium);
+				li4.append(Span4);
 				
-
+				const li5 = $("<li>");
+				li5.text("단백질(g) : ")
+				const Span5 = $("<span>");
+				Span5.text(product.productContentProtein);
+				li5.append(Span5);
+				
+				$(".script_wrap").append(li1).append(li2).append(li3).append(li4).append(li5);
+			
 			}
+
+			
 			
 			
 			

@@ -249,6 +249,32 @@ public class ProductService {
 		return searchProductUpdate;
 	}
 
+	public int productGoodsUpadte(int productNo, int productPrice, String productName, String productContentPresent,
+			int productBestNo) {
+		if(productBestNo == -1) {
+			//일반 상품
+			int result = productDao.productGoodsUpdate(productNo, productPrice, productName, productContentPresent);
+			if(result > 0) {
+				return 1;//업데이트 성공
+			}else {
+				return 0;//실패
+			}
+		}else {
+			//대표상품
+			int result = productDao.productGoodsUpdate(productNo, productPrice, productName, productContentPresent);
+			if(result >0) {
+				int bestResult = productDao.productGoodsUpdateBest(productName, productBestNo);
+				if(bestResult > 0) {
+					return 1;//성공
+				}else {
+					return 10;//1 전체 상품에서만 수정 성공/대표상품 이름 수정 실패-> 삭제 후 재등록 해주세요
+				}
+			}else {
+				return 0;//실패
+			}
+		}
+	}
+
 	
 
 

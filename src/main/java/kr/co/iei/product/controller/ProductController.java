@@ -15,6 +15,8 @@ import kr.co.iei.product.service.ProductService;
 import kr.co.iei.product.vo.Product;
 import kr.co.iei.product.vo.productListDate;
 import kr.co.iei.util.FileUtil;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping(value="/product")
@@ -158,7 +160,7 @@ public class ProductController {
 		return "product/productList?reqPage=1&shopName=manager";
 	}
 	
-	@GetMapping(value="/productUpdate")
+	@GetMapping(value="/productUpdateFrm")
 	public String productUpdateFrm(int productNo,  Model model) {
 		System.out.println(productNo);
 		Product searchProductUpdate = productService.searchProductUpdate(productNo);
@@ -166,6 +168,20 @@ public class ProductController {
 		model.addAttribute("shopName","manager");
 		return "product/productUpdateFrm";
 	}
-
+	
+	@GetMapping(value="/productGoodsUpdate")
+	public String productUpdate(int productNo, int productPrice, String productName, String productContentPresent, int productBestNo) {
+		//대표상품 아니면 -1
+		int result = productService.productGoodsUpadte(productNo, productPrice, productName, productContentPresent, productBestNo);
+		
+		return "";
+	}
+	
+	@GetMapping(value="/productUpdate")
+	public String productUpdate(int productNo, int productPrice, String productName, int productBestNo) {
+		int result = productService.productUpadte(productNo,productPrice,productName,productBestNo)
+		
+		return "";
+	}
 	
 }

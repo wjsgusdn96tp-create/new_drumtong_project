@@ -108,4 +108,16 @@
     left join product_best_tbl b on (b.product_no = p.product_no)
     where p.product_no=#{productNo}
   </select>
+  
+  <update id="productGoodsUpdate">
+  	update product_tbl 
+		set product_name=#{productName}, product_price=#{productPrice}, product_content_present=#{productContentPresent}
+		where product_no =#{productNo}
+  </update>
+  
+  <update id="productGoodsUpdateBest">
+  	update product_best_tbl
+  		set product_name=#{productName}
+  		where product_no=#{productNo}
+  </update>
 </mapper>

@@ -18,10 +18,12 @@
 	overflow: hidden;
 	margin-bottom: 50px;
 	text-align: center;
+	
 }
 /*-------------------*/
 .productUpdate_title_wrap{
 	margin: 50px;
+	
 }
 
 .productUpdate_title_wrap>h2{
@@ -34,14 +36,17 @@
 }
 form{
 	width: 800px;
+	
    
 }
+
 .updateContent_wrap{
 	overflow: hidden;
 	width: 800px;
     background-color: var(--main2);
-    padding: 40px 15px;
+    padding: 35px 15px;
     margin-bottom: 15px;
+    
 }
 /*
 .updateContent_wrap{
@@ -55,7 +60,7 @@ form{
 .img_wrap{
 	width: 355px;
     height: 375px;
-    border: 2px solid var(--gray1); 
+    border: 2px solid var(--main3); 
     float: left;
     margin-left: 10px;
 }
@@ -78,7 +83,8 @@ form{
     height: 375px;
     background-color : var(--main1);
     float: right;
-    margin-right: 40px;
+    margin-right: 35px;
+    border: 2px solid var(--main3);
     }
 
 .btn_div{	
@@ -116,6 +122,47 @@ button{
     margin:10px;
     height:40px;
     border: none;
-    
-    
+    color: var(--main5);
+    border: 2px solid var(--main3);
+
+}
+.price_li{
+	 color: var(--main5);
+}
+.price_li>input{
+	 border: none;
+	 color: var(--main5);
+	 font-weight: 600;
+	 height: 20px;
+	 width: 100px;
+	 border: 2px solid var(--main3);
+}
+.dessert_li{
+	color: var(--main5);
+	text-align: t
+}
+.dessert_li>.li_content>input{
+	border: none;
+	 color: var(--main5);
+	 font-weight: 600;
+	 height: 145px;
+	 width: 275px;
+	 border: 2px solid var(--main3);
+	 
+	 
+}
+ul{
+	overflow: hidden;
+	font-weight: 500;
+	margin-top:10px; 
+	text-align: left;
+	margin-left: 40px;
+}
+li{
+	color: var(--gray1);
+	margin-bottom: 10px;
+}
+
+.icon_div{
+	color: var(--main5);
 }
