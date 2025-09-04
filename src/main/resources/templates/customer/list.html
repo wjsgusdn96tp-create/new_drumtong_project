@@ -8,6 +8,20 @@
     	.material-icons{
     		margin: 0 auto;
     	}
+    	.null-td{
+			height: auto;
+		    border: 1px, solid, var(--main3);
+		    border-bottom: 0;
+		    border-top: 0;
+		}
+		
+		.button-td{
+		    text-align: right;
+		    padding-right: 15px;
+		    height: 40px;
+		    border-top: 1px, solid, var(--main3);
+		}
+		
     </style>
 </head>
 <body>
@@ -59,7 +73,7 @@
             
             <div class="customer-content-wrap">
                 <table class="title-table">
-                    <tr>
+                    <tr class="tab-content">
                         <th style="width: 15%;">유형</th>
                         <th style="width: 15%;">작성자</th>
                         <th style="width: 45%;">제목</th>
@@ -87,6 +101,9 @@
 	                            	<input type="checkbox" class="checkbox" th:checked="${customer.adminCommented > 0}" disabled>
 	                            </th:block>
 	                        </td>
+	                    </tr>
+	                    <tr>
+	                    	<td class="null-td" colspan="5"></td>
 	                    </tr>
 	                    <tr class="button-tr">
 	                    	<td class="button-td" colspan="5">

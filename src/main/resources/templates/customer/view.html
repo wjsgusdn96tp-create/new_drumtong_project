@@ -17,9 +17,9 @@
                 <table class="tbl" style="width: 100%">
                     <tr>
                         <th style="width: 15%">유형</th>
-                        <td style="width: 30%" th:text="${c.customerCategory}"></td>
+                        <td style="width: 30%; font-size: 15px;" th:text="${c.customerCategory}"></td>
                         <th style="width: 15%">제목</th>
-                        <td style="width: 40%" th:text="${c.customerTitle}"></td>
+                        <td style="width: 40%; font-size: 15px;" th:text="${c.customerTitle}"></td>
                     </tr>
                     <tr>
                         <th>첨부파일</th>
@@ -27,7 +27,7 @@
                             <th:block th:if="${!c.fileList.isEmpty()}">
                                 <div th:each="file : ${c.fileList}">
                                     <img src="/img/file.png">
-                                    <a th:href="@{/customer/filedown(customerFileNo=${file.customerFileNo})}" th:text="${file.fileName}"></a>
+                                    <a style="font-size: 15px;" th:href="@{/customer/filedown(customerFileNo=${file.customerFileNo})}" th:text="${file.fileName}"></a>
                                 </div>
                             </th:block>
                             <th:block th:if="${c.fileList.isEmpty()}">
@@ -36,7 +36,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="content" colspan="4" th:utext="${c.customerContent}"></td>
+                        <td style="font-size: 15px" class="content" colspan="4" th:utext="${c.customerContent}"></td>
                     </tr>
                 </table>
 
@@ -70,7 +70,7 @@
                         <!-- 댓글 출력 -->
                         <th:block th:each="cc : ${c.commentList}" th:if="${cc.customerCommentRef == 0 or cc.customerCommentRef == null}">
                             <ul class="comment-ul-road">
-                                <li style="font-weight: bold; width: 120px; text-align: center;">
+                                <li style="font-weight: bold; text-align: center;">
                                     <th:block th:each="m : ${allMembers}" th:if="${m.memberNo == cc.customerWriterNo}">
                                         <span th:if="${m.memberGrade == '관리자'}">관리자</span>
                                         <span th:if="${m.memberGrade != '관리자'}" th:text="${m.memberNickname}"></span>
@@ -86,10 +86,10 @@
                                 </li>
                                 <li>
                                     <th:block th:if="${session.member != null and session.member.memberNo == cc.customerWriterNo}">
-                                        <button th:onclick="modifyComment(this, [[${c.customerNo}]], [[${cc.commentNo}]])">수정</button>
+                                        <button class="modyComment" th:onclick="modifyComment(this, [[${c.customerNo}]], [[${cc.commentNo}]])">수정</button>
                                         <button class="delComment" th:value="${cc.commentNo}" th:onclick="deleteComment([[${c.customerNo}]], [[${cc.commentNo}]])">삭제</button>
                                     </th:block>
-                                    <div>
+                                    <div style="display: inline-block;">
                                         <a class="recShow" th:if="${session.member != null and (session.member.memberNickname == c.customerNickname or session.member.memberGrade == '관리자')}">댓글달기</a>
                                     </div>
                                 </li>
@@ -100,7 +100,7 @@
                                 <form action="/customer/insertComment" method="post">
                                     <ul class="comment-ul-ref">
                                         <li>
-                                        	<span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
+                                        	<span class="material-icons" style="font-size: 20px;">subdirectory_arrow_right</span>
                                         </li>
                                         <li>
                                             <input type="hidden" name="customerCommentRef" th:value="${cc.commentNo}">
@@ -120,8 +120,8 @@
                             <!-- 대댓글 출력 -->
                             <th:block th:each="re : ${c.commentList}" th:if="${re.customerCommentRef == cc.commentNo}">
                                 <ul class="comment-ul-ref">
-                                    <li style="font-weight: bold; width: 120px; text-align: center;">
-                                        <span class="material-icons" style="font-size: 40px;">subdirectory_arrow_right</span>
+                                    <li style="font-weight: bold; text-align: center;">
+                                        <span class="material-icons" style="font-size: 20px;">subdirectory_arrow_right</span>
                                         <th:block th:each="m : ${allMembers}" th:if="${m.memberNo == re.customerWriterNo}">
                                             <span th:if="${m.memberGrade == '관리자'}">관리자</span>
                                             <span th:if="${m.memberGrade != '관리자'}" th:text="${m.memberNickname}"></span>
@@ -135,7 +135,7 @@
                                     </li>
                                     <li>
                                         <th:block th:if="${session.member != null and session.member.memberNo == re.customerWriterNo}">
-                                            <button th:onclick="modifyComment(this, [[${c.customerNo}]], [[${re.commentNo}]])">수정</button>
+                                            <button class="modyComment" th:onclick="modifyComment(this, [[${c.customerNo}]], [[${re.commentNo}]])">수정</button>
                                             <button class="delComment" th:value="${re.commentNo}" th:onclick="deleteComment([[${c.customerNo}]], [[${re.commentNo}]])">삭제</button>
                                         </th:block>
                                     </li>
