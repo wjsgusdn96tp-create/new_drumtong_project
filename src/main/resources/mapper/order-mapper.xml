@@ -71,11 +71,15 @@
 	 	delete from cart_item_tbl where member_no = #{memberNo} and shop_name = #{shopName}
 	 </delete>
 	 	
-	<select id="selectOrderPay" resultType="int">
-		select sum(pay) from order_details_tbl group by substr(enroll_date,1,4) having substr(enroll_date,1,4) = to_char(add_months(sysdate, #{year}), 'yyyy')
+	<select id="selectOrderPay" resultType="chart">
+		select substr(enroll_date,1,4) as year , sum(pay) as sum_pay from order_details_tbl group by substr(enroll_date,1,4)
 	</select>
 	
-	<select id="selectOrderCount" resultType="int">
-		select sum(count) from order_details_tbl group by substr(enroll_date,1,4) having substr(enroll_date,1,4) = to_char(add_months(sysdate, ((-12)*0)), 'yyyy')
+	<select id="selectOrderCount" resultType="chart">
+		select substr(enroll_date,1,4) as year , sum(count) as sum_count from order_details_tbl group by substr(enroll_date,1,4)
+	</select>
+	
+	<select id="selectOrderShop" resultType="chart">
+		select shop_name, sum(pay) as sum_pay, sum(count) as sum_count from order_details_tbl join shop_tbl using(shop_name) group by shop_name
 	</select>
 </mapper>

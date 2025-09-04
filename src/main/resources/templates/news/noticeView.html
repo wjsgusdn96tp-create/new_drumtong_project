@@ -14,7 +14,7 @@
 					<th style="width:10%">글 제목</th>
 					<td th:text="${notice.title}" style="width:70%"></td>
 					<th style="width:10%">조회수</th>
-					<td style="width:10%">99</td>
+					<td style="width:10%" th:text="${notice.viewCount}"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
@@ -25,4 +25,11 @@
 	 </div>
 	 <th:block th:include="common/footer"></th:block>
 </body>
+
+<script th:inline="javascript">
+	const viewCount = [[${notice.viewCount}]];
+	const newViewCount = Number(viewCount)+1;
+	//ajax
+	
+</script> 
 </html>

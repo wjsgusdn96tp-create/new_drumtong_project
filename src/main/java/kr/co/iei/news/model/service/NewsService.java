@@ -270,6 +270,40 @@ public class NewsService {
 		return result;
 	}
 	
+	@Transactional
+	public int changeBannerMain(int posterNo) {
+		int result = newsDao.insertBannerMain(posterNo);
+		result += newsDao.deleteBannerMain(posterNo);
+		return 0;
+	}
 	
+	@Transactional
+	public int changeBannerNews(int posterNo) {
+		int result = newsDao.insertBannerNews(posterNo);
+		result += newsDao.deleteBannerNews(posterNo);
+		return 0;
+	}
+	
+	@Transactional
+	public int deleteBanner(String[] posterNoList) {
+		int result = 0;
+		for(int i=0;i<posterNoList.length ;i++ ) {
+			int posterNo = Integer.parseInt(posterNoList[i]);
+			
+			result += newsDao.deleteBanner(posterNo);
+		}
+		return result;
+	}
+	@Transactional
+	public int deleteNotice(int noticeNo) {
+		int result = newsDao.deleteNotice(noticeNo);
+		return result;
+	}
+	@Transactional
+	public int updateNotice(Notice notice) {
+		int result= newsDao.updateNotice(notice);
+		return result;
+	}
+
 	
 }

@@ -14,7 +14,7 @@
 	<th:block th:include="common/header"></th:block>
 	<div id="main-img">
 		<div id="main-news" style="width:100%; min-width:1200px;">
-			<a th:href="@{redirect:/news/view(newsNo=${banner.newsNo})}">
+			<a th:href="@{'/news/view?newsNo='+${banner.newsNo}}">
 				<img th:src="@{'/banner/image/'+${banner.image}}" style="width: 100%">
 			</a>
 			<div  th:if="${session.member != null && session.member.memberGrade == '관리자'}" class="btn-div">

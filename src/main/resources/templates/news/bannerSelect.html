@@ -4,9 +4,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	.btn{
+		margin: 10px 0;
+	}
+</style>
 <body>
 <th:block th:include="common/header"></th:block>
 <div class="content-wrap">
+	<button class="btn" id="cancle" >목록가기</button>
 	<form action="/news/bannerChange" method="post" enctype="multipart/form-data">
 			<table border=1>
 						<tr>
@@ -52,12 +58,12 @@
 						<tr>
 							<td colspan="4">
 							<button class="btn" id="insert-btn" type="submit">배너 선정</button>
-							<button class="btn" id="cancle" >목록가기</button>
 							</td>
 						</tr> 
 						
 					</table>
 				</form>
+				
 </div>
 
 
@@ -66,6 +72,12 @@
 </body>
 
 <script th:inline="javascript">
+
+
+$("#cancle").on("click", function(){
+	location.href="/news/list?noticeReqPage=1&tab=all";		
+})
+
 
 $("#posterNo").on("change", function() {
 	$("#main-view").attr("src", "/banner/image/"+$("select[name=posterNo] option:selected").next().text());

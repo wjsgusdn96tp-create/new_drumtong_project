@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.order.dao.OrderDao;
 import kr.co.iei.order.vo.CartItem;
+import kr.co.iei.order.vo.Chart;
 import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
@@ -120,37 +121,26 @@ public class OrderService {
 	}
 
 
-	public ArrayList<Integer> selectOrderPay() {
-		ArrayList<Integer> payList = new ArrayList<>();
-		int x = 5;
-		int yearVal = orderDao.selectOrderPay(1);
+	public List<Chart> selectOrderPay() {
+		List<Chart> chartListPay = orderDao.selectOrderPay();		
+		return chartListPay;
+	}
+
+
+	public List<Chart> selectOrderCount() {
+		List<Chart> chartListCount = orderDao.selectOrderCount();
 		
-		payList.add(0);
-		System.out.println(yearVal);
-		for(int year = 0;  year<x;  year++) {
-		}
-		return payList;
+		return chartListCount;
 	}
 
 
-	public List<Integer> selectOrderCount() {
-		ArrayList<Integer> countList = new ArrayList<>();
-		int x = 5;
-		for(int year = 0;  year<x;  year++) {
-			int yearVal = orderDao.selectOrderCount(0);
-			countList.add(0);
-		}
-		return countList;
-
+	public List<Chart> selectOrderShop() {
+		List<Chart> chartListShop = orderDao.selectOrderShop();
+		return chartListShop;
 	}
 
 
-
-
-
-
-
-
+	
 
 	
 

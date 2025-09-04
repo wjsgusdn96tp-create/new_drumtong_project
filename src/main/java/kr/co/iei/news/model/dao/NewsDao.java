@@ -68,6 +68,21 @@ public interface NewsDao {
 
 	int insertModal(int newsNo);
 
+	int insertBannerMain(int posterNo);
+	
+	int deleteBannerMain(int posterNo);
+	
+	int insertBannerNews(int posterNo);
+	
+	int deleteBannerNews(int posterNo);
+
+	int deleteBanner(int posterNo);
+
+	int deleteNotice(int noticeNo);
+
+	int updateNotice(Notice notice);
+
+
 	
 
 }

@@ -26,4 +26,5 @@ public class News {
 	private String discountType;
 	private int likeCount;
 	private int isLike;
+	private List<Discount> discountList;
 }
