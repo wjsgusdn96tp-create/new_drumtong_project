@@ -11,7 +11,7 @@
 </head>
 <body>
    <th:block th:include="/common/header"></th:block>
-	
+	<div class="cart-primarlbox">
     <div class="cart-mainbox">
         <div class="cart-namebox">
             <div class="cart-name">
@@ -282,26 +282,22 @@
 			        				    buyer_addr: "서울특별시 강남구 삼성동",
 			        				    buyer_postcode: "123-456",
 			        				  function (rsp) {
-			        				    	if (rsp.success) {
+			        				    	if(rsp.success) {
 			        				    	const form = document.createElement("form");
-			        				    	form.attr("src","/");
-			        				    	form.attr("method","get");
+			        				    	form.setAttribute("action","/order/OrderMap");
+			        				    	form.setAttribute("method","get");
 			        				    	
 			        				    	document.body.appendChild(form);
 			        				    	form.submit();
 			        				    		
-			        				    	} else {
-			        				    		alert("결제에 실패했습니다!" + rsp.error_msg );
+			        				    	}else {
+			        				    		return;
 			        				    	}
-			        			      			
-			        			      		}
-
+			        				    	
+			        			      	}
 			        			})
-			        		
 			        	}
-			        	
-			        })
-
+			   })
 	});
 	
 	
