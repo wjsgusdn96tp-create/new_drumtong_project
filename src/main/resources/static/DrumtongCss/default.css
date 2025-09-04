@@ -196,6 +196,9 @@ table>tbody>tr>th{
     border-right: 0;
     height: 40px;
 }
+table>tbody>tr{
+	border: 1px, solid, var(--main3);
+}
 
 table>tbody>tr>:last-child{
     border-right: 1px solid var(--main3);

@@ -120,6 +120,31 @@ public class OrderService {
 	}
 
 
+	public ArrayList<Integer> selectOrderPay() {
+		ArrayList<Integer> payList = new ArrayList<>();
+		int x = 5;
+		int yearVal = orderDao.selectOrderPay(1);
+		
+		payList.add(0);
+		System.out.println(yearVal);
+		for(int year = 0;  year<x;  year++) {
+		}
+		return payList;
+	}
+
+
+	public List<Integer> selectOrderCount() {
+		ArrayList<Integer> countList = new ArrayList<>();
+		int x = 5;
+		for(int year = 0;  year<x;  year++) {
+			int yearVal = orderDao.selectOrderCount(0);
+			countList.add(0);
+		}
+		return countList;
+
+	}
+
+
 
 
 

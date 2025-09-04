@@ -71,10 +71,10 @@
 			<div class="tb">
 				<div class="inner" style="max-width: 800px;">
 					<div class="top">
-						<div class="title">모달창 제목</div>
+						<div class="title" th:text=${newsModal.title}></div>
 						<a href="#" class="modal-close">닫기</a>
 					</div>
-					<img src="/img/banner/poster.jfif" class="ct">
+					<img th:src="@{'/news/image/'+${newsModal.image}}" class="ct">
 				</div>
 			</div>
 		</div>
@@ -82,10 +82,21 @@
 		
 		
 		<div id="main-news">
-			<img src="/img/news/main_promotion3.jpg" class="main-news3">
+			<a th:href="@{redirect:/news/view(newsNo=${banner.newsNo})}">
+				<img th:src="@{'/news/image/'+${banner.image}}" style="width: 100%">
+			</a>
+			
+			
 			<div th:if="${session.member != null && session.member.memberGrade == '관리자'}" class="btn-div">
-				<a href="/news/bannerSelect" class="btn write-btn" style="float:right;">배너 선정</a>
-				<a href="/news/bannerWrite" class="btn write-btn" style="float:right;">배너 등록</a>	
+				<span>팝업 창 설정 : </span>
+				<select class="btn modalPoster">
+					<th:block th:each="news:${newsAllList}">
+						<option th:value=${news.newsNo} th:text=${news.title} th:selected="${news.modalYn} == 'Y'"></option>
+					</th:block>
+				</select>
+				<a href="/news/bannerSelect" class="btn" style="float:right;">배너 선정</a>
+				<a href="/news/bannerDelete" class="btn" style="float:right;">배너 삭제</a>
+				<a href="/news/bannerWrite" class="btn" style="float:right;">배너 등록</a>	
 			</div>
 		</div>
 		<div class="tab">
@@ -102,8 +113,8 @@
 		
 		<div class="btn-div">
 			<div th:if="${session.member != null && session.member.memberGrade == '관리자'}" style="overflow:hidden;">
-				<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 쓰기</a>
-				<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>					
+				<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 작성</a>
+				<a href="/news/writeFrm" class="btn write-btn">NEWS 작성</a>					
 			</div>
 		</div>
 		
@@ -157,6 +168,16 @@
 		
 		const memberGrade = [[${session.member?.memberGrade}]];
 		
+		
+		$(".modalPoster").on("change", function(){
+			const newsNo = $(".modalPoster option:selected").val();
+
+			$.ajax({
+				url: "/news/modalChange",
+				type: "get",
+				data: {newsNo : newsNo },
+			})
+		})
 		
 		
 		$(".first-tab>li").on("click", function(){

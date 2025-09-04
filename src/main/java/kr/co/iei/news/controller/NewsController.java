@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
-import kr.co.iei.customer.controller.CustomerController;
-import kr.co.iei.customer.service.CustomerService;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.Discount;
@@ -28,9 +26,7 @@ import kr.co.iei.util.FileUtil;
 @RequestMapping("news")
 public class NewsController {
 
-    private final CustomerService customerService;
 
-    private final CustomerController customerController;
 	
 	@Autowired
 	private NewsService newsService;
@@ -40,11 +36,6 @@ public class NewsController {
 	
 	@Autowired
 	private FileUtil fileUtil;
-
-    NewsController(CustomerController customerController, CustomerService customerService) {
-        this.customerController = customerController;
-        this.customerService = customerService;
-    }
 	
 	@GetMapping(value="/list")
 	public String newsList(int noticeReqPage, String tab, Model model) {
@@ -57,6 +48,15 @@ public class NewsController {
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("tab", tab);
 		
+		Poster banner = newsService.selectNewsPoster();
+		model.addAttribute("banner", banner);
+		
+		List<News> newsAllList = newsService.selectAllNewsBanner();
+		System.out.println(newsAllList);
+		model.addAttribute("newsAllList", newsAllList);
+		
+		News newsModal = newsService.selectOneNewsModal();
+		model.addAttribute("newsModal", newsModal);
 		return "news/list";
 	}
 	
@@ -69,16 +69,67 @@ public class NewsController {
 	@PostMapping(value="write") //뉴스 등록하기 누르면 호출
 	public String writeNews(News news, String productNoStr, String discountType, String discountPrice, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
 		int memberNo = member == null ? 0 : member.getMemberNo();
-		String[] productList = productNoStr.split(",");
 		
+		//productNo list 확인
+		String[] productList;
+		if(productNoStr != null) {	
+			productList = productNoStr.split(",");
+		} else {
+			productList = null;
+		}
+		
+		//file upload
 		String savepath = root+"/news/";
 		String filepath = fileUtil.upload(savepath, newsImageFile);
 		news.setImage(filepath);
 		news.setMemberNo(memberNo);
 		
+		System.out.println(news);
+		System.out.println(productList);
+		System.out.println(discountType);
+		System.out.println(discountPrice);
 		int result = newsService.insertNews(news, productList, discountType, discountPrice);		
 		
 		return "redirect:/news/list?noticeReqPage=1&tab=all";
+	}
+	
+	
+	@GetMapping(value="updateNews")
+	public String updateNews(int newsNo, Model model) {
+		News news = newsService.selectOneNews(newsNo);
+		model.addAttribute("news", news);
+		
+		List product = newsService.selectAllProduct();
+		model.addAttribute("product", product);
+		
+		List discount = newsService.selectAllDiscount(newsNo);
+		Discount d = (Discount)discount.get(0);
+		
+		if(d.getDiscountPercent()== 0) {
+			model.addAttribute("discountPrice",d.getDiscountPrice());
+		} else {
+			model.addAttribute("discountPrice",d.getDiscountPercent());
+		}
+		model.addAttribute("discount", discount);
+		
+		return "news/updateNews";
+	}
+	
+	@PostMapping(value="updatewrite")
+	public String updateWrite(News news, String productNoStr, String discountType, String discountPrice,@SessionAttribute(required = false) Member member) {
+		int memberNo = member == null ? 0 : member.getMemberNo();
+		news.setMemberNo(memberNo);
+		
+		String[] productList;
+		if(productNoStr != null) {	
+			productList = productNoStr.split(",");
+		} else {
+			productList = null;
+		}
+		
+		int result = newsService.updateNews(news, productList, discountType, discountPrice);		
+		
+		return "redirect:/news/view?newsNo="+news.getNewsNo();
 	}
 	
 	@GetMapping(value="/noticeWriteFrm")
@@ -121,49 +172,12 @@ public class NewsController {
 	
 	
 	@GetMapping(value="/view")
-	public String newsView(String newsNo, Model model) {
+	public String newsView(int newsNo, Model model) {
 		News news = newsService.selectOneNews(newsNo);
 		model.addAttribute("news", news);
 		return "news/view";
 	}
 	
-	@GetMapping(value="updateNews")
-	public String updateNews(String newsNo, Model model) {
-		News news = newsService.selectOneNews(newsNo);
-		model.addAttribute("news", news);
-		
-		List product = newsService.selectAllProduct();
-		model.addAttribute("product", product);
-		
-		List discount = newsService.selectAllDiscount(newsNo);
-		Discount d = (Discount)discount.get(0);
-		
-		if(d.getDiscountPercent()== 0) {
-			model.addAttribute("discountPrice",d.getDiscountPrice());
-		} else {
-			model.addAttribute("discountPrice",d.getDiscountPercent());
-		}
-		model.addAttribute("discount", discount);
-		
-		return "news/updateNews";
-	}
-	
-	@PostMapping(value="updatewrite")
-	public String updateWrite(News news, String productNoStr, String discountType, String discountPrice,@SessionAttribute(required = false) Member member) {
-		int memberNo = member == null ? 0 : member.getMemberNo();
-		news.setMemberNo(memberNo);
-		
-		String[] productList;
-		if(productNoStr != null) {	
-			productList = productNoStr.split(",");
-		} else {
-			productList = null;
-		}
-		
-		int result = newsService.updateNews(news, productList, discountType, discountPrice);		
-		
-		return "redirect:/news/view?newsNo="+news.getNewsNo();
-	}
 	
 	@GetMapping(value="deleteNews")
 	public String deleteNews(int newsNo) {
@@ -205,6 +219,11 @@ public class NewsController {
 		model.addAttribute("imageNews", imageNews);
 		return "news/bannerSelect";
 	}
+	
+	@GetMapping(value="modalChange")
+	public void modalChange(int newsNo) {
+		int result = newsService.changeModal(newsNo);		
+	}
+	
 }
-
 

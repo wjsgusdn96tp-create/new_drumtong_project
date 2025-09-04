@@ -7,7 +7,7 @@
 <body>
 <th:block th:include="common/header"></th:block>
 <div class="content-wrap">
-	<form action="/news/banner" method="post" enctype="multipart/form-data">
+	<form action="/news/bannerChange" method="post" enctype="multipart/form-data">
 			<table border=1>
 						<tr>
 							<th style="width: 20%">메인베너 선택하기</th>
@@ -51,7 +51,7 @@
 						
 						<tr>
 							<td colspan="4">
-							<button class="btn" id="insert-btn" type="submit">배너 등록하기</button>
+							<button class="btn" id="insert-btn" type="submit">배너 선정</button>
 							<button class="btn" id="cancle" >목록가기</button>
 							</td>
 						</tr> 
@@ -66,49 +66,19 @@
 </body>
 
 <script th:inline="javascript">
-	$("#posterNo").on("change", function() {
-			$("#main-view").attr("src", "/banner/image/"+$("select[name=posterNo] option:selected").next().text());
-	})
-	
-	$("#posterNoNews").on("change", function() {
-			$("#news-view").attr("src", "/banner/image/"+$("select[name=posterNoNews] option:selected").next().text());
-	})
-	
-	
+
+$("#posterNo").on("change", function() {
+	$("#main-view").attr("src", "/banner/image/"+$("select[name=posterNo] option:selected").next().text());
+});
+
+		
+$("#posterNoNews").on("change", function() {
+		$("#news-view").attr("src", "/banner/image/"+$("select[name=posterNoNews] option:selected").next().text());
+});
+
+
+
 		
 </script>
-<!-- ajax
-	
-	
-	$("#show").on("click",function() {
-			$.ajax({
-				url: "/news/more",
-				type: "get",
-				data: {start: start, amount : amount, tab : [[${tab}]]},
-				success : function(newsList){
-				}
-				
-			})
-	})
-				
-						<tr>
-							<th>메인배너 선택</th>
-							<select name="mainYn" id="mainYn">
-									<option th:value= th:text=></option>
-								</select>
-						</tr>
-						<tr>
-							<th>뉴스배너 선택</th>
-							<select name="mainYn" id="mainYn">
-									<option th:value= th:text=></option>
-								</select>
-						</tr>
-						<tr>
-							<th>모달포스터 선택</th>
-							<select name="mainYn" id="mainYn">
-									<option th:value= th:text=></option>
-								</select>
-						</tr>
-						 -->
-	
+
 </html>

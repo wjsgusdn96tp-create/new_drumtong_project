@@ -106,14 +106,16 @@ public class NewsService {
 		news.setNewsNo(newsNo);
 		
 		int result = newsDao.insertNews(news);
-		
-		for(int i=0 ;i<productList.length;i++) {
-			HashMap<String, Object> param = new HashMap<String, Object>();
-			param.put("newsNo", newsNo);
-			param.put("productNo", productList[i]);
-			param.put("discountType", discountType);
-			param.put("discountPrice", discountPrice);
-			result += newsDao.insertDiscount(param);			
+		if(productList != null) {
+			for(int i=0 ;i<productList.length;i++) {
+				HashMap<String, Object> param = new HashMap<String, Object>();
+				param.put("newsNo", newsNo);
+				param.put("productNo", productList[i]);
+				param.put("discountType", discountType);
+				param.put("discountPrice", discountPrice);
+				result += newsDao.insertDiscount(param);			
+			}
+			
 		}
 		
 		return result;
@@ -178,12 +180,12 @@ public class NewsService {
 		return product;
 	}
 
-	public List selectAllDiscount(String newsNo) {
+	public List selectAllDiscount(int newsNo) {
 		List discount = newsDao.selectAllDiscount(newsNo);
 		return discount;
 	}
 
-	public News selectOneNews(String newsNo) {
+	public News selectOneNews(int newsNo) {
 		News news = newsDao.selectOneNews(newsNo);
 		return news;
 	}
@@ -255,5 +257,19 @@ public class NewsService {
 		Poster imageNews = newsDao.selectNewsPoster();
 		return imageNews;
 	}
+
+	public News selectOneNewsModal() {
+		News newsModal = newsDao.selectOneNewsModal();
+		return newsModal;
+	}
+	
+	@Transactional
+	public int changeModal(int newsNo) {
+		int result = newsDao.deleteModal();
+		result += newsDao.insertModal(newsNo);
+		return result;
+	}
+	
+	
 	
 }

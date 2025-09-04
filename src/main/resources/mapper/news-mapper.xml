@@ -35,7 +35,7 @@
   </select>
   
   <insert id="insertNews">
-  	insert into news values(#{newsNo}, #{memberNo}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'), #{image})
+  	insert into news values(#{newsNo}, #{memberNo}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'), #{image}, null)
   </insert>
   
   <insert id="insertDiscount">
@@ -130,4 +130,17 @@
 	<select id="selectNewsPoster" resultType="poster">
 		select * from poster where news_yn = 'Y'
 	</select>
+	
+	<select id="selectOneNewsModal" resultType="news">
+		select * from news where modal_yn = 'Y'
+	</select>
+	
+	<update id="deleteModal">
+		update news set modal_yn = null
+	</update>
+	
+	<update id="insertModal">
+		update news set modal_yn = 'Y' where news_no = #{newsNo}
+	</update>
+		
 </mapper>

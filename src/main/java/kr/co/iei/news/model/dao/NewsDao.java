@@ -38,9 +38,9 @@ public interface NewsDao {
 
 	List selectAllProduct();
 
-	List selectAllDiscount(String newsNo);
+	List selectAllDiscount(int newsNo);
 
-	News selectOneNews(String newsNo);
+	News selectOneNews(int newsNo);
 
 	List selectBestProduct();
 
@@ -61,5 +61,13 @@ public interface NewsDao {
 	Poster selectMainPoster();
 
 	Poster selectNewsPoster();
+
+	News selectOneNewsModal();
+
+	int deleteModal();
+
+	int insertModal(int newsNo);
+
+	
 
 }
