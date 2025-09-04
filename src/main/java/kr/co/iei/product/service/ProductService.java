@@ -248,6 +248,117 @@ public class ProductService {
 		Product searchProductUpdate = productDao.searchProductUpdate(productNo);
 		return searchProductUpdate;
 	}
+	@Transactional
+	public int productGoodsUpadte(int productNo, int productPrice, String productName, String productContentPresent,
+			int productBestNo) {
+		if(productBestNo == -1) {
+			//일반 상품
+			int result = productDao.productGoodsUpdate(productNo, productPrice, productName, productContentPresent);
+			if(result > 0) {
+				return 1;//업데이트 성공
+			}else {
+				return 0;//실패
+			}
+		}else {
+			//대표상품
+			int result = productDao.productGoodsUpdate(productNo, productPrice, productName, productContentPresent);
+			if(result >0) {
+				int bestResult = productDao.productGoodsUpdateBest(productName, productBestNo);
+				if(bestResult > 0) {
+					return 1;//성공
+				}else {
+					return 10;//10 전체 상품에서만 수정 성공/대표상품 이름 수정 실패-> 삭제 후 재등록 해주세요
+				}
+			}else {
+				return 0;//실패
+			}
+		}
+	}
+	@Transactional
+	public int productUpadte(int productNo, int productPrice, String productName, int productBestNo) {
+		if(productBestNo == -1) {
+			//일반 상품
+			int result = productDao.productUpdate(productNo, productPrice, productName);
+			if(result > 0) {
+				return 1;//업데이트 성공
+			}else {
+				return 0;//실패
+			}
+		}else {
+			//대표상품
+			int result = productDao.productUpdate(productNo, productPrice, productName);
+			if(result >0) {
+				int bestResult = productDao.productUpdateBest(productName, productBestNo);
+				if(bestResult > 0) {
+					return 1;//성공
+				}else {
+					return 10;//10 전체 상품에서만 수정 성공/대표상품 이름 수정 실패-> 삭제 후 재등록 해주세요
+				}
+			}else {
+				return 0;//실패
+			}
+		}
+	}
+
+	public int likepush(Product p, int memberNo) {
+		HashMap<String, Object> param = new HashMap<String,Object>();
+		param.put("productNo", p.getProductNo());
+		param.put("memberNo", memberNo);
+		System.out.println(p);
+		if(p.getIsLike() == 0) {
+			int result = productDao.insertProductLike(param);
+		}else {
+			int result = productDao.deleteProductLike(param);
+		}
+		
+		int likeCount = productDao.selectProductLikeCount(p.getProductNo());
+		return likeCount;
+	}
+
+	public List DessertList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List dessertList = productDao.dessertList(param);
+		
+		
+		return dessertList;
+	}
+
+	public List dessertListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectDessertList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
+
+	public List dessertListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.dessertListPriceDate(param);
+		
+		return list;
+	}
 
 	
 
