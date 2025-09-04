@@ -4,36 +4,53 @@
 	
 	<select id="selectCustomerList" resultType="customer">
 		SELECT *
+		FROM (
+			SELECT 
+				rownum AS rnum, 
+				c.*
 			FROM (
-			    SELECT rownum AS rnum, c.*
-			    FROM (
-			        SELECT customer_no, customer_category, customer_nickname, customer_title, customer_date
-			        FROM customer_service_tbl
-			        <where>
-			        	<if test="memberGrade != null and memberGrade != '관리자'">
-			        		customer_nickname = #{memberNickname}
-			        	</if>
-			        	<if test="category != null">
-		                    AND customer_category = #{category}
-		                </if>
-			        </where>
-			        <choose>	
-			        	<when test="sort == null">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('lastest')">
-			        		ORDER BY customer_no DESC
-			        	</when>
-			        	<when test="sort.equals('oldest')">
-			        		order by customer_no asc
-			        	</when>
-			        	<when test="sort.equals('abc')">
-			        		order by customer_title asc, customer_no asc
-			        	</when>
-			        </choose>
-			    ) c
-			)
-			WHERE #{start} <![CDATA[ <= ]]> rnum and rnum <![CDATA[ <= ]]> #{end}
+				SELECT 
+					cst.customer_no, 
+					cst.customer_category, 
+					cst.customer_nickname, 
+					cst.customer_title, 
+					cst.customer_date,
+					
+					(
+						SELECT COUNT(*)
+						FROM customer_comment cc
+						JOIN member_tbl m ON (cc.customer_writer_no = m.member_no)
+						WHERE cc.customer_service_ref = cst.customer_no AND m.member_grade = '관리자'
+					) AS adminCommented
+				FROM 
+					customer_service_tbl cst 
+				<where>
+					<if test="memberGrade != null and memberGrade != '관리자'">
+						customer_nickname = #{memberNickname}
+					</if>
+					<if test="category != null">
+						AND customer_category = #{category}
+					</if>
+				</where>
+				
+				ORDER BY adminCommented ASC,
+				<choose>	
+					<when test="sort == null">
+						customer_no DESC
+					</when>
+					<when test="sort.equals('lastest')">
+						customer_no DESC
+					</when>
+					<when test="sort.equals('oldest')">
+						customer_no ASC
+					</when>
+					<when test="sort.equals('abc')">
+						customer_title ASC, customer_no ASC
+					</when>
+				</choose>
+			) c
+		)
+		WHERE #{start} <![CDATA[ <= ]]> rnum AND rnum <![CDATA[ <= ]]> #{end}
 	</select>
 	
 	<select id="selectCustomerTotalCount" resultType="int">
@@ -83,7 +100,7 @@
 	</select>
 	
 	<delete id="deleteCustomerFiles">
-		delete from customer_service_file where customer_file_no = #{customerFileNo}
+		delete from customer_service_file where customer_no = #{customerNo}
 	</delete>
 	
 	<delete id="deleteCustomer">
@@ -157,14 +174,22 @@
 	</update>
 	
 	<select id="selectCustomerFileList" resultType="customerServiceFile">
-		select *
-		from customer_service_file_no in
-		<foreach collection="array" item="customerFileNo" open="(" close=")" separator=",">
-			#{customerFileNo}
-		</foreach>
+	  SELECT *
+	  FROM customer_service_file
+	  WHERE customer_file_no IN
+	  <foreach collection="array" item="customerFileNo" open="(" close=")" separator=",">
+	    #{customerFileNo}
+	  </foreach>
 	</select>
 	
 	<delete id="deleteCustomerFile">
 		delete from customer_service_file where customer_file_no = #{customerFileNo}
 	</delete>
+	
+	<select id="checkAdminComment" resultType="int">
+	    select count(*)
+	    FROM customer_comment cc
+	    JOIN member_tbl m ON (cc.customer_writer_no = m.member_no)
+	    WHERE cc.customer_service_ref = #{customerNo} AND m.member_grade = '관리자'
+	</select>
 </mapper>

@@ -46,7 +46,8 @@ public class CustomerService {
 	        param.put("category", category);
 	    }
 		
-		List list = customerDao.selectCustomerList(param);
+	    List<Customer> list = customerDao.selectCustomerList(param);
+	   
 		
 		int totalCount = customerDao.selectCustomerTotalCount(param);
 		int totalPage = (int)(Math.ceil(totalCount/(double)numPerPage));
@@ -68,7 +69,7 @@ public class CustomerService {
 	    customerNavi.setStartNo(startNo);
 	    customerNavi.setTotalPage(totalPage);
 	    
-	    CustomerListData cld = new CustomerListData(list, customerNavi, endNo);
+	    CustomerListData cld = new CustomerListData(list, customerNavi, 0);
 		return cld;
 	}
 
@@ -155,7 +156,7 @@ public class CustomerService {
 		return customerFile;
 	}
 
-
+	@Transactional
 	public List<CustomerServiceFile> updateCustomer(Customer c, List<CustomerServiceFile> fileList, int[] delFileNo) {
 		
 		int result = customerDao.updateCustomer(c);
@@ -165,22 +166,18 @@ public class CustomerService {
 		}
 		
 		List<CustomerServiceFile> delFileList = new ArrayList<CustomerServiceFile>();
-		if(delFileNo != null) {
-			List list = customerDao.selectCustomerFileList(delFileNo);
-			for(int customerFileNo : delFileNo) {
-				result += customerDao.deleteCustomerFile(customerFileNo);
-			}
+		
+		if (delFileNo != null) {
+	        List<CustomerServiceFile> list = customerDao.selectCustomerFileList(delFileNo); 
+	        delFileList.addAll(list); 
+
+	        for (int customerFileNo : delFileNo) {
+	            result += customerDao.deleteCustomerFile(customerFileNo);
+	        }
 		}
 		return delFileList;
 	}
 
-
-	
-	
-	
-	
-	
-	
 }
 
 

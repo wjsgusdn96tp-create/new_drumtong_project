@@ -43,6 +43,10 @@ public class CustomerController {
 	
 	@GetMapping(value="/list")
 	public String customerList(int reqPage, String sort, Model model, @SessionAttribute(required = false) Member member) {
+		if(sort == null || sort.isEmpty()) {
+            sort = "lastest";
+        }
+		
 		CustomerListData cld = customerService.selectCustomerList(reqPage, sort, member, null);
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
@@ -52,6 +56,10 @@ public class CustomerController {
 	
 	@GetMapping(value="/goodjob")
 	public String goodjobList(int reqPage, String sort, String category, Model model, @SessionAttribute(required = false) Member member) {
+		if(sort == null || sort.isEmpty()) {
+            sort = "lastest";
+        }
+		
 		CustomerListData cld = customerService.selectCustomerList(reqPage, sort, member, "칭찬");
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
@@ -61,6 +69,10 @@ public class CustomerController {
 	
 	@GetMapping(value="/complain")
 	public String complainList(int reqPage, String sort, Model model, @SessionAttribute(required = false) Member member) {
+		if(sort == null || sort.isEmpty()) {
+            sort = "lastest";
+        }
+		
 		CustomerListData cld = customerService.selectCustomerList(reqPage, sort, member, "불만");
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
@@ -70,6 +82,10 @@ public class CustomerController {
 	
 	@GetMapping(value="/opinion")
 	public String opinionList(int reqPage, String sort, Model model, @SessionAttribute(required = false) Member member) {
+		if(sort == null || sort.isEmpty()) {
+            sort = "lastest";
+        }
+		
 		CustomerListData cld = customerService.selectCustomerList(reqPage, sort, member, "의견");
 		model.addAttribute("list", cld.getList());
 		model.addAttribute("navi", cld.getCustomerNavi());
@@ -132,6 +148,10 @@ public class CustomerController {
 	@PostMapping(value="/delete")
 	@ResponseBody
 	public String deleteCustomer(int customerNo, @SessionAttribute(required = false) Member member) {
+		if (member == null) {
+	        return "fail";
+	    }
+		
 		Customer c = customerService.selectOneCustomer(customerNo);
 		
 		if (c != null && c.getCustomerNickname().equals(member.getMemberNickname())) {

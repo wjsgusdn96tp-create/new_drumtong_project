@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.iei.member.model.vo.Member;
+
 import kr.co.iei.product.service.ProductService;
 import kr.co.iei.product.vo.Product;
 import kr.co.iei.product.vo.productListDate;
 import kr.co.iei.util.FileUtil;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
 
 @Controller
 @RequestMapping(value="/product")
@@ -57,6 +63,39 @@ public class ProductController {
 		List productListPriceDate =productService.productListPriceDate(pageNavi, reqPage);
 		model.addAttribute("priceList", productListPriceDate);
 		return "product/productList";
+		
+		//좋아요 순
+	}
+	
+	@GetMapping(value="/productDessertList")
+	private String productDessertList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNavi(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNavi);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List DessertList = productService.DessertList(pageNavi, reqPage);
+		model.addAttribute("allList",DessertList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List dessertListDate = productService.dessertListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", dessertListDate);
+		
+		
+		//가격순
+		List dessertListPriceDate =productService.dessertListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", dessertListPriceDate);
+		return "product/productDessertList";
 		
 		//좋아요 순
 	}
@@ -108,23 +147,23 @@ public class ProductController {
 			model.addAttribute("title", "상품 등록 실패!!");
 			model.addAttribute("text", "상품 등록 실패 되었습니다.");
 			model.addAttribute("icon", "info");
-			model.addAttribute("loc", "/product/productInsertFrm?reqPage=1" ); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productInsertFrm?reqPage=1&shopName=manager" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}else if(result == 10) {
 			model.addAttribute("title", "대표 상품 등록 실패(일반 상품으로 등록)!!!");
 			model.addAttribute("text", "대표 상품으로 등록 원할 시 [1.상품 수정 2.삭제 후 재등록] 진행 해주세요.");
 			model.addAttribute("icon", "info");
-			model.addAttribute("loc", "/product/productList?reqPage=1" ); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}else if(result == 1) {
 			model.addAttribute("title", "상품 등록 성공!!");
 			model.addAttribute("text", "상품 등록 성공 했습니다.");
 			model.addAttribute("icon", "success");
-			model.addAttribute("loc", "/product/productList?reqPage=1" ); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager" ); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}
 	
-		return "product/productList?reqPage=1";
+		return "product/productList?reqPage=1&shopName=manager";
 	}
 	
 	@GetMapping(value="/productDelete")
@@ -139,31 +178,96 @@ public class ProductController {
 			model.addAttribute("title", "상품 삭제 실패!!");
 			model.addAttribute("text", "상품 삭제 실패 했습니다.");
 			model.addAttribute("icon", "info");
-			model.addAttribute("loc", "/product/productList?reqPage=1"); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}else if(result == 10) {
 			model.addAttribute("title", "전체 상품 리스트에서 삭제 실패(대표상품에서만 삭제)!!!");
 			model.addAttribute("text", "전체 상품에서 일반상품으로 전환되었습니다. [수정 또는 재삭제 해주세요.]");
 			model.addAttribute("icon", "info");
-			model.addAttribute("loc", "/product/productList?reqPage=1"); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}else if(result == 1) {
 			model.addAttribute("title", "상품 삭제 성공!!");
 			model.addAttribute("text", "상품 삭제 성공 했습니다.");
 			model.addAttribute("icon", "success");
-			model.addAttribute("loc", "/product/productList?reqPage=1"); //reqPage 반드시 줘야 함. 
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
 			return "common/msg";
 		}
 	
-		return "product/productList?reqPage=1";
+		return "product/productList?reqPage=1&shopName=manager";
+	}
+	
+	@GetMapping(value="/productUpdateFrm")
+	public String productUpdateFrm(int productNo,  Model model) {
+		System.out.println(productNo);
+		Product searchProductUpdate = productService.searchProductUpdate(productNo);
+		model.addAttribute("product",searchProductUpdate);
+		model.addAttribute("shopName","manager");
+		return "product/productUpdateFrm";
+	}
+	
+	@GetMapping(value="/productGoodsUpdate")
+	public String productUpdate(Model model, int productNo, int productPrice, String productName, String productContentPresent, int productBestNo) {
+		//대표상품 아니면 -1
+		int result = productService.productGoodsUpadte(productNo, productPrice, productName, productContentPresent, productBestNo);
+		
+		if(result == 0) {
+			model.addAttribute("title", "상품 수정 실패!!");
+			model.addAttribute("text", "상품 정보 수정 실패 했습니다.");
+			model.addAttribute("icon", "info");
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+			return "common/msg";
+		}else if(result == 10) {
+			model.addAttribute("title", "수정 일부 성공/일부 실패!!!");
+			model.addAttribute("text", "전체 상품에서 수정 되어 화면상 문제 없으나, 대표상품 관리에서 이름 수정에 실패했습니다.[상품 삭제 후 재등록 해주세요.]");
+			model.addAttribute("icon", "info");
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+			return "common/msg";
+		}else if(result == 1) {
+			model.addAttribute("title", "상품 수정 성공!!");
+			model.addAttribute("text", "상품 정보 수정 성공 했습니다.");
+			model.addAttribute("icon", "success");
+			model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+			return "common/msg";
+		}
+		
+		return "/product/productList?reqPage=1&shopName=manager";
 	}
 	
 	@GetMapping(value="/productUpdate")
-	public String productUpdateFrm(int productNo, Model model) {
-		Product searchProductUpdate = productService.searchProductUpdate(productNo);
-		model.addAttribute("product",searchProductUpdate);
-		return "product/productUpdateFrm";
+	public String productUpdate(Model model, int productNo, int productPrice, String productName, int productBestNo) {
+		//대표상품 아니면 -1
+		int result = productService.productUpadte(productNo,productPrice,productName,productBestNo);
+		
+				if(result == 0) {
+					model.addAttribute("title", "상품 수정 실패!!");
+					model.addAttribute("text", "상품 정보 수정 실패 했습니다.");
+					model.addAttribute("icon", "info");
+					model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+					return "common/msg";
+				}else if(result == 10) {
+					model.addAttribute("title", "수정 일부 성공/일부 실패!!!");
+					model.addAttribute("text", "전체 상품에서 수정 되어 화면상 문제 없으나, 대표상품 관리에서 이름 수정에 실패했습니다.[상품 삭제 후 재등록 해주세요.]");
+					model.addAttribute("icon", "info");
+					model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+					return "common/msg";
+				}else if(result == 1) {
+					model.addAttribute("title", "상품 수정 성공!!");
+					model.addAttribute("text", "상품 정보 수정 성공 했습니다.");
+					model.addAttribute("icon", "success");
+					model.addAttribute("loc", "/product/productList?reqPage=1&shopName=manager"); //reqPage 반드시 줘야 함. 
+					return "common/msg";
+				}
+				
+				return "/product/productList?reqPage=1&shopName=manager";
 	}
-
+	
+	@PostMapping(value="/likepush")
+	@ResponseBody
+	public int likepush(Product p, @SessionAttribute Member member) {
+		int memberNo = member.getMemberNo();
+		int result = productService.likepush(p,memberNo);
+		return result;
+	}
 	
 }
