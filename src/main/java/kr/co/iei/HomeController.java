@@ -20,4 +20,5 @@ public class HomeController {
 		model.addAttribute("product", product);
 		return "index";
 	}
+	
 }

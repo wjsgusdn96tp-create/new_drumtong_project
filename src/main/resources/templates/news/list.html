@@ -84,7 +84,8 @@
 		<div id="main-news">
 			<img src="/img/news/main_promotion3.jpg" class="main-news3">
 			<div th:if="${session.member != null && session.member.memberGrade == '관리자'}" class="btn-div">
-				<a href="/" class="btn write-btn" style="float:right;">이미지 수정</a>	<!-- 관리자만 노출 -->
+				<a href="/news/bannerSelect" class="btn write-btn" style="float:right;">배너 선정</a>
+				<a href="/news/bannerWrite" class="btn write-btn" style="float:right;">배너 등록</a>	
 			</div>
 		</div>
 		<div class="tab">

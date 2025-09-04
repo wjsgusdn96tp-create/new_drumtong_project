@@ -3,7 +3,6 @@ package kr.co.iei.news.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.javassist.bytecode.analysis.MultiArrayType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,7 @@ import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.news.model.vo.Poster;
 import kr.co.iei.util.FileUtil;
 
 
@@ -70,6 +70,7 @@ public class NewsController {
 	public String writeNews(News news, String productNoStr, String discountType, String discountPrice, MultipartFile newsImageFile, @SessionAttribute(required = false) Member member) {
 		int memberNo = member == null ? 0 : member.getMemberNo();
 		String[] productList = productNoStr.split(",");
+		
 		String savepath = root+"/news/";
 		String filepath = fileUtil.upload(savepath, newsImageFile);
 		news.setImage(filepath);
@@ -169,6 +170,40 @@ public class NewsController {
 		int result = newsService.deleteNews(newsNo);
 		
 		return "redirect:/news/list?noticeReqPage=1&tab=all";
+	}
+	
+	@GetMapping(value="bannerWrite")
+	public String bannerWrite( Model model) {
+		List newsList = newsService.selectAllNewsBanner();
+		model.addAttribute("newsList", newsList);
+		
+		return "news/bannerWrite";
+	}
+	
+	@PostMapping(value="banner")
+	public String banner(Poster poster, MultipartFile posterImageFile) {
+		String savepath = root+"/banner/";
+		String filepath = fileUtil.upload(savepath, posterImageFile);
+		poster.setImage(filepath);
+		int result = newsService.insertPoster(poster);
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping(value="bannerSelect")
+	public String bannerSelect(Model model) {
+		List newsList = newsService.selectAllNewsBanner();
+		model.addAttribute("newsList", newsList);
+		
+		List posterList = newsService.selectAllPoster();
+		model.addAttribute("posterList",posterList);
+		
+		Poster imageMain = newsService.selectMainPoster();
+		model.addAttribute("imageMain", imageMain);
+		
+		Poster imageNews = newsService.selectNewsPoster();
+		model.addAttribute("imageNews", imageNews);
+		return "news/bannerSelect";
 	}
 }
 

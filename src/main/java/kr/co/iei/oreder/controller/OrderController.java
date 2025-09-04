@@ -1,6 +1,7 @@
 package kr.co.iei.oreder.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,10 +73,7 @@ public class OrderController {
 		model.addAttribute("p", p);
 		model.addAttribute("shop", shop);
 		
-		//로그인 하면 회원번호 나오게하기
-		 if(member != null) {
-	        model.addAttribute("memberNo", member.getMemberNo());
-	        }
+		
 		 
 		return "order/Orderoption";
 	}
@@ -102,7 +100,7 @@ public class OrderController {
 	public String cartPage(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
 	    
-		
+		//로그인 체크하기
 		if(member == null) {
 			return "redirect:/member/loginFrm";
 		}
@@ -144,11 +142,33 @@ public class OrderController {
 	public String orderListPage(Model model,
 			@SessionAttribute(required = false) Member member) {
 		
+
+		if(member == null) {
+			return "redirect:/member/loginFrm";
+		}
+		 int memberNo = member.getMemberNo();
+		
+		List list = orderService.selectDetail(memberNo);
+		 
+		model.addAttribute("list", list);
 		
 		
 		
 		return "order/OrderList";
 		
 	}
+	
+	
+	@PostMapping(value="/cartdel")
+	@ResponseBody
+	public int cartdel(int cartNo) {
+		
+		int result = orderService.cartdel(cartNo);
+		
+		return result;
+	}
+	
+	
+	
 	
 }
