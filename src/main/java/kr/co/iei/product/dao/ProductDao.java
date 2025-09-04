@@ -61,4 +61,10 @@ public interface ProductDao {
 
 	List dessertListPriceDate(HashMap<String, Object> param);
 
+	List goodsList(HashMap<String, Object> param);
+
+	List selectGoodsList(HashMap<String, Object> param);
+
+	List goodsListPriceDate(HashMap<String, Object> param);
+
 }

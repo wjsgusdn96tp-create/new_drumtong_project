@@ -22,24 +22,24 @@
 							<ul class="product_title_ice">
 								<li>ICE
 									<ul>
-										<li><a class="drink_a_iceCoffe" href="#">커피</a></li>
-										<li><a class="drink_a_iceTea" href="#">차</a></li>
-										<li><a class="drink_a_iceOther" href="#">그 외 제조음료</a></li>
+										<li><a class="drink_a_iceCoffe" th:href="@{/product/productIceCoffeList(reqPage=1,shopName=${shopName})}">커피</a></li>
+										<li><a class="drink_a_iceTea" th:href="@{/product/productIceTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
+										<li><a class="drink_a_iceOther" th:href="@{/product/productIceOtherList(reqPage=1,shopName=${shopName})}">그 외 제조음료</a></li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="product_title_hot">
 								<li>HOT
 									<ul>
-										<li><a class="drink_a_hotCoffe" href="#">커피</a></li>
-										<li><a class="drink_a_hotTrs" href="#">차</a></li>
+										<li><a class="drink_a_hotCoffe" th:href="@{/product/productHotCoffetList(reqPage=1,shopName=${shopName})}">커피</a></li>
+										<li><a class="drink_a_hotTrs" th:href="@{/product/productTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
 									</ul>
 								</li>
 							</ul>
 						</div>
 					</li>
 					<li class="product_title_main dessert_li"><a class="dessert_a product_title_main_a" th:href="@{/product/productDessertList(reqPage=1,shopName=${shopName})}">디저트</a></li>
-					<li class="product_title_main goods_li"><a class="goods_a product_title_main_a" href="#">굿즈</a></li>
+					<li class="product_title_main goods_li"><a class="goods_a product_title_main_a" th:href="@{/product/productGoodsList(reqPage=1,shopName=${shopName})}">굿즈</a></li>
 				</ul>
 			</div>
 			
@@ -1266,10 +1266,11 @@
 						}
 						
 						
+						if(member.memberGrade == "관리자"){
 						
 						//수정btn
 						const updateForm = $("<form>");
-						updateForm.attr("action","/product/productUpdate");
+						updateForm.attr("action","/product/productUpdateFrm");
 						updateForm.attr("method","get");
 						updateForm.attr("value",product.productNo);
 						
@@ -1323,13 +1324,18 @@
 						deleteLabel.append(deleteButton);
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
-					
+						}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
+						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
-						imgForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							imgForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							imgForm.attr("action","#");
+						}
 						imgForm.attr("method","get");
 						
 						
@@ -1422,7 +1428,12 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						cartForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							cartForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							cartForm.attr("action","#");
+						}
+						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
 						
@@ -1474,7 +1485,9 @@
 						
 						iconDiv.append(priceTextDiv);
 						
+						/*
 						//like icon
+						
 						const likeIconDiv = $("<div>");
 						likeIconDiv.addClass("product_like");
 						likeIconDiv.attr("style","width:200px");
@@ -1486,8 +1499,9 @@
 						
 						const likeIconSpan1 = $("<span>")
 						likeIconSpan1.addClass("material-icons");
-						likeIconSpan1.addClass("unlike_icon");
+						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
 						likeIconSpan1.text("favorite_border");
+						
 						
 						const likeIconSpan2 = $("<span>")
 						likeIconSpan2.addClass("material-icons");
@@ -1512,7 +1526,7 @@
 						likeIconDiv.append(likeUl);
 						
 						//좋아요 div icon div 에 넣기에 넣기
-						iconDiv.append(likeIconDiv);
+						iconDiv.append(likeIconDiv);*/
 						//div_one_box에 넣기
 						div.append(iconDiv);
 						

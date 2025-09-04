@@ -100,6 +100,38 @@ public class ProductController {
 		//좋아요 순
 	}
 	
+	@GetMapping(value="/productGoodsList")
+	private String productGoodsList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNavi(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNavi);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List DessertList = productService.GoodsList(pageNavi, reqPage);
+		model.addAttribute("allList",DessertList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List dessertListDate = productService.goodsListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", dessertListDate);
+		
+		
+		//가격순
+		List dessertListPriceDate =productService.goodsListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", dessertListPriceDate);
+		return "product/productGoodsList";
+		
+		//좋아요 순
+	}
 
 	@GetMapping(value="/productInsertFrm")
 	public String ProductInsertFrm() {
