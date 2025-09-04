@@ -73,7 +73,7 @@
             
             <div class="customer-content-wrap">
                 <table class="title-table">
-                    <tr class="tab-content">
+                    <tr>
                         <th style="width: 15%;">유형</th>
                         <th style="width: 15%;">작성자</th>
                         <th style="width: 45%;">제목</th>
@@ -85,7 +85,7 @@
                         	<th style="width: 10%;">답변</th>
                         </th:block>
                     </tr>
-                    <tbody th:if="${session.member != null}">
+                    <tbody class="content-body" th:if="${session.member != null}">
 	                    <tr class="tab-content"  th:each="customer : ${list}">
 	                        <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
 	                        <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
@@ -102,6 +102,9 @@
 	                            </th:block>
 	                        </td>
 	                    </tr>
+	                    <tr th:if="${#lists.isEmpty(list)}">
+						    <td class="login-warning" colspan="5">등록된 게시글이 없습니다.</td>
+						</tr>
 	                    <tr>
 	                    	<td class="null-td" colspan="5"></td>
 	                    </tr>
@@ -122,7 +125,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="navi" th:if="${session.member != null}">
+            <div class="navi" th:if="${session.member != null and !#lists.isEmpty(list)}">
             	<ul class="navi-ul">
             		<li class="navi-li" th:if="${navi.prev}">
             			<a th:href="@{/customer/list(reqPage=${navi.startNo - 1},sort=${sort})}">
