@@ -148,11 +148,11 @@ public class OrderController {
 		}
 		 int memberNo = member.getMemberNo();
 		
-		List list = orderService.selectDetail(memberNo);
-		 
-		model.addAttribute("list", list);
+		List orderList = orderService.selectOrderList(memberNo);
 		
 		
+
+		model.addAttribute("orderList", orderList);
 		
 		return "order/OrderList";
 		

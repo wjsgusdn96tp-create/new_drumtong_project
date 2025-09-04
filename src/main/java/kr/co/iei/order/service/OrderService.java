@@ -1,6 +1,5 @@
 package kr.co.iei.order.service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +17,7 @@ import kr.co.iei.product.vo.Product;
 
 @Service
 public class OrderService {
+
 	@Autowired
 	private OrderDao orderDao;
 
@@ -52,8 +52,12 @@ public class OrderService {
 		
 		HashMap<String, Object> param = new HashMap<String,Object>();
 		
+		
+		
 		param.put("memberNo", memberNo);
 		param.put("shopName", shopName);
+		
+		
 		
 		List list = orderDao.selectCartList(param);
 		
@@ -127,11 +131,47 @@ public class OrderService {
 	}
 
 
-	public List selectDetail(int memberNo) {
+
+	public List<OrderTbl> selectOrderList(int memberNo) {
 		
-		List detailList = orderDao.selectDetail(memberNo);
 		
-		return detailList;
+		//주문번호 찾기
+		List<OrderTbl> orderList = orderDao.selectOrderList(memberNo);
+		
+		//주문번호받은 값을 대입
+		/*
+		OrderTbl ot = orderList.get(0);		
+		int orderNo = ot.getOrderNo();
+		List<DetailsTbl> deList = orderDao.selectDetailList(orderNo);
+		
+		OrderTbl ot2 = orderList.get(1);
+		int orderNo2 = ot2.getOrderNo();
+		List<DetailsTbl> deList2 = orderDao.selectDetailList(orderNo2);
+		
+		
+		OrderTbl ot3 = orderList.get(2);		
+		int orderNo3 = ot3.getOrderNo();		
+		List<DetailsTbl> deList3 = orderDao.selectDetailList(orderNo3);
+		
+		*/
+		
+		
+		for(int i=0 ; i < orderList.size();i++) {
+			
+			OrderTbl ot = orderList.get(i);		
+			int orderNo = ot.getOrderNo();
+			List<DetailsTbl> deList = orderDao.selectDetailList(orderNo);
+			
+			
+			ot.setDetailsList(deList);
+		
+		}
+		
+		return orderList;
+		
+		
+		//select * from order_details_tbl where order_no = 44;
+
 	}
 
 

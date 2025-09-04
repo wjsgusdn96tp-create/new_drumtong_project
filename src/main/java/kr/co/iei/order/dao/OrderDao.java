@@ -35,7 +35,10 @@ public interface OrderDao {
 
 	int cartdel(int cartNo);
 
-	List selectDetail(int memberNo);
+	List<OrderTbl> selectOrderList(int memberNo);
+
+	List<DetailsTbl> selectDetailList(int orderNo);
+
 
 
 

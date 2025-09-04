@@ -76,10 +76,14 @@
 		<delete id="cartdel">
 			delete from cart_item_tbl where cart_no = #{cartNo}
 		</delete>
-	
-	<select id="selectDetail" resultType="details" >
-		select * from order_details_tbl
+	<select id="selectOrderList" resultType="order">
+		select * from order_tbl where member_no = #{memberNo}
 	</select>
+	<select id="selectDetailList" resultType="details" >
+		select * from order_details_tbl where order_no = #{orderNo}
+	</select>
+	
+	
 		
 		
 </mapper>

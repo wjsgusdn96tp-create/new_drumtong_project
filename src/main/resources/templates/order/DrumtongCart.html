@@ -52,7 +52,6 @@
                                     <div class="option-top">
                                         <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
                                         <span class="cup">컵 : </span><span class="cup-type" th:text="${list.cupChoice}"></span>
-                                    	    <span class="heat">데우기 : </span><span class="heat-check"></span>
                                     </div>
                                     <div class="option-bottom">
                                         <span class="shot">샷추가 : </span><span class="shot-count" th:text="${list.cupShot}"></span>
@@ -142,7 +141,7 @@
     </div>
 
 	
-	
+	<th:block th:include="common/footer"></th:block>
 	<script th:inline="javascript">
 
 	let list = [[${list}]];
@@ -182,7 +181,7 @@
 	$(".cartlist li").each(function(){
 		const title = $(this).find(".hidden-title").text().trim();
 		//li 안에있는 모든 요소중 히든타이틀 찾아서 값 대입하고 공백 제거완료
-		//핀드는 신이다
+
 		const optionBox = $(this).find(".item-option");
 		
 		
