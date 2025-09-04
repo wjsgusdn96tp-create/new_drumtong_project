@@ -148,4 +148,97 @@
   select count(*) from product_like_tbl where notice_no = #{productNo}
 	
   </select>
+  
+  <select id="dessertList">
+  	select * from
+    (select rownum as rnum, n.* from 
+                (select *
+                    from product_tbl p
+                    left join product_best_tbl b on (b.product_no = p.product_no)
+                    order by product_best_no asc
+                )n
+                where product_title='dessert' 
+        )
+        where rnum between #{start} and #{end}
+  </select>
+  
+   <select id="goodsList">
+  	select * from
+    (select rownum as rnum, n.* from 
+                (select *
+                    from product_tbl p
+                    left join product_best_tbl b on (b.product_no = p.product_no)
+                    order by product_best_no asc
+                )n
+                where product_title='goods' 
+        )
+        where rnum between #{start} and #{end}
+  </select>
+  
+   <select id="allDrinkList">
+  	select * from
+    (select rownum as rnum, n.* from 
+                (select *
+                    from product_tbl p
+                    
+                    left join product_best_tbl b on (b.product_no = p.product_no)
+                    order by product_best_no asc
+                )n
+                where product_title='drink' 
+        )
+        where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="selectDessertList">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title='dessert'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="selectGoodsList">
+  	select * from 
+    		(select rownum as rnum, n.* from 
+        		(select 
+            		* 
+       			 from product_tbl order 
+       			 
+       			 by product_no desc
+       			 )n
+       			 where product_title='goods'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="dessertListPriceDate">
+  select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl 
+        		
+        		order by product_price asc
+       			 )n
+       			 where product_title='dessert'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
+   <select id="goodsListPriceDate">
+  select * from 
+    		(select rownum as rnum, n.* from 
+        		(select * from product_tbl 
+        		
+        		order by product_price asc
+       			 )n
+       			 where product_title='goods'
+       		)
+		where rnum between #{start} and #{end}
+  </select>
+  
 </mapper>

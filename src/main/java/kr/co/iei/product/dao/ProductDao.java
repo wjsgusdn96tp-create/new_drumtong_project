@@ -55,4 +55,10 @@ public interface ProductDao {
 
 	int selectProductLikeCount(int productNo);
 
+	List dessertList(HashMap<String, Object> param);
+
+	List selectDessertList(HashMap<String, Object> param);
+
+	List dessertListPriceDate(HashMap<String, Object> param);
+
 }

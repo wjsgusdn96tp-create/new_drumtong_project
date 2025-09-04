@@ -315,6 +315,51 @@ public class ProductService {
 		return likeCount;
 	}
 
+	public List DessertList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List dessertList = productDao.dessertList(param);
+		
+		
+		return dessertList;
+	}
+
+	public List dessertListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectDessertList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
+
+	public List dessertListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.dessertListPriceDate(param);
+		
+		return list;
+	}
+
 	
 
 
