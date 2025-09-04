@@ -110,4 +110,24 @@
 	<delete id="deleteNews">
 		delete from news where news_no = #{newsNo}
 	</delete>
+	
+	<select id="selectAllNewsBanner" resultType="news">
+		select * from news
+	</select>
+	
+	<insert id="insertPoster">
+		insert into poster values(poster_seq.nextval, null, null, #{newsNo}, #{image})
+	</insert>
+	
+	<select id="selectAllPoster" resultType="poster">
+		select * from poster
+	</select>
+	
+	<select id="selectMainPoster" resultType="poster">
+		select * from poster where main_yn = 'Y'
+	</select>
+	
+	<select id="selectNewsPoster" resultType="poster">
+		select * from poster where news_yn = 'Y'
+	</select>
 </mapper>

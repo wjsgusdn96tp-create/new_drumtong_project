@@ -78,7 +78,7 @@
                                 </li>
                                 <li>
                                     <div class="input-item1">
-                                        <p class="comment-content-p" th:text="${cc.commentContent}"></p>
+                                        <p class="comment-content-p" th:utext="${cc.commentContent}"></p>
                                         <div class="input-item" style="display:none;">
                                             <textarea class="ccc" name="commentContent"></textarea>
                                         </div>
@@ -128,7 +128,7 @@
                                         </th:block>
                                     </li>
                                     <li>
-                                        <p class="comment-content-p" th:text="${re.commentContent}"></p>
+                                        <p class="comment-content-p" th:utext="${re.commentContent}"></p>
                                         <div class="input-item" style="display:none;">
                                             <textarea class="ccc" name="commentContent"></textarea>
                                         </div>
@@ -262,12 +262,12 @@
         const contentLi = buttonLi.prev();
 
         const contentP = contentLi.find(".comment-content-p");
-        const textareaDiv = contentLi.find(".input-item[style*='display:none']");
+        const textareaDiv = contentLi.find(".input-item");
 
         textareaDiv.find("textarea").val(contentP.text());
 
         contentP.hide();
-        $(".ccc").show();
+//         $(".ccc").show();
         textareaDiv.show();
 
         $(obj).text("수정완료");
@@ -302,10 +302,10 @@
         const contentLi = buttonLi.prev();
 
         const contentP = contentLi.find(".comment-content-p");
-        const textareaDiv = contentLi.find(".input-item[style*='display:none']");
+        const textareaDiv = contentLi.find(".input-item");
 
         textareaDiv.hide();
-        $(".ccc").hide();
+//         $(".ccc").hide();
         contentP.show();
 
         $(obj).prev().text("수정");

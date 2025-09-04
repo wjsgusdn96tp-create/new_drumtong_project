@@ -23,5 +23,5 @@ public class Customer {
 	private int customerStar;
 	private List<CustomerServiceFile> fileList;
 	private List<CustomerComment> commentList;
-	
+	private int adminCommented; 
 }

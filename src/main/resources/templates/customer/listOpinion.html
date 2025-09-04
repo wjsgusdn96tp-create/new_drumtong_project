@@ -38,16 +38,16 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>
-                            <a th:href="@{/customer/opinion(reqPage=1, sort='lastest')}">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
-                        </li>
-                        <li>
-                            <a th:href="@{/customer/opinion(reqPage=1, sort='oldest')}">오래된순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
-                        </li>
-                        <li>
-                            <a th:href="@{/customer/opinion(reqPage=1, sort='abc')}">가나다순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
-                        </li>
-                    </ul>
+					    <li>
+					        <a th:href="@{/customer/opinion(reqPage=${navi.reqPage}, sort='lastest')}">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+					    </li>
+					    <li>
+					        <a th:href="@{/customer/opinion(reqPage=${navi.reqPage}, sort='oldest')}">오래된순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+					    </li>
+					    <li>
+					        <a th:href="@{/customer/opinion(reqPage=${navi.reqPage}, sort='abc')}">가나다순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+					    </li>
+					</ul>
                 </div>
             </div>
             <div class="customer-content-wrap">
@@ -76,13 +76,13 @@
                             	<button class="delete-btn" th:value="${customer.customerNo}">삭제</button>
                             </th:block>
                             <th:block th:if="${session.member.memberGrade == '관리자'}">
-                            	<input type="checkbox" class="checkbox">
+                            	<input type="checkbox" class="checkbox" th:checked="${customer.adminCommented > 0}" disabled>
                             </th:block>
                         </td>
                     </tr>
                     <tr class="button-tr">
                     	<td class="button-td" colspan="5">
-	                        <button class="write-btn">글쓰기</button>
+	                        <button class="write-btn" th:href=@{/customer/writeFrm}>글쓰기</button>
                     	</td>
                     </tr>
                 </table>
@@ -109,7 +109,37 @@
     </div>
     <th:block th:include="common/footer"></th:block>
     <script>
-    	
+    $(document).ready(function(){
+	    $(".delete-btn").on("click", function() {
+	        
+	        const deleteBtn = $(this);
+	        const index = $(".delete-btn").index(this);
+			const customerNo = deleteBtn.val();
+	        if (!confirm("정말로 삭제하시겠습니까?")) {
+	            return;
+	        }
+	       
+	        $.ajax({
+	            url: "/customer/delete",
+	            type: "post",
+	            data: {
+	                customerNo: customerNo
+	            },
+	            success: function(response) {
+	                if (response === "success") {
+	                    alert("게시글이 삭제되었습니다.");
+						$(".tab-content").eq(index).remove();
+	                    
+	                } else {
+	                    alert("게시글 삭제 실패");
+	                }
+	            },
+	            error: function() {
+	                alert("삭제 오류");
+	            }
+	        });
+	    });
+    });
     
     
     </script>
