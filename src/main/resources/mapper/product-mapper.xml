@@ -132,4 +132,20 @@
   		set product_name=#{productName}
   		where product_no=#{productNo}
   </update>
+  
+  <insert id="insertProductLike">
+  	insert into product_like_tbl values(product_like_seq.nextval, #{productNo},#{memberNo})
+
+  </insert>
+  
+  <delete id="deleteProductLike">
+  delete from product_like_tbl
+		where product_no = #{productNo} and member_no= #{memberNo}
+	
+  </delete>
+  
+  <select id="selectProductLikeCount">
+  select count(*) from product_like_tbl where notice_no = #{productNo}
+	
+  </select>
 </mapper>

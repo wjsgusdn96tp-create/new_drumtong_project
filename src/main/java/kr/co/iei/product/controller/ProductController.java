@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.iei.member.model.vo.Member;
+
 import kr.co.iei.product.service.ProductService;
 import kr.co.iei.product.vo.Product;
 import kr.co.iei.product.vo.productListDate;
 import kr.co.iei.util.FileUtil;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 
 @Controller
@@ -223,6 +227,14 @@ public class ProductController {
 				}
 				
 				return "/product/productList?reqPage=1&shopName=manager";
+	}
+	
+	@PostMapping(value="/likepush")
+	@ResponseBody
+	public int likepush(Product p, @SessionAttribute Member member) {
+		int memberNo = member.getMemberNo();
+		int result = productService.likepush(p,memberNo);
+		return result;
 	}
 	
 }

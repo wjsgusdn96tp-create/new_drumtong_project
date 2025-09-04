@@ -49,4 +49,10 @@ public interface ProductDao {
 
 	int productUpdateBest(String productName, int productBestNo);
 
+	int insertProductLike(HashMap<String, Object> param);
+
+	int deleteProductLike(HashMap<String, Object> param);
+
+	int selectProductLikeCount(int productNo);
+
 }

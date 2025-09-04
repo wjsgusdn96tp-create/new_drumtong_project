@@ -48,13 +48,15 @@
 				<div class="product_list_btn">
 					<button class="btn product_btn price_btn">가격순</button>
 					<button class="btn product_btn day_btn">최신순</button>
+					<!-- 
 					<button class="btn product_btn like_btn">좋아요순</button>
+					 -->
 				</div>
 			
 				<!--e(관리자버튼)메뉴 추가 -->
 				<!-- 메뉴추가 페이지로 이동->페이지에서 form으로 controller -->
 				<div class="product_insert_btn">
-					<button class="btn"><a href="/product/productInsertFrm">메뉴 추가</a></button>
+					<button class="btn product_insert_manager_btn"><a href="/product/productInsertFrm">메뉴 추가</a></button>
 				</div>
 			</div>	
 				
@@ -73,6 +75,15 @@
 			//const reqPage=[[${reqPage}]];
 			
 			
+					const member = [[${session}]];
+
+					
+					if(member.memberGrade!="관리자"){
+						$(".product_insert_manager_btn").css("display","none");
+					}
+					
+						
+						console.log(member);
 					console.log([[${list}]]);
 					
 					const shopName= [[${shopName}]];
@@ -135,6 +146,7 @@
 						}
 						
 						
+						if(member.memberGrade == "관리자"){
 						
 						//수정btn
 						const updateForm = $("<form>");
@@ -192,13 +204,18 @@
 						deleteLabel.append(deleteButton);
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
-					
+						}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
+						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
-						imgForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							imgForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							imgForm.attr("action","#");
+						}
 						imgForm.attr("method","get");
 						
 						
@@ -291,7 +308,12 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						cartForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							cartForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							cartForm.attr("action","#");
+						}
+						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
 						
@@ -343,7 +365,9 @@
 						
 						iconDiv.append(priceTextDiv);
 						
+						/*
 						//like icon
+						
 						const likeIconDiv = $("<div>");
 						likeIconDiv.addClass("product_like");
 						likeIconDiv.attr("style","width:200px");
@@ -355,8 +379,9 @@
 						
 						const likeIconSpan1 = $("<span>")
 						likeIconSpan1.addClass("material-icons");
-						likeIconSpan1.addClass("unlike_icon");
+						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
 						likeIconSpan1.text("favorite_border");
+						
 						
 						const likeIconSpan2 = $("<span>")
 						likeIconSpan2.addClass("material-icons");
@@ -381,7 +406,7 @@
 						likeIconDiv.append(likeUl);
 						
 						//좋아요 div icon div 에 넣기에 넣기
-						iconDiv.append(likeIconDiv);
+						iconDiv.append(likeIconDiv);*/
 						//div_one_box에 넣기
 						div.append(iconDiv);
 						
@@ -394,6 +419,40 @@
 					}
 				
 					
+					
+					
+	
+					
+					
+					
+					/*
+					
+					//좋아요 기능 구현 못함ㅠㅠㅠ
+					if(member != null && member.grade !="관리자" && product.isLike == 1){}
+					$(".likeIconSpan1").on("click", function() {
+						
+						
+						const productNo = $(this).data("productno");
+						const likeText = $(this).text();
+						const isLike = (likeText == "favorite")?1:0;
+					$.ajax({
+						url : "/product/likepush",
+						data : {productNo :productNo, isLike:isLike},
+						type : "post",
+						success : function(data){
+							console.log(data);
+							if(isLike === 0){
+								$(this).text("favorite");
+							}else{
+								$(this).text("favorite_border");
+							}
+							$(this).text(data);
+						
+						}
+					})
+					})
+					
+					*/
 				$(".product_all_list").on("click",function(){
 						
 					$(".product_one_wrap").css("display","none");
@@ -452,10 +511,11 @@
 						}
 						
 						
+						if(member.memberGrade == "관리자"){
 						
 						//수정btn
 						const updateForm = $("<form>");
-						updateForm.attr("action","/product/productUpdate");
+						updateForm.attr("action","/product/productUpdateFrm");
 						updateForm.attr("method","get");
 						updateForm.attr("value",product.productNo);
 						
@@ -509,13 +569,18 @@
 						deleteLabel.append(deleteButton);
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
-					
+						}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
+						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
-						imgForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							imgForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							imgForm.attr("action","#");
+						}
 						imgForm.attr("method","get");
 						
 						
@@ -608,7 +673,12 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						cartForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							cartForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							cartForm.attr("action","#");
+						}
+						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
 						
@@ -660,7 +730,9 @@
 						
 						iconDiv.append(priceTextDiv);
 						
+						/*
 						//like icon
+						
 						const likeIconDiv = $("<div>");
 						likeIconDiv.addClass("product_like");
 						likeIconDiv.attr("style","width:200px");
@@ -672,8 +744,9 @@
 						
 						const likeIconSpan1 = $("<span>")
 						likeIconSpan1.addClass("material-icons");
-						likeIconSpan1.addClass("unlike_icon");
+						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
 						likeIconSpan1.text("favorite_border");
+						
 						
 						const likeIconSpan2 = $("<span>")
 						likeIconSpan2.addClass("material-icons");
@@ -698,7 +771,7 @@
 						likeIconDiv.append(likeUl);
 						
 						//좋아요 div icon div 에 넣기에 넣기
-						iconDiv.append(likeIconDiv);
+						iconDiv.append(likeIconDiv);*/
 						//div_one_box에 넣기
 						div.append(iconDiv);
 						
@@ -709,6 +782,7 @@
 						//ul에 반복문 넣기
 						$(".product_list_wrap_ul").append(li);
 					}
+				
 				})
 						
 								
@@ -823,10 +897,11 @@
 						}
 						
 						
+						if(member.memberGrade == "관리자"){
 						
 						//수정btn
 						const updateForm = $("<form>");
-						updateForm.attr("action","/product/productUpdate");
+						updateForm.attr("action","/product/productUpdateFrm");
 						updateForm.attr("method","get");
 						updateForm.attr("value",product.productNo);
 						
@@ -880,13 +955,18 @@
 						deleteLabel.append(deleteButton);
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
-					
+						}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
+						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
-						imgForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							imgForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							imgForm.attr("action","#");
+						}
 						imgForm.attr("method","get");
 						
 						
@@ -979,7 +1059,12 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						cartForm.attr("action","/order/Orderoption");
+						if(member.memberGrade != "관리자"){
+							cartForm.attr("action","/order/Orderoption");						
+						}else if(member.memberGrade == "관리자"){
+							cartForm.attr("action","#");
+						}
+						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
 						
@@ -1031,7 +1116,9 @@
 						
 						iconDiv.append(priceTextDiv);
 						
+						/*
 						//like icon
+						
 						const likeIconDiv = $("<div>");
 						likeIconDiv.addClass("product_like");
 						likeIconDiv.attr("style","width:200px");
@@ -1043,8 +1130,9 @@
 						
 						const likeIconSpan1 = $("<span>")
 						likeIconSpan1.addClass("material-icons");
-						likeIconSpan1.addClass("unlike_icon");
+						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
 						likeIconSpan1.text("favorite_border");
+						
 						
 						const likeIconSpan2 = $("<span>")
 						likeIconSpan2.addClass("material-icons");
@@ -1069,7 +1157,7 @@
 						likeIconDiv.append(likeUl);
 						
 						//좋아요 div icon div 에 넣기에 넣기
-						iconDiv.append(likeIconDiv);
+						iconDiv.append(likeIconDiv);*/
 						//div_one_box에 넣기
 						div.append(iconDiv);
 						
@@ -1080,6 +1168,7 @@
 						//ul에 반복문 넣기
 						$(".product_list_wrap_ul").append(li);
 					}
+				
 					
 				
 				

@@ -248,7 +248,7 @@ public class ProductService {
 		Product searchProductUpdate = productDao.searchProductUpdate(productNo);
 		return searchProductUpdate;
 	}
-
+	@Transactional
 	public int productGoodsUpadte(int productNo, int productPrice, String productName, String productContentPresent,
 			int productBestNo) {
 		if(productBestNo == -1) {
@@ -274,7 +274,7 @@ public class ProductService {
 			}
 		}
 	}
-
+	@Transactional
 	public int productUpadte(int productNo, int productPrice, String productName, int productBestNo) {
 		if(productBestNo == -1) {
 			//일반 상품
@@ -298,6 +298,21 @@ public class ProductService {
 				return 0;//실패
 			}
 		}
+	}
+
+	public int likepush(Product p, int memberNo) {
+		HashMap<String, Object> param = new HashMap<String,Object>();
+		param.put("productNo", p.getProductNo());
+		param.put("memberNo", memberNo);
+		System.out.println(p);
+		if(p.getIsLike() == 0) {
+			int result = productDao.insertProductLike(param);
+		}else {
+			int result = productDao.deleteProductLike(param);
+		}
+		
+		int likeCount = productDao.selectProductLikeCount(p.getProductNo());
+		return likeCount;
 	}
 
 	
