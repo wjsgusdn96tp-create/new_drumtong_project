@@ -133,7 +133,7 @@
   		where product_no=#{productNo}
   </update>
   
-  <insert id="insertProductLike">
+  <insert id="insertProductLike" >
   	insert into product_like_tbl values(product_like_seq.nextval, #{productNo},#{memberNo})
 
   </insert>
@@ -144,12 +144,12 @@
 	
   </delete>
   
-  <select id="selectProductLikeCount">
+  <select id="selectProductLikeCount" resultType="product">
   select count(*) from product_like_tbl where notice_no = #{productNo}
 	
   </select>
   
-  <select id="dessertList">
+  <select id="dessertList" resultType="product">
   	select * from
     (select rownum as rnum, n.* from 
                 (select *
@@ -162,7 +162,7 @@
         where rnum between #{start} and #{end}
   </select>
   
-   <select id="goodsList">
+   <select id="goodsList" resultType="product">
   	select * from
     (select rownum as rnum, n.* from 
                 (select *
@@ -175,7 +175,7 @@
         where rnum between #{start} and #{end}
   </select>
   
-   <select id="allDrinkList">
+   <select id="allDrinkList" resultType="product">
   	select * from
     (select rownum as rnum, n.* from 
                 (select *
@@ -189,7 +189,7 @@
         where rnum between #{start} and #{end}
   </select>
   
-  <select id="selectDessertList">
+  <select id="selectDessertList" resultType="product">
   	select * from 
     		(select rownum as rnum, n.* from 
         		(select 
@@ -203,7 +203,7 @@
 		where rnum between #{start} and #{end}
   </select>
   
-  <select id="selectGoodsList">
+  <select id="selectGoodsList" resultType="product">
   	select * from 
     		(select rownum as rnum, n.* from 
         		(select 
@@ -217,7 +217,7 @@
 		where rnum between #{start} and #{end}
   </select>
   
-  <select id="dessertListPriceDate">
+  <select id="dessertListPriceDate" resultType="product">
   select * from 
     		(select rownum as rnum, n.* from 
         		(select * from product_tbl 
@@ -229,7 +229,7 @@
 		where rnum between #{start} and #{end}
   </select>
   
-   <select id="goodsListPriceDate">
+   <select id="goodsListPriceDate" resultType="product">
   select * from 
     		(select rownum as rnum, n.* from 
         		(select * from product_tbl 
