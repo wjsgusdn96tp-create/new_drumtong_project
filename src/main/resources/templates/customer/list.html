@@ -8,6 +8,20 @@
     	.material-icons{
     		margin: 0 auto;
     	}
+    	.null-td{
+			height: auto;
+		    border: 1px, solid, var(--main3);
+		    border-bottom: 0;
+		    border-top: 0;
+		}
+		
+		.button-td{
+		    text-align: right;
+		    padding-right: 15px;
+		    height: 40px;
+		    border-top: 1px, solid, var(--main3);
+		}
+		
     </style>
 </head>
 <body>
@@ -44,22 +58,22 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>
-                            <a href="/customer/list?reqPage=1&sort=lastest">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
-                        </li>
-                        <li>
-                            <a href="/customer/list?reqPage=1&sort=oldest">오래된순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
-                        </li>
-                        <li>
-                            <a href="/customer/list?reqPage=1&sort=abc">가나다순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
-                        </li>
-                    </ul>
+					    <li>
+					        <a th:href="@{/customer/list(reqPage=${navi.reqPage}, sort='lastest')}">최신순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+					    </li>
+					    <li>
+					        <a th:href="@{/customer/list(reqPage=${navi.reqPage}, sort='oldest')}">오래된순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+					    </li>
+					    <li>
+					        <a th:href="@{/customer/list(reqPage=${navi.reqPage}, sort='abc')}">가나다순<span class="material-icons" style="font-size: 20px;">arrow_drop_down</span></a>
+					    </li>
+					</ul>
                 </div>
             </div>
             
             <div class="customer-content-wrap">
                 <table class="title-table">
-                    <tr>
+                    <tr class="tab-content">
                         <th style="width: 15%;">유형</th>
                         <th style="width: 15%;">작성자</th>
                         <th style="width: 45%;">제목</th>
@@ -84,9 +98,12 @@
 	                            	<button class="delete-btn" th:value="${customer.customerNo}">삭제</button>
 	                            </th:block>
 	                            <th:block th:if="${session.member.memberGrade == '관리자'}">
-	                            	<input type="checkbox" class="checkbox">
+	                            	<input type="checkbox" class="checkbox" th:checked="${customer.adminCommented > 0}" disabled>
 	                            </th:block>
 	                        </td>
+	                    </tr>
+	                    <tr>
+	                    	<td class="null-td" colspan="5"></td>
 	                    </tr>
 	                    <tr class="button-tr">
 	                    	<td class="button-td" colspan="5">

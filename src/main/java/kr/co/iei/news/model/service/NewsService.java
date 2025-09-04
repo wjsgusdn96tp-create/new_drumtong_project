@@ -11,6 +11,7 @@ import kr.co.iei.news.model.dao.NewsDao;
 import kr.co.iei.news.model.vo.Discount;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.Notice;
+import kr.co.iei.news.model.vo.Poster;
 
 @Service
 public class NewsService {
@@ -222,10 +223,37 @@ public class NewsService {
 		
 		return result;
 	}
-
+	@Transactional
 	public int deleteNews(int newsNo) {
 		int result = newsDao.deleteNews(newsNo);
 		return 0;
+	}
+
+	public List selectAllNewsBanner() {
+		List newsList = newsDao.selectAllNewsBanner();
+		
+		return newsList;
+	}
+
+	@Transactional
+	public int insertPoster(Poster poster) {
+		int result = newsDao.insertPoster(poster);
+		return result;
+	}
+
+	public List selectAllPoster() {
+		List posterList = newsDao.selectAllPoster();
+		return posterList;
+	}
+
+	public Poster selectMainPoster() {
+		Poster imageMain = newsDao.selectMainPoster();
+		return imageMain;
+	}
+
+	public Poster selectNewsPoster() {
+		Poster imageNews = newsDao.selectNewsPoster();
+		return imageNews;
 	}
 	
 }

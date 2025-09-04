@@ -130,6 +130,7 @@ body{
     display: flex;
     justify-content: center;
 }
+
 .title-table{
     width: 100%;
     border-spacing: 0;
@@ -139,27 +140,40 @@ body{
 .title-table>tbody>tr>th{
     border: 1px, solid, var(--main3);
     border-right: 0;
-    
     height: 40px;
+    max-height: 40px;
 }
 
 .title-table>tbody>tr>:last-child{
     border-right: 1px solid var(--main3);
 }
+
+
 .tab-content>td{
     border: 1px, solid, var(--main3);
     border-right: 0;
     border-top: 0;
-    height: 30px;
+    height: 25px;
+    max-height: 25px;
     text-align: center;
     font-size: 12px;
+    vertical-align: middle;
+}
+.title-td{
+	padding-top: 5px
 }
 .title-td>a{
     display: block;
     width: 100%;
     height: 100%;
     text-decoration: none;
-    color: var(--gray1);
+    color: var(--gray3);
+}
+.null-td{
+	height: auto;
+    border: 1px, solid, var(--main3);
+    border-bottom: 0;
+    border-top: 0;
 }
 .delete-btn{
     font-size: 10px;

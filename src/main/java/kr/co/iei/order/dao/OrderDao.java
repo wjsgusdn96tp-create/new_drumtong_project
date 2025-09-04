@@ -33,7 +33,17 @@ public interface OrderDao {
 
 	int deleteCart(HashMap<String, Object> param);
 
+	int cartdel(int cartNo);
 
+	List<OrderTbl> selectOrderList(int memberNo);
+
+	List<DetailsTbl> selectDetailList(int orderNo);
+
+
+
+
+
+	
 
 
 

@@ -19,7 +19,7 @@
 	<div class="order-option-main-box">
 	    <div class="order-option-image-box"><img src="/" ></div>
 	
-	    <div class="order-option-option-box">
+	    <div id="drinkBox" class="order-option-option-box">
 	    
 	        <div class="order-option-top">
 	            <div class="order-option-name" th:text="${p.productName}"></div>
@@ -75,16 +75,66 @@
 	                <div>원</div>
 	        </div>
 	    </div>
+	    <div id="dessertBox" class="order-option-option-box">
+	    
+	        <div class="order-option-top">
+	            <div class="order-option-name" th:text="${p.productName}"></div>
+	        </div>
+	
+	            <div class="order-option-quantity-box">
+	                <div class="order-option-quantity">
+	                    <button class="button-minus1"><span class="material-icons">remove_circle_outline</span></button>
+	                    <span class="order-option-count">1</span>
+	                    <button class="button-plus1"><span class="material-icons">add_circle_outline</span></button>
+	                </div>
+	                <div class="order-base-price" th:text="${p.productPrice}"></div>
+	                	                <div>원</div>
+	            </div>
+	          
+	   
+	       
+	 
+	          
+	
+	        <div class="order-option-totalbox">
+	            <div class="order-option-totalname">결제금액</div>
+	            <div class="order-option-totalprice" th:text="${p.productPrice}"></div>
+	                <div>원</div>
+	        </div>
+	    </div>
+	    <div id="goodsBox" class="order-option-option-box">
+	    
+	        <div class="order-option-top">
+	            <div class="order-option-name" th:text="${p.productName}"></div>
+	        </div>
+	
+	            <div class="order-option-quantity-box">
+	                <div class="order-option-quantity">
+	                    <button class="button-minus1"><span class="material-icons">remove_circle_outline</span></button>
+	                    <span class="order-option-count">1</span>
+	                    <button class="button-plus1"><span class="material-icons">add_circle_outline</span></button>
+	                </div>
+	                <div class="order-base-price" th:text="${p.productPrice}"></div>
+	                	                <div>원</div>
+	            </div>
+	            
+	
+	        <div class="order-option-totalbox">
+	            <div class="order-option-totalname">결제금액</div>
+	            <div class="order-option-totalprice" th:text="${p.productPrice}"></div>
+	                <div>원</div>
+	        </div>
+	    </div>
 	</div>
 
 
 
 	<div class="order-option-footer">
-	    <a href="/product/productList?reqPage=1" class="order-listpage">메뉴목록</a>
-	    <!--
-	    나중에 매장 이름으로 불러올때 새로고침 하는 경우의 값
-	    <a href="/product/productList?reqPage=${reqPage}&shopName=${shopName}" class="order-listpage">
-	      -->
+	
+	
+	    <a th:href="@{'/product/productList?shopName='+${shop.shopName}+'&reqPage=1'}" class="order-listpage">메뉴목록</a>
+	 			
+	 			
 	    
 		
 		
@@ -92,48 +142,172 @@
 			  <input type="hidden" name="productName" id="productName" th:value="${p.productName}">
 			  <input type="hidden" name="productPrice" id="productPrice" th:value="${p.productPrice}">
 			  <input type="hidden" name="shopName" id="shopName" th:value="${shop.shopName}">
-			  <!-- 이미지 받을것 <input type="hidden" name="productImg" id="productImg" th:value="${p.productImg}">-->
-		      <input type="hidden" name="count" id="count" th:value="1">
+			  <input type="hidden" name="productImg" id="productImg" th:value="${p.productImg}">
 		      <input type="hidden" name="cupShot" id="cupShot" th:value="0">
 		      <input type="hidden" name="cupCream" id="cupCream" th:value="0">
 		      <input type="hidden" name="cupChoice" id="cupChoice" th:value="개인">
 		      <input type="hidden" name="cupSize" id="cupSize" th:value="L">
-		      <input type="hidden" name="pay" id="pay" th:value="${p.productPrice}">
+		      <input type="hidden" name="productTitle" id="productTitle" th:value="${p.productTitle}">
+		      
+		      <input type="hidden" name="count" id="count" th:value="1">
+		      
+			  <input type="hidden" id="drinkCount" value="1">
+			  <input type="hidden" id="dessertCount" value="1">
+			  <input type="hidden" id="goodsCount" value="1">
+		      
+	   		  <input type="hidden" name="pay" id="pay" th:value="${p.productPrice}">
+		      
+		      <input type="hidden" name="pay" id="drinkPay" th:value="${p.productPrice}">
+	   	      <input type="hidden" name="pay" id="dessertPay" th:value="${p.productPrice}">
+	   	      <input type="hidden" name="pay" id="goodsPay" th:value="${p.productPrice}">		 
 	   
+	    
 	    <button type="submit" class="order-cartadd">장바구니담기</button>
 
 	    
 	    
-	    <form action="/order/DrumtongCart" method="get">
-	    	<input type="hidden" name="shopName" id="shopName" th:value="${shop.shopName}">
-	    	<button type="submit" class="order-moveCart">장바구니가기</button>
-	    </form>
+	    
 	</div>
-	
+	<th:block th:include="common/footer"></th:block>
 	<script th:inline="javascript">
+			//타이틀 값 저장
+			const productTitle = [[${p.productTitle}]];
+			
+			$("#drinkBox, #dessertBox, #goodsBox").hide();
+			
+			//쇼 하이드로 보이기 숨기
+			if (productTitle === "drink") {
+				$("#drinkBox").show();
+			}else if (productTitle === "dessert") {
+			    $("#dessertBox").show();
+			}else if (productTitle === "goods") {
+			    $("#goodsBox").show();
+			}
+			
 			const shotPay =  400;
 			const creamPay = 500;
 			const sizePrice = 2000;
 			let selectedSize = "L";
 			
-			const basePrice = Number($(".order-base-price").text());
+			const drinkBasePrice = Number($("#drinkBox .order-base-price").text());
+			const dessertBasePrice = Number($("#dessertBox .order-base-price").text());
+			const goodsBasePrice = Number($("#goodsBox .order-base-price").text());
 			
-			$("#pay").val(basePrice); 
+			if (productTitle === "drink") {
+			    $("#pay").val(drinkBasePrice);
+			} else if (productTitle === "dessert") {
+			    $("#pay").val(dessertBasePrice);
+			} else if (productTitle === "goods") {
+			    $("#pay").val(goodsBasePrice);
+			}
 			
 			
 			
-			$(".order-option-sizebtn").on("click",function(){
 			
+			
+			$("#dessertBox .button-plus1").on("click",function(){
+				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
+				const optionCount = $("#dessertBox .order-option-count").text();
 				
-				const optionCount = $(".order-option-count").text();
-				const shotCount = $(".order-option-shotcount").text();
-				const creamCount = $(".order-option-creamcount").text();
+				const plusCount = Number(optionCount)+1;
+				
+				if(optionCount == 10){
+					return;
+				}
+				
+				
+				const totalPrice = dessertBasePrice * plusCount;
+				const payPrice = totalPrice;
+						
+				//태그 안의 문자열값에 플러스한 값을 대입
+				$("#dessertBox .order-option-count").text(plusCount);
+				$("#dessertBox .order-base-price").text(totalPrice);
+				$("#dessertBox .order-option-totalprice").text(payPrice);
+				
+				$("#dessertCount").val(plusCount);
+				$("#dessertPay").val(payPrice);
+			});
+			
+			
+			$("#dessertBox .button-minus1").on("click",function(){
+				const optionCount = $("#dessertBox .order-option-count").text();
+				
+				const minusCount = Number(optionCount)-1;
+				
+				if(optionCount == 1 ){
+					return;
+				}
+			
+				const totalPrice = dessertBasePrice * minusCount;
+				const payPrice = totalPrice;
+						
+				$("#dessertBox .order-option-count").text(minusCount);
+				$("#dessertBox .order-base-price").text(totalPrice);
+				$("#dessertBox .order-option-totalprice").text(payPrice);
+				
+				$("#dessertBox").val(minusCount);
+				$("#dessertBox").val(payPrice);
+			});
+			
+			
+			$("#goodsBox .button-plus1").on("click",function(){
+				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
+				const optionCount = $("#goodsBox .order-option-count").text();
+				
+				const plusCount = Number(optionCount)+1;
+				
+				if(optionCount == 10){
+					return;
+				}
+				
+				
+				const totalPrice = goodsBasePrice * plusCount;
+				const payPrice = totalPrice;
+						
+				//태그 안의 문자열값에 플러스한 값을 대입
+				$("#goodsBox .order-option-count").text(plusCount);
+				$("#goodsBox .order-base-price").text(totalPrice);
+				$("#goodsBox .order-option-totalprice").text(payPrice);
+				
+				$("#goodsCount").val(plusCount);
+				$("#goodsPay").val(payPrice);
+			});
+			
+			
+			$("#goodsBox .button-minus1").on("click",function(){
+				const optionCount = $("#dessertBox .order-option-count").text();
+				
+				const minusCount = Number(optionCount)-1;
+				
+				if(optionCount == 1 ){
+					return;
+				}
+			
+				const totalPrice = goodsBasePrice * minusCount;
+				const payPrice = totalPrice;
+						
+				$("#goodsBox .order-option-count").text(minusCount);
+				$("#goodsBox .order-base-price").text(totalPrice);
+				$("#goodsBox .order-option-totalprice").text(payPrice);
+				
+				$("#goodsCount").val(minusCount);
+				$("#goodsPay").val(payPrice);
+			});
+			
+			
+			
+			
+			$("#drinkBox .order-option-sizebtn").on("click",function(){
+			
+				const optionCount = $("#drinkBox .order-option-count").text();
+				const shotCount = $("#drinkBox .order-option-shotcount").text();
+				const creamCount = $("#drinkBox .order-option-creamcount").text();
 				
 				const shop = $(this).text();	
 				
 				console.log(shop);
 			
-				$(".order-option-sizebtn").removeClass("selected");	
+				$("#drinkBox .order-option-sizebtn").removeClass("selected");	
 				$(this).addClass("selected");
 				
 				selectedSize = shop;
@@ -145,7 +319,7 @@
 				} 
 					
 					
-				const totalPrice = basePrice * optionCount;
+				const totalPrice = drinkBasePrice * optionCount;
 				const sizeTotal = sizePrice * plusCount * optionCount;
 				const shotTotal = shotCount * shotPay * optionCount;
 				const creamTotal = creamCount * creamPay * optionCount;
@@ -154,21 +328,21 @@
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 				
 					//태그 안의 문자열값에 플러스한 값을 대입
-					$(".order-option-price").text(totalPrice);
-					$(".order-option-totalprice").text(payPrice);
+					$("#drinkBox .order-option-price").text(totalPrice);
+					$("#drinkBox .order-option-totalprice").text(payPrice);
 				
 					
 					//인풋값 밸류 변경 밸류값을 대입
 			
 					 $("#cupSize").val(shop);    // "L" or "XL" 값
-						 $("#pay").val(payPrice);    // 결제금액
+					 $("#drinkPay").val(payPrice);    // 결제금액
 			
 			});
 			
-			$(".order-option-cupbtn").on("click",function(){
+			$("#drinkBox .order-option-cupbtn").on("click",function(){
 				const solo = $(this).text();
 				
-				$(".order-option-cupbtn").removeClass("selected");	
+				$("#drinkBox .order-option-cupbtn").removeClass("selected");	
 				
 				$(this).addClass("selected");
 				
@@ -177,11 +351,11 @@
 			});
 			
 			//지정한 클래스명을 눌렀을때 동작		
-			$(".button-plus1").on("click",function(){
+			$("#drinkBox .button-plus1").on("click",function(){
 				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
-				const optionCount = $(".order-option-count").text();
-				const shotCount = $(".order-option-shotcount").text();
-				const creamCount = $(".order-option-creamcount").text();
+				const optionCount = $("#drinkBox .order-option-count").text();
+				const shotCount = $("#drinkBox .order-option-shotcount").text();
+				const creamCount = $("#drinkBox .order-option-creamcount").text();
 				
 			
 				const plusCount = Number(optionCount)+1;
@@ -196,7 +370,7 @@
 					sizeCount = 1;
 				}
 				
-				const totalPrice = basePrice * plusCount;
+				const totalPrice = drinkBasePrice * plusCount;
 				const sizeTotal = sizePrice * sizeCount * plusCount;
 				const shotTotal = shotCount * shotPay * plusCount;
 				const creamTotal = creamCount * creamPay * plusCount;
@@ -204,19 +378,19 @@
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 						
 				//태그 안의 문자열값에 플러스한 값을 대입
-				$(".order-option-count").text(plusCount);
-				$(".order-base-price").text(totalPrice);
-				$(".order-option-totalprice").text(payPrice);
+				$("#drinkBox .order-option-count").text(plusCount);
+				$("#drinkBox .order-base-price").text(totalPrice);
+				$("#drinkBox .order-option-totalprice").text(payPrice);
 				
-				$("#count").val(plusCount);
-				$("#pay").val(payPrice);
+				$("#drinkCount").val(plusCount);
+				$("#drinkPay").val(payPrice);
 			});
 			
-			$(".button-plus2").on("click", function(){
+			$("#drinkBox .button-plus2").on("click", function(){
 				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
-				const optionCount = $(".order-option-count").text();
-				const shotCount = $(".order-option-shotcount").text();
-				const creamCount = $(".order-option-creamcount").text();
+				const optionCount = $("#drinkBox .order-option-count").text();
+				const shotCount = $("#drinkBox .order-option-shotcount").text();
+				const creamCount = $("#drinkBox .order-option-creamcount").text();
 				
 				
 			
@@ -233,7 +407,7 @@
 					sizeCount = 1;
 				} 
 			
-				const totalPrice = basePrice * optionCount;
+				const totalPrice = drinkBasePrice * optionCount;
 				const sizeTotal = sizePrice * sizeCount * optionCount;
 				const shotTotal = plusCount * shotPay * optionCount;
 				const creamTotal = creamCount * creamPay * optionCount;
@@ -241,20 +415,20 @@
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 						
 				//태그 안의 문자열값에 플러스한 값을 대입
-				$(".order-option-shotcount").text(plusCount);
-				$(".order-option-price").text(totalPrice);
-				$(".order-option-totalprice").text(payPrice);
+				$("#drinkBox .order-option-shotcount").text(plusCount);
+				$("#drinkBox .order-option-price").text(totalPrice);
+				$("#drinkBox .order-option-totalprice").text(payPrice);
 				
 				$("#cupShot").val(plusCount);
-				$("#pay").val(payPrice);
+				$("#drinkPay").val(payPrice)
 				
 			});
 			
-			$(".button-plus3").on("click",function(){
+			$("#drinkBox .button-plus3").on("click",function(){
 				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
-				const optionCount = $(".order-option-count").text();
-				const shotCount = $(".order-option-shotcount").text();
-				const creamCount = $(".order-option-creamcount").text();
+				const optionCount = $("#drinkBox .order-option-count").text();
+				const shotCount = $("#drinkBox .order-option-shotcount").text();
+				const creamCount = $("#drinkBox .order-option-creamcount").text();
 				
 				const plusCount = Number(creamCount)+1;
 				
@@ -267,7 +441,7 @@
 					sizeCount = 1;
 				} 
 			
-				const totalPrice = basePrice * optionCount;
+				const totalPrice = drinkBasePrice * optionCount;
 				const sizeTotal = sizePrice * sizeCount * optionCount;
 				const shotTotal = shotCount * shotPay * optionCount;
 				const creamTotal = plusCount * creamPay * optionCount;
@@ -275,20 +449,20 @@
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 						
 				//태그 안의 문자열값에 플러스한 값을 대입
-				$(".order-option-creamcount").text(plusCount);
-				$(".order-option-price").text(totalPrice);
-				$(".order-option-totalprice").text(payPrice);
+				$("#drinkBox .order-option-creamcount").text(plusCount);
+				$("#drinkBox .order-option-price").text(totalPrice);
+				$("#drinkBox .order-option-totalprice").text(payPrice);
 					
 				$("#cupCream").val(plusCount);
-				$("#pay").val(payPrice);
+				$("#drinkpay").val(payPrice);
 				
 			});
 				
 				
-			$(".button-minus1").on("click",function(){
-				const optionCount = $(".order-option-count").text();
-				const shotCount = $(".order-option-shotcount").text();
-				const creamCount = $(".order-option-creamcount").text();
+			$("#drinkBox .button-minus1").on("click",function(){
+				const optionCount = $("#drinkBox .order-option-count").text();
+				const shotCount = $("#drinkBox .order-option-shotcount").text();
+				const creamCount = $("#drinkBox .order-option-creamcount").text();
 				
 				const minusCount = Number(optionCount)-1;
 				
@@ -302,28 +476,28 @@
 					sizeCount = 1;
 				} 
 			
-				const totalPrice = basePrice * minusCount;
+				const totalPrice = drinkBasePrice * minusCount;
 				const sizeTotal = sizePrice * sizeCount * minusCount;
 				const shotTotal = shotCount * shotPay * minusCount;
 				const creamTotal = creamCount * creamPay * minusCount;
 				
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 						
-				$(".order-option-count").text(minusCount);
-				$(".order-base-price").text(totalPrice);
-				$(".order-option-totalprice").text(payPrice);
+				$("#drinkBox .order-option-count").text(minusCount);
+				$("#drinkBox .order-base-price").text(totalPrice);
+				$("#drinkBox .order-option-totalprice").text(payPrice);
 				
-				$("#count").val(minusCount);
-				$("#pay").val(payPrice);
+				$("#drinkCount").val(minusCount);
+				$("#drinkPay").val(payPrice);
 			});
 					
 			
 			
-			$(".button-minus2").on("click", function(){
+			$("#drinkBox .button-minus2").on("click", function(){
 				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
-				const optionCount = $(".order-option-count").text();
-				const shotCount = $(".order-option-shotcount").text();
-				const creamCount = $(".order-option-creamcount").text();
+				const optionCount = $("#drinkBox .order-option-count").text();
+				const shotCount = $("#drinkBox .order-option-shotcount").text();
+				const creamCount = $("#drinkBox .order-option-creamcount").text();
 				
 				
 				// 마지막 결제 금액
@@ -339,7 +513,7 @@
 					sizeCount = 1;
 				} 
 				
-				const totalPrice = basePrice * optionCount;
+				const totalPrice = drinkBasePrice * optionCount;
 				const sizeTotal = sizePrice * sizeCount * optionCount;
 				const shotTotal = minusCount * shotPay * optionCount;
 				const creamTotal = creamCount * creamPay * optionCount;
@@ -347,20 +521,20 @@
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 						
 				//태그 안의 문자열값에 플러스한 값을 대입
-				$(".order-option-shotcount").text(minusCount);
-				$(".order-option-price").text(totalPrice);
-				$(".order-option-totalprice").text(payPrice);
+				$("#drinkBox .order-option-shotcount").text(minusCount);
+				$("#drinkBox .order-option-price").text(totalPrice);
+				$("#drinkBox .order-option-totalprice").text(payPrice);
 				
 				 $("#cupShot").val(minusCount);
-			     $("#pay").val(payPrice);
+			     $("#drinkPay").val(payPrice);
 			});
 				
 				
-			$(".button-minus3").on("click",function(){
+			$("#drinkBox .button-minus3").on("click",function(){
 				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
-				const optionCount = $(".order-option-count").text();
-				const shotCount = $(".order-option-shotcount").text();
-				const creamCount = $(".order-option-creamcount").text();
+				const optionCount = $("#drinkBox .order-option-count").text();
+				const shotCount = $("#drinkBox .order-option-shotcount").text();
+				const creamCount = $("#drinkBox .order-option-creamcount").text();
 				
 				const minusCount = Number(creamCount)-1;
 				
@@ -373,7 +547,7 @@
 					sizeCount = 1;
 				} 
 			
-				const totalPrice = basePrice * optionCount;
+				const totalPrice = drinkBasePrice * optionCount;
 				const sizeTotal = sizePrice * sizeCount * optionCount;
 				const shotTotal = shotCount * shotPay * optionCount;
 				const creamTotal = minusCount * creamPay * optionCount;
@@ -381,35 +555,51 @@
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 						
 				//태그 안의 문자열값에 플러스한 값을 대입
-				$(".order-option-creamcount").text(minusCount);
-				$(".order-option-price").text(totalPrice);
-				$(".order-option-totalprice").text(payPrice);
+				$("#drinkBox .order-option-creamcount").text(minusCount);
+				$("#drinkBox .order-option-price").text(totalPrice);
+				$("#drinkBox .order-option-totalprice").text(payPrice);
 				
 				$("#cupCream").val(minusCount);
-			    $("#pay").val(payPrice)
+			    $("#drinkPay").val(payPrice)
 				
 			});
 	
 	
 	
 	$(".order-cartadd").on("click", function(){
-	    
+		const productTitle = [[${p.productTitle}]];
+		let count = 1;
+		let pay = 0;
+		
+		if(productTitle === "drink"){
+			count = $("#drinkCount").val();
+			pay = $("#drinkPay").val();
+		}else if (productTitle === "dessert") {
+	        count = $("#dessertCount").val();
+	        pay = $("#dessertPay").val();
+		 } else if (productTitle === "goods") {
+		    count = $("#goodsCount").val();
+		    pay = $("#goodsPay").val();
+		 }
+		
 		const productNo = $("#productNo").val();
         const productName = $("#productName").val();
         const productPrice = $("#productPrice").val();
         const shopName = $("#shopName").val();
-        const count = $("#count").val();
+        
         const cupShot = $("#cupShot").val();
         const cupCream = $("#cupCream").val();
         const cupChoice = $("#cupChoice").val();
         const cupSize = $("#cupSize").val();
-        const pay = $("#pay").val();
 		
+        
+        
+        
 	    $.ajax({
 	        url: "/order/DrumtongCart",
 	        type: "post",
 	        data: {
-	        	
+	        		productTitle: productTitle,
 	            productNo: productNo,
 	            productName: productName,
 	            productPrice: productPrice,

@@ -41,4 +41,24 @@ public interface ProductDao {
 
 	Product searchProductUpdate(int productNo);
 
+	int productGoodsUpdate(int productNo, int productPrice, String productName, String productContentPresent);
+
+	int productGoodsUpdateBest(String productName, int productBestNo);
+
+	int productUpdate(int productNo, int productPrice, String productName);
+
+	int productUpdateBest(String productName, int productBestNo);
+
+	int insertProductLike(HashMap<String, Object> param);
+
+	int deleteProductLike(HashMap<String, Object> param);
+
+	int selectProductLikeCount(int productNo);
+
+	List dessertList(HashMap<String, Object> param);
+
+	List selectDessertList(HashMap<String, Object> param);
+
+	List dessertListPriceDate(HashMap<String, Object> param);
+
 }
