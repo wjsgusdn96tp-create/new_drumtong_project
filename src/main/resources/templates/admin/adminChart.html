@@ -5,7 +5,10 @@
 <title>Insert title here</title>
 <style>
 	.title{
-	
+		margin-top: 30px;
+	}
+	.chart {
+		margin-bottom : 20px;
 	}
 </style>
 
@@ -18,27 +21,63 @@
 
 <th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
-		<div class="title"><h3>매출현황(금액)</h3></div>
-		<div id="paychart" style="height: 250px;"></div>
+		<div class="title"><h3>연도별 매출현황(금액:원)</h3></div>
+		<div class="chart" id="paychart" style="height: 250px;"></div>
 		
-		<div class="title"><h3>매출현황(잔)</h3></div>
-		<div id="countchart" style="height: 250px;"></div>
+		<div class="title"><h3>연도별 매출현황(수량:개)</h3></div>
+		<div class="chart" id="countchart" style="height: 250px;"></div>
+		
+		<div class="title"><h3>매장별 매출현황(금액:원)</h3></div>
+		<div class="chart" id="barpaychart" style="height: 250px;"></div>
+		
+		<div class="title"><h3>매장별 매출현황(수량:개)</h3></div>
+		<div class="chart" id="barcountchart" style="height: 250px;"></div>
 	</div>
 
 
 	<th:block th:include="common/footer"></th:block>
-<script>
+<script th:inline="javascript">
+const today = new Date();
+
+const Pvalue1= [[${Pvalue1}]];
+const Pvalue2= [[${Pvalue2}]];
+const Pvalue3= [[${Pvalue3}]];
+const Pvalue4= [[${Pvalue4}]];
+const Pvalue5= [[${Pvalue5}]];
+
+const Cvalue1= [[${Cvalue1}]];
+const Cvalue2= [[${Cvalue2}]];
+const Cvalue3= [[${Cvalue3}]];
+const Cvalue4= [[${Cvalue4}]];
+const Cvalue5= [[${Cvalue5}]];
+
+const Shop1= [[${Shop1}]];
+const Shop2= [[${Shop2}]];
+const Shop3= [[${Shop3}]];
+const Shop4= [[${Shop4}]];
+
+const SPvalue1= [[${SPvalue1}]];
+const SPvalue2= [[${SPvalue2}]];
+const SPvalue3= [[${SPvalue3}]];
+const SPvalue4= [[${SPvalue4}]];
+
+const CPvalue1= [[${CPvalue1}]];
+const CPvalue2= [[${CPvalue2}]];
+const CPvalue3= [[${CPvalue3}]];
+const CPvalue4= [[${CPvalue4}]];
+
+
 new Morris.Line({
 	  // ID of the element in which to draw the chart.
 	  element: 'paychart',
 	  // Chart data records -- each entry in this array corresponds to a point on
 	  // the chart.
 	  data: [
-	    { year: '2008', value: 20 },
-	    { year: '2009', value: 10 },
-	    { year: '2010', value: 5 },
-	    { year: '2011', value: 5 },
-	    { year: '2012', value: 20 }
+	    { year: today.getFullYear().toString(),	value: Pvalue1},
+	    { year: (today.getFullYear()-1).toString(), value: Pvalue2 },
+	    { year: (today.getFullYear()-2).toString(), value: Pvalue3 },
+	    { year: (today.getFullYear()-3).toString(), value: Pvalue4 },
+	    { year: (today.getFullYear()-4).toString(), value: Pvalue5 }
 	  ],
 	  // The name of the data record attribute that contains x-values.
 	  xkey: 'year',
@@ -54,12 +93,49 @@ new Morris.Line({
 	  element: 'countchart',
 	  // Chart data records -- each entry in this array corresponds to a point on
 	  // the chart.
+	    data: [
+	    { year: today.getFullYear().toString(), value: Cvalue1 },
+	    { year: (today.getFullYear()-1).toString(), value: Cvalue2 },
+	    { year: (today.getFullYear()-2).toString(), value: Cvalue3 },
+	    { year: (today.getFullYear()-3).toString(), value: Cvalue4 },
+	    { year: (today.getFullYear()-4).toString(), value: Cvalue5 },
+	  ],
+	  // The name of the data record attribute that contains x-values.
+	  xkey: 'year',
+	  // A list of names of data record attributes that contain y-values.
+	  ykeys: ['value'],
+	  // Labels for the ykeys -- will be displayed when you hover over the
+	  // chart.
+	  labels: ['Value']
+	});
+	
+new Morris.Bar({
+	  // ID of the element in which to draw the chart.
+	  element: 'barpaychart',
+	  // Chart data records -- each entry in this array corresponds to a point on
+	  // the chart.
 	  data: [
-	    { year: '2008', value: 20 },
-	    { year: '2009', value: 10 },
-	    { year: '2010', value: 5 },
-	    { year: '2011', value: 5 },
-	    { year: '2012', value: 20 }
+	    { year: Shop1, value: SPvalue1 },
+	    { year: Shop2, value: SPvalue2 },
+	    { year: Shop3, value: SPvalue3 }
+	  ],
+	  // The name of the data record attribute that contains x-values.
+	  xkey: 'year',
+	  // A list of names of data record attributes that contain y-values.
+	  ykeys: ['value'],
+	  // Labels for the ykeys -- will be displayed when you hover over the
+	  // chart.
+	  labels: ['Value']
+	});
+new Morris.Bar({
+	  // ID of the element in which to draw the chart.
+	  element: 'barcountchart',
+	  // Chart data records -- each entry in this array corresponds to a point on
+	  // the chart.
+	  data: [
+		 	{ year: Shop1, value: CPvalue1 },
+		    { year: Shop2, value: CPvalue2 },
+		    { year: Shop3, value: CPvalue3 }
 	  ],
 	  // The name of the data record attribute that contains x-values.
 	  xkey: 'year',

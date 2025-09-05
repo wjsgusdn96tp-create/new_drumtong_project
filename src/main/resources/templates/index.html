@@ -29,9 +29,9 @@
 	<th:block th:include="common/header"></th:block>
 	<div id="main-img">
 		<div id="main-news" style="width:100%; min-width:1200px;">
-			<a href=#><img src="/img/news/main_promotion1.jpg" class="main-news1 close" style="width: 100%"> </a>
-			<a href=#><img src="/img/news/main_promotion2.jpg" class="main-news2 active" style="width: 100%"> </a>
-			<a href=#><img src="/img/news/main_promotion3.jpg" class="main-news3 close" style="width: 100%"> </a>
+			<a th:href="@{'/news/view?newsNo='+${banner.newsNo}}">
+				<img th:src="@{'/banner/image/'+${banner.image}}" style="width: 100%">
+			</a>
 			<div  th:if="${session.member != null && session.member.memberGrade == '관리자'}" class="btn-div">
 				<a href="/news/bannerSelect" class="btn write-btn" style="float:right;">배너 선정</a>
 			</div>

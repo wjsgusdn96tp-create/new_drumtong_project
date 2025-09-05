@@ -64,7 +64,7 @@
 						            <div th:each="file : ${c.fileList}">
 						            	<img src="/img/file.png">
 						                <a th:href="@{/customer/filedown(customerFileNo=${file.customerFileNo})}" th:text="${file.fileName}"></a>
-						                <span class="material-icons" th:onclick="deleteFile([[${file.customerFileNo}]], this)">delete</span>
+<!-- 						                <span class="material-icons" th:onclick="deleteFile([[${file.customerFileNo}]], this)">delete</span> -->
 						            </div>
 						        </th:block>
 						
@@ -86,23 +86,23 @@
 	                    </tr>
 	                </table>
 	             </div>
-	             <div>
+	             <div class="btnDiv">
 	             	<button type="submit" class="modybtn">수정</button>
-	             	<a class="modybtn" th:href="@{/customer/view(customerNo=${c.customerNo})}">취소</a>
+	             	<a class="cancelbtn" th:href="@{/customer/view(customerNo=${c.customerNo})}">취소</a>
 	             </div>
 	             <input class="inp" type="hidden" name="customerNo" th:value="${c.customerNo}">
 	        </form>
          </div>      
      </div>
      <script>
-     	function deleteFile(customerFileNo, obj){
-     		const input = $("<input>");
-     		input.attr("name","delFileNo");
-     		input.attr("type","hidden");
-     		input.val(customerFileNo);
-     		$(".all-content-wrap").append(input);
-     		$(obj).parent().remove();
-     	};
+//      	function deleteFile(customerFileNo, obj){
+//      		const input = $("<input>");
+//      		input.attr("name","delFileNo");
+//      		input.attr("type","hidden");
+//      		input.val(customerFileNo);
+//      		$(".all-content-wrap").append(input);
+//      		$(obj).parent().remove();
+//      	};
      	
 //      	$(".changeLevel").on("click",function(){
 // 			const memberLevel = $(this).parent().children().val();

@@ -11,7 +11,7 @@
 </head>
 <body>
    <th:block th:include="/common/header"></th:block>
-	
+	<div class="cart-primarlbox">
     <div class="cart-mainbox">
         <div class="cart-namebox">
             <div class="cart-name">
@@ -52,43 +52,12 @@
                                     <div class="option-top">
                                         <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
                                         <span class="cup">컵 : </span><span class="cup-type" th:text="${list.cupChoice}"></span>
-                                    	    <span class="heat">데우기 : </span><span class="heat-check"></span>
                                     </div>
                                     <div class="option-bottom">
                                         <span class="shot">샷추가 : </span><span class="shot-count" th:text="${list.cupShot}"></span>
                                         <span class="cream">휘핑크림 : </span><span class="cream-count" th:text="${list.cupCream}"></span>
                                     </div>
                                 </div>
-                                <div class="info-bottom">
-                                    <span class="sale">등급할인</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-listfooter">
-                            <div class="footer-pricebox">
-                                <div class="price-row">
-                                <span class="label-price">상품금액</span>
-                                <div class="value-box">
-    							<span class="product-price"th:text="${list.pay}"></span>
-   								 <span class="unit">원</span>
-  								</div>
-                                </div>
-                                <span class="operator">-</span>
-                                <div class="price-row">
-                                <span class="label-price">할인금액</span>
-                                <div class="value-box">
-							    <span class="discount-price"th:text="${list.discountPrice}"></span>
-							    <span class="unit">원</span>
-							  	</div>
-                             </div>
-                                <span class="operator">=</span>
-                                <div class="price-row total">
-                                <span class="label-price">주문금액</span>
-                                 <div class="value-box">
-								    <span class="order-price"th:text="${list.pay} - ${list.discountPrice}"></span>
-								    <span class="unit">원</span>
-								  </div>
-                             </div>
                             </div>
                         </div>
                     </li>
@@ -115,11 +84,6 @@
 				      </span>
 				    </div>
 				    <div class="summary-row">
-				      <span class="label">할인총합</span>
-				      <span class="value">
-				        -<span class="total-discount"></span>
-				        <span class="unit">원</span>
-				      </span>
 				    </div>
 				     <hr>
 					    <div class="summary-row total">
@@ -142,7 +106,8 @@
     </div>
 
 	
-	
+	<th:block th:include="common/footer"></th:block>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script th:inline="javascript">
 
 	let list = [[${list}]];
@@ -175,6 +140,8 @@
 	$(".total-price").text(totalpay);
 	
 	
+	
+	
 	const select =  $(".material-icons.selected");
 	
 	
@@ -182,7 +149,7 @@
 	$(".cartlist li").each(function(){
 		const title = $(this).find(".hidden-title").text().trim();
 		//li 안에있는 모든 요소중 히든타이틀 찾아서 값 대입하고 공백 제거완료
-		//핀드는 신이다
+
 		const optionBox = $(this).find(".item-option");
 		
 		
@@ -274,34 +241,64 @@
 	$(".buy-btn").on("click",function(){
 		
         const shopName = $("#shopName").val();
+        
         //태그가 몇개있는지 렝스로 확인
         const itemCount = $(".cartlist li").length; 
 	
+        
         if (itemCount === 0) {
             alert("장바구니에 담긴 물건이 없습니다.");
             location.href = "/";
             return;
         }
-       
-        $.ajax({
-        	url : "/order/pay",
-        	type : "post",
-        	data : 
-        		{
-        		
-        		shopName : shopName
-   
-        		},
-        		
-        	success : function(){
-        		alert("구매하기 성공");
-        		location.href = "/";
-        	},
-        	error : function(){
-        		alert("구매하기 실패");
-        	}
-        })
- 	});
+			        $.ajax({
+			        	url : "/order/pay",
+			        	type : "post",
+			        	data : 
+			        		{
+			        		
+			        		shopName : shopName
+			   
+			        		},
+			        		
+			        	success : function(){
+			        		const totalprice = $(".total-price").text();
+
+			                
+			                const date = new Date();
+			        		const dateString = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+			        		
+			        		IMP.init("imp57046341");
+			        		IMP.request_pay(
+			        				  {
+			        				    channelKey: "channel-key-d17f31e0-d991-403f-bc94-3f28deb3cce8",
+			        				    pay_method: "card",
+			        				    merchant_uid: "order_no_"+dateString, 
+			        				    name: "드럼통 주식회사",
+			        				    amount: totalprice,
+			        				    buyer_email: "test@portone.io",
+			        				    buyer_name: "구매자이름",
+			        				    buyer_tel: "010-1234-5678", 
+			        				    buyer_addr: "서울특별시 강남구 삼성동",
+			        				    buyer_postcode: "123-456",
+			        				  function (rsp) {
+			        				    	if(rsp.success) {
+			        				    	const form = document.createElement("form");
+			        				    	form.setAttribute("action","/order/OrderMap");
+			        				    	form.setAttribute("method","get");
+			        				    	
+			        				    	document.body.appendChild(form);
+			        				    	form.submit();
+			        				    		
+			        				    	}else {
+			        				    		return;
+			        				    	}
+			        				    	
+			        			      	}
+			        			})
+			        	}
+			   })
+	});
 	
 	
 	</script>

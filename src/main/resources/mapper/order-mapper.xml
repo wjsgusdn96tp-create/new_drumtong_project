@@ -72,14 +72,30 @@
 	 <delete id="deleteCart">
 	 	delete from cart_item_tbl where member_no = #{memberNo} and shop_name = #{shopName}
 	 </delete>
+	 	
+	<select id="selectOrderPay" resultType="chart">
+		select substr(enroll_date,1,4) as year , sum(pay) as sum_pay from order_details_tbl group by substr(enroll_date,1,4)
+	</select>
+	
+	<select id="selectOrderCount" resultType="chart">
+		select substr(enroll_date,1,4) as year , sum(count) as sum_count from order_details_tbl group by substr(enroll_date,1,4)
+	</select>
+	
+	<select id="selectOrderShop" resultType="chart">
+		select shop_name, sum(pay) as sum_pay, sum(count) as sum_count from order_details_tbl join shop_tbl using(shop_name) group by shop_name
+	</select>
 	
 		<delete id="cartdel">
 			delete from cart_item_tbl where cart_no = #{cartNo}
 		</delete>
-	
-	<select id="selectDetail" resultType="details" >
-		select * from order_details_tbl
+	<select id="selectOrderList" resultType="order">
+		select * from order_tbl where member_no = #{memberNo}
 	</select>
+	<select id="selectDetailList" resultType="details" >
+		select * from order_details_tbl where order_no = #{orderNo}
+	</select>
+	
+	
 		
 		
 </mapper>

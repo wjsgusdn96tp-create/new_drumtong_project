@@ -111,6 +111,7 @@ public class OrderController {
 		List list = orderService.selectCartList(memberNo,shopName);
 		
 		
+		
 		model.addAttribute("shopName", shopName);
 		model.addAttribute("memberNo", memberNo);
 		
@@ -124,7 +125,7 @@ public class OrderController {
 	public int insertOrderTbl(Model model,String shopName,
 			@SessionAttribute(required = false) Member member) {
 		
-		
+		System.out.println("상점 이름:"+shopName);
 		int memberNo =  member.getMemberNo();
 		
 		OrderTbl otb = new OrderTbl(); 
@@ -148,11 +149,11 @@ public class OrderController {
 		}
 		 int memberNo = member.getMemberNo();
 		
-		List list = orderService.selectDetail(memberNo);
-		 
-		model.addAttribute("list", list);
+		List orderList = orderService.selectOrderList(memberNo);
 		
 		
+
+		model.addAttribute("orderList", orderList);
 		
 		return "order/OrderList";
 		

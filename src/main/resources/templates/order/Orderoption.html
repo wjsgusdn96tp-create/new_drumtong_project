@@ -92,12 +92,7 @@
 	            </div>
 	          
 	   
-	        <div class="order-option-section">
-	            <div class="order-option-label">데우기</div>
-	            <div class="order-option-choice">
-	                <input type="checkbox" id="heat" name="heat" value="1">
-	            </div>
-	        </div>
+	       
 	 
 	          
 	
@@ -135,11 +130,11 @@
 
 
 	<div class="order-option-footer">
-	    <a href="/product/productList?reqPage=1" class="order-listpage">메뉴목록</a>
-	    <!--
-	    나중에 매장 이름으로 불러올때 새로고침 하는 경우의 값
-	    <a href="/product/productList?reqPage=${reqPage}&shopName=${shopName}" class="order-listpage">
-	      -->
+	
+	
+	    <a th:href="@{'/product/productList?shopName='+${shop.shopName}+'&reqPage=1'}" class="order-listpage">메뉴목록</a>
+	 			
+	 			
 	    
 		
 		
@@ -173,7 +168,7 @@
 	    
 	    
 	</div>
-	
+	<th:block th:include="common/footer"></th:block>
 	<script th:inline="javascript">
 			//타이틀 값 저장
 			const productTitle = [[${p.productTitle}]];

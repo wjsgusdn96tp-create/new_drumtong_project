@@ -75,5 +75,10 @@ public class MemberService {
 		}
 		return result == count;
 	}
+
+	public int updatePasswordByEmail(String memberEmail, String newPassword) {
+		int updated = memberDao.updatePasswordByEmail(memberEmail, newPassword);
+		return updated;
+	}
 	
 }// MemberService Class

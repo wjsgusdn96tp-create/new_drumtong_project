@@ -3,15 +3,39 @@
 }
 
 
+.order-orderlistbox {
+	width: 650px;
+	border: 2px solid var(--main4);
+	margin: 20px auto;
+	
+}
+.orderList-box {
+	width: 600px;
+	margin: 0 auto;
+	display:flex;
+	justify-content: space-between;
+	padding-left: 20px;
+	padding-right: 20px;
+	box-sizing: border-box;
+	font-weight: bold;
+	
+}
+.order-toplistbox {
+	width: 800px;
+	margin: 0 auto;
+	border: 3px solid var(--gray7);
+}
+
 .order-orderuibox {
-    border: 5px solid var(--main3);
 
     width: 600px;
     height: 100%;
     margin: 10px auto;
     padding: 10px;
     border-radius: 10px;
+    box-sizing: border-box;
 }
+
 .order-libox {
     padding: 10px;
     
@@ -57,7 +81,7 @@
     width: 420px;
     height: 150px;
     background-color: var(--main2);
-    border: 2px solid var(--main4);
+    
     border-radius: 10px;
 }
 .order-infotop {
@@ -76,9 +100,11 @@
     font-weight: bold;
 }
 .order-infomid {
+	padding-top : 10px;
     display: flex;
     justify-content: space-around;
     font-weight: 500;
+    border-bottom: 1px solid var(--gray5);
 }
 .detail-box {
     font-weight: 500;
@@ -96,6 +122,14 @@
 .order-infobottom {
     margin-left: 100px;
     margin-top: 10px;
+    display: flex;
+    font-weight: 500;
+    justify-content: space-around;
+}
+.order-infobottom2{
+	
+	margin-left: 100px;
+    margin-top: 70px;
     display: flex;
     font-weight: 500;
     justify-content: space-around;

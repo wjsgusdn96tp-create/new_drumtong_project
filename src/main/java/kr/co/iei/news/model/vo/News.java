@@ -22,7 +22,9 @@ public class News {
 	private String content;
 	private String writeDate;
 	private String image;
+	private String modalYn;
 	private String discountType;
 	private int likeCount;
 	private int isLike;
+	private List<Discount> discountList;
 }
