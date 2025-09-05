@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
@@ -45,7 +46,11 @@ public class AdminController {
 	
 	
 	@GetMapping(value="/adminChart")
-	public String adminChart(Model model) {
+	public String adminChart(Model model,@SessionAttribute(required = false) Member member) {
+		int memberNo = member == null ? 0 : member.getMemberNo();
+		if (memberNo == 0) {
+			return "redirect:/";
+		}
 		Date currentDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
 		String thisYear = dateFormat.format(currentDate);
