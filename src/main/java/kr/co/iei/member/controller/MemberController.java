@@ -156,10 +156,18 @@ public class MemberController {
 	public String delete(@SessionAttribute Member member, Model model, HttpSession session) {
 		int memberNo = member.getMemberNo();
 		int result = memberService.deleteMember(memberNo);
-		model.addAttribute("title", "회원 탈퇴 완료");
-		model.addAttribute("text", "회원탈퇴가 정상적으로 완료되었습니다.");
-		model.addAttribute("icon", "success");
-		model.addAttribute("loc", "/");
+		if(result > 0) {
+			session.invalidate(); // 세션 종료
+			model.addAttribute("title", "회원 탈퇴 완료");
+			model.addAttribute("text", "회원탈퇴가 정상적으로 완료되었습니다.");
+			model.addAttribute("icon", "success");
+			model.addAttribute("loc", "/");
+		}else {
+	        model.addAttribute("title","회원 탈퇴 실패");
+	        model.addAttribute("text","오류가 발생했습니다. 다시 시도해 주세요.");
+	        model.addAttribute("icon","error");
+	        model.addAttribute("loc","/member/mypage");
+		}
 		return "common/msg";
 	}// delete
 	
