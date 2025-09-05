@@ -9,7 +9,7 @@
 </head>
 <body>
 	<th:block th:include="/common/header"></th:block>
-	<div class="wrap">
+	<div class="wrap content-wrap">
 	<div class="productInsert_wrap">
 		<div class="productInsert_title_wrap">상품 등록</div>
 
@@ -114,18 +114,17 @@
 			</div>
 			
 				<button class="btn insert_btn" type="submit">등록</button>
+				<button type="button" class="btn no_btn"><a href="/product/productList?reqPage=1&shopName=manager">취소</a></button>
 		</form>
 		<div class="insert_btn_wrap">
-			<form action="/product/productInsertDrink" method="post" enctype="multipart/form-data">
-			</form>
-			<button class="btn no_btn"><a href="/product/productList">취소</a></button>
+			
 		
 		</div>
 	</div>		
 	</div>
 	
 	<script>
-	console.log(Product);
+	
 		function loadImg(obj){
 			//매개변수로 받은 obj는 input type="file" 인 요소
 			//해당 객체에 files라는 속성에 접근하면 첨부파일 정보를 볼 수 있음
@@ -148,6 +147,8 @@
 				$("#img-view").attr("src","/img/default_img.png");
 			}
 		}
+		console.log($(".name_content").text());
+		//if($(".name_content").text() == null ||
 	</script>
 	
 	<th:block th:include="common/footer"></th:block>

@@ -4,10 +4,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	.content{
+		height: 500px;
+	}
+	.btn{
+		margin: 10px;
+	}
+	.title{
+		margin: 20px 0;
+	}
+</style>
 <body>
 <th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
-	<h2>공지사항 작성하기</h2>
+	<h2 class="title">공지사항 수정하기</h2>
 		<form action="/news/noticeWrite" method="get">
 			<div class="notice-list">
 				<table border=1>
@@ -17,7 +28,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="content" style="width:95%;" th:text="${notice.content}"></textarea></td>
+						<td><textarea name="content" style="width:95%;" th:text="${notice.content}" class="content"></textarea></td>
 					</tr>
 					
 					<tr>

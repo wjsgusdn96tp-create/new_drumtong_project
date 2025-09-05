@@ -5,7 +5,7 @@
   		select * from 
     		(select rownum as rnum, n.* from 
         		(select 
-            		notice_no, title, write_date
+            		notice_no, title, write_date, view_count
        			 from notice order by notice_no desc
        			 )n
        		)
@@ -169,6 +169,10 @@
 	
 	<update id="updateNotice">
 		update notice set title = #{title}, content = #{content}, member_no = #{memberNo}  where notice_no = #{noticeNo} 
+	</update>
+	
+	<update id="viewUpdate">
+		update notice set view_count = #{viewCount} where notice_no = #{noticeNo}
 	</update>
 	
 </mapper>

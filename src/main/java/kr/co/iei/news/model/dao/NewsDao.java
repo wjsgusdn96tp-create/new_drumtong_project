@@ -82,6 +82,8 @@ public interface NewsDao {
 
 	int updateNotice(Notice notice);
 
+	int viewUpdate(HashMap<String, Object> param);
+
 
 	
 

@@ -1,7 +1,6 @@
 package kr.co.iei.admin.controller;
 
 import java.text.SimpleDateFormat;
-import java.time.MonthDay;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.Chart;
-import kr.co.iei.order.vo.ShopTbl;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -76,6 +74,7 @@ public class AdminController {
 		}
 		List<Chart> chartListShop = orderService.selectOrderShop();
 		for(int i=0 ; i<chartListShop.size(); i++) {
+			System.out.println(chartListShop.get(i));
 			model.addAttribute("Shop"+(i+1), chartListShop.get(i).getShopName());
 			model.addAttribute("SPvalue"+(i+1), chartListShop.get(i).getSumPay());
 			model.addAttribute("CPvalue"+(i+1), chartListShop.get(i).getSumCount());
