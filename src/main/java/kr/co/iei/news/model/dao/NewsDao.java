@@ -38,9 +38,9 @@ public interface NewsDao {
 
 	List selectAllProduct();
 
-	List selectAllDiscount(String newsNo);
+	List selectAllDiscount(int newsNo);
 
-	News selectOneNews(String newsNo);
+	News selectOneNews(int newsNo);
 
 	List selectBestProduct();
 
@@ -61,5 +61,30 @@ public interface NewsDao {
 	Poster selectMainPoster();
 
 	Poster selectNewsPoster();
+
+	News selectOneNewsModal();
+
+	int deleteModal();
+
+	int insertModal(int newsNo);
+
+	int insertBannerMain(int posterNo);
+	
+	int deleteBannerMain(int posterNo);
+	
+	int insertBannerNews(int posterNo);
+	
+	int deleteBannerNews(int posterNo);
+
+	int deleteBanner(int posterNo);
+
+	int deleteNotice(int noticeNo);
+
+	int updateNotice(Notice notice);
+
+	int viewUpdate(HashMap<String, Object> param);
+
+
+	
 
 }

@@ -360,8 +360,664 @@ public class ProductService {
 		return list;
 	}
 
+	public List GoodsList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List goodsList = productDao.goodsList(param);
+		
+		
+		return goodsList;
+	}
+	public List goodsListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectGoodsList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
+
+	public List goodsListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.goodsListPriceDate(param);
+		
+		return list;
+	}
+
+	public List IceCoffeList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List IceCoffeList = productDao.IceCoffeList(param);
+		
+		
+		return IceCoffeList;
+	}
 	
+	public List IceTeaList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List IceTeaList = productDao.IceTeaList(param);
+		
+		
+		return IceTeaList;
+	}
+	
+	public List IceOtherDrinkList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List IceOtherDrinkList = productDao.IceOtherDrinkList(param);
+		
+		
+		return IceOtherDrinkList;
+	}
 
+	public List HotCoffeList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List HotCoffeList = productDao.HotCoffeList(param);
+		
+		
+		return HotCoffeList;
+	}
+	
+	public List HotTeaList(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List bestProductList = productDao.bestProductList();
+		//List notBestProductList = productDao.notBestProductList();
+		List HotTeaList = productDao.HotTeaList(param);
+		
+		
+		return HotTeaList;
+	}
 
+	public List IceCoffeListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectIceCoffeList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
+	
+	public List IceTeaListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectIceTeaList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
+	
+	public List IceOtherDrinkListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectIceOtherDrinkList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
+	
+	public List HotCoffeListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectHotCoffeList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
+	
+	public List HotTeaListDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.selectHotTeaList(param);
+		
+		
+		//productListDate pld= new productListDate(list, pageNavi);
+		
+		return list;
+	}
 
+	public List IceCoffeListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.IceCoffeListPriceDate(param);
+		
+		return list;
+	}
+	
+	public List IceTeaListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.IceTeaListPriceDate(param);
+		
+		return list;
+	}
+	
+	public List IceOtherDrinkListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.IceOtherDrinkListPriceDate(param);
+		
+		return list;
+	}
+	
+	public List HotCoffeListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.HotCoffeListPriceDate(param);
+		
+		return list;
+	}
+
+	public List HotTeaListPriceDate(String pageNavi, int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		List list = productDao.HotTeaListPriceDate(param);
+		
+		return list;
+	}
+
+	public String pageNaviDessert(int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
+		int totalCount = productDao.selectDessertTotalCount();
+		/*페이지 수 계산(올림계산)*/
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		/*페이지 네비 사이즈 설정*/
+		int pageNaviSize = 3;
+		/*페이지 네비 시작번호 지정  -> 컴퓨터상 나머지=/ , 몫=% */
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		/*페이지 네비 html생성*/
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'> chevron_left </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		
+		/*이해 요망*/
+		for(int i=0; i<pageNaviSize; i++) {
+			pageNavi += "<li>";
+			if(pageNo == reqPage) {
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
+			} else {
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+			}
+			pageNavi += pageNo;
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+			
+			pageNo++;
+			// 페이지를 제작하다가 마지막 페이지를 출력했으면 더이상 반복하지 않고 반복문 종료
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼(최종 페이지를 출력하지 않은 경우)
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'> chevron_right </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		pageNavi += "</ul>"; 
+		return pageNavi;
+	}
+
+	public String pageNaviGoods(int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
+		int totalCount = productDao.selectGoodsTotalCount();
+		/*페이지 수 계산(올림계산)*/
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		/*페이지 네비 사이즈 설정*/
+		int pageNaviSize = 3;
+		/*페이지 네비 시작번호 지정  -> 컴퓨터상 나머지=/ , 몫=% */
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		/*페이지 네비 html생성*/
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'> chevron_left </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		
+		/*이해 요망*/
+		for(int i=0; i<pageNaviSize; i++) {
+			pageNavi += "<li>";
+			if(pageNo == reqPage) {
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
+			} else {
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+			}
+			pageNavi += pageNo;
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+			
+			pageNo++;
+			// 페이지를 제작하다가 마지막 페이지를 출력했으면 더이상 반복하지 않고 반복문 종료
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼(최종 페이지를 출력하지 않은 경우)
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'> chevron_right </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		pageNavi += "</ul>"; 
+		return pageNavi;
+	}
+
+	public String pageNaviIceCoffe(int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
+		int totalCount = productDao.selectIceCoffeTotalCount();
+		/*페이지 수 계산(올림계산)*/
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		/*페이지 네비 사이즈 설정*/
+		int pageNaviSize = 3;
+		/*페이지 네비 시작번호 지정  -> 컴퓨터상 나머지=/ , 몫=% */
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		/*페이지 네비 html생성*/
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'> chevron_left </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		
+		/*이해 요망*/
+		for(int i=0; i<pageNaviSize; i++) {
+			pageNavi += "<li>";
+			if(pageNo == reqPage) {
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
+			} else {
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+			}
+			pageNavi += pageNo;
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+			
+			pageNo++;
+			// 페이지를 제작하다가 마지막 페이지를 출력했으면 더이상 반복하지 않고 반복문 종료
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼(최종 페이지를 출력하지 않은 경우)
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'> chevron_right </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		pageNavi += "</ul>"; 
+		return pageNavi;
+	}
+	
+	public String pageNaviIceTea(int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
+		int totalCount = productDao.selectIceTeaTotalCount();
+		/*페이지 수 계산(올림계산)*/
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		/*페이지 네비 사이즈 설정*/
+		int pageNaviSize = 3;
+		/*페이지 네비 시작번호 지정  -> 컴퓨터상 나머지=/ , 몫=% */
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		/*페이지 네비 html생성*/
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'> chevron_left </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		
+		/*이해 요망*/
+		for(int i=0; i<pageNaviSize; i++) {
+			pageNavi += "<li>";
+			if(pageNo == reqPage) {
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
+			} else {
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+			}
+			pageNavi += pageNo;
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+			
+			pageNo++;
+			// 페이지를 제작하다가 마지막 페이지를 출력했으면 더이상 반복하지 않고 반복문 종료
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼(최종 페이지를 출력하지 않은 경우)
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'> chevron_right </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		pageNavi += "</ul>"; 
+		return pageNavi;
+	}
+
+	public String pageNaviIceOtherDrink(int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
+		int totalCount = productDao.selectIceOtherDrinkTotalCount();
+		/*페이지 수 계산(올림계산)*/
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		/*페이지 네비 사이즈 설정*/
+		int pageNaviSize = 3;
+		/*페이지 네비 시작번호 지정  -> 컴퓨터상 나머지=/ , 몫=% */
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		/*페이지 네비 html생성*/
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'> chevron_left </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		
+		/*이해 요망*/
+		for(int i=0; i<pageNaviSize; i++) {
+			pageNavi += "<li>";
+			if(pageNo == reqPage) {
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
+			} else {
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+			}
+			pageNavi += pageNo;
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+			
+			pageNo++;
+			// 페이지를 제작하다가 마지막 페이지를 출력했으면 더이상 반복하지 않고 반복문 종료
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼(최종 페이지를 출력하지 않은 경우)
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'> chevron_right </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		pageNavi += "</ul>"; 
+		return pageNavi;
+	}
+	
+	public String pageNaviHotCoffe(int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
+		int totalCount = productDao.selectHotCoffeTotalCount();
+		/*페이지 수 계산(올림계산)*/
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		/*페이지 네비 사이즈 설정*/
+		int pageNaviSize = 3;
+		/*페이지 네비 시작번호 지정  -> 컴퓨터상 나머지=/ , 몫=% */
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		/*페이지 네비 html생성*/
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'> chevron_left </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		
+		/*이해 요망*/
+		for(int i=0; i<pageNaviSize; i++) {
+			pageNavi += "<li>";
+			if(pageNo == reqPage) {
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
+			} else {
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+			}
+			pageNavi += pageNo;
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+			
+			pageNo++;
+			// 페이지를 제작하다가 마지막 페이지를 출력했으면 더이상 반복하지 않고 반복문 종료
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼(최종 페이지를 출력하지 않은 경우)
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'> chevron_right </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		pageNavi += "</ul>"; 
+		return pageNavi;
+	}
+	
+	public String pageNaviHotTea(int reqPage) {
+		int numPerPage =6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		HashMap<String,Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		/*반복문 종료 시점을 위한 전체 상품 수 카운트*/
+		int totalCount = productDao.selectHotTeaTotalCount();
+		/*페이지 수 계산(올림계산)*/
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		/*페이지 네비 사이즈 설정*/
+		int pageNaviSize = 3;
+		/*페이지 네비 시작번호 지정  -> 컴퓨터상 나머지=/ , 몫=% */
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		/*페이지 네비 html생성*/
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'> chevron_left </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		
+		/*이해 요망*/
+		for(int i=0; i<pageNaviSize; i++) {
+			pageNavi += "<li>";
+			if(pageNo == reqPage) {
+				pageNavi += "<a class='page-item active-page' href='/product/productList?reqPage="+pageNo+"'>";
+			} else {
+				pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";				
+			}
+			pageNavi += pageNo;
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+			
+			pageNo++;
+			// 페이지를 제작하다가 마지막 페이지를 출력했으면 더이상 반복하지 않고 반복문 종료
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼(최종 페이지를 출력하지 않은 경우)
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/product/productList?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'> chevron_right </span>";
+			pageNavi += "</a>";
+			pageNavi += "</li>";
+		}
+		pageNavi += "</ul>"; 
+		return pageNavi;
+	}
 }

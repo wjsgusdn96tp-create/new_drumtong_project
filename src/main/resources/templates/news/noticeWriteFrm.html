@@ -4,26 +4,32 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
+	.content{
+		height: 500px;
+	}
+	.btn{
+		margin: 10px;
+	}
+	.title{
+		margin: 20px 0;
+	}
 </style>
 
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<h1>공지사항 작성하기</h1>
 	<div class="content-wrap">
-		<form action="/news/noticeWrite" method="get">
+	<h1 class="title">공지사항 작성하기</h1>
+		<form action="/news/noticeUpdate" method="get">
 			<div class="notice-list">
 				<table border=1>
-				<!--
-				<input type="hidden" name="noticeWriter" th:value="${session.member.memberId}">  -->
 					<tr>
 						<th style="width:10%">글 제목</th>
 						<td style="width:90%"><input type="text" name="title" style="width:95%"></td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="content" style="width:95%;"></textarea></td>
+						<td><textarea name="content" style="width:95%;" class="content"></textarea></td>
 					</tr>
 					
 					<tr>

@@ -7,31 +7,45 @@
 	.title{
 		margin: 20px 0;
 	}
-
+	.content-wrap{
+	text-align: center;
+	overflow: hidden;
+	margin: 0 auto;
+	}
+	table{
+	overflow: hidden;
+	margin: 0 auto;
+	}
+	tr{
+	float: left;
+	width: 45%;
+	margin: auto 10px;
+	
+	}
+	
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div id="main-img">
 		<div id="main-news" style="width:100%; min-width:1200px;">
-			<a href=#><img src="/img/news/main_promotion1.jpg" class="main-news1 close" style="width: 100%"> </a>
-			<a href=#><img src="/img/news/main_promotion2.jpg" class="main-news2 active" style="width: 100%"> </a>
-			<a href=#><img src="/img/news/main_promotion3.jpg" class="main-news3 close" style="width: 100%"> </a>
+			<a th:href="@{'/news/view?newsNo='+${banner.newsNo}}">
+				<img th:src="@{'/banner/image/'+${banner.image}}" style="width: 100%">
+			</a>
 			<div  th:if="${session.member != null && session.member.memberGrade == '관리자'}" class="btn-div">
 				<a href="/news/bannerSelect" class="btn write-btn" style="float:right;">배너 선정</a>
 			</div>
 		</div>
 		
-		<div class="content-wrap">
+		<div style="width: 1300px;" class="content-wrap">
 			<h2 class="title">DRUM TONG BEST!</h2>
 			<table class="best_tbl">
 				<tr th:each="p:${product}">
-					<td style="width: 30%; border: 1px, solid, var(--main1);">
-						<img th:src="@{'/product/'+${p.productImg}}">
+					<td style="width: 45%; border: 1px, solid, var(--main1);">
+						<img style="width: 550px;" th:src="@{'/product/'+${p.productImg}}">
+						<h3 style="font-weight: bold; font-size: 20px;" th:text="${p.productName} "></h3>
 					</td>
-					<td style="border: 1px, solid, var(--main1); text-align:left;">
-						<h3 th:text="${p.productName} "></h3>
-					</td>
+					
 				</tr>
 				
 			</table>

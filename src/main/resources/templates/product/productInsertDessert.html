@@ -9,7 +9,7 @@
 </head>
 <body>
 	<th:block th:include="/common/header"></th:block>
-	<div class="wrap">
+	<div class="wrap content-wrap">
 	<div class="productInsert_wrap">
 		<div class="productInsert_title_wrap">상품 등록</div>
 
@@ -129,11 +129,11 @@
 			
 		
 				<button class="btn insert_btn" type="submit">등록</button>
+				<button type="button" class="btn no_btn"><a href="/product/productList?reqPage=1&shopName=manager">취소</a></button>
 		</form>
 		<div class="insert_btn_wrap">
-			<form action="/product/productInsertDessert" method="post" enctype="multipart/form-data">
-			</form>
-			<button class="btn no_btn"><a href="/product/productList">취소</a></button>
+			
+			
 		
 		</div>
 	</div>		

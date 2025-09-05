@@ -6,8 +6,8 @@
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<h1>NEWS 수정하기</h1>
 		<div class="content-wrap">
+			<h1>NEWS 수정하기</h1>
 			<div class="notice-list">
 				<form action="/news/updatewrite" method="post" enctype="multipart/form-data">
 					<table border=1>
@@ -21,14 +21,15 @@
 						<tr>
 							<th>타입선택</th>
 							<td style="width: 25%">
-								<input type="radio" name="type" id="promotion" value="프로모션"  th:checked="${news.type}=='프로모션'">
+								<input type="radio" name="type" id="promotion" value="프로모션" th:checked="${news.type}=='프로모션'">
 								<label for="promotion">프로모션</label>
 								<input type="radio" name="type" id="event" value="이벤트" th:checked="${news.type}=='이벤트'">
 								<label for="event">이벤트</label>
 							</td>
 							<th style="width: 20%">적용일자</th>
 							<td style="width: 40%">
-								<input type="date" name="startDate" th:value="${news.startDate}"><span> ~ </span><input type="date" name="endDate"  th:value="${news.endDate}">
+								<input type="date" name="startDate" th:value="${news.startDate}"><span> ~ </span>
+								<input type="date" name="endDate"  th:value="${news.endDate}">
 							</td>
 						</tr>
 						
@@ -37,8 +38,7 @@
 							<td colspan="3">
 								<textarea name="content" th:text="${news.content}"></textarea>
 							</td>
-						</tr>	
-						
+						</tr>
 						<tr>
 							<th>이미지 미리보기</th>
 							<td colspan="3">
@@ -47,6 +47,7 @@
 								</div>
 							</td>
 						</tr>
+							
 						<tr> 
 							<th>할인 적용상품</th>
 							<td colspan="3">
@@ -57,8 +58,7 @@
 							</td>
 						</tr>						
 						<tr>
-							<th>할인
-							</th>
+							<th>할인</th>
 							<td colspan="3">
 								<select name="discountType" id="discountSelect">
 									<option value="Percent"  th:selected="${discountType}=='Percent'">할인율</option>
@@ -67,6 +67,7 @@
 								<input type="number" name="discountPrice" th:value="${discountPrice}"><span class="priceInput" >%</span>
 							</td>
 						</tr>
+						
 						
 						<tr>
 							<td colspan="4">
@@ -84,11 +85,15 @@
 	<th:block th:include="common/footer"></th:block>
 
 	<script th:inline="javascript">
-			const discount = [[${discount}]];
-			for (var i = 0; i <discount.length; i++) {
-				$("input[id="+discount[i].productNo+"]").prop("checked",true);
-			}
+	const discount = [[${discount}]];
+	if(discount != null) {
+		for (var i = 0; i <discount.length; i++) {
+			$("input[id="+discount[i].productNo+"]").prop("checked",true);
+		}
 		
+		
+	}
+
 
 	</script>
 </body>

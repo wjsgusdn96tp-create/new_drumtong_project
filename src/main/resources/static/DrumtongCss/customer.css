@@ -125,10 +125,12 @@ body{
 }
 .customer-content-wrap{
     background-color: #F7ECDE;
-    height: 500px;
+/*     height: 500px; */
+	min-height: 500px;
     padding: 20px;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .title-table{
@@ -148,6 +150,9 @@ body{
     border-right: 1px solid var(--main3);
 }
 
+.content-body{
+	height: 500px;
+}
 
 .tab-content>td{
     border: 1px, solid, var(--main3);
