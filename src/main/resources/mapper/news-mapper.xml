@@ -35,7 +35,7 @@
   </select>
   
   <insert id="insertNews">
-  	insert into news values(#{newsNo}, #{memberNo}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'), #{image})
+  	insert into news values(#{newsNo}, #{memberNo}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'), #{image}, null)
   </insert>
   
   <insert id="insertDiscount">
@@ -62,7 +62,7 @@
 	</select>
 	
 	<insert id="insertNotice">
-		insert into notice values(notice_seq.nextval, #{memberNo}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'))
+		insert into notice values(notice_seq.nextval, #{memberNo}, #{title}, #{content}, to_char(sysdate,'yyyy-mm-dd'), 0)
 	</insert>
 	
 	<insert id="insertNewsLike">
@@ -130,4 +130,45 @@
 	<select id="selectNewsPoster" resultType="poster">
 		select * from poster where news_yn = 'Y'
 	</select>
+	
+	<select id="selectOneNewsModal" resultType="news">
+		select * from news where modal_yn = 'Y'
+	</select>
+	
+	<update id="deleteModal">
+		update news set modal_yn = null
+	</update>
+	
+	<update id="insertModal">
+		update news set modal_yn = 'Y' where news_no = #{newsNo}
+	</update>
+	
+	<update id="insertBannerMain">
+		update poster set main_yn = 'Y' where poster_no = #{posterNo}
+	</update>
+	
+	<update id="deleteBannerMain">
+		update poster set main_yn = null where poster_no not in (#{posterNo})
+	</update>
+		
+	<update id="insertBannerNews">
+		update poster set news_yn = 'Y' where poster_no = #{posterNo}
+	</update>
+	
+	<update id="deleteBannerNews">
+		update poster set news_yn = null where poster_no not in (#{posterNo})
+	</update>
+	
+	<delete id="deleteBanner">
+		delete from poster where poster_no = #{posterNo}
+	</delete>
+	
+	<delete id="deleteNotice">
+		delete from notice where notice_no = #{noticeNo} 
+	</delete>
+	
+	<update id="updateNotice">
+		update notice set title = #{title}, content = #{content}, member_no = #{memberNo}  where notice_no = #{noticeNo} 
+	</update>
+	
 </mapper>

@@ -3,41 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	table{
+		width: 100%;
+	}
+	.btn{
+		margin: 10px;
+	}
+	.title{
+		width: 90%;
+	}
+	.content{
+		width: 90%;
+		height: 100px;
+		margin: 10px 0;
+	}
+	#title_big{
+		margin: 20px 0;
+	}
+	input[name=newsImageFile]{
+		padding-left: 10px;
+	}
+	.notice-list{
+		margin-bottom : 40px;
+	}
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<h1>NEWS 작성하기</h1>
 		<div class="content-wrap">
-			<div class="notice-list">
+			<div id="title_big">
+				<h2>NEWS 작성하기</h2>
+			</div>
 				<form action="/news/write" method="post" enctype="multipart/form-data">
+			<div class="notice-list">
 					<table border=1>
 						<tr>
 							<th style="width: 20%">글 제목</th>
 							<td style="width: 80%" colspan="3">
-								<input type="text" name=title>
+								<input type="text" name=title class="title" required>
 							</td>
 						</tr>
 						<tr>
 							<th>타입선택</th>
 							<td style="width: 30%">
-								<input type="radio" name="type" id="promotion" value="프로모션">
+								<input type="radio" name="type" id="promotion" value="프로모션" checked>
 								<label for="promotion">프로모션</label>
 								<input type="radio" name="type" id="event" value="이벤트">
 								<label for="event">이벤트</label>
 							</td>
 							<th style="width: 20%">썸네일 선택하기</th>
 							<td style="width: 30%">
-								<input type="file" name="newsImageFile" accept="image/*" onchange="loadImg(this);">
+								<input type="file" name="newsImageFile" accept="image/*" onchange="loadImg(this);" required>
 							</td>
-						</tr>
-						<tr>
-							<th>적용일자</th>
-							<td colspan="3"><input type="date" name="startDate"><span> ~ </span><input type="date" name="endDate"></td>
 						</tr>
 						<tr>
 							<th>내용</th>
 							<td colspan="3">
-								<textarea name="content"></textarea>
+								<textarea name="content" class="content"></textarea>
 							</td>
 						</tr>	
 						
@@ -49,7 +73,11 @@
 								</div>
 							</td>
 						</tr>
-						<tr> 
+						<tr class="event close">
+							<th>적용일자</th>
+							<td colspan="3"><input type="date" name="startDate"><span> ~ </span><input type="date" name="endDate"></td>
+						</tr>
+						<tr class="event  close"> 
 							<th>할인 적용상품</th>
 							<td colspan="3">
 								<th:block th:each="p:${product}">
@@ -59,9 +87,8 @@
 							</td>
 						</tr>
 						
-						<tr>
-							<th>할인
-							</th>
+						<tr class="event close">
+							<th>할인	</th>
 							<td colspan="3">
 								<select name="discountType" id="discountSelect">
 									<option value="Percent" selected>할인율</option>
@@ -79,16 +106,26 @@
 						</tr> 
 						
 					</table>
-				</form>
 		
 			</div>
+				</form>
 		
 		
 		</div>
 	<th:block th:include="common/footer"></th:block>
 			
 	<script>
-		
+
+
+		$("input[name=type]").on("change", function(){
+			const chk = $("input[name=type]:checked").val();
+			if(chk == '이벤트'){
+				$(".event").removeClass("close");
+			} else if(chk == '프로모션') {
+				$(".event").addClass("close");
+			}
+		})
+	
 		$("#discountSelect").on("change", function(){
 			const discountSelect = $("#discountSelect option:selected").val();
 			if(discountSelect == "Percent"){
