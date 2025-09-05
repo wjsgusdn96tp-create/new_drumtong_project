@@ -27,6 +27,8 @@
                 <ul class="navi-small-box">
                     <li th:if="${session.member != null && session.member.memberGrade == '관리자'}">
     					<a href="/admin/adminChart">Admin</a>
+					</li>
+					<li th:if="${session.member != null && session.member.memberGrade == '관리자'}">
     					<a href="/admin/adminPage">MemberList</a>
 					</li>
                     <li>
