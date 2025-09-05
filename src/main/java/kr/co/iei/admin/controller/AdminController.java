@@ -74,7 +74,6 @@ public class AdminController {
 		}
 		List<Chart> chartListShop = orderService.selectOrderShop();
 		for(int i=0 ; i<chartListShop.size(); i++) {
-			System.out.println(chartListShop.get(i));
 			model.addAttribute("Shop"+(i+1), chartListShop.get(i).getShopName());
 			model.addAttribute("SPvalue"+(i+1), chartListShop.get(i).getSumPay());
 			model.addAttribute("CPvalue"+(i+1), chartListShop.get(i).getSumCount());
