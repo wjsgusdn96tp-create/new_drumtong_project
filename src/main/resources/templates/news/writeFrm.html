@@ -75,7 +75,7 @@
 						</tr>
 						<tr class="event close">
 							<th>적용일자</th>
-							<td colspan="3"><input type="date" name="startDate"><span> ~ </span><input type="date" name="endDate"></td>
+							<td colspan="3"><input type="date" name="startDate" id="startDate"><span> ~ </span><input type="date" name="endDate" id="endDate"></td>
 						</tr>
 						<tr class="event  close"> 
 							<th>할인 적용상품</th>
@@ -115,8 +115,27 @@
 	<th:block th:include="common/footer"></th:block>
 			
 	<script>
+	$("#endDate").on("change", function(){
+		const endDate = $("#endDate").val();
+		const startDate = $("#startDate").val();
+		if(endDate < startDate) {
+			alert("종료일자는 시작일자보다 작을 수 없습니다.");
+			$("#endDate").val(startDate);
+		}
+			
+	})
+		$("#startDate").on("change", function(){
+		const endDate = $("#endDate").val();
+		
+		const startDate = $("#startDate").val();
+		if(endDate != '' && endDate < startDate) {
+			alert("시작일자는 종료일자보다 클 수 없습니다.");
+			$("#startDate").val(endDate);
+		}
+			
+	})
 
-
+	
 		$("input[name=type]").on("change", function(){
 			const chk = $("input[name=type]:checked").val();
 			if(chk == '이벤트'){
@@ -134,7 +153,6 @@
 				$(".priceInput").text("원");			
 			}
 		});
-			
 		function loadImg(obj) {
 			if(obj.files.length !== 0) {
 				const reader = new FileReader();
@@ -150,6 +168,6 @@
 	</script>
 	
 	
-		});
+
 </body>
 </html>

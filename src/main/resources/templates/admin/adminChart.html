@@ -5,7 +5,10 @@
 <title>Insert title here</title>
 <style>
 	.title{
-	
+		margin-top: 30px;
+	}
+	.chart {
+		margin-bottom : 20px;
 	}
 </style>
 
@@ -18,17 +21,17 @@
 
 <th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
-		<div class="title"><h3>매출현황(금액:원)</h3></div>
-		<div id="paychart" style="height: 250px;"></div>
+		<div class="title"><h3>연도별 매출현황(금액:원)</h3></div>
+		<div class="chart" id="paychart" style="height: 250px;"></div>
 		
-		<div class="title"><h3>매출현황(갯수)</h3></div>
-		<div id="countchart" style="height: 250px;"></div>
+		<div class="title"><h3>연도별 매출현황(수량:개)</h3></div>
+		<div class="chart" id="countchart" style="height: 250px;"></div>
 		
 		<div class="title"><h3>매장별 매출현황(금액:원)</h3></div>
-		<div id="barpaychart" style="height: 250px;"></div>
+		<div class="chart" id="barpaychart" style="height: 250px;"></div>
 		
-		<div class="title"><h3>매장별 매출현황(갯수)</h3></div>
-		<div id="barcountchart" style="height: 250px;"></div>
+		<div class="title"><h3>매장별 매출현황(수량:개)</h3></div>
+		<div class="chart" id="barcountchart" style="height: 250px;"></div>
 	</div>
 
 
@@ -58,10 +61,10 @@ const SPvalue2= [[${SPvalue2}]];
 const SPvalue3= [[${SPvalue3}]];
 const SPvalue4= [[${SPvalue4}]];
 
-const SCvalue1= [[${SCvalue1}]];
-const SCvalue2= [[${SCvalue2}]];
-const SCvalue3= [[${SCvalue3}]];
-const SCvalue4= [[${SCvalue4}]];
+const CPvalue1= [[${CPvalue1}]];
+const CPvalue2= [[${CPvalue2}]];
+const CPvalue3= [[${CPvalue3}]];
+const CPvalue4= [[${CPvalue4}]];
 
 
 new Morris.Line({
@@ -130,9 +133,9 @@ new Morris.Bar({
 	  // Chart data records -- each entry in this array corresponds to a point on
 	  // the chart.
 	  data: [
-		 	{ year: Shop1, value: SCvalue1 },
-		    { year: Shop2, value: SCvalue2 },
-		    { year: Shop3, value: SCvalue3 }
+		 	{ year: Shop1, value: CPvalue1 },
+		    { year: Shop2, value: CPvalue2 },
+		    { year: Shop3, value: CPvalue3 }
 	  ],
 	  // The name of the data record attribute that contains x-values.
 	  xkey: 'year',

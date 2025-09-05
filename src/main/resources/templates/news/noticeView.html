@@ -4,10 +4,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	.content{
+		height: 500px;
+		text-align: left;
+		padding : 20px;
+	}
+	.btn{
+		margin: 10px;
+	}
+	.title{
+		margin: 20px 0;
+	}
+</style>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
-		<h2> 공지사항 상세보기</h3>
+		<h2 class="title"> 공지사항 상세보기</h3>
 		<div class="notice-list">
 			<table border=1>
 				<tr>
@@ -18,7 +31,7 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td colspan="4" th:text="${notice.content}"></td>
+					<td colspan="4" th:text="${notice.content}" class="content"></td>
 				</tr>					
 			</table>
 		</div>
@@ -29,7 +42,17 @@
 <script th:inline="javascript">
 	const viewCount = [[${notice.viewCount}]];
 	const newViewCount = Number(viewCount)+1;
-	//ajax
+	const noticeNo = [[${notice.noticeNo}]]
+	
+		$.ajax({
+				url: "/news/viewUpdate",
+				type: "get",
+				data: {viewCount : newViewCount,
+						noticeNo : noticeNo
+				}
+				
+		});
+	
 	
 </script> 
 </html>

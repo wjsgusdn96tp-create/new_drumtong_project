@@ -304,6 +304,17 @@ public class NewsService {
 		int result= newsDao.updateNotice(notice);
 		return result;
 	}
+	
+	@Transactional
+	public int viewUpdate(int viewCount, int noticeNo) {
+		
+		HashMap<String , Object> param = new HashMap<String , Object>();
+		param.put("viewCount", viewCount);
+		param.put("noticeNo", noticeNo);
+		int result = newsDao.viewUpdate(param);
+		
+		return result;
+	}
 
 	
 }
