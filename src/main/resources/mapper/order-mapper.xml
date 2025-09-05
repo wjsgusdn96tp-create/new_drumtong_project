@@ -33,7 +33,7 @@
 			#{pay},
 			#{productName},
 			#{productTitle},
-			#{cartImg},
+			#{cartImg}
 			)
 	</insert>
 	

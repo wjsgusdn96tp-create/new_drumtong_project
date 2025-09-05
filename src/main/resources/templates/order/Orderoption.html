@@ -17,8 +17,8 @@
     <div class="order-option-header">옵션선택</div>
 
 	<div class="order-option-main-box">
-	    <div class="order-option-image-box"><img th:src="@{'/product/'+${${p.productImg}}" ></div>
-	
+	    <div class="order-option-image-box"><img th:src="@{'/product/'+${p.productImg}}" ></div>
+		
 	    <div id="drinkBox" class="order-option-option-box">
 	    
 	        <div class="order-option-top">
@@ -592,7 +592,7 @@
         const cupCream = $("#cupCream").val();
         const cupChoice = $("#cupChoice").val();
         const cupSize = $("#cupSize").val();
-		
+        const cartImg = $("#productImg").val();
         
         
         
@@ -600,7 +600,7 @@
 	        url: "/order/DrumtongCart",
 	        type: "post",
 	        data: {
-	        		productTitle: productTitle,
+	        	productTitle: productTitle,
 	            productNo: productNo,
 	            productName: productName,
 	            productPrice: productPrice,
@@ -610,7 +610,8 @@
 	            cupCream: cupCream,
 	            cupChoice: cupChoice,
 	            cupSize: cupSize,
-	            pay: pay
+	            pay: pay,
+	            cartImg : cartImg
 	            
 	        },
 	        success: function(result){
