@@ -76,7 +76,8 @@ public class WebConfig implements WebMvcConfigurer {
 							"/product/productHotTeaList"
 						);
 		registry.addInterceptor(new AdminInterceptor())
-				.addPathPatterns("/admin/**");
+				.addPathPatterns("/admin/**")
+				.excludePathPatterns("/admin/adminChart");
 	}
 	
 	

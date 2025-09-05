@@ -1,112 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장바구니</title>
-    <link rel="stylesheet" href="/DrumtongCss/default.css">
-    <link rel="stylesheet" href="/DrumtongCss/Cart.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장바구니</title>
+<link rel="stylesheet" href="/DrumtongCss/default.css">
+<link rel="stylesheet" href="/DrumtongCss/Cart.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 </head>
 <body>
-   <th:block th:include="/common/header"></th:block>
+	<th:block th:include="/common/header"></th:block>
 	<div class="cart-primarlbox">
-    <div class="cart-mainbox">
-        <div class="cart-namebox">
-            <div class="cart-name">
-               <h2>장바구니</h2>
-            </div>
-            <div class="cart-check">
-                <button class="delete-btn">선택삭제</button>
-            </div>
-        </div>
-        <div class="cart-box">
-            <div class="cart-listbox">
-                <ul class="cartlist"th:each="list : ${list}">
-                    <li>
-                        <div class="cart-listheader">
-                                <button class="button-icons"><span class="material-icons">check_circle_outline</span></button>
-                        			<span class="shop-name" th:text="${list.shopName}"></span>
-                        			<input type="hidden" class="cart-no" th:value="${list.cartNo}">
-                        </div>
-                        
-                        <div class="cart-listbody">
-                            <div class="cart-imgbox">
-                                <img th:src="@{'/product/'+${list.cartImg}}"class="cart-img">
-                                			
-                            </div>
-                            <div class="list-infobox">
-                                <div class="info-top">
-                                    <span class="item-name" th:text="${list.productName}"></span>
-                                    <div class="quantity-box">
-                                        <span class="quantity" th:text="${list.count}"></span>
-                                        <span>개</span>
-                                    </div>
-                                    <div class=quantity-box2>
-                                    <span class="item-price" th:text="${list.pay}"></span>
-                                    <span>원</span>
-                                    </div>
-                                </div>
-                                <span class="hidden-title" th:text="${list.productTitle}" style="display:none;"></span>
-                                <div class="item-option">
-                                    <div class="option-top">
-                                        <span class="size">사이즈 : </span><span class="size-count" th:text="${list.cupSize}"></span>
-                                        <span class="cup">컵 : </span><span class="cup-type" th:text="${list.cupChoice}"></span>
-                                    </div>
-                                    <div class="option-bottom">
-                                        <span class="shot">샷추가 : </span><span class="shot-count" th:text="${list.cupShot}"></span>
-                                        <span class="cream">휘핑크림 : </span><span class="cream-count" th:text="${list.cupCream}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
-           <div class="cart-pricebox">
-                <div class="price-summary">
-                    <h3>결제정보</h3>
-                        <hr>
-                    <div class="summary-row">
-				      <span class="label">전체수량</span>
-				      <span class="value">
-				        <span class="total-count"></span>
-				        <span class="unit">개</span>
-				      </span>
-				    </div>
-				
-				    <div class="summary-row">
-				      <span class="label">상품총합</span>
-				      <span class="value">
-				        <span class="product-totalprice"></span>
-				        <span class="unit">원</span>
-				      </span>
-				    </div>
-				    <div class="summary-row">
-				    </div>
-				     <hr>
-					    <div class="summary-row total">
-					      <span class="label">총 결제금액</span>
-					      <span class="value">
-					        <span class="total-price"></span>
-					        <span class="unit">원</span>
-					      </span>
-    					</div>
-                  </div>
-                  <div class="buy-btnbox">
-    				
-					<input type="hidden" name="shopName" id="shopName" th:value="${shopName}">
-                    <button class="buy-btn">구매하기</button>
+		<div class="cart-mainbox">
+			<div class="cart-namebox">
+				<div class="cart-name">
+					<h2>장바구니</h2>
+				</div>
+				<div class="cart-check">
+					<button class="delete-btn">선택삭제</button>
+				</div>
+			</div>
+			<div class="cart-box">
+				<div class="cart-listbox">
+					<ul class="cartlist" th:each="list : ${list}">
+						<li>
+							<div class="cart-listheader">
+								<button class="button-icons">
+									<span class="material-icons">check_circle_outline</span>
+								</button>
+								<span class="shop-name" th:text="${list.shopName}"></span> <input
+									type="hidden" class="cart-no" th:value="${list.cartNo}">
+							</div>
 
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<div class="cart-listbody">
+								<div class="cart-imgbox">
+									<img th:src="@{'/product/'+${list.cartImg}}" class="cart-img">
 
-	
+								</div>
+								<div class="list-infobox">
+									<div class="info-top">
+										<span class="item-name" th:text="${list.productName}"></span>
+										<div class="quantity-box">
+											<span class="quantity" th:text="${list.count}"></span> <span>개</span>
+										</div>
+										<div class=quantity-box2>
+											<span class="item-price" th:text="${list.pay}"></span> <span>원</span>
+										</div>
+									</div>
+									<span class="hidden-title" th:text="${list.productTitle}"
+										style="display: none;"></span>
+									<div class="item-option">
+										<div class="option-top">
+											<span class="size">사이즈 : </span><span class="size-count"
+												th:text="${list.cupSize}"></span> <span class="cup">컵
+												: </span><span class="cup-type" th:text="${list.cupChoice}"></span>
+										</div>
+										<div class="option-bottom">
+											<span class="shot">샷추가 : </span><span class="shot-count"
+												th:text="${list.cupShot}"></span> <span class="cream">휘핑크림
+												: </span><span class="cream-count" th:text="${list.cupCream}"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="cart-pricebox">
+					<div class="price-summary">
+						<h3>결제정보</h3>
+						<hr>
+						<div class="summary-row">
+							<span class="label">전체수량</span> <span class="value"> <span
+								class="total-count"></span> <span class="unit">개</span>
+							</span>
+						</div>
+
+						<div class="summary-row">
+							<span class="label">상품총합</span> <span class="value"> <span
+								class="product-totalprice"></span> <span class="unit">원</span>
+							</span>
+						</div>
+						<div class="summary-row"></div>
+						<hr>
+						<div class="summary-row total">
+							<span class="label">총 결제금액</span> <span class="value"> <span
+								class="total-price"></span> <span class="unit">원</span>
+							</span>
+						</div>
+					</div>
+					<div class="buy-btnbox">
+
+						<input type="hidden" name="shopName" id="shopName"
+							th:value="${shopName}">
+						<button class="buy-btn">구매하기</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<th:block th:include="common/footer"></th:block>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script th:inline="javascript">
@@ -235,8 +232,8 @@
 			    });
 	   
 	});
-	
- 	
+		
+ 			
 	
 	
 	$(".buy-btn").on("click",function(){
@@ -252,17 +249,9 @@
             location.href = "/";
             return;
         }
-			        $.ajax({
-			        	url : "/order/pay",
-			        	type : "post",
-			        	data : 
-			        		{
-			        		
-			        		shopName : shopName
-			   
-			        		},
-			        		
-			        	success : function(){
+			        
+     
+        
 			        		const totalprice = $(".total-price").text();
 							const productName = $(".item-name").text();
 			                
@@ -282,27 +271,28 @@
 			        				    buyer_tel: "1533-1212", 
 			        				    buyer_addr: "서울특별시 영등포구 선유동2로 57 이레빌딩",
 			        				    buyer_postcode: "123-456",
+			        				  },
 			        				  function (rsp) {
-			        				    	if(rsp.success) {
-			        				    	const form = document.createElement("form");
-			        				    	form.setAttribute("action","/order/OrderMap");
-			        				    	form.setAttribute("method","get");
-			        				    	
-			        				    	document.body.appendChild(form);
-			        				    	form.submit();
-			        				    		
-			        				    	}else {
-			        				    		return;
-			        				    	}
-			        				    	
+			        				    	$.ajax({
+			        				        	url : "/order/pay",
+			        				        	type : "post",
+			        				        	data : 
+			        				        		{shopName : shopName},
+			        				        		
+			        				   			success: function () {
+			        					            alert("구매 성공");
+			        							location.href = "/";
+				
+			        					        }
+			        				   		});
 			        			      	}
-			        			})
-			        	}
-			   })
+									
+				
+		);
 	});
 	
 	
 	</script>
-	
+
 </body>
 </html>
