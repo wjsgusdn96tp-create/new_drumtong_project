@@ -273,6 +273,7 @@
 			        				    buyer_postcode: "123-456",
 			        				  },
 			        				  function (rsp) {
+			        					 
 			        				    	$.ajax({
 			        				        	url : "/order/pay",
 			        				        	type : "post",
@@ -282,10 +283,15 @@
 			        				   			success: function () {
 			        					            alert("구매 성공");
 			        							location.href = "/";
-				
+			        					        },
+			        					        error: function() {
+			        					        	alert("구매 실패");
 			        					        }
 			        				   		});
-			        			      	}
+			        			      	
+			        				  
+			        				  
+			        				  }
 									
 				
 		);
