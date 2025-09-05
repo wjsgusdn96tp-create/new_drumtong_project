@@ -43,7 +43,7 @@
 					<!-- 회원정보 수정/회원탈퇴 버튼 생성 -->
 					<div class="mypage-btn">
 						<input type="hidden" name="memberEmail" th:value="${session.member.memberEmail}">
-						<button type="submit" class="btn-primary lg">비밀번호 수정</button>
+						<button type="submit" class="btn-primary lg" id="pw-btn-event">비밀번호 수정</button>
 						<button type="button" class="btn-secondary lg del-btn">회원탈퇴</button>
 					</div>
 				</form>
@@ -53,6 +53,13 @@
 	</main>
 	<script src="/DrumtongJs/sweetalert.min.js"></script>
 	<script>
+	const btnPw = document.getElementById("pw-btn-event");
+	btnPw.addEventListener("mouseenter", function(){
+		btnPw.style.backgroundColor = "#54BAB9";
+		btnPw.style.color = "#f8f9fa";
+	});
+	
+	
 		$(".del-btn").on("click", function(){
 			swal({
 				title: "회원탈퇴",
