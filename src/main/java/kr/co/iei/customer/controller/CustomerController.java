@@ -186,7 +186,7 @@ public class CustomerController {
 	    CustomerComment customerComment = customerService.selectOneComment(cc.getCommentNo()); 
 	    
 	    if (member != null && customerComment != null && member.getMemberNo() == customerComment.getCustomerWriterNo()) {
-	        customerService.updateComment(cc);
+	        int result = customerService.updateComment(cc);
 	    }
 	    return "redirect:/customer/view?customerNo=" + cc.getCustomerServiceRef();
 	}
@@ -196,7 +196,7 @@ public class CustomerController {
 	    CustomerComment commentToDelete = customerService.selectOneComment(commentNo);
 
 	    if(member != null && commentToDelete != null && member.getMemberNo() == commentToDelete.getCustomerWriterNo()){
-	        customerService.deleteComment(commentNo);
+	        int result = customerService.deleteComment(commentNo);
 	    }
 	    return "redirect:/customer/view?customerNo=" + customerServiceRef;
 	}
@@ -206,11 +206,11 @@ public class CustomerController {
 	public String updateStar(int customerNo, int customerStar, @SessionAttribute(required = false) Member member) {
 		Customer c = customerService.selectOneCustomer(customerNo);
 		if(member != null && c != null && member.getMemberNickname().equals(c.getCustomerNickname())) {
-			Customer customerToUpdate = new Customer();
-            customerToUpdate.setCustomerNo(customerNo);
-            customerToUpdate.setCustomerStar(customerStar);
+			Customer customer = new Customer();
+			customer.setCustomerNo(customerNo);
+			customer.setCustomerStar(customerStar);
 			
-			int result = customerService.updateStarRating(customerToUpdate);
+			int result = customerService.updateStarRating(customer);
 			if(result > 0) {
 				return "success";
 			}

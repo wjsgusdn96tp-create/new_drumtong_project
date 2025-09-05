@@ -61,31 +61,51 @@
 	.newsDelete{
 		margin-left:10px;
 	}
+	.write-btn{
+		margin-left:10px;
+	}
+	
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<div class="content-wrap">
+		<th:block th:if="${modal == 1}">	
+					
+			<div id="modal" class="dialog" >
 				
-		<div id="modal" class="dialog">
-			<div class="tb">
-				<div class="inner" style="max-width: 800px;">
-					<div class="top">
-						<div class="title">모달창 제목</div>
-						<a href="#" class="modal-close">닫기</a>
+					<div class="tb">
+						<div class="inner" style="max-width: 800px;">
+							<div class="top">
+								<div class="title" th:text=${newsModal.title}></div>
+								<a href=# class="modal-close">닫기</a>
+							</div>
+
+							<img th:src="@{'/news/image/'+${newsModal.image}}" class="ct">	
+					
+						</div>
 					</div>
-					<img src="/img/banner/poster.jfif" class="ct">
-				</div>
+				
 			</div>
-		</div>
-		
+		</th:block>
 		
 		
 		<div id="main-news">
-			<img src="/img/news/main_promotion3.jpg" class="main-news3">
+			<a th:href="@{'/news/view?newsNo='+${banner.newsNo}}">
+				<img th:src="@{'/banner/image/'+${banner.image}}" style="width: 100%">
+			</a>
+			
+			
 			<div th:if="${session.member != null && session.member.memberGrade == '관리자'}" class="btn-div">
-				<a href="/news/bannerSelect" class="btn write-btn" style="float:right;">배너 선정</a>
-				<a href="/news/bannerWrite" class="btn write-btn" style="float:right;">배너 등록</a>	
+				<span>팝업 창 설정 : </span>
+				<select class="btn modalPoster">
+					<th:block th:each="news:${newsAllList}">
+						<option th:value=${news.newsNo} th:text=${news.title} th:selected="${news.modalYn} == 'Y'"></option>
+					</th:block>
+				</select>
+				<a href="/news/bannerSelect" class="btn" style="float:right; margin-left: 10px;">배너 선정</a>
+				<a href="/news/bannerDelete" class="btn" style="float:right; margin-left: 10px;">배너 삭제</a>
+				<a href="/news/bannerWrite" class="btn" style="float:right;">배너 등록</a>	
 			</div>
 		</div>
 		<div class="tab">
@@ -102,8 +122,8 @@
 		
 		<div class="btn-div">
 			<div th:if="${session.member != null && session.member.memberGrade == '관리자'}" style="overflow:hidden;">
-				<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 쓰기</a>
-				<a href="/news/writeFrm" class="btn write-btn">NEWS 쓰기</a>					
+				<a href="/news/noticeWriteFrm" class="btn write-btn">공지사항 작성</a>
+				<a href="/news/writeFrm" class="btn write-btn">NEWS 작성</a>					
 			</div>
 		</div>
 		
@@ -113,7 +133,7 @@
 			
 			</ul>
 			<div id="add-search"> 		
-				<button class="btn" id="more-btn">더보기</button>
+				<button class="btn" id="more-btn" style="margin-bottom : 40px;">더보기</button>
 			</div>
 		</div>	
 		
@@ -130,12 +150,20 @@
 						
 					</tr>
 					<tr th:each="notice : ${notice}">
-						<td th:text="${notice.noticeNo}"></td>
-						<td> <a th:href="@{/news/noticeView(noticeNo=${notice.noticeNo})}" th:text="${notice.title}"></a></td>
+						<td th:text="${notice.noticeNo}" class=noticeNo></td>
+						<td> 
+							<a th:href="@{/news/noticeView(noticeNo=${notice.noticeNo})}" th:text="${notice.title}"></a>
+						</td>
 						<td th:text="${notice.writeDate}"></td>
-						<td>999</td>
-						<td><button>수정</button></td> <!-- 관리자만 노출 -->
-						<td><button>삭제</button></td> <!-- 관리자만 노출 -->
+						<td th:text="${notice.viewCount}"></td>
+						<td>
+							<button class="noticeUpdate"><a th:href="@{('/news/noticeUpdateFrm?noticeNo='+${notice.noticeNo})}">수정</a> </button>
+							
+						</td> <!-- 관리자만 노출 -->
+						<td>
+							<button class="noticeDelete">삭제</button>
+							<div style="display:none;" th:text="${notice.noticeNo}" ></div>
+						</td> <!-- 관리자만 노출 -->
 					</tr>
 				</table>
 			</div>
@@ -158,6 +186,28 @@
 		const memberGrade = [[${session.member?.memberGrade}]];
 		
 		
+		$(".noticeDelete").on("click", function() {
+			const noticeNo = $(this).next().text();
+		
+			$.ajax({
+				url: "/news/noticeDelete",
+				type: "get",
+				data: {noticeNo : noticeNo },
+				success: function() {
+					window.location.href="/news/list?noticeReqPage=1&tab=all&modal=0";
+				}
+			})
+		})
+		
+		$(".modalPoster").on("change", function(){
+			const newsNo = $(".modalPoster option:selected").val();
+			$.ajax({
+				url: "/news/modalChange",
+				type: "get",
+				data: {newsNo : newsNo },
+			})
+		})
+		
 		
 		$(".first-tab>li").on("click", function(){
 			$(".notice_wrap").addClass("close");
@@ -173,7 +223,8 @@
 			}else {
 				tab="all"
 			}
-			location.href="/news/list?noticeReqPage=1&tab="+tab;
+			
+			location.href="/news/list?noticeReqPage=1&tab="+tab+"&modal=0";
 						
 		});
 		

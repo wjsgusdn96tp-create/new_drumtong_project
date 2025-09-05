@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.content-wrap{
+		padding-top : 40px;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<div class="content-wrap">
+		<form action="/news/deleteBannerComplete">
+			<table border=1>
+				<tr th:each="p:${posterList}" >
+					<th style="width: 5%">
+						<span>
+							<input  type="checkbox" th:if="${p.mainYn == null && p.newsYn == null}" name=posterNo th:value="${p.posterNo}" >
+						</span>
+						<span th:text="${p.posterNo}"></span>
+					</th>
+					<th style="width: 20%">배너 이미지</th>
+					<td style="width: 80%" >
+						<div>
+							<img id="main-view" width="500px" th:src="@{'/banner/image/'+${p.image}}">							
+						</div>								
+					</td>
+				</tr>
+				<tr>
+					<th colspan="3">
+						<button class="btn" type="submit">삭제하기</button>
+						<button class="btn" id="cancle" >목록가기</button>
+					</th>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<th:block th:include="common/footer"></th:block>
+
+</body>
+</html>

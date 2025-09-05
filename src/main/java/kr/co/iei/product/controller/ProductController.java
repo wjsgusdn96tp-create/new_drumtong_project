@@ -69,7 +69,40 @@ public class ProductController {
 	
 	@GetMapping(value="/productDessertList")
 	private String productDessertList(int reqPage, String shopName, Model model) {
-		String pageNavi = productService.pageNavi(reqPage);
+		String pageNaviDessert = productService.pageNaviDessert(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNaviDessert);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List DessertList = productService.DessertList(pageNaviDessert, reqPage);
+		model.addAttribute("allList",DessertList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List dessertListDate = productService.dessertListDate(pageNaviDessert, reqPage);
+		model.addAttribute("dayList", dessertListDate);
+		
+		
+		//가격순
+		List dessertListPriceDate =productService.dessertListPriceDate(pageNaviDessert, reqPage);
+		model.addAttribute("priceList", dessertListPriceDate);
+		return "product/productDessertList";
+		
+		//좋아요 순
+	}
+	
+	@GetMapping(value="/productGoodsList")
+	private String productGoodsList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNaviGoods(reqPage);
 		//productListDate pld = productService.productListDate(reqPage);
 		//System.out.println(pld);
 		
@@ -79,7 +112,7 @@ public class ProductController {
 		
 		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
 		//productListDate pld = new productListDate(productListDate, pageNavi);
-		List DessertList = productService.DessertList(pageNavi, reqPage);
+		List DessertList = productService.GoodsList(pageNavi, reqPage);
 		model.addAttribute("allList",DessertList);
 		
 		//베스트 상품
@@ -88,19 +121,190 @@ public class ProductController {
 		
 		
 		//최신순
-		List dessertListDate = productService.dessertListDate(pageNavi, reqPage);
+		List dessertListDate = productService.goodsListDate(pageNavi, reqPage);
 		model.addAttribute("dayList", dessertListDate);
 		
 		
 		//가격순
-		List dessertListPriceDate =productService.dessertListPriceDate(pageNavi, reqPage);
+		List dessertListPriceDate =productService.goodsListPriceDate(pageNavi, reqPage);
 		model.addAttribute("priceList", dessertListPriceDate);
-		return "product/productDessertList";
+		return "product/productGoodsList";
+		
+		//좋아요 순
+	}
+
+	@GetMapping(value="/productIceCoffeList")
+	private String productIceCoffeList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNaviIceCoffe(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNavi);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List IceCoffeList = productService.IceCoffeList(pageNavi, reqPage);
+		model.addAttribute("allList",IceCoffeList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List IceCoffeListDate = productService.IceCoffeListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", IceCoffeListDate);
+		
+		
+		//가격순
+		List IceCoffeListPriceDate =productService.IceCoffeListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", IceCoffeListPriceDate);
+		return "product/productIceCoffeList";
 		
 		//좋아요 순
 	}
 	
-
+	@GetMapping(value="/productIceTeaList")
+	private String productIceTeaList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNaviIceTea(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNavi);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List IceTeaList = productService.IceTeaList(pageNavi, reqPage);
+		model.addAttribute("allList",IceTeaList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List IceTeaListDate = productService.IceTeaListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", IceTeaListDate);
+		
+		
+		//가격순
+		List IceTeaListPriceDate =productService.IceTeaListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", IceTeaListPriceDate);
+		return "product/productIceTeaList";
+		
+		//좋아요 순
+	}
+	
+	@GetMapping(value="/productIceOtherList")
+	private String productIceOtherDrinkList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNaviIceOtherDrink(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNavi);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List IceOtherDrinkList = productService.IceOtherDrinkList(pageNavi, reqPage);
+		model.addAttribute("allList",IceOtherDrinkList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List IceOtherDrinkListDate = productService.IceOtherDrinkListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", IceOtherDrinkListDate);
+		
+		
+		//가격순
+		List IceOtherDrinkListPriceDate =productService.IceOtherDrinkListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", IceOtherDrinkListPriceDate);
+		return "product/productIceOtherDrinkList";
+		
+		//좋아요 순
+	}
+	
+	@GetMapping(value="/productHotCoffeList")
+	private String productHotCoffeList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNaviHotCoffe(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNavi);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List HotCoffeList = productService.HotCoffeList(pageNavi, reqPage);
+		model.addAttribute("allList",HotCoffeList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List HotCoffeListDate = productService.HotCoffeListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", HotCoffeListDate);
+		
+		
+		//가격순
+		List HotCoffeListPriceDate =productService.HotCoffeListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", HotCoffeListPriceDate);
+		return "product/productIceCoffeList";
+		
+		//좋아요 순
+	}
+	
+	@GetMapping(value="/productHotTeaList")
+	private String productHotTeaList(int reqPage, String shopName, Model model) {
+		String pageNavi = productService.pageNaviHotTea(reqPage);
+		//productListDate pld = productService.productListDate(reqPage);
+		//System.out.println(pld);
+		
+		
+		model.addAttribute("pageNavi",pageNavi);
+		model.addAttribute("shopName",shopName);
+		
+		//전체 상품 리스트(대표상품 먼저 띄워야 함)-------------아직 못함 ㅜㅜㅜ
+		//productListDate pld = new productListDate(productListDate, pageNavi);
+		List HotTeaList = productService.HotTeaList(pageNavi, reqPage);
+		model.addAttribute("allList",HotTeaList);
+		
+		//베스트 상품
+		List bestProductList = productService.bestProductList();
+		model.addAttribute("bestList",bestProductList);
+		
+		
+		//최신순
+		List HotTeaListDate = productService.HotTeaListDate(pageNavi, reqPage);
+		model.addAttribute("dayList", HotTeaListDate);
+		
+		
+		//가격순
+		List HotTeaListPriceDate =productService.HotTeaListPriceDate(pageNavi, reqPage);
+		model.addAttribute("priceList", HotTeaListPriceDate);
+		return "product/productHotTeaList";
+		
+		//좋아요 순
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping(value="/productInsertFrm")
 	public String ProductInsertFrm() {
 		return "product/productInsertFrm";
