@@ -34,4 +34,5 @@ public class DetailsTbl {
 	private String productName;
 	private String shopName;
 	private String productTitle;
+	private String cartImg;
 }

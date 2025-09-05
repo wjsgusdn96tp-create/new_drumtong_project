@@ -5,16 +5,18 @@
 
 .wrap{
 	width: 1275px;
+	text-align:center;
 	margin: auto;
 }
-.product_wrap{
-		width: 1275px;
-		margin: 50px auto;
-		line-height: 45px;
-		
-	}
+.logo-name>div{
+	width: 1270px;
+}
 
 /*카테로리*/
+.product_wrap{
+	width:1200px;
+	margin-right: 500px;
+}
 .product_wrap>.product_title_wrap{
 	width:1200px;
 	height: 50px;
