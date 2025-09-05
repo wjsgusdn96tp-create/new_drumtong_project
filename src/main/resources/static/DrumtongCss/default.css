@@ -290,3 +290,17 @@ table>tbody>tr>td{
 }
 
 
+/*에러페이지*/
+.page-title{
+	height: 200px;
+	width: 800px;
+	margin: 0 auto;
+	
+	line-height: 200px;
+	border: 5px, solid, var(--main4);
+	text-align: center;
+	margin-top: 50px;
+	font-size: 30px;
+	font-weight: 600;
+	
+}

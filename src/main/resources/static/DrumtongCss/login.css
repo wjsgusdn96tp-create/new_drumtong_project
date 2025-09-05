@@ -53,6 +53,7 @@ h1{
     border-left: none;
     border-right: none;
     background-color: #F7ECDE;
+    outline: none;
 }
 .search-password>a{
     font-size: 14px;
