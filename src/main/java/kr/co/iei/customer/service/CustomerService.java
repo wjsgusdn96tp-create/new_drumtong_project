@@ -110,11 +110,9 @@ public class CustomerService {
 					delFile.delete();
 				}
 			}
-			// 3. DB에서 파일 정보 삭제
 			customerDao.deleteCustomerFiles(customerNo);
 		}
 		
-		// 4. 마지막으로 게시글 정보 삭제
 		int result = customerDao.deleteCustomer(customerNo);
 		
 		return result;
@@ -133,21 +131,25 @@ public class CustomerService {
 	}
 	
 	public List<Member> selectAllMember() {
-	        return customerDao.selectAllMember();
+		List<Member> allMemberList = customerDao.selectAllMember();
+	        return allMemberList;
 	    }
 	 
 	@Transactional
 	public int updateComment(CustomerComment cc) {
-		return customerDao.updateComment(cc);
+		int result = customerDao.updateComment(cc);
+		return result;
 	}
 	
 	public CustomerComment selectOneComment(int commentNo) {
-		return customerDao.selectOneComment(commentNo);
+		CustomerComment customerComment = customerDao.selectOneComment(commentNo);
+		return customerComment;
 	}
 	
 	@Transactional
 	public int updateStarRating(Customer customer) {
-		return customerDao.updateStarRating(customer);
+		int result = customerDao.updateStarRating(customer);
+		return result;
 	}
 
 	
