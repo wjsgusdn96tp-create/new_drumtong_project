@@ -66,7 +66,7 @@
 						<div class="productInsert_title img_insert">이미지 등록</div>
 						<div class="productInsert_title img_insert_choice">
 						<!-- <input type="file" name="imageFile" accept="image/*" onchange="loadImg(this);"><!-- (추가메모)accept="image/*" 이미지 말고 다른 파일 선택 불가 --> 
-							<input type="file" name="imageFile" accept="image/*" onchange="loadImg(this);">
+							<input type="file" name="imageFile" class="imgeFile" accept="image/*" onchange="loadImg(this);">
 						</div>
 					</div>
 					<div class="img_show_wrap">
@@ -84,7 +84,7 @@
 						<ul class="detail_box">
 							<li>
 								<label for="price">가격(원) : </label> 
-								<input type="text" name="productPrice" id="price">
+								<input type="text" name="productPrice" class="productPrice" id="price">
 							</li> 
 							<li>
 								<label for="kcal">칼로리(kcal) : </label> 
@@ -147,8 +147,16 @@
 				$("#img-view").attr("src","/img/default_img.png");
 			}
 		}
+		/*
+		$(".btn insert_btn").on("click",function(){
+			if($(".name_content").text() == null || $(".product_best_radio").value() == null || $(".product_best_radio") == null 
+					|| $(."product_drink_radio").value() ==null || $(".imgeFile").src() == null ||  $(".productPrice").text() == ){
+				
+			}
+			
+		})
+		*/
 		console.log($(".name_content").text());
-		//if($(".name_content").text() == null ||
 	</script>
 	
 	<th:block th:include="common/footer"></th:block>
