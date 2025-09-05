@@ -78,7 +78,9 @@ body {
     padding: 10px 10px;
     
 }
-
+.content-header{
+	height: 40px;
+}
 
 /*댓글*/
 .comment-ul{
