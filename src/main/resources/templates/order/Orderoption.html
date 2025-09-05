@@ -17,7 +17,7 @@
     <div class="order-option-header">옵션선택</div>
 
 	<div class="order-option-main-box">
-	    <div class="order-option-image-box"><img src="/" ></div>
+	    <div class="order-option-image-box"><img th:src="@{'/product/'+${${p.productImg}}" ></div>
 	
 	    <div id="drinkBox" class="order-option-option-box">
 	    
@@ -147,6 +147,7 @@
 		      <input type="hidden" name="cupCream" id="cupCream" th:value="0">
 		      <input type="hidden" name="cupChoice" id="cupChoice" th:value="개인">
 		      <input type="hidden" name="cupSize" id="cupSize" th:value="L">
+		      
 		      <input type="hidden" name="productTitle" id="productTitle" th:value="${p.productTitle}">
 		      
 		      <input type="hidden" name="count" id="count" th:value="1">

@@ -26,7 +26,7 @@
             <ul class= "order-orderuibox">
                 <li class="order-libox" th:each="detail : ${orderList.detailsList}">
 	                    <div class="order-contentbox" th:if="${detail.productTitle == 'drink'}">
-	                        <div class="order-imgbox"><img src="img/로고 (1) 1.svg" alt=""></div>
+	                        <div class="order-imgbox"><img src="@{'/product/'+${detail.cartImg}}" alt=""></div>
 	                        <div class="order-infobox">
 	                            <div class="order-infomid">
 	                                <div class="order-infoname" th:text="${detail.productName}"></div>
