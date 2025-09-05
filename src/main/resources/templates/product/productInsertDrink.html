@@ -124,7 +124,7 @@
 	</div>
 	
 	<script>
-	console.log(Product);
+	
 		function loadImg(obj){
 			//매개변수로 받은 obj는 input type="file" 인 요소
 			//해당 객체에 files라는 속성에 접근하면 첨부파일 정보를 볼 수 있음
@@ -147,8 +147,8 @@
 				$("#img-view").attr("src","/img/default_img.png");
 			}
 		}
-		
-		
+		console.log($(".name_content").text());
+		//if($(".name_content").text() == null ||
 	</script>
 	
 	<th:block th:include="common/footer"></th:block>

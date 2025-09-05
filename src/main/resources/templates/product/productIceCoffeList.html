@@ -22,16 +22,16 @@
 							<ul class="product_title_ice">
 								<li>ICE
 									<ul>
-										<li><a class="drink_a_iceCoffe" th:href="@{/product/productIceCoffeList(reqPage=1,shopName=${shopName})}">커피</a></li>
-										<li><a class="drink_a_iceTea" th:href="@{/product/productIceTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
-										<li><a class="drink_a_iceOther" th:href="@{/product/productHotCoffeList(reqPage=1,shopName=${shopName})}">그 외 제조음료</a></li>
+										<li><a class="drink_a_iceCoffe" href="#">커피</a></li>
+										<li><a class="drink_a_iceTea" href="@{/product/productIceTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
+										<li><a class="drink_a_iceOther" th:href="@{/product/productIceOtherList(reqPage=1,shopName=${shopName})}">그 외 제조음료</a></li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="product_title_hot">
 								<li>HOT
 									<ul>
-										<li><a class="drink_a_hotCoffe" href="#">커피</a></li>
+										<li><a class="drink_a_hotCoffe" th:href="@{/product/productHotCoffeList(reqPage=1,shopName=${shopName})}">커피</a></li>
 										<li><a class="drink_a_hotTrs" th:href="@{/product/productHotTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
 									</ul>
 								</li>
