@@ -46,9 +46,11 @@ public class WebConfig implements WebMvcConfigurer {
 							"/member/update2",
 							"/member/delete",
 							"/customer/**",
-							"/news/**"
+							"/news/**",
+							"/product/**",
+							"/order/**"
 							
-//							
+						
 						)
 				.excludePathPatterns(
 							"/customer/filedown",
@@ -59,14 +61,19 @@ public class WebConfig implements WebMvcConfigurer {
 							"/news/bannerSelect",
 							"/notice/editor/**",
 							"/banana/image/**",
-							"/product/**",
 							"/news/image/**",
 							"/news/list",
 							"/news/noticeView",
 							"/news/view",
-							"/news/bannerSelect"
-							
-							
+							"/news/bannerSelect",
+							"/product/productList",
+							"/product/productDessertList",
+							"/product/productGoodsList",
+							"/product/productIceCoffeList",
+							"/product/productIceTeaList",
+							"/product/productIceOtherList",
+							"/product/productHotCoffeList",
+							"/product/productHotTeaList"
 						);
 		registry.addInterceptor(new AdminInterceptor())
 				.addPathPatterns("/admin/**");
