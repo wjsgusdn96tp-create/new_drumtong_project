@@ -263,7 +263,7 @@
 			        		
 			        	success : function(){
 			        		const totalprice = $(".total-price").text();
-
+							const productName = $(".item-name").text();
 			                
 			                const date = new Date();
 			        		const dateString = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
@@ -276,10 +276,10 @@
 			        				    merchant_uid: "order_no_"+dateString, 
 			        				    name: "드럼통 주식회사",
 			        				    amount: totalprice,
-			        				    buyer_email: "test@portone.io",
-			        				    buyer_name: "구매자이름",
+			        				    buyer_email: "DromTong@naver.com",
+			        				    buyer_name: productName,
 			        				    buyer_tel: "010-1234-5678", 
-			        				    buyer_addr: "서울특별시 강남구 삼성동",
+			        				    buyer_addr: "",
 			        				    buyer_postcode: "123-456",
 			        				  function (rsp) {
 			        				    	if(rsp.success) {
