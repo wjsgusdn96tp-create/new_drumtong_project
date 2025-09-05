@@ -33,7 +33,8 @@
                         
                         <div class="cart-listbody">
                             <div class="cart-imgbox">
-                                <img src="img/로고 (1) 1.svg" alt="" class="cart-img">
+                                <img th:src="@{'/product/'+${list.cartImg}}"class="cart-img">
+                                			
                             </div>
                             <div class="list-infobox">
                                 <div class="info-top">

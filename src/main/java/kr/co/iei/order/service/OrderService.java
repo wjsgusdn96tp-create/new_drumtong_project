@@ -110,6 +110,7 @@ public class OrderService {
 		 dtl.setDiscountPrice(o.getDiscountPrice());
 		 dtl.setProductName(o.getProductName());
 		 dtl.setProductTitle(o.getProductTitle());
+		 dtl.setCartImg(o.getCartImg());
 		 
 		 
 		 int resultDt = orderDao.insertDetailsTbl(dtl);

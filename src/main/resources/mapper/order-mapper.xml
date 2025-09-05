@@ -20,7 +20,7 @@
 
 	<insert id="insertCart">
 		insert into cart_item_tbl (cart_no, cup_choice, cup_size, cup_shot, cup_cream, count, product_no, 
-			member_no, shop_name, pay, product_name, product_title)
+			member_no, shop_name, pay, product_name, product_title, cart_img)
 			values (cart_item_tbl_seq.nextval,
 			#{cupChoice}, 
 			#{cupSize}, 
@@ -32,7 +32,9 @@
 			#{shopName}, 
 			#{pay},
 			#{productName},
-			#{productTitle})
+			#{productTitle},
+			#{cartImg}
+			)
 	</insert>
 	
 	<select id="selectCartList" resultType="cart">
@@ -64,7 +66,8 @@
 	 	to_char(sysdate,'yyyy-mm-dd'),
 	 	#{productName},
 	 	#{shopName},
-	 	#{productTitle}
+	 	#{productTitle},
+	 	#{cartImg}
 	 	
 	 	)
 	 </insert>
