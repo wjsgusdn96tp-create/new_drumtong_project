@@ -88,23 +88,23 @@
 							</li> 
 							<li>
 								<label for="kcal">칼로리(kcal) : </label> 
-								<input type="text" name="productContentKcal" id="kcal">
+								<input type="text" name="productContentKcal" class="productContentKcal" id="kcal">
 							</li>  
 							<li>
 								<label for="shot">카페인(g) : </label> 
-								<input type="text" name="productContentShot" id="shot">
+								<input type="text" name="productContentShot" class="productContentShot" id="shot">
 							</li>
 							<li> 
 								<label for="sugar">당류(g) : </label> 
-								<input type="text" name="productContentSugar" id="sugar">
+								<input type="text" name="productContentSugar" class="productContentSugar" id="sugar">
 							</li>  
 							<li>
 								<label for="natrium">나트륨(g) : </label> 
-								<input type="text" name="productContentNatrium" id="natrium">
+								<input type="text" name="productContentNatrium" class="productContentNatrium" id="natrium">
 							</li>
 							<li>
 								<label for="carbs">단백질(g) : </label> 
-								<input type="text" name="productContentProtein" id="protein">
+								<input type="text" name="productContentProtein" class="productContentProtein" id="protein">
 							</li>  
 							
 						</ul>
@@ -147,7 +147,7 @@
 				$("#img-view").attr("src","/img/default_img.png");
 			}
 		}
-		/*
+		
 		$(".btn insert_btn").on("click",function(){
 			if($(".name_content").text() == null || $(".product_best_radio").value() == null || $(".product_best_radio") == null 
 					|| $(."product_drink_radio").value() ==null || $(".imgeFile").src() == null ||  $(".productPrice").text() == ){
@@ -155,7 +155,7 @@
 			}
 			
 		})
-		*/
+		
 		console.log($(".name_content").text());
 	</script>
 	

@@ -12,7 +12,7 @@
 <body>
 	<th:block th:include="/common/header"></th:block>
 		<!--카테고리-->
-	<div class="wrap content-wrap">
+	<div style="width: 1275px;" class="wrap content-wrap">
 		<div class="product_wrap">
 			<div class="product_title_wrap">
 				<ul class="product_title">
@@ -75,13 +75,17 @@
 			//const reqPage=[[${reqPage}]];
 			
 			
-					const member = [[${session.member}]];
-					
-					if(member.memberGrade != "관리자"){
+					if([[${session.member}]] != null){
+						const member = [[${session.member}]];
+						
+						if(member.memberGrade != "관리자"){
+							$(".product_insert_manager_btn").css("display","none");
+						}
+					}else {
 						$(".product_insert_manager_btn").css("display","none");
 					}
 						
-						console.log(member);
+						
 					console.log([[${list}]]);
 					
 					const shopName= [[${shopName}]];
@@ -143,8 +147,12 @@
 							}
 						}
 						
-						
-						if(member.memberGrade == "관리자"){
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+							
+							if(member.memberGrade == "관리자"){
+								
+							
 						
 						//수정btn
 						const updateForm = $("<form>");
@@ -203,17 +211,22 @@
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
 						}
+					}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
 						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
+						
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
 						if(member.memberGrade != "관리자"){
 							imgForm.attr("action","/order/Orderoption");						
 						}else if(member.memberGrade == "관리자"){
 							imgForm.attr("action","#");
-						}
+						}}
 						imgForm.attr("method","get");
 						
 						
@@ -306,11 +319,16 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						if(member.memberGrade != "관리자"){
-							cartForm.attr("action","/order/Orderoption");						
-						}else if(member.memberGrade == "관리자"){
-							cartForm.attr("action","#");
-						}
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
+							if(member.memberGrade != "관리자"){
+								cartForm.attr("action","/order/Orderoption");						
+							}else if(member.memberGrade == "관리자"){
+								cartForm.attr("action","#");
+							}}
+						
+						
 						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
@@ -363,7 +381,49 @@
 						
 						iconDiv.append(priceTextDiv);
 						
+						/*
+						//like icon
 						
+						const likeIconDiv = $("<div>");
+						likeIconDiv.addClass("product_like");
+						likeIconDiv.attr("style","width:200px");
+						const likeUl = $("<ul>");
+						
+						const likeLi = $("<li>");
+						const likeP = $("<p>");
+						likeP.attr("style","flot:rigth;");
+						
+						const likeIconSpan1 = $("<span>")
+						likeIconSpan1.addClass("material-icons");
+						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
+						likeIconSpan1.text("favorite_border");
+						
+						
+						const likeIconSpan2 = $("<span>")
+						likeIconSpan2.addClass("material-icons");
+						likeIconSpan2.addClass("unlike_icon");
+						likeIconSpan2.text("favorite_border");
+						likeIconSpan1.append(likeIconSpan2);
+						
+						const likeIconSpan3 = $("<span>")
+						likeIconSpan3.addClass("material-icons");
+						likeIconSpan3.addClass("like_icon");
+						likeIconSpan3.text("favorite");
+						likeIconSpan1.append(likeIconSpan3);
+						
+						const likeCount = $("<span>")
+						likeCount.addClass("like_count");
+						likeCount.text("좋아요 수");
+						likeIconSpan1.append(likeCount);
+						
+						likeP.append(likeIconSpan1);
+						likeLi.append(likeP);
+						likeUl.append(likeLi);
+						likeIconDiv.append(likeUl);
+						
+						//좋아요 div icon div 에 넣기에 넣기
+						iconDiv.append(likeIconDiv);*/
+						//div_one_box에 넣기
 						div.append(iconDiv);
 						
 						//최종->li에 넣기
@@ -373,7 +433,6 @@
 						//ul에 반복문 넣기
 						$(".product_list_wrap_ul").append(li);
 					}
-				
 					
 					
 					
@@ -441,8 +500,12 @@
 							}
 						}
 						
-						
-						if(member.memberGrade == "관리자"){
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+							
+							if(member.memberGrade == "관리자"){
+								
+							
 						
 						//수정btn
 						const updateForm = $("<form>");
@@ -501,17 +564,22 @@
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
 						}
+					}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
 						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
+						
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
 						if(member.memberGrade != "관리자"){
 							imgForm.attr("action","/order/Orderoption");						
 						}else if(member.memberGrade == "관리자"){
 							imgForm.attr("action","#");
-						}
+						}}
 						imgForm.attr("method","get");
 						
 						
@@ -604,11 +672,16 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						if(member.memberGrade != "관리자"){
-							cartForm.attr("action","/order/Orderoption");						
-						}else if(member.memberGrade == "관리자"){
-							cartForm.attr("action","#");
-						}
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
+							if(member.memberGrade != "관리자"){
+								cartForm.attr("action","/order/Orderoption");						
+							}else if(member.memberGrade == "관리자"){
+								cartForm.attr("action","#");
+							}}
+						
+						
 						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
@@ -661,7 +734,49 @@
 						
 						iconDiv.append(priceTextDiv);
 						
+						/*
+						//like icon
 						
+						const likeIconDiv = $("<div>");
+						likeIconDiv.addClass("product_like");
+						likeIconDiv.attr("style","width:200px");
+						const likeUl = $("<ul>");
+						
+						const likeLi = $("<li>");
+						const likeP = $("<p>");
+						likeP.attr("style","flot:rigth;");
+						
+						const likeIconSpan1 = $("<span>")
+						likeIconSpan1.addClass("material-icons");
+						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
+						likeIconSpan1.text("favorite_border");
+						
+						
+						const likeIconSpan2 = $("<span>")
+						likeIconSpan2.addClass("material-icons");
+						likeIconSpan2.addClass("unlike_icon");
+						likeIconSpan2.text("favorite_border");
+						likeIconSpan1.append(likeIconSpan2);
+						
+						const likeIconSpan3 = $("<span>")
+						likeIconSpan3.addClass("material-icons");
+						likeIconSpan3.addClass("like_icon");
+						likeIconSpan3.text("favorite");
+						likeIconSpan1.append(likeIconSpan3);
+						
+						const likeCount = $("<span>")
+						likeCount.addClass("like_count");
+						likeCount.text("좋아요 수");
+						likeIconSpan1.append(likeCount);
+						
+						likeP.append(likeIconSpan1);
+						likeLi.append(likeP);
+						likeUl.append(likeLi);
+						likeIconDiv.append(likeUl);
+						
+						//좋아요 div icon div 에 넣기에 넣기
+						iconDiv.append(likeIconDiv);*/
+						//div_one_box에 넣기
 						div.append(iconDiv);
 						
 						//최종->li에 넣기
@@ -739,8 +854,12 @@
 							}
 						}
 						
-						
-						if(member.memberGrade == "관리자"){
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+							
+							if(member.memberGrade == "관리자"){
+								
+							
 						
 						//수정btn
 						const updateForm = $("<form>");
@@ -799,17 +918,22 @@
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
 						}
+					}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
 						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
+						
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
 						if(member.memberGrade != "관리자"){
 							imgForm.attr("action","/order/Orderoption");						
 						}else if(member.memberGrade == "관리자"){
 							imgForm.attr("action","#");
-						}
+						}}
 						imgForm.attr("method","get");
 						
 						
@@ -902,11 +1026,16 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						if(member.memberGrade != "관리자"){
-							cartForm.attr("action","/order/Orderoption");						
-						}else if(member.memberGrade == "관리자"){
-							cartForm.attr("action","#");
-						}
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
+							if(member.memberGrade != "관리자"){
+								cartForm.attr("action","/order/Orderoption");						
+							}else if(member.memberGrade == "관리자"){
+								cartForm.attr("action","#");
+							}}
+						
+						
 						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
@@ -959,7 +1088,49 @@
 						
 						iconDiv.append(priceTextDiv);
 						
+						/*
+						//like icon
 						
+						const likeIconDiv = $("<div>");
+						likeIconDiv.addClass("product_like");
+						likeIconDiv.attr("style","width:200px");
+						const likeUl = $("<ul>");
+						
+						const likeLi = $("<li>");
+						const likeP = $("<p>");
+						likeP.attr("style","flot:rigth;");
+						
+						const likeIconSpan1 = $("<span>")
+						likeIconSpan1.addClass("material-icons");
+						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
+						likeIconSpan1.text("favorite_border");
+						
+						
+						const likeIconSpan2 = $("<span>")
+						likeIconSpan2.addClass("material-icons");
+						likeIconSpan2.addClass("unlike_icon");
+						likeIconSpan2.text("favorite_border");
+						likeIconSpan1.append(likeIconSpan2);
+						
+						const likeIconSpan3 = $("<span>")
+						likeIconSpan3.addClass("material-icons");
+						likeIconSpan3.addClass("like_icon");
+						likeIconSpan3.text("favorite");
+						likeIconSpan1.append(likeIconSpan3);
+						
+						const likeCount = $("<span>")
+						likeCount.addClass("like_count");
+						likeCount.text("좋아요 수");
+						likeIconSpan1.append(likeCount);
+						
+						likeP.append(likeIconSpan1);
+						likeLi.append(likeP);
+						likeUl.append(likeLi);
+						likeIconDiv.append(likeUl);
+						
+						//좋아요 div icon div 에 넣기에 넣기
+						iconDiv.append(likeIconDiv);*/
+						//div_one_box에 넣기
 						div.append(iconDiv);
 						
 						//최종->li에 넣기
@@ -1054,8 +1225,12 @@
 							}
 						}
 						
-						
-						if(member.memberGrade == "관리자"){
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+							
+							if(member.memberGrade == "관리자"){
+								
+							
 						
 						//수정btn
 						const updateForm = $("<form>");
@@ -1114,17 +1289,22 @@
 						deleteForm.append(deleteLabel);
 						divManagerBtn.append(deleteForm);
 						}
+					}
 						//--관리자버튼 완성(divonebox)
 						div.append(divManagerBtn);
 						
 						
 						//현우님 order가는 form
 						const imgForm = $("<form>");
+						
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
 						if(member.memberGrade != "관리자"){
 							imgForm.attr("action","/order/Orderoption");						
 						}else if(member.memberGrade == "관리자"){
 							imgForm.attr("action","#");
-						}
+						}}
 						imgForm.attr("method","get");
 						
 						
@@ -1217,11 +1397,16 @@
 						
 						//장바구니
 						const cartForm = $("<form>");
-						if(member.memberGrade != "관리자"){
-							cartForm.attr("action","/order/Orderoption");						
-						}else if(member.memberGrade == "관리자"){
-							cartForm.attr("action","#");
-						}
+						if([[${session.member}]] != null){
+							const member = [[${session.member}]];
+						
+							if(member.memberGrade != "관리자"){
+								cartForm.attr("action","/order/Orderoption");						
+							}else if(member.memberGrade == "관리자"){
+								cartForm.attr("action","#");
+							}}
+						
+						
 						
 						cartForm.attr("method","get");
 						cartForm.attr("style","width:40px;");
