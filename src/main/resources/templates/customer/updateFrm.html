@@ -64,7 +64,7 @@
 						            <div th:each="file : ${c.fileList}">
 						            	<img src="/img/file.png">
 						                <a th:href="@{/customer/filedown(customerFileNo=${file.customerFileNo})}" th:text="${file.fileName}"></a>
-						                <span class="material-icons" th:onclick="deleteFile([[${file.customerFileNo}]], this)">delete</span>
+<!-- 						                <span class="material-icons" th:onclick="deleteFile([[${file.customerFileNo}]], this)">delete</span> -->
 						            </div>
 						        </th:block>
 						
@@ -95,14 +95,14 @@
          </div>      
      </div>
      <script>
-     	function deleteFile(customerFileNo, obj){
-     		const input = $("<input>");
-     		input.attr("name","delFileNo");
-     		input.attr("type","hidden");
-     		input.val(customerFileNo);
-     		$(".all-content-wrap").append(input);
-     		$(obj).parent().remove();
-     	};
+//      	function deleteFile(customerFileNo, obj){
+//      		const input = $("<input>");
+//      		input.attr("name","delFileNo");
+//      		input.attr("type","hidden");
+//      		input.val(customerFileNo);
+//      		$(".all-content-wrap").append(input);
+//      		$(obj).parent().remove();
+//      	};
      	
 //      	$(".changeLevel").on("click",function(){
 // 			const memberLevel = $(this).parent().children().val();

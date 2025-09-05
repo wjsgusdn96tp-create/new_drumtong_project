@@ -7,7 +7,22 @@
 	.title{
 		margin: 20px 0;
 	}
-
+	.content-wrap{
+	text-align: center;
+	overflow: hidden;
+	margin: 0 auto;
+	}
+	table{
+	overflow: hidden;
+	margin: 0 auto;
+	}
+	tr{
+	float: left;
+	width: 45%;
+	margin: auto 10px;
+	
+	}
+	
 </style>
 </head>
 <body>
@@ -22,16 +37,15 @@
 			</div>
 		</div>
 		
-		<div class="content-wrap">
+		<div style="width: 1300px;" class="content-wrap">
 			<h2 class="title">DRUM TONG BEST!</h2>
 			<table class="best_tbl">
 				<tr th:each="p:${product}">
-					<td style="width: 30%; border: 1px, solid, var(--main1);">
-						<img th:src="@{'/product/'+${p.productImg}}">
+					<td style="width: 45%; border: 1px, solid, var(--main1);">
+						<img style="width: 550px;" th:src="@{'/product/'+${p.productImg}}">
+						<h3 style="font-weight: bold; font-size: 20px;" th:text="${p.productName} "></h3>
 					</td>
-					<td style="border: 1px, solid, var(--main1); text-align:left;">
-						<h3 th:text="${p.productName} "></h3>
-					</td>
+					
 				</tr>
 				
 			</table>
