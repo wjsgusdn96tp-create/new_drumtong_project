@@ -39,17 +39,41 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginIntercepter())
 				.addPathPatterns(
-//							"/customer/listGj",
-//							"/customer/listComplain",
-//							"/customer/listOpinion",
-//							"/customer/writeFrm",
-//							"/customer/view",
-//							"/customer/updateFrm"
-							"/customer/**"
+							"/member/logout",
+							"/member/mypage",
+							"/member/update",
+							"/member/mypage2",
+							"/member/update2",
+							"/member/delete",
+							"/customer/**",
+							"/news/**",
+							"/product/**",
+							"/order/**"
+							
+						
 						)
 				.excludePathPatterns(
-							"/customer/list"
-							
+							"/customer/filedown",
+							"/customer/list",
+							"/news/list",
+							"/news/noticeView",
+							"/news/view",
+							"/news/bannerSelect",
+							"/notice/editor/**",
+							"/banana/image/**",
+							"/news/image/**",
+							"/news/list",
+							"/news/noticeView",
+							"/news/view",
+							"/news/bannerSelect",
+							"/product/productList",
+							"/product/productDessertList",
+							"/product/productGoodsList",
+							"/product/productIceCoffeList",
+							"/product/productIceTeaList",
+							"/product/productIceOtherList",
+							"/product/productHotCoffeList",
+							"/product/productHotTeaList"
 						);
 		registry.addInterceptor(new AdminInterceptor())
 				.addPathPatterns("/admin/**");
