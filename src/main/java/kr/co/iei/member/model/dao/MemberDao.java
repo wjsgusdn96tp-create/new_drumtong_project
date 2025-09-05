@@ -21,4 +21,6 @@ public interface MemberDao {
 
 	int changeMemberGrade(Member m);
 
+	int updatePasswordByEmail(String memberEmail, String newPassword);
+
 }

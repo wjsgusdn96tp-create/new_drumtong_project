@@ -106,14 +106,16 @@ public class NewsService {
 		news.setNewsNo(newsNo);
 		
 		int result = newsDao.insertNews(news);
-		
-		for(int i=0 ;i<productList.length;i++) {
-			HashMap<String, Object> param = new HashMap<String, Object>();
-			param.put("newsNo", newsNo);
-			param.put("productNo", productList[i]);
-			param.put("discountType", discountType);
-			param.put("discountPrice", discountPrice);
-			result += newsDao.insertDiscount(param);			
+		if(productList != null) {
+			for(int i=0 ;i<productList.length;i++) {
+				HashMap<String, Object> param = new HashMap<String, Object>();
+				param.put("newsNo", newsNo);
+				param.put("productNo", productList[i]);
+				param.put("discountType", discountType);
+				param.put("discountPrice", discountPrice);
+				result += newsDao.insertDiscount(param);			
+			}
+			
 		}
 		
 		return result;
@@ -178,12 +180,12 @@ public class NewsService {
 		return product;
 	}
 
-	public List selectAllDiscount(String newsNo) {
+	public List selectAllDiscount(int newsNo) {
 		List discount = newsDao.selectAllDiscount(newsNo);
 		return discount;
 	}
 
-	public News selectOneNews(String newsNo) {
+	public News selectOneNews(int newsNo) {
 		News news = newsDao.selectOneNews(newsNo);
 		return news;
 	}
@@ -255,5 +257,64 @@ public class NewsService {
 		Poster imageNews = newsDao.selectNewsPoster();
 		return imageNews;
 	}
+
+	public News selectOneNewsModal() {
+		News newsModal = newsDao.selectOneNewsModal();
+		return newsModal;
+	}
+	
+	@Transactional
+	public int changeModal(int newsNo) {
+		int result = newsDao.deleteModal();
+		result += newsDao.insertModal(newsNo);
+		return result;
+	}
+	
+	@Transactional
+	public int changeBannerMain(int posterNo) {
+		int result = newsDao.insertBannerMain(posterNo);
+		result += newsDao.deleteBannerMain(posterNo);
+		return 0;
+	}
+	
+	@Transactional
+	public int changeBannerNews(int posterNo) {
+		int result = newsDao.insertBannerNews(posterNo);
+		result += newsDao.deleteBannerNews(posterNo);
+		return 0;
+	}
+	
+	@Transactional
+	public int deleteBanner(String[] posterNoList) {
+		int result = 0;
+		for(int i=0;i<posterNoList.length ;i++ ) {
+			int posterNo = Integer.parseInt(posterNoList[i]);
+			
+			result += newsDao.deleteBanner(posterNo);
+		}
+		return result;
+	}
+	@Transactional
+	public int deleteNotice(int noticeNo) {
+		int result = newsDao.deleteNotice(noticeNo);
+		return result;
+	}
+	@Transactional
+	public int updateNotice(Notice notice) {
+		int result= newsDao.updateNotice(notice);
+		return result;
+	}
+	
+	@Transactional
+	public int viewUpdate(int viewCount, int noticeNo) {
+		
+		HashMap<String , Object> param = new HashMap<String , Object>();
+		param.put("viewCount", viewCount);
+		param.put("noticeNo", noticeNo);
+		int result = newsDao.viewUpdate(param);
+		
+		return result;
+	}
+
 	
 }

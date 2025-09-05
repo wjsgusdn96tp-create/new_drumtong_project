@@ -8,6 +8,7 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="content">
+	<div class="content-web" style="height:800px;">
 		<section class="section">
 			<div class="page-title">관리자 페이지</div>
 			<table class="tbl tbl-hover">
@@ -29,27 +30,6 @@
 					<td th:text="${m.memberNo}"></td>
 					<td th:text="${m.memberEmail}"></td>
 					<td th:text="${m.memberNickname}"></td>
-					<!-- 
-					<td>
-						<div class="select" th:switch="${m.membershipGrade}">
-							<select th:case="1">
-								<option value="1" selected>Standard</option>
-								<option value="2">Primeum</option>
-								<option value="3">Specialty</option>
-							</select>
-							<select th:case="2">
-								<option value="1">Standard</option>
-								<option value="2" selected>Primeum</option>
-								<option value="3">Specialty</option>
-							</select>
-							<select th:case="3">
-								<option value="1">Standard</option>
-								<option value="2">Primeum</option>
-								<option value="3" selected>Specialty</option>
-							</select>
-						</div>
-					</td>
-					 -->
 					<td>
 						<div class="select" th:switch="${m.memberGrade}">
 							<select th:case="'관리자'">
@@ -62,34 +42,44 @@
 							</select>
 						</div>
 					</td>
-					<!-- 맴버쉽 변경 버튼 
-					<td>
-						<button class="btn-primary changeMembershipGrade">맴버쉽 변경</button>
-					</td>					 
-					 -->
 					<td>
 						<!-- 회원등급 변경 버튼 -->
-						<button class="btn-primary changeMemberGrade">등급변경</button>
+						<button class="btn-primary changeMemberGrade" id="btn-event">등급변경</button>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="9">
-						<button style="width:100%" class="btn-point chekedChangeGrade">선택 회원 등급/맴버쉽 변경</button>
+					<td colspan="6">
+						<button style="width:100%" class="btn-point chekedChangeGrade" id="btnEvent">선택 회원 등급 변경</button>
 					</td>
 				</tr>
 			</table>
 		</section>
+	</div>
 	</main>
 	<script>
+	const btnEvent = document.getElementById("btnEvent");
+	// 회원 등급 변경 버튼 event
+	btnEvent.addEventListener("mouseenter", function(){
+        btnEvent.style.backgroundColor = "#54BAB9";
+        btnEvent.style.color = "#f8f9fa";
+	});
+	btnEvent.addEventListener("mouseleave", function(){
+        btnEvent.style.backgroundColor = "#f8f9fa";
+        btnEvent.style.color = "#333333";
+	});
 	$(".changeMemberGrade").on("click", function(){
 		const memberNo = $(this).parent().parent().children().eq(1).text();
-		const memberGrade = $(this).parent().prev().children().children().val();		
+		const memberGrade = $(this).parent().prev().children().children().val();
+		alert("선택한 회원 등급이 변경되었습니다."); 
 		location.href="/admin/changeMemberGrade?memberNo="+memberNo+"&memberGrade="+memberGrade;
 	});
 	$(".chekedChangeGrade").on("click", function(){
 		const checkbox = $(".chk:checked");
 		if(checkbox.length === 0){
+			 alert("선택된 회원이 없습니다.");
 			return;
+		}else{
+			alert("선택한 회원 등급이 변경되었습니다.");
 		}
 		const no = new Array();
 		const grade = new Array();

@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	table{
+		margin: 40px 0;
+	}
+	.btn{
+		margin: 10px;
+	}
+</style>
 </head>
 <body>
 <th:block th:include="common/header"></th:block>
@@ -13,7 +21,7 @@
 						<tr>
 							<th style="width: 20%">배너 등록하기</th>
 							<td style="width: 80%">
-								<input type="file" name="posterImageFile" accept="image/*" onchange="loadImg(this);">
+								<input type="file" name="posterImageFile" accept="image/*" onchange="loadImg(this);" required>
 							</td>
 						</tr>
 						<tr>
@@ -27,7 +35,7 @@
 						<tr>
 							<th>포스터 연결하기</th>
 							<td>
-								<select name="newsNo" id="newsNo">
+								<select name="newsNo" id="newsNo" required>
 									<th:block th:each="n:${newsList}" >
 											<option th:value="${n.newsNo}" th:text="${n.title}"></option>
 											<div style="display:none;" th:text=${n.image}></div>
@@ -61,12 +69,12 @@
 <th:block th:include="common/footer"></th:block>
 
 <script th:inline="javascript">
-//삭제 ajax
+
 
 
 
 	$("#cancle").on("click", function(){
-		location.href="/list?noticeReqPage=1&tab=all";		
+		location.href="/news/list?noticeReqPage=1&tab=all";		
 	})
 
 	function loadImg(obj) {

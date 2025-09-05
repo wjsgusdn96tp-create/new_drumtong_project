@@ -52,7 +52,7 @@
             </div>
             <div class="customer-content-wrap">
                 <table class="title-table">
-                    <tr>
+                    <tr style="height: 40px;">
                         <th style="width: 15%;">유형</th>
                         <th style="width: 15%;">작성자</th>
                         <th style="width: 45%;">제목</th>
@@ -64,33 +64,39 @@
                         	<th style="width: 10%;">답변</th>
                         </th:block>
                     </tr>
-                    <tr class="tab-content"  th:each="customer : ${list}">
-                        <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
-                        <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
-                        <td class="title-td" style="width: 45%;">
-                        	<a th:href="@{/customer/view(customerNo=${customer.customerNo})}" th:text="${customer.customerTitle}"></a>
-                        </td>
-                        <td style="width: 15%;" th:text="${customer.customerDate}"></td>
-                        <td style="width: 10%;">
-                            <th:block th:if="${session.member.memberNickname == customer.customerNickname}">
-                            	<button class="delete-btn" th:value="${customer.customerNo}">삭제</button>
-                            </th:block>
-                            <th:block th:if="${session.member.memberGrade == '관리자'}">
-                            	<input type="checkbox" class="checkbox" th:checked="${customer.adminCommented > 0}" disabled>
-                            </th:block>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td class="null-td" colspan="5"></td>
-                    </tr>
-                    <tr class="button-tr">
-                    	<td class="button-td" colspan="5">
-	                        <button class="write-btn" th:href=@{/customer/writeFrm}>글쓰기</button>
-                    	</td>
-                    </tr>
+                    <tbody class="content-body" th:if="${session.member != null}">
+	                    <tr class="tab-content"  th:each="customer : ${list}">
+	                        <td style="width: 15%;" th:text="${customer.customerCategory}"></td>
+	                        <td style="width: 15%;" th:text="${customer.customerNickname}"></td>
+	                        <td class="title-td" style="width: 45%;">
+	                        	<a th:href="@{/customer/view(customerNo=${customer.customerNo})}" th:text="${customer.customerTitle}"></a>
+	                        </td>
+	                        <td style="width: 15%;" th:text="${customer.customerDate}"></td>
+	                        <td style="width: 10%;">
+	                            <th:block th:if="${session.member.memberNickname == customer.customerNickname}">
+	                            	<button class="delete-btn" th:value="${customer.customerNo}">삭제</button>
+	                            </th:block>
+	                            <th:block th:if="${session.member.memberGrade == '관리자'}">
+	                            	<input type="checkbox" class="checkbox" th:checked="${customer.adminCommented > 0}" disabled>
+	                            </th:block>
+	                        </td>
+	                    </tr>
+	                    <tr th:if="${#lists.isEmpty(list)}">
+						    <td class="login-warning" colspan="5">등록된 게시글이 없습니다.</td>
+						</tr>
+	                    <tr>
+	                    	<td class="null-td" colspan="5"></td>
+	                    </tr>
+	                    <tr class="button-tr">
+	                    	<td class="button-td" colspan="5">
+		                        <button class="write-btn" th:href=@{/customer/writeFrm}>글쓰기</button>
+	                    	</td>
+	                    </tr>
+                    </tbody>
+                    
                 </table>
             </div>
-            <div class="navi">
+            <div class="navi" th:if="${session.member != null and !#lists.isEmpty(list)}">
             	<ul class="navi-ul">
             		<li class="navi-li" th:if="${navi.prev}">
             			<a th:href="@{/customer/opinion(reqPage=${navi.startNo - 1},sort=${sort})}">

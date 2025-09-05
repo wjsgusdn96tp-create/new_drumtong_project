@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.order.dao.OrderDao;
 import kr.co.iei.order.vo.CartItem;
+import kr.co.iei.order.vo.Chart;
 import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
@@ -178,12 +179,26 @@ public class OrderService {
 
 
 
+	public List<Chart> selectOrderPay() {
+		List<Chart> chartListPay = orderDao.selectOrderPay();		
+		return chartListPay;
+	}
 
 
+	public List<Chart> selectOrderCount() {
+		List<Chart> chartListCount = orderDao.selectOrderCount();
+		
+		return chartListCount;
+	}
 
 
+	public List<Chart> selectOrderShop() {
+		List<Chart> chartListShop = orderDao.selectOrderShop();
+		return chartListShop;
+	}
 
 
+	
 
 	
 

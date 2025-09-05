@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.iei.order.vo.CartItem;
+import kr.co.iei.order.vo.Chart;
 import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
@@ -33,6 +34,9 @@ public interface OrderDao {
 
 	int deleteCart(HashMap<String, Object> param);
 
+	List<Chart> selectOrderPay();
+
+	List<Chart> selectOrderCount();
 	int cartdel(int cartNo);
 
 	List<OrderTbl> selectOrderList(int memberNo);
@@ -45,6 +49,7 @@ public interface OrderDao {
 
 	
 
+	List<Chart> selectOrderShop();
 
 
 }

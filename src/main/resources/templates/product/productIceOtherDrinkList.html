@@ -16,7 +16,7 @@
 		<div class="product_wrap">
 			<div class="product_title_wrap">
 				<ul class="product_title">
-					<li class="product_title_main product_all_list"><a class="product_all_list_a product_title_main_a" href="#">전체상품</a></li>
+					<li class="product_title_main product_all_list"><a class="product_all_list_a product_title_main_a" th:href="@{/product/productList(reqPage=1,shopName=${shopName})}">전체상품</a></li>
 					<li class="product_title_main product_drink drink_li">음료
 						<div class="product_title_list">
 							<ul class="product_title_ice">
@@ -24,14 +24,14 @@
 									<ul>
 										<li><a class="drink_a_iceCoffe" th:href="@{/product/productIceCoffeList(reqPage=1,shopName=${shopName})}">커피</a></li>
 										<li><a class="drink_a_iceTea" th:href="@{/product/productIceTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
-										<li><a class="drink_a_iceOther" th:href="@{/product/productIceOtherList(reqPage=1,shopName=${shopName})}">그 외 제조음료</a></li>
+										<li><a class="drink_a_iceOther" href="#">그 외 제조음료</a></li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="product_title_hot">
 								<li>HOT
 									<ul>
-										<li><a class="drink_a_hotCoffe" th:href="@{/product/productHotCoffetList(reqPage=1,shopName=${shopName})}">커피</a></li>
+										<li><a class="drink_a_hotCoffe" th:href="@{/product/productHotCoffeList(reqPage=1,shopName=${shopName})}">커피</a></li>
 										<li><a class="drink_a_hotTrs" th:href="@{/product/productHotTeaList(reqPage=1,shopName=${shopName})}">차</a></li>
 									</ul>
 								</li>
@@ -75,10 +75,10 @@
 			//const reqPage=[[${reqPage}]];
 			
 			
-
 					const member = [[${session.member}]];
+
 					
-					if(member.memberGrade != "관리자"){
+					if(member.memberGrade!="관리자"){
 						$(".product_insert_manager_btn").css("display","none");
 					}
 					
@@ -365,49 +365,7 @@
 						
 						iconDiv.append(priceTextDiv);
 						
-						/*
-						//like icon
 						
-						const likeIconDiv = $("<div>");
-						likeIconDiv.addClass("product_like");
-						likeIconDiv.attr("style","width:200px");
-						const likeUl = $("<ul>");
-						
-						const likeLi = $("<li>");
-						const likeP = $("<p>");
-						likeP.attr("style","flot:rigth;");
-						
-						const likeIconSpan1 = $("<span>")
-						likeIconSpan1.addClass("material-icons");
-						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
-						likeIconSpan1.text("favorite_border");
-						
-						
-						const likeIconSpan2 = $("<span>")
-						likeIconSpan2.addClass("material-icons");
-						likeIconSpan2.addClass("unlike_icon");
-						likeIconSpan2.text("favorite_border");
-						likeIconSpan1.append(likeIconSpan2);
-						
-						const likeIconSpan3 = $("<span>")
-						likeIconSpan3.addClass("material-icons");
-						likeIconSpan3.addClass("like_icon");
-						likeIconSpan3.text("favorite");
-						likeIconSpan1.append(likeIconSpan3);
-						
-						const likeCount = $("<span>")
-						likeCount.addClass("like_count");
-						likeCount.text("좋아요 수");
-						likeIconSpan1.append(likeCount);
-						
-						likeP.append(likeIconSpan1);
-						likeLi.append(likeP);
-						likeUl.append(likeLi);
-						likeIconDiv.append(likeUl);
-						
-						//좋아요 div icon div 에 넣기에 넣기
-						iconDiv.append(likeIconDiv);*/
-						//div_one_box에 넣기
 						div.append(iconDiv);
 						
 						//최종->li에 넣기
@@ -425,35 +383,10 @@
 					
 					
 					
-					/*
 					
-					//좋아요 기능 구현 못함ㅠㅠㅠ
-					if(member != null && member.grade !="관리자" && product.isLike == 1){}
-					$(".likeIconSpan1").on("click", function() {
-						
-						
-						const productNo = $(this).data("productno");
-						const likeText = $(this).text();
-						const isLike = (likeText == "favorite")?1:0;
-					$.ajax({
-						url : "/product/likepush",
-						data : {productNo :productNo, isLike:isLike},
-						type : "post",
-						success : function(data){
-							console.log(data);
-							if(isLike === 0){
-								$(this).text("favorite");
-							}else{
-								$(this).text("favorite_border");
-							}
-							$(this).text(data);
-						
-						}
-					})
-					})
 					
-					*/
-				$(".product_all_list").on("click",function(){
+					
+				$(".drink_a_iceOther").on("click",function(){
 						
 					$(".product_one_wrap").css("display","none");
 
@@ -730,49 +663,7 @@
 						
 						iconDiv.append(priceTextDiv);
 						
-						/*
-						//like icon
 						
-						const likeIconDiv = $("<div>");
-						likeIconDiv.addClass("product_like");
-						likeIconDiv.attr("style","width:200px");
-						const likeUl = $("<ul>");
-						
-						const likeLi = $("<li>");
-						const likeP = $("<p>");
-						likeP.attr("style","flot:rigth;");
-						
-						const likeIconSpan1 = $("<span>")
-						likeIconSpan1.addClass("material-icons");
-						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
-						likeIconSpan1.text("favorite_border");
-						
-						
-						const likeIconSpan2 = $("<span>")
-						likeIconSpan2.addClass("material-icons");
-						likeIconSpan2.addClass("unlike_icon");
-						likeIconSpan2.text("favorite_border");
-						likeIconSpan1.append(likeIconSpan2);
-						
-						const likeIconSpan3 = $("<span>")
-						likeIconSpan3.addClass("material-icons");
-						likeIconSpan3.addClass("like_icon");
-						likeIconSpan3.text("favorite");
-						likeIconSpan1.append(likeIconSpan3);
-						
-						const likeCount = $("<span>")
-						likeCount.addClass("like_count");
-						likeCount.text("좋아요 수");
-						likeIconSpan1.append(likeCount);
-						
-						likeP.append(likeIconSpan1);
-						likeLi.append(likeP);
-						likeUl.append(likeLi);
-						likeIconDiv.append(likeUl);
-						
-						//좋아요 div icon div 에 넣기에 넣기
-						iconDiv.append(likeIconDiv);*/
-						//div_one_box에 넣기
 						div.append(iconDiv);
 						
 						//최종->li에 넣기
@@ -786,62 +677,16 @@
 				})
 						
 								
-					
 				
-				/*탭 호버
-				$(".product_all_list").on("mouseover",function(){
-					$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-					$(".product_all_list_a").css("borderBottom","none");
-				})
-				$(".product_all_list").on("mouseout",function(){
-					$(".product_all_list").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-					$(".product_all_list_a").css("color", "var(--main5)");
-				})
-				$(".dessert_li").on("mouseover",function(){
-					$(".dessert_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-					$(".dessert_a").css("borderBottom","none");
-				})
-				$(".dessert_li").on("mouseout",function(){
-					$(".dessert_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-					$(".dessert_a").css("color", "var(--main5)");
-				})
-				$(".goods_li").on("mouseover",function(){
-					$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-					$(".goods_a").css("borderBottom","none");
-				})
-				$(".goods_li").on("mouseout",function(){
-					$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-					$(".goods_a").css("color", "var(--main5)");
-				})
-				$(".drink_li").on("mouseover",function(){
-					$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-				})
-				$(".drink_li").on("mouseout",function(){
-					$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
-				})*/
 				
-				//기본페이지 탭 전체상품
-				$(".product_all_list").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
-				$(".product_all_list_a").css("color", "white");
+				
 				
 				//가격순 눌렀을 때
 				$(".price_btn").on("click",function(){
 					$(".price_btn").css("backgroundColor","var(--main3)").css("fontWeight","600").css("color","var(--gray2)");
 					$(".like_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
 					$(".day_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
-					/*hover
-					$(".day_btn").on("mouseover",function(){
-						$(".day_btn").css("backgroundColor","var(--main2)");
-					})
-					$(".day_btn").on("mouseout",function(){
-						$(".day_btn").css("backgroundColor","var(--main1)");
-					})
-					$(".like_btn").on("mouseover",function(){
-						$(".like_btn").css("backgroundColor","var(--main2)");
-					})
-					$(".like_btn").on("mouseout",function(){
-						$(".like_btn").css("backgroundColor","var(--main1)");
-					})*/
+					
 					
 					$(".product_one_wrap").css("display","none");
 					
@@ -1116,49 +961,7 @@
 						
 						iconDiv.append(priceTextDiv);
 						
-						/*
-						//like icon
 						
-						const likeIconDiv = $("<div>");
-						likeIconDiv.addClass("product_like");
-						likeIconDiv.attr("style","width:200px");
-						const likeUl = $("<ul>");
-						
-						const likeLi = $("<li>");
-						const likeP = $("<p>");
-						likeP.attr("style","flot:rigth;");
-						
-						const likeIconSpan1 = $("<span>")
-						likeIconSpan1.addClass("material-icons");
-						likeIconSpan1.addClass("unlike_icon likeIconSpan1");
-						likeIconSpan1.text("favorite_border");
-						
-						
-						const likeIconSpan2 = $("<span>")
-						likeIconSpan2.addClass("material-icons");
-						likeIconSpan2.addClass("unlike_icon");
-						likeIconSpan2.text("favorite_border");
-						likeIconSpan1.append(likeIconSpan2);
-						
-						const likeIconSpan3 = $("<span>")
-						likeIconSpan3.addClass("material-icons");
-						likeIconSpan3.addClass("like_icon");
-						likeIconSpan3.text("favorite");
-						likeIconSpan1.append(likeIconSpan3);
-						
-						const likeCount = $("<span>")
-						likeCount.addClass("like_count");
-						likeCount.text("좋아요 수");
-						likeIconSpan1.append(likeCount);
-						
-						likeP.append(likeIconSpan1);
-						likeLi.append(likeP);
-						likeUl.append(likeLi);
-						likeIconDiv.append(likeUl);
-						
-						//좋아요 div icon div 에 넣기에 넣기
-						iconDiv.append(likeIconDiv);*/
-						//div_one_box에 넣기
 						div.append(iconDiv);
 						
 						//최종->li에 넣기
@@ -1178,19 +981,7 @@
 					$(".like_btn").css("backgroundColor","var(--main3)").css("fontWeight","600").css("color","var(--gray2)");
 					$(".day_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");
 					$(".price_btn").css("backgroundColor","var(--main1)").css("fontWeight","500").css("color","var(--gray3)");;
-					/*
-					$(".day_btn").on("mouseover",function(){
-						$(".day_btn").css("backgroundColor","var(--main2)");
-					})
-					$(".day_btn").on("mouseout",function(){
-						$(".day_btn").css("backgroundColor","var(--main1)");
-					})
-					$(".price_btn").on("mouseover",function(){
-						$(".price_btn").css("backgroundColor","var(--main2)");
-					})
-					$(".price_btn").on("mouseout",function(){
-						$(".price_btn").css("backgroundColor","var(--main1)");
-					})*/
+					
 				})
 				//최신순 눌렸을 때
 				$(".day_btn").on("click",function(){
@@ -1539,141 +1330,23 @@
 					}
 				})
 				
+				
+				//기본페이지 탭 디저트
+				$(".drink_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
+				$(".drink_li").css("color", "white");
+				
+
 				//전체 탭 클릭
-				$(".product_all_list").on("click", function(){
+				$(".drink_a_iceOther").on("click", function(){
 					//디저트 탭 색상 변경 및 상품 출력
+			
 					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
 					$(".product_title_main_a").css("color", "var(--main5)");
-					$(".drink_li").css("color", "var(--main5)");
-					$(".product_all_list").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
-					$(".product_all_list_a").css("color", "white");
-					$(".dessert_li").on("mouseover",function(){
-						$(".dessert_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-						$(".dessert_a").css("borderBottom","none");
-					})
-					$(".dessert_li").on("mouseout",function(){
-						$(".dessert_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-						$(".dessert_a").css("color", "var(--main5)");
-					})
-					$(".goods_li").on("mouseover",function(){
-						$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-						$(".goods_a").css("borderBottom","none");
-					})
-					$(".goods_li").on("mouseout",function(){
-						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-						$(".goods_a").css("color", "var(--main5)");
-					})
-					$(".drink_li").on("mouseover",function(){
-						$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-					})
-					$(".drink_li").on("mouseout",function(){
-						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
-					})
+					
+					$(".drink_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
+					$(".drink_li").css("color", "white");
 					
 					
-					
-					/*
-					const reqPage = [[${reqPage}]];
-					const shopName = [[${shopName}]];
-					$.ajax({
-						url : "/product/productList",
-						data : {reqPage:reqPage, shopName:shopName},
-						type : "get",
-						success : function(data){
-							
-						}
-						
-					})*/
-				
-				
-				})
-				/*	
-				//디저트 탭 클릭
-				$(".dessert_li").on("click", function(){
-					//디저트 탭 색상 변경 및 상품 출력
-					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-					$(".product_title_main_a").css("color", "var(--main5)");
-					$(".drink_li").css("color", "var(--main5)");
-					$(".dessert_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
-					$(".dessert_a").css("color", "white");
-					$(".product_all_list").on("mouseover",function(){
-						$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-						$(".product_all_list_a").css("borderBottom","none");
-					})
-					$(".product_all_list").on("mouseout",function(){
-						$(".product_all_list").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-						$(".product_all_list_a").css("color", "var(--main5)");
-					})
-					$(".goods_li").on("mouseover",function(){
-						$(".goods_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-						$(".goods_a").css("borderBottom","none");
-					})
-					$(".goods_li").on("mouseout",function(){
-						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-						$(".goods_a").css("color", "var(--main5)");
-					})
-					$(".drink_li").on("mouseover",function(){
-						$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-					})
-					$(".drink_li").on("mouseout",function(){
-						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
-					})
-					
-					$(".product_one_wrap").css("display","none");
-					/*
-					const reqPage = [[${reqPage}]];
-					const shopName = [[${shopName}]];
-					$.ajax({
-						url : "/product/productListDessert",
-						data : {reqPage:reqPage, shopName:shopName},
-						type : "get",
-						success : function(data){
-							
-						}
-						
-					})
-					
-					
-				})
-				
-				//굿즈 탭 클릭
-				$(".goods_li").on("click", function(){
-					//디저트 탭 색상 변경 및 상품 출력
-					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-					$(".product_title_main_a").css("color", "var(--main5)");
-					$(".drink_li").css("color", "var(--main5)");
-					$(".goods_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none");
-					$(".goods_a").css("color", "white");
-					$(".product_all_list").on("mouseover",function(){
-						$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-						$(".product_all_list_a").css("borderBottom","none");
-					})
-					$(".product_all_list").on("mouseout",function(){
-						$(".product_all_list").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-						$(".product_all_list_a").css("color", "var(--main5)");
-					})
-					$(".dessert_li").on("mouseover",function(){
-						$(".dessert_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-						$(".dessert_a").css("borderBottom","none");
-					})
-					$(".dessert_li").on("mouseout",function(){
-						$(".dessert_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-						$(".dessert_a").css("color", "var(--main5)");
-					})
-					$(".drink_li").on("mouseover",function(){
-						$(".drink_li").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
-					})
-					$(".drink_li").on("mouseout",function(){
-						$(".drink_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
-					})
-				})
-				
-				//음료 탭 클릭
-				$(".drink_a_iceCoffe").on("click", function(){
-					//디저트 탭 색상 변경 및 상품 출력
-					$(".product_title_main").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
-					$(".product_title_main_a").css("color", "var(--main5)");
-					$(".drink_li").css("backgroundColor", "var(--main5)").css("borderTop","3px solid var(--main4)").css("borderBottom","none").css("color", "white");
 					$(".product_all_list").on("mouseover",function(){
 						$(".product_all_list").css("backgroundColor", "var(--main2)").css("borderTop","3px solid var(--main5)").css("borderBottom","none");
 						$(".product_all_list_a").css("borderBottom","none");
@@ -1695,13 +1368,16 @@
 						$(".goods_a").css("borderBottom","none");
 					})
 					$(".goods_li").on("mouseout",function(){
-						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)");
+						$(".goods_li").css("backgroundColor", "var(--main1)").css("borderTop","2px solid var(--main3)").css("borderBottom","2px solid var(--main3)").css("color", "var(--main5)");
 						$(".goods_a").css("color", "var(--main5)");
 					})
 					
 					
+					
+					
+				
+				
 				})
-				*/
 				
 				
 				
