@@ -94,10 +94,6 @@ public class NewsController {
 		news.setImage(filepath);
 		news.setMemberNo(memberNo);
 		
-		System.out.println(news);
-		System.out.println(productList);
-		System.out.println(discountType);
-		System.out.println(discountPrice);
 		int result = newsService.insertNews(news, productList, discountType, discountPrice);		
 		
 		return "redirect:/news/list?noticeReqPage=1&tab=all&modal=1";

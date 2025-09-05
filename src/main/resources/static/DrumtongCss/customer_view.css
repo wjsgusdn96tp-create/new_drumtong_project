@@ -22,6 +22,9 @@
     --line3: #eaeced;
     --line4: #f6f6f6;
     --line5: #f8f9fa;
+    align-items: center;
+    line-height: 50px;
+    border-radius: 45%;
 }
 *{
 	padding: 0;

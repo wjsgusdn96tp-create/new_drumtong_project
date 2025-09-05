@@ -39,12 +39,13 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginIntercepter())
 				.addPathPatterns(
-							"/customer/listGj",
-							"/customer/listComplain",
-							"/customer/listOpinion",
-							"/customer/writeFrm",
-							"/customer/view",
-							"/customer/updateFrm"
+//							"/customer/listGj",
+//							"/customer/listComplain",
+//							"/customer/listOpinion",
+//							"/customer/writeFrm",
+//							"/customer/view",
+//							"/customer/updateFrm"
+							"/customer/**"
 						)
 				.excludePathPatterns(
 							"/customer/list"
