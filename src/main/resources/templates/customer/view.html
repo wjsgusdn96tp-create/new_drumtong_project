@@ -202,18 +202,18 @@
         }
     });
 
-    function updateStarUI(rating){
+    function updateStarUI(customerStar){
         const stars = $(".star-wrap>span");
         
         stars.each(function(i){
-            if(i < rating){
+            if(i < customerStar){
                 $(this).css("color", "var(--main4)");
             } else {
                 $(this).css("color", "var(--gray6)");
             }
         });
         
-        $(".star-rank").text(rating + "점");
+        $(".star-rank").text(customerStar + "점");
     }
 
     $(".star-wrap>span").on("click",function(){
@@ -222,7 +222,7 @@
         }
     	
         const clickedIndex = $(this).index();
-        const newRating = clickedIndex + 1;
+        const customerStar = clickedIndex + 1;
         const customerNo = $("#customerNo").val();
 
         $.ajax({
@@ -230,12 +230,12 @@
             type: "post",
             data: {
                 customerNo: customerNo,
-                customerStar: newRating
+                customerStar: customerStar
             },
             success: function(response){
                 if(response === "success"){
                     alert("별점이 저장되었습니다.");
-                    updateStarUI(newRating);
+                    updateStarUI(customerStar);
                     $("#customerStar").val(newRating);
                 } else {
                     alert("별점 저장 실패");
