@@ -36,13 +36,14 @@
 							<div class="cart-listbody">
 								<div class="cart-imgbox">
 									<img th:src="@{'/product/'+${list.cartImg}}" class="cart-img">
-
 								</div>
 								<div class="list-infobox">
 									<div class="info-top">
 										<span class="item-name" th:text="${list.productName}"></span>
 										<div class="quantity-box">
+											<button class="button-minus"><span class="material-icons">remove_circle_outline</span></button>
 											<span class="quantity" th:text="${list.count}"></span> <span>개</span>
+											<button class="button-plus"><span class="material-icons">add_circle_outline</span></button>
 										</div>
 										<div class=quantity-box2>
 											<span class="item-price" th:text="${list.pay}"></span> <span>원</span>
@@ -61,9 +62,40 @@
 												th:text="${list.cupShot}"></span> <span class="cream">휘핑크림
 												: </span><span class="cream-count" th:text="${list.cupCream}"></span>
 										</div>
+										<div class="info-bottom">
+		                                    <span class="sale">등급할인</span>
+		                                    <a href="#" class="modify">옵션변경</a>
+		                                </div>
 									</div>
 								</div>
 							</div>
+							<div class="cart-listfooter">
+	                            <div class="footer-pricebox">
+	                                <div class="price-row">
+	                                <span class="label">상품금액</span>
+	                                <div class="price-rowbox">
+	                                <span class="price-product" th:text="${list.pay}"></span>
+	                                <span>원</span>
+	                                </div>
+	                                </div>
+	                                <span class="operator">-</span>
+	                                <div class="price-row">
+	                                <span class="label">할인금액</span>
+	                                <div class="price-rowbox">
+	                                <span class="price-discount" th:text="${list.discountPrice}"></span>
+	                                <span>원</span>
+	                                </div>
+	                             </div>
+	                                <span class="operator">=</span>
+	                                <div class="price-row">
+	                                <span class="label">주문금액</span>
+	                                <div class="price-rowbox">
+	                                <span class="price-order"></span>
+	                                <span>원</span>
+	                                </div>
+	                             </div>
+                            </div>
+                        </div>
 						</li>
 					</ul>
 				</div>
@@ -73,8 +105,10 @@
 						<h3>결제정보</h3>
 						<hr>
 						<div class="summary-row">
-							<span class="label">전체수량</span> <span class="value"> <span
-								class="total-count"></span> <span class="unit">개</span>
+							<span class="label">전체수량</span> 
+							<span class="value"> 
+							<span class="total-count"></span> 
+								<span class="unit">개</span>
 							</span>
 						</div>
 
@@ -83,7 +117,11 @@
 								class="product-totalprice"></span> <span class="unit">원</span>
 							</span>
 						</div>
-						<div class="summary-row"></div>
+						<div class="summary-row">
+								<span class="label">할인총합</span> <span class="value"> <span
+								class=".total-discount"></span> <span class="unit">원</span>
+							</span>
+						</div>
 						<hr>
 						<div class="summary-row total">
 							<span class="label">총 결제금액</span> <span class="value"> <span
@@ -107,7 +145,7 @@
 	<th:block th:include="common/footer"></th:block>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script th:inline="javascript">
-
+	//리스트값 불러오기
 	let list = [[${list}]];
 	//상품총합
 	let totalProduct = Number($(".product-totalprice").text());
@@ -118,24 +156,40 @@
 	//총 결제금액
 	let totalpay = Number($(".total-price").text());
 	
-	
-	
-	
-	list.forEach(function(item){
+
+	//할인,수량,상품 총합값
+	$.each(list,function(index,item){
 		
-		totalProduct += (item.pay);
-		totalCount += (item.count);
-		totalDiscount += (item.discountPrice);
+		totalProduct += item.pay;
+		totalCount += item.count;
+		totalDiscount += item.discountPrice;
 		
 	});
-	
+	//총합금액    총합상품값     총합 할인값
 	totalpay = totalProduct - totalDiscount;
-			
-		
+	
+	$(".footer-pricebox").each(function() {
+	   
+	  	//상품가격 개별
+	   let priceProduct = Number($(this).find(".price-product").text());
+	  	//상품 할인금액 개별
+	    let priceDiscount = Number($(this).find(".price-discount").text());
+	  	//개별 금액 합 
+	  	
+	    let priceOrder = priceProduct - priceDiscount;
+
+	    $(this).find(".price-order").text(priceOrder);
+
+	});
+	//개별금액결과     개별값         할인개별값	
+	
+	
 	$(".total-count").text(totalCount);
 	$(".product-totalprice").text(totalProduct);
 	$(".total-discount").text(totalDiscount);
 	$(".total-price").text(totalpay);
+	
+
 	
 	
 	
@@ -253,9 +307,9 @@
      
         
 			        		const totalprice = $(".total-price").text();
-							const productName = $(".item-name").text();
+						const productName = $(".item-name").text();
 			                
-			                const date = new Date();
+			            const date = new Date();
 			        		const dateString = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
 			        		
 			        		IMP.init("imp57046341");
@@ -273,7 +327,8 @@
 			        				    buyer_postcode: "123-456",
 			        				  },
 			        				  function (rsp) {
-			        					 
+			        					 if(rsp.success){
+			        						 alert("구매 실패");
 			        				    	$.ajax({
 			        				        	url : "/order/pay",
 			        				        	type : "post",
@@ -288,6 +343,9 @@
 			        					        	alert("구매 실패");
 			        					        }
 			        				   		});
+			        					 }else {
+			        						 alert("구매 실패");
+			        					 }
 			        			      	
 			        				  
 			        				  
