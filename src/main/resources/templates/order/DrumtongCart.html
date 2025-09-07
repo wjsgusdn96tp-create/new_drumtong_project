@@ -82,12 +82,12 @@
 	                                <div class="price-row">
 	                                <span class="label">할인금액</span>
 	                                <div class="price-rowbox">
-	                                <span class="price-dicount" th:text="${list.discountPrice}"></span>
+	                                <span class="price-discount" th:text="${list.discountPrice}"></span>
 	                                <span>원</span>
 	                                </div>
 	                             </div>
 	                                <span class="operator">=</span>
-	                                <div class="price-row total">
+	                                <div class="price-row">
 	                                <span class="label">주문금액</span>
 	                                <div class="price-rowbox">
 	                                <span class="price-order"></span>
@@ -105,8 +105,10 @@
 						<h3>결제정보</h3>
 						<hr>
 						<div class="summary-row">
-							<span class="label">전체수량</span> <span class="value"> <span
-								class="total-count"></span> <span class="unit">개</span>
+							<span class="label">전체수량</span> 
+							<span class="value"> 
+							<span class="total-count"></span> 
+								<span class="unit">개</span>
 							</span>
 						</div>
 
@@ -154,30 +156,40 @@
 	//총 결제금액
 	let totalpay = Number($(".total-price").text());
 	
-	//상품가격 개별
-	let priceProduct = Number($(".price-product").text());
-	//상품 할인금액 개별
-	let priceDiscount = Number($(".price-discount").text());
-	//개별 금액 합 
-	let priceOrder = Number($(".price-order").text());
+
 	//할인,수량,상품 총합값
-	list.forEach(function(item){
+	$.each(list,function(index,item){
 		
-		totalProduct += (item.pay);
-		totalCount += (item.count);
-		totalDiscount += (item.discountPrice);
+		totalProduct += item.pay;
+		totalCount += item.count;
+		totalDiscount += item.discountPrice;
 		
 	});
 	//총합금액    총합상품값     총합 할인값
 	totalpay = totalProduct - totalDiscount;
+	
+	$(".footer-pricebox").each(function() {
+	   
+	  	//상품가격 개별
+	   let priceProduct = Number($(this).find(".price-product").text());
+	  	//상품 할인금액 개별
+	    let priceDiscount = Number($(this).find(".price-discount").text());
+	  	//개별 금액 합 
+	  	
+	    let priceOrder = priceProduct - priceDiscount;
+
+	    $(this).find(".price-order").text(priceOrder);
+
+	});
 	//개별금액결과     개별값         할인개별값	
-	priceOrder = priceProduct - priceDiscount;
+	
 	
 	$(".total-count").text(totalCount);
 	$(".product-totalprice").text(totalProduct);
 	$(".total-discount").text(totalDiscount);
 	$(".total-price").text(totalpay);
-	$(".price-order").text(priceOrder);
+	
+
 	
 	
 	
@@ -295,9 +307,9 @@
      
         
 			        		const totalprice = $(".total-price").text();
-							const productName = $(".item-name").text();
+						const productName = $(".item-name").text();
 			                
-			                const date = new Date();
+			            const date = new Date();
 			        		const dateString = `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
 			        		
 			        		IMP.init("imp57046341");
