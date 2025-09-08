@@ -131,7 +131,7 @@ public class OrderService {
 	}
 
 
-
+	@Transactional
 	public List<OrderTbl> selectOrderList(int memberNo) {
 		
 		
