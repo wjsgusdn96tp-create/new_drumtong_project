@@ -98,7 +98,17 @@
 		select * from order_details_tbl where order_no = #{orderNo}
 	</select>
 	
-	
+	<select id="insertVip" resultType="vip">
+		select * from 
+			(select rownum, member_no,member_nickname,membership_grade,membership_level,percent,membership_recode_last
+			from member_tbl
+			left join membership_recode_tbl on membership_recode_nickname = member_nickname
+			left join membership_tbl on membership_recode_member_no = membership_level
+			where sysdate between membership_recode_start and membership_recode_last and
+			member_no = ${memberNo}
+			order by percent desc nulls last) 
+			where rownum = 1
+	</select>
 		
 		
 </mapper>

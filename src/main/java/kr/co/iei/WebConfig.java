@@ -74,6 +74,7 @@ public class WebConfig implements WebMvcConfigurer {
 							"/product/productIceOtherList",
 							"/product/productHotCoffeList",
 							"/product/productHotTeaList"
+							
 						);
 		registry.addInterceptor(new AdminInterceptor())
 				.addPathPatterns("/admin/**")

@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.iei.membership.model.vo.MemberShip;
+import kr.co.iei.membershiprecode.model.vo.MemberShipRecode;
 import kr.co.iei.order.dao.OrderDao;
 import kr.co.iei.order.vo.CartItem;
 import kr.co.iei.order.vo.Chart;
 import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
+import kr.co.iei.order.vo.VipMember;
 import kr.co.iei.product.vo.Product;
 
 @Service
@@ -45,6 +48,10 @@ public class OrderService {
 	public int insertCart(CartItem ct) {
 		int result = orderDao.insertCart(ct);
 		
+		
+		
+		
+		
 		return result;
 	}
 
@@ -68,8 +75,10 @@ public class OrderService {
 	@Transactional
 	public int insertOrderTbl(OrderTbl otb) {
 		
+		//주문번호 를 가져와서 인트변수에 대입
 		int orderNo  = orderDao.getorderNo();
 		otb.setOrderNo(orderNo);
+		
 		
 		int memberNo = otb.getMemberNo();
 		String shopName = otb.getShopName();
@@ -90,7 +99,7 @@ public class OrderService {
 		
 		
 		for(int i=0 ; i < list.size() ; i++) {
-			
+		 
 		 CartItem o = list.get(i);
 		
 		 DetailsTbl dtl = new DetailsTbl();
@@ -112,11 +121,11 @@ public class OrderService {
 		 dtl.setProductTitle(o.getProductTitle());
 		 dtl.setCartImg(o.getCartImg());
 		 
-		 
+		 // cart 테이블을 dtl 테이블로 추가
 		 int resultDt = orderDao.insertDetailsTbl(dtl);
 	
 		}
-		
+		// 삭제 로직
 		int result = orderDao.deleteCart(param);
 		
 		return result;
@@ -173,11 +182,18 @@ public class OrderService {
 		//select * from order_details_tbl where order_no = 44;
 
 	}
-
-
+	@Transactional
+	public VipMember insertVip(int memberNo) {
+		
+		VipMember vm = orderDao.insertVip(memberNo);
+		
+		
+		System.out.println(vm);
+		
+		return vm;
+	}
 	
 	
-
 
 
 	public List<Chart> selectOrderPay() {
@@ -197,6 +213,10 @@ public class OrderService {
 		List<Chart> chartListShop = orderDao.selectOrderShop();
 		return chartListShop;
 	}
+
+
+
+
 
 
 	

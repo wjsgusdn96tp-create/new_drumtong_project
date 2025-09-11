@@ -21,11 +21,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.co.iei.customer.controller.CustomerController;
 import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.membership.model.vo.MemberShip;
+import kr.co.iei.membershiprecode.model.vo.MemberShipRecode;
 import kr.co.iei.order.service.OrderService;
 import kr.co.iei.order.vo.CartItem;
 import kr.co.iei.order.vo.DetailsTbl;
 import kr.co.iei.order.vo.OrderTbl;
 import kr.co.iei.order.vo.ShopTbl;
+import kr.co.iei.order.vo.VipMember;
 import kr.co.iei.product.vo.Product;
 
 @Controller
@@ -109,10 +112,15 @@ public class OrderController {
 		int memberNo = member.getMemberNo();
 		
 		
+		
+		VipMember vm = orderService.insertVip(memberNo);
+		
+		System.out.println(vm);
+		
 		List list = orderService.selectCartList(memberNo,shopName);
 		
 		
-		
+		model.addAttribute("vm", vm);
 		model.addAttribute("shopName", shopName);
 		model.addAttribute("memberNo", memberNo);
 		
