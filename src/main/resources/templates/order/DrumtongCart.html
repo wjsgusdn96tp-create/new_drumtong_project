@@ -65,7 +65,7 @@
 												: </span><span class="cream-count" th:text="${list.cupCream}"></span>
 										</div>
 										<div class="info-bottom">
-		                                    <span class="sale">등급할인</span>
+		                                    <span class="sale" th:text="${vm.membershipGrade}"></span>
 		                                    <a href="#" class="modify">옵션변경</a>
 		                                </div>
 									</div>
@@ -84,7 +84,7 @@
 	                             <div class="price-row">
 	                                <span class="label">할인금액</span>
 	                                <div class="price-rowbox">
-	                                <span class="price-discount" ></span>
+	                                <span class="price-discount" th:text="${list.pay}*${vm.percent}/100" ></span>
 	                                <span>원</span>
 	                                </div>
 	                             </div>
@@ -158,17 +158,45 @@
 	//총 결제금액
 	let totalpay = Number($(".total-price").text());
 	
-     
+	
+	
+	
 	//할인,수량,상품 총합값
 	$.each(list,function(index,item){
 		
 		totalProduct += item.pay;
 		totalCount += item.count;
-		totalDiscount += item.discountPrice;
+		
 		
 	});
+	
+	
+	
+	$(".footer-pricebox").each(function() {
+	   
+	  	//상품가격 개별
+	   let priceProduct = Number($(this).find(".price-product").text());
+	  	//상품 할인금액 개별
+	    let priceDiscount = Number($(this).find(".price-discount").text());
+	  	//개별 금액 합 
+	  	
+	  	totalDiscount += priceDiscount;
+	  	
+		//개별금액결과     개별값         할인개별값	
+	    let priceOrder = priceProduct - priceDiscount;
+	    
+	  	$(this).find(".price-order").text(priceOrder);
+
+	});
+
 	//총합금액    총합상품값     총합 할인값
 	totalpay = totalProduct - totalDiscount;
+	
+	
+	$(".total-count").text(totalCount);
+	$(".product-totalprice").text(totalProduct);
+	$(".total-discount").text(totalDiscount);
+	$(".total-price").text(totalpay);
 	
 	
 	/*
@@ -222,27 +250,6 @@
 	
 	
 	
-	
-	$(".footer-pricebox").each(function() {
-	   
-	  	//상품가격 개별
-	   let priceProduct = Number($(this).find(".price-product").text());
-	  	//상품 할인금액 개별
-	    let priceDiscount = Number($(this).find(".price-discount").text());
-	  	//개별 금액 합 
-	  	
-	    let priceOrder = priceProduct - priceDiscount;
-
-	    $(this).find(".price-order").text(priceOrder);
-
-	});
-	//개별금액결과     개별값         할인개별값	
-	
-	
-	$(".total-count").text(totalCount);
-	$(".product-totalprice").text(totalProduct);
-	$(".total-discount").text(totalDiscount);
-	$(".total-price").text(totalpay);
 	
 	
 	

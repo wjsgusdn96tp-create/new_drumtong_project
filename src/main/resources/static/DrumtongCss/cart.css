@@ -159,6 +159,7 @@ button {
 .sale {
     font-weight: 700;
     padding-right: 80px;
+    color: var(--main3);
 }
 .modify {
     color: black;
@@ -301,5 +302,6 @@ button {
 	background-color: var(--main4);
 	border: 3px solid black;
 }
+
 
 

@@ -12,11 +12,11 @@ public class WebServerCustom implements WebServerFactoryCustomizer<ConfigurableW
 	@Override
 	public void customize(ConfigurableWebServerFactory factory) {
 		//404
-		ErrorPage error404 = new ErrorPage(HttpStatus.NOT_FOUND, "/error/notFound"); //(에러종류, 이동경로)
+		//ErrorPage error404 = new ErrorPage(HttpStatus.NOT_FOUND, "/error/notFound"); //(에러종류, 이동경로)
 		//500
-		ErrorPage error500 = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/serverError");
+		//ErrorPage error500 = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/serverError");
 		
-		factory.addErrorPages(error404, error500);
+		//factory.addErrorPages(error404, error500);
 		//꼭풀기
 	}
 
