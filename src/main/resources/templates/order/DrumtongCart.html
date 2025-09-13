@@ -43,9 +43,13 @@
 									<div class="info-top">
 										<span class="item-name" th:text="${list.productName}"></span>
 										<div class="quantity-box">
+											<!-- 
 											<button class="button-minus"><span class="material-icons">remove_circle_outline</span></button>
+											 -->
 											<span class="quantity" th:text="${list.count}"></span> <span>개</span>
+											<!-- 
 											<button class="button-plus"><span class="material-icons">add_circle_outline</span></button>
+											 -->
 										</div>
 										<div class=quantity-box2>
 											<span class="item-price" th:text="${list.pay}"></span> <span>원</span>
@@ -66,7 +70,9 @@
 										</div>
 										<div class="info-bottom">
 		                                    <span class="sale" th:text="${vm.membershipGrade}"></span>
+		                                    <!-- 
 		                                    <a href="#" class="modify">옵션변경</a>
+		                                     -->
 		                                </div>
 									</div>
 								</div>
@@ -161,7 +167,7 @@
 	
 	
 	
-	//할인,수량,상품 총합값
+	//수량,상품 총합값
 	$.each(list,function(index,item){
 		
 		totalProduct += item.pay;
@@ -170,21 +176,22 @@
 		
 	});
 	
-	
-	
 	$(".footer-pricebox").each(function() {
 	   
 	  	//상품가격 개별
 	   let priceProduct = Number($(this).find(".price-product").text());
 	  	//상품 할인금액 개별
 	    let priceDiscount = Number($(this).find(".price-discount").text());
-	  	//개별 금액 합 
 	  	
+	  	priceDiscount = Math.round(priceDiscount / 10) * 10;
+	  	
+	  	//개별 금액 합 
 	  	totalDiscount += priceDiscount;
 	  	
 		//개별금액결과     개별값         할인개별값	
 	    let priceOrder = priceProduct - priceDiscount;
 	    
+		$(this).find(".price-discount").text(priceDiscount);
 	  	$(this).find(".price-order").text(priceOrder);
 
 	});
@@ -271,9 +278,7 @@
 		//li 안에있는 모든 요소중 히든타이틀 찾아서 값 대입하고 공백 제거완료
 
 		const optionBox = $(this).find(".item-option");
-		
-		
-		
+
 		
 		if (title === "drink") {
 			optionBox.show();
@@ -289,14 +294,11 @@
 			optionBox.find(".heat").hide();
 		}
 		
-		
 	});
 	
 	
 	
 	
-	
-	//두개이상 클릭막기.. 내실력 부족 전체 삭제는 안돼겠다
 	$(".button-icons .material-icons").on("click", function () {
     		
 		let inselect = $(".material-icons.selected");
@@ -328,18 +330,12 @@
 				cartNo = cartLi.find(".cart-no").val();
 				
 				return false;
-				
 			}
 		});
-		
 		  if (!cartNo) {
 		        alert("삭제할 물건을 체크하세요");
 		        return;
 		    }
-	
-			console.log("매장값확인",shopName)
-			
-		
 			 $.ajax({
 			        url: "/order/cartdel",
 			        type: "post",
@@ -371,10 +367,8 @@
             location.href = "/";
             return;
         }
-			        
-     
-        
-			        		const totalprice = $(".total-price").text();
+			       
+			        	const totalprice = $(".total-price").text();
 						const productName = $(".item-name").text();
 			                
 			            const date = new Date();
@@ -396,7 +390,6 @@
 			        				  },
 			        				  function (rsp) {
 			        					 if(rsp.success){
-			        						 alert("구매 실패");
 			        				    	$.ajax({
 			        				        	url : "/order/pay",
 			        				        	type : "post",

@@ -173,6 +173,10 @@
 	<script th:inline="javascript">
 			//타이틀 값 저장
 			const productTitle = [[${p.productTitle}]];
+			const shotPay =  400;
+			const creamPay = 500;
+			const sizePrice = 2000;
+			let selectedSize = "L";
 			
 			$("#drinkBox, #dessertBox, #goodsBox").hide();
 			
@@ -185,10 +189,6 @@
 			    $("#goodsBox").show();
 			}
 			
-			const shotPay =  400;
-			const creamPay = 500;
-			const sizePrice = 2000;
-			let selectedSize = "L";
 			
 			const drinkBasePrice = Number($("#drinkBox .order-base-price").text());
 			const dessertBasePrice = Number($("#dessertBox .order-base-price").text());
@@ -202,9 +202,7 @@
 			    $("#pay").val(goodsBasePrice);
 			}
 			
-			
-			
-			
+
 			
 			$("#dessertBox .button-plus1").on("click",function(){
 				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
@@ -216,7 +214,7 @@
 					return;
 				}
 				
-				
+	
 				const totalPrice = dessertBasePrice * plusCount;
 				const payPrice = totalPrice;
 						
@@ -317,15 +315,13 @@
 				
 				if(selectedSize=="XL") {
 					plusCount = 1;
-				} 
-					
-					
+				} 		
 				const totalPrice = drinkBasePrice * optionCount;
 				const sizeTotal = sizePrice * plusCount * optionCount;
 				const shotTotal = shotCount * shotPay * optionCount;
 				const creamTotal = creamCount * creamPay * optionCount;
 			
-				
+	
 				const payPrice = totalPrice + sizeTotal + shotTotal + creamTotal;
 				
 					//태그 안의 문자열값에 플러스한 값을 대입
@@ -356,21 +352,17 @@
 				//지정한 클래스명의 태그 안의 문자열값을 대입 처음 금액 
 				const optionCount = $("#drinkBox .order-option-count").text();
 				const shotCount = $("#drinkBox .order-option-shotcount").text();
-				const creamCount = $("#drinkBox .order-option-creamcount").text();
-				
-			
+				const creamCount = $("#drinkBox .order-option-creamcount").text();					
 				const plusCount = Number(optionCount)+1;
 				
 				if(optionCount == 10){
 					return;
 				}
-				
 				let sizeCount = 0;
 				
 				if(selectedSize == "XL") {
 					sizeCount = 1;
 				}
-				
 				const totalPrice = drinkBasePrice * plusCount;
 				const sizeTotal = sizePrice * sizeCount * plusCount;
 				const shotTotal = shotCount * shotPay * plusCount;

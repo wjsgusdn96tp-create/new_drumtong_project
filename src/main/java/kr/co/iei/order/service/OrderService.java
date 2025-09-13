@@ -104,7 +104,6 @@ public class OrderService {
 		
 		 DetailsTbl dtl = new DetailsTbl();
 		 
-		 
 		 dtl.setCupChoice(o.getCupChoice());
 		 dtl.setCupSize(o.getCupSize());
 		 dtl.setCupShot(o.getCupShot());
