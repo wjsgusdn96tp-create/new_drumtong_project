@@ -43,13 +43,13 @@
 									<div class="info-top">
 										<span class="item-name" th:text="${list.productName}"></span>
 										<div class="quantity-box">
-											<!-- 
+											
 											<button class="button-minus"><span class="material-icons">remove_circle_outline</span></button>
-											 -->
+											 
 											<span class="quantity" th:text="${list.count}"></span> <span>개</span>
-											<!-- 
+											 
 											<button class="button-plus"><span class="material-icons">add_circle_outline</span></button>
-											 -->
+											
 										</div>
 										<div class=quantity-box2>
 											<span class="item-price" th:text="${list.pay}"></span> <span>원</span>
@@ -98,7 +98,7 @@
 	                             <div class="price-row">
 	                                <span class="label">주문금액</span>
 	                                <div class="price-rowbox">
-	                                <span class="price-order"></span>
+	                                <span class="price-order" th:text="${list.pay}-${list.pay}*${vm.percent}/100"></span>
 	                                <span>원</span>
 	                                </div>
 	                             </div>
@@ -155,6 +155,9 @@
 	<script th:inline="javascript">
 	//리스트값 불러오기
 	let list = [[${list}]];
+
+	
+	
 	//상품총합
 	let totalProduct = Number($(".product-totalprice").text());
 	//상품수량총합
@@ -167,7 +170,8 @@
 	
 	
 	
-	//수량,상품 총합값
+	
+	
 	$.each(list,function(index,item){
 		
 		totalProduct += item.pay;
@@ -176,43 +180,48 @@
 		
 	});
 	
-	$(".footer-pricebox").each(function() {
-	   
-	  	//상품가격 개별
-	   let priceProduct = Number($(this).find(".price-product").text());
-	  	//상품 할인금액 개별
-	    let priceDiscount = Number($(this).find(".price-discount").text());
-	  	
-	  	priceDiscount = Math.round(priceDiscount / 10) * 10;
-	  	
-	  	//개별 금액 합 
-	  	totalDiscount += priceDiscount;
-	  	
-		//개별금액결과     개별값         할인개별값	
-	    let priceOrder = priceProduct - priceDiscount;
-	    
-		$(this).find(".price-discount").text(priceDiscount);
-	  	$(this).find(".price-order").text(priceOrder);
-
-	});
-
-	//총합금액    총합상품값     총합 할인값
-	totalpay = totalProduct - totalDiscount;
+	
+	
 	
 	
 	$(".total-count").text(totalCount);
 	$(".product-totalprice").text(totalProduct);
-	$(".total-discount").text(totalDiscount);
-	$(".total-price").text(totalpay);
 	
 	
-	/*
+	
+	
+	
 	//개별 수량 플러스 하는 로직 
-	$(".info-top").each(function(){
+	$(".cartlist").each(function(){
+			//버튼 동작 위해서 변수에 this 다시 지정하기
 			const infoTop = $(this);	
+			//상품 개별가격
+			let priceProduct = Number($(this).find(".price-product").text());
+			//상품 할인 개별가격
+			let priceDiscount = Number($(this).find(".price-discount").text());
+			//숫자 반올림하기 
+			priceDiscount = Math.round(priceDiscount / 10) * 10;
+			
+			totalDiscount += priceDiscount; 
+			
+			//총합금액    총합상품값     총합 할인값
+			totalpay = totalProduct - totalDiscount;
+			
+			
+			$(".total-discount").text(totalDiscount);
+			$(".total-price").text(totalpay);
+			
+			let orderPrice = priceProduct - priceDiscount;
 		
+			//기본 할인값, 결제값에 반올림값 부여
+			$(this).find(".price-discount").text(priceDiscount);
+			$(this).find(".price-order").text(orderPrice);
+			
+			
 			const itemPrice = infoTop.find(".item-price").text();
 		
+			
+			
 			infoTop.find(".button-plus").on("click",function(){
 			
 				const quantity = infoTop.find(".quantity").text();
@@ -220,40 +229,86 @@
 				if(quantity == 10){
 					return;
 				}
-				const newAmount = Number(quantity) + 1;
-				const newTotalPrice = newAmount * itemPrice;
+				//수량 올라갈때마다 +1
+				let newAmount = Number(quantity) + 1;
+				//그 수량에 따라 1*씩
+				let newTotalPrice = newAmount * itemPrice;
+				let newProduct = newAmount * priceProduct;
+				let newDiscount = newAmount * priceDiscount;
+				
+				let priceOrder = newProduct - newDiscount;
+				let newCount =  totalCount + Number(quantity);
+				let newTotalProduct = totalProduct + (newAmount * priceProduct) - priceProduct;
+				let newTotalDiscount = totalDiscount + (newAmount * priceDiscount) - priceDiscount;
+				let newTotalpay = newTotalProduct - newTotalDiscount;
+
 				
 				infoTop.find(".quantity").text(newAmount);
 				infoTop.find(".item-price").text(newTotalPrice);
+				infoTop.find(".price-product").text(newProduct);
+				infoTop.find(".price-discount").text(newDiscount);
+				infoTop.find(".price-order").text(priceOrder);
+				$(".total-count").text(newCount);
+				$(".total-discount").text(newTotalDiscount);
+				$(".product-totalprice").text(newTotalProduct);
+				$(".total-price").text(newTotalpay);
+		});
+		
+			
+			
+	});
+	//개별 수량 마이너스 하는 로직 
+	$(".cartlist").each(function(){
+			//버튼 동작 위해서 변수에 this 다시 지정하기
+			const infoTop = $(this);	
+			//상품 개별가격
+			let priceProduct = Number($(this).find(".price-product").text());
+			//상품 할인 개별가격
+			let priceDiscount = Number($(this).find(".price-discount").text());
+			//숫자 반올림하기 
+			
+			$(this).find(".price-discount").text(priceDiscount);
+			
+			
+			const itemPrice = infoTop.find(".item-price").text();
+		
+			
+			infoTop.find(".button-minus").on("click",function(){
+			
+				const quantity = infoTop.find(".quantity").text();
+				
+				if(quantity <= 1){
+					return;
+				}
+				//수량 올라갈때마다 -1
+				let newAmount = Number(quantity) - 1;
+				//그 수량에 따라 1*씩
+				let newTotalPrice = newAmount * itemPrice;
+				let newProduct = newAmount * priceProduct;
+				let newDiscount = newAmount * priceDiscount;
+				
+				let priceOrder = newProduct - newDiscount;
+				let newCount =  totalCount + Number(quantity);
+				let newTotalProduct = totalProduct + (newAmount * priceProduct) - priceProduct;
+				let newTotalDiscount = totalDiscount + (newAmount * priceDiscount) - priceDiscount;
+				let newTotalpay = newTotalProduct - newTotalDiscount;
+
+				
+				infoTop.find(".quantity").text(newAmount);
+				infoTop.find(".item-price").text(newTotalPrice);
+				infoTop.find(".price-product").text(newProduct);
+				infoTop.find(".price-discount").text(newDiscount);
+				infoTop.find(".price-order").text(priceOrder);
+				$(".total-count").text(newCount);
+				$(".total-discount").text(newTotalDiscount);
+				$(".product-totalprice").text(newTotalProduct);
+				$(".total-price").text(newTotalpay);
 			
 		});
 		
 	});
-	//개별 수량 마이너스 하는 로직 
-	$(".info-top").each(function(){
-		const infoTop = $(this);	
 	
-		const itemPrice = infoTop.find(".item-price").text();
 	
-		infoTop.find(".button-minus").on("click",function(){
-		
-			const quantity = infoTop.find(".quantity").text();
-			
-			if(quantity == 1){
-				return;
-			}
-			
-			const newAmount = Number(quantity) - 1;
-			const newTotalPrice = newAmount * itemPrice;
-			
-			infoTop.find(".quantity").text(newAmount);
-			infoTop.find(".item-price").text(newTotalPrice);
-		
-	});
-	
-});
-	
-	*/
 	
 	
 	
