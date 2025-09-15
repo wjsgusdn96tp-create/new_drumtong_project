@@ -167,64 +167,103 @@
 	//총 결제금액
 	let totalpay = Number($(".total-price").text());
 	
-	
-	
-	
-	
-	
-	$.each(list,function(index,item){
+	function total() {
+		let totalProduct = 0;
+		let totalDiscount = 0;
+		let totalCount = 0;
 		
-		totalProduct += item.pay;
-		totalCount += item.count;
-		
-		
-	});
-	
-	
-	
-	
-	
-	$(".total-count").text(totalCount);
-	$(".product-totalprice").text(totalProduct);
-	
-	
-	
-	
-	
-	//개별 수량 플러스 하는 로직 
-	$(".cartlist").each(function(){
-			//버튼 동작 위해서 변수에 this 다시 지정하기
-			const infoTop = $(this);	
-			//상품 개별가격
+	    // 모든 cartlist를 돌면서 합계 구하기
+	    $(".cartlist").each(function() {
+	    	//상품 개별가격
 			let priceProduct = Number($(this).find(".price-product").text());
 			//상품 할인 개별가격
 			let priceDiscount = Number($(this).find(".price-discount").text());
+			//수량 값 원
+			let itemPrice = Number($(this).find(".item-price").text());
+			//상품 개별 숫자
+			let priceCount = Number($(this).find(".quantity").text());
+			
 			//숫자 반올림하기 
 			priceDiscount = Math.round(priceDiscount / 10) * 10;
 			
+			//할인금액 기본값 합
 			totalDiscount += priceDiscount; 
+			//상품금액 기본값 합
+			totalProduct += priceProduct;
+			//상품 개별 숫자 합
+			totalCount += priceCount;
 			
-			//총합금액    총합상품값     총합 할인값
-			totalpay = totalProduct - totalDiscount;
-			
-			
-			$(".total-discount").text(totalDiscount);
-			$(".total-price").text(totalpay);
-			
+			//주문금액 값       상품금액     -    할인금액  아이템리스트창의 기본 값
 			let orderPrice = priceProduct - priceDiscount;
-		
+			
 			//기본 할인값, 결제값에 반올림값 부여
 			$(this).find(".price-discount").text(priceDiscount);
 			$(this).find(".price-order").text(orderPrice);
 			
 			
-			const itemPrice = infoTop.find(".item-price").text();
+	    });
+	  	//총합금액    총합상품값     총합 할인값
+		totalpay = totalProduct - totalDiscount;
+
+	    // 결제정보창에 합계 출력
+	    $(".product-totalprice").text(totalProduct);
+	    $(".total-discount").text(totalDiscount);
+	    $(".total-count").text(totalCount);
+	    $(".total-price").text(totalpay);
+	}
+
+	
+	//개별 수량 플러스 하는 로직 
+	$(".cartlist").each(function(){
+			//밑에 물건정보창 정보변경 위해서 this 값 지정하기
+			const listInfo = $(this);	
+			total();
+			//상품 개별가격
+			let priceProduct = Number($(this).find(".price-product").text());
+			//상품 할인 개별가격
+			let priceDiscount = Number($(this).find(".price-discount").text());
+			//수량 값 원
+			let itemPrice = Number($(this).find(".item-price").text());
+			//상품 개별 숫자
+			let priceCount = Number($(this).find(".quantity").text());
+			/*
+			
+			//숫자 반올림하기 
+			priceDiscount = Math.round(priceDiscount / 10) * 10;
+			
+			//할인금액 기본값 합
+			totalDiscount += priceDiscount; 
+			//상품금액 기본값 합
+			totalProduct += priceProduct;
+			//상품 개별 숫자 합
+			totalCount += priceCount;
+			//총합금액    총합상품값     총합 할인값
+			totalpay = totalProduct - totalDiscount;
+			
+			//할인총합
+			$(".total-discount").text(totalDiscount);
+			//총 결제금액
+			$(".total-price").text(totalpay);
+			
+			//주문금액 값       상품금액     -    할인금액  아이템리스트창의 기본 값
+				let orderPrice = priceProduct - priceDiscount;
 		
+			//기본 할인값, 결제값에 반올림값 부여
+			$(this).find(".price-discount").text(priceDiscount);
+			$(this).find(".price-order").text(orderPrice);
+		
+			//결제정보 창 4개값  문제점 발견
+			$(".total-count").text(totalCount);
+			$(".total-discount").text(totalDiscount);
+			$(".product-totalprice").text(totalProduct);
+			$(".total-price").text(totalpay);
+			*/
 			
-			
-			infoTop.find(".button-plus").on("click",function(){
-			
-				const quantity = infoTop.find(".quantity").text();
+			$(this).find(".button-plus").on("click",function(){
+
+				const quantity = listInfo.find(".quantity").text();
+				
+				
 				
 				if(quantity == 10){
 					return;
@@ -238,44 +277,29 @@
 				
 				let priceOrder = newProduct - newDiscount;
 				let newCount =  totalCount + Number(quantity);
-				let newTotalProduct = totalProduct + (newAmount * priceProduct) - priceProduct;
-				let newTotalDiscount = totalDiscount + (newAmount * priceDiscount) - priceDiscount;
+				let newTotalProduct = totalProduct + (newAmount * priceProduct);
+				let newTotalDiscount = totalDiscount + (newAmount * priceDiscount);
 				let newTotalpay = newTotalProduct - newTotalDiscount;
 
+				//물건정보창
+				//수량
+				listInfo.find(".quantity").text(newAmount);
+				listInfo.find(".item-price").text(newTotalPrice);
+				listInfo.find(".price-product").text(newProduct);
+				listInfo.find(".price-discount").text(newDiscount);
+				listInfo.find(".price-order").text(priceOrder);
 				
-				infoTop.find(".quantity").text(newAmount);
-				infoTop.find(".item-price").text(newTotalPrice);
-				infoTop.find(".price-product").text(newProduct);
-				infoTop.find(".price-discount").text(newDiscount);
-				infoTop.find(".price-order").text(priceOrder);
+				//결제정보 창 4개값
 				$(".total-count").text(newCount);
 				$(".total-discount").text(newTotalDiscount);
 				$(".product-totalprice").text(newTotalProduct);
 				$(".total-price").text(newTotalpay);
+				
 		});
-		
-			
-			
-	});
-	//개별 수량 마이너스 하는 로직 
-	$(".cartlist").each(function(){
-			//버튼 동작 위해서 변수에 this 다시 지정하기
-			const infoTop = $(this);	
-			//상품 개별가격
-			let priceProduct = Number($(this).find(".price-product").text());
-			//상품 할인 개별가격
-			let priceDiscount = Number($(this).find(".price-discount").text());
-			//숫자 반올림하기 
-			
-			$(this).find(".price-discount").text(priceDiscount);
-			
-			
-			const itemPrice = infoTop.find(".item-price").text();
-		
-			
-			infoTop.find(".button-minus").on("click",function(){
-			
-				const quantity = infoTop.find(".quantity").text();
+			//개별 수량 마이너스 하는 로직 
+				$(this).find(".button-minus").on("click",function(){
+				
+				const quantity = listInfo.find(".quantity").text();
 				
 				if(quantity <= 1){
 					return;
@@ -286,28 +310,34 @@
 				let newTotalPrice = newAmount * itemPrice;
 				let newProduct = newAmount * priceProduct;
 				let newDiscount = newAmount * priceDiscount;
-				
-				let priceOrder = newProduct - newDiscount;
 				let newCount =  totalCount + Number(quantity);
-				let newTotalProduct = totalProduct + (newAmount * priceProduct) - priceProduct;
-				let newTotalDiscount = totalDiscount + (newAmount * priceDiscount) - priceDiscount;
+				
+			
+				let priceOrder = newProduct - newDiscount;
+				let newTotalProduct = totalProduct + (newAmount * priceProduct);
+				let newTotalDiscount = totalDiscount + (newAmount * priceDiscount);
 				let newTotalpay = newTotalProduct - newTotalDiscount;
 
+				//물건정보창
+				//수량
+				listInfo.find(".quantity").text(newAmount);
+				listInfo.find(".item-price").text(newTotalPrice);
+				listInfo.find(".price-product").text(newProduct);
+				listInfo.find(".price-discount").text(newDiscount);
+				listInfo.find(".price-order").text(priceOrder);
 				
-				infoTop.find(".quantity").text(newAmount);
-				infoTop.find(".item-price").text(newTotalPrice);
-				infoTop.find(".price-product").text(newProduct);
-				infoTop.find(".price-discount").text(newDiscount);
-				infoTop.find(".price-order").text(priceOrder);
+				//결제정보 창 4개값
 				$(".total-count").text(newCount);
 				$(".total-discount").text(newTotalDiscount);
 				$(".product-totalprice").text(newTotalProduct);
 				$(".total-price").text(newTotalpay);
-			
+				
 		});
-		
+			
+			
 	});
 	
+
 	
 	
 	
